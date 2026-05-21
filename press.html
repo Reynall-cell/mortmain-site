@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Press Kit — Squalor / Mortmain Studio</title>
+    <meta name="description" content="Press kit for Squalor by Mortmain Studio. Factsheet, studio bio, media contact.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Squalor — Press Kit">
+    <meta property="og:description" content="For journalists, content creators, and friends of the dark.">
+
+    <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="%2307060a"/><g stroke="%237a3a1f" stroke-width="1.2" fill="none" stroke-linecap="square"><line x1="16" y1="6" x2="16" y2="26"/><line x1="9" y1="13" x2="23" y2="13"/><line x1="11" y1="22" x2="21" y2="22"/></g><circle cx="16" cy="16" r="2" fill="%237a3a1f"/></svg>'>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
+
+    <style>
+        .factsheet {
+            border: 1px solid var(--border-subtle);
+            margin: 32px 0;
+        }
+        .fact-row {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            padding: 14px 24px;
+            border-bottom: 1px solid var(--border-subtle);
+            gap: 24px;
+        }
+        .fact-row:last-child { border-bottom: none; }
+        .fact-key {
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            padding-top: 4px;
+        }
+        .fact-val {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        .fact-val .pending-inline {
+            color: var(--text-tertiary);
+            font-style: italic;
+            font-size: 13px;
+        }
+        .asset-placeholder {
+            border: 1px dashed var(--border-medium);
+            padding: 48px 24px;
+            text-align: center;
+            margin: 24px 0;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 16px;
+            color: var(--text-tertiary);
+            background: rgba(20, 16, 26, 0.3);
+        }
+        @media (max-width: 768px) {
+            .fact-row { grid-template-columns: 1fr; gap: 6px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-frame"><div class="corner-bl"></div><div class="corner-br"></div></div>
+
+<nav id="nav">
+    <a href="index.html" class="nav-brand">Mortmain Studio</a>
+    <div class="nav-right">
+        <ul class="nav-links">
+            <li><a href="index.html#game" data-i18n="nav_game">The Game</a></li>
+            <li><a href="index.html#codex" data-i18n="nav_codex">Codex</a></li>
+            <li><a href="about.html" data-i18n="nav_about">About</a></li>
+            <li><a href="faq.html" data-i18n="nav_faq">FAQ</a></li>
+        </ul>
+        <div class="lang-switcher">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="ru">RU</button>
+        </div>
+    </div>
+</nav>
+
+<main class="page-wrapper">
+    <div class="page-container">
+        <div class="page-prefix" data-i18n="page_prefix">— For journalists & creators —</div>
+        <h1 class="page-title" data-i18n="page_title">Press Kit</h1>
+        <p class="page-subtitle" data-i18n="page_subtitle">For coverage, interviews, and creator content. This kit will grow as the project does.</p>
+
+        <div class="page-divider"><div class="page-divider-symbol">✠</div></div>
+
+        <section class="page-section">
+            <h2 data-i18n="fact_title">Factsheet</h2>
+
+            <div class="factsheet">
+                <div class="fact-row">
+                    <div class="fact-key" data-i18n="fk_title">Title</div>
+                    <div class="fact-val">Squalor</div>
+                </div>
+                <div class="fact-row">
+                    <div class="fact-key" data-i18n="fk_dev">Developer</div>
+                    <div class="fact-val">Mortmain Studio</div>
+                </div>
+                <div class="fact-row">
+                    <div class="fact-key" data-i18n="fk_pub">Publisher</div>
+                    <div class="fact-val">Mortmain Studio (self-published)</div>
+                </div>
+                <div class="fact-row">
+                    <div class="fact-key" data-i18n="fk_genre">Genre</div>
+                    <div class="fact-val" data-i18n="fv_genre">Multiplayer extraction · Medieval dark fantasy · First-person directional melee</div>
+                </div>
+                <div class="fact-row">
+                    <div class="fact-key" data-i18n="fk_engine">Engine</div>
+                    <div class="fact-val">Unreal Engine 5</div>
+                </div>
+                <div class="fact-row">
+                    <div class="fact-key" data-i18n="fk_platforms">Platforms</div>
+                    <div class="fact-val" data-i18n="fv_platforms">PC (Windows). Linux via Proton under evaluation.</div>
+                </div>
+                <div class="fact-row">
+                    <div class="fact-key" data-i18n="fk_languages">Languages</div>
+                    <div class="fact-val" data-i18n="fv_languages">English, Russian at launch. Further localisation to be considered.</div>
+                </div>
+                <div class="fact-row">
+                    <div class="fact-key" data-i18n="fk_release">Release</div>
+                    <div class="fact-val" data-i18n="fv_release">TBA — no earlier than 2027. Early Access path planned.</div>
+                </div>
+                <div class="fact-row">
+                    <div class="fact-key" data-i18n="fk_price">Price</div>
+                    <div class="fact-val pending-inline" data-i18n="fv_price">To be announced. No pay-to-win, no loot boxes, no NFT.</div>
+                </div>
+                <div class="fact-row">
+                    <div class="fact-key" data-i18n="fk_website">Website</div>
+                    <div class="fact-val"><a href="https://mortmain.studio">mortmain.studio</a></div>
+                </div>
+                <div class="fact-row">
+                    <div class="fact-key" data-i18n="fk_contact">Press contact</div>
+                    <div class="fact-val"><a href="mailto:press@mortmain.studio">press@mortmain.studio</a></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section">
+            <h2 data-i18n="pitch_title">Short pitch</h2>
+            <p data-i18n="pitch_body">Squalor is a multiplayer extraction game set in a medieval kingdom devoured by plague. Players enter dangerous zones, scavenge what they can, and try to make it back to safety with their lives and their loot intact. Combat is first-person, directional, and built on stance, parry, and feint — the duel is a conversation written in steel. Loot is hardcore: die in a raid and you may lose everything you carried. The world is alive with bandits, undead, beasts of folklore, and other players who want what you carry.</p>
+            <p data-i18n="pitch_body2">Squalor is heavily inspired by the combat of Kingdom Come: Deliverance and For Honor, the extraction loop of Escape from Tarkov, and the dark folklore of The Witcher. The studio's central interest is in worlds that remember — and in players who must outlive that memory.</p>
+        </section>
+
+        <section class="page-section">
+            <h2 data-i18n="features_title">Key features</h2>
+            <ul>
+                <li data-i18n="ft1">Four-direction melee combat with stance switching, parries, feints, and combos.</li>
+                <li data-i18n="ft2">Hardcore extraction loop with persistent stash and per-raid loot risk.</li>
+                <li data-i18n="ft3">An insurance system that includes a "find your killer" mechanic — coin recovered through revenge, not magic.</li>
+                <li data-i18n="ft4">A living world of AI bandits, undead, and beasts of folklore, alongside other players.</li>
+                <li data-i18n="ft5">Skill progression based on technique unlocks, not stat inflation. Knowledge is power; numbers are not.</li>
+                <li data-i18n="ft6">A pantheon and bestiary rooted in a deliberate, layered lore — what is shown, what is hidden, what is forgotten on purpose.</li>
+                <li data-i18n="ft7">Proximity voice. Friendly fire. Solo or in squads up to four.</li>
+            </ul>
+        </section>
+
+        <section class="page-section">
+            <h2 data-i18n="studio_title">About the studio</h2>
+            <p data-i18n="studio_body">Mortmain Studio is an independent workshop building dark fantasy games. We do not give out names. We work in the dark on purpose — not because we hide, but because the work matters more than the worker. Squalor is our first game.</p>
+            <p data-i18n="studio_body2">Read our principles on our <a href="about.html">about page</a>.</p>
+        </section>
+
+        <section class="page-section">
+            <h2 data-i18n="assets_title">Media assets</h2>
+            <p data-i18n="assets_body">High-resolution screenshots, key art, and trailers will appear here as the project develops. For early access to assets ahead of public release, contact <a href="mailto:press@mortmain.studio">press@mortmain.studio</a>.</p>
+
+            <div class="asset-placeholder" data-i18n="assets_placeholder">— screenshots, key art, and footage will be added here as they become available —</div>
+        </section>
+
+        <section class="page-section">
+            <h2 data-i18n="terms_title">Terms of coverage</h2>
+            <p data-i18n="terms_body">Press, streamers, and content creators are welcome to share, embed, screenshot, and stream all assets and gameplay from Squalor. Monetisation of such coverage is permitted. The only thing we ask is honesty: if you accept review keys or sponsorship from us, disclose it clearly to your audience.</p>
+        </section>
+
+        <div class="last-updated" data-i18n="last_updated">— A.D. MMXXVI · last revised: May, MMXXVI —</div>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-column footer-brand">
+            <h3>Mortmain Studio</h3>
+            <p data-i18n="footer_brand">A workshop at the edge of medieval imagination. We build games that remember what the world forgets.</p>
+        </div>
+        <div class="footer-column">
+            <h4 data-i18n="footer_game">The Game</h4>
+            <ul>
+                <li><a href="index.html#features" data-i18n="footer_features">Features</a></li>
+                <li><a href="index.html#codex" data-i18n="footer_codex">Codex</a></li>
+                <li><a href="faq.html" data-i18n="footer_faq">FAQ</a></li>
+                <li><a href="press.html" data-i18n="footer_presskit">Press Kit</a></li>
+                <li><span class="pending" data-i18n="footer_roadmap">Roadmap</span></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4 data-i18n="footer_community">Community</h4>
+            <ul>
+                <li><span class="pending">Discord</span></li>
+                <li><span class="pending">Steam</span></li>
+                <li><span class="pending">YouTube</span></li>
+                <li><span class="pending">X / Twitter</span></li>
+                <li><span class="pending">Reddit</span></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4 data-i18n="footer_studio">Studio</h4>
+            <ul>
+                <li><a href="about.html" data-i18n="footer_about">About</a></li>
+                <li><span class="pending" data-i18n="footer_careers">Careers</span></li>
+                <li><a href="press.html" data-i18n="footer_press">Press Inquiries</a></li>
+                <li><a href="mailto:contact@mortmain.studio" data-i18n="footer_contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="footer-copyright" data-i18n="footer_copyright">© MMXXVI · Mortmain Studio · All rights reserved</div>
+        <div class="footer-contact"><a href="mailto:contact@mortmain.studio">contact@mortmain.studio</a></div>
+        <ul class="footer-legal">
+            <li><a href="privacy.html" data-i18n="legal_privacy">Privacy</a></li>
+            <li><a href="terms.html" data-i18n="legal_terms">Terms</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script>
+window.pageTranslations = {
+    en: {
+        nav_game: "The Game", nav_codex: "Codex", nav_about: "About", nav_faq: "FAQ",
+        page_prefix: "— For journalists & creators —",
+        page_title: "Press Kit",
+        page_subtitle: "For coverage, interviews, and creator content. This kit will grow as the project does.",
+        fact_title: "Factsheet",
+        fk_title: "Title", fk_dev: "Developer", fk_pub: "Publisher",
+        fk_genre: "Genre", fk_engine: "Engine", fk_platforms: "Platforms",
+        fk_languages: "Languages", fk_release: "Release", fk_price: "Price",
+        fk_website: "Website", fk_contact: "Press contact",
+        fv_genre: "Multiplayer extraction · Medieval dark fantasy · First-person directional melee",
+        fv_platforms: "PC (Windows). Linux via Proton under evaluation.",
+        fv_languages: "English, Russian at launch. Further localisation to be considered.",
+        fv_release: "TBA — no earlier than 2027. Early Access path planned.",
+        fv_price: "To be announced. No pay-to-win, no loot boxes, no NFT.",
+        pitch_title: "Short pitch",
+        pitch_body: "Squalor is a multiplayer extraction game set in a medieval kingdom devoured by plague. Players enter dangerous zones, scavenge what they can, and try to make it back to safety with their lives and their loot intact. Combat is first-person, directional, and built on stance, parry, and feint — the duel is a conversation written in steel. Loot is hardcore: die in a raid and you may lose everything you carried. The world is alive with bandits, undead, beasts of folklore, and other players who want what you carry.",
+        pitch_body2: "Squalor is heavily inspired by the combat of Kingdom Come: Deliverance and For Honor, the extraction loop of Escape from Tarkov, and the dark folklore of The Witcher. The studio's central interest is in worlds that remember — and in players who must outlive that memory.",
+        features_title: "Key features",
+        ft1: "Four-direction melee combat with stance switching, parries, feints, and combos.",
+        ft2: "Hardcore extraction loop with persistent stash and per-raid loot risk.",
+        ft3: 'An insurance system that includes a "find your killer" mechanic — coin recovered through revenge, not magic.',
+        ft4: "A living world of AI bandits, undead, and beasts of folklore, alongside other players.",
+        ft5: "Skill progression based on technique unlocks, not stat inflation. Knowledge is power; numbers are not.",
+        ft6: "A pantheon and bestiary rooted in a deliberate, layered lore — what is shown, what is hidden, what is forgotten on purpose.",
+        ft7: "Proximity voice. Friendly fire. Solo or in squads up to four.",
+        studio_title: "About the studio",
+        studio_body: "Mortmain Studio is an independent workshop building dark fantasy games. We do not give out names. We work in the dark on purpose — not because we hide, but because the work matters more than the worker. Squalor is our first game.",
+        studio_body2: 'Read our principles on our <a href="about.html">about page</a>.',
+        assets_title: "Media assets",
+        assets_body: 'High-resolution screenshots, key art, and trailers will appear here as the project develops. For early access to assets ahead of public release, contact <a href="mailto:press@mortmain.studio">press@mortmain.studio</a>.',
+        assets_placeholder: "— screenshots, key art, and footage will be added here as they become available —",
+        terms_title: "Terms of coverage",
+        terms_body: "Press, streamers, and content creators are welcome to share, embed, screenshot, and stream all assets and gameplay from Squalor. Monetisation of such coverage is permitted. The only thing we ask is honesty: if you accept review keys or sponsorship from us, disclose it clearly to your audience.",
+        last_updated: "— A.D. MMXXVI · last revised: May, MMXXVI —",
+        footer_brand: "A workshop at the edge of medieval imagination. We build games that remember what the world forgets.",
+        footer_game: "The Game", footer_features: "Features", footer_codex: "Codex",
+        footer_faq: "FAQ", footer_presskit: "Press Kit", footer_roadmap: "Roadmap",
+        footer_community: "Community", footer_studio: "Studio", footer_about: "About",
+        footer_careers: "Careers", footer_press: "Press Inquiries", footer_contact: "Contact",
+        footer_copyright: "© MMXXVI · Mortmain Studio · All rights reserved",
+        legal_privacy: "Privacy", legal_terms: "Terms"
+    },
+    ru: {
+        nav_game: "Игра", nav_codex: "Кодекс", nav_about: "О нас", nav_faq: "FAQ",
+        page_prefix: "— Для журналистов и контент-мейкеров —",
+        page_title: "Пресс-кит",
+        page_subtitle: "Для публикаций, интервью и контента. Этот кит будет расти вместе с проектом.",
+        fact_title: "Информация о проекте",
+        fk_title: "Название", fk_dev: "Разработчик", fk_pub: "Издатель",
+        fk_genre: "Жанр", fk_engine: "Движок", fk_platforms: "Платформы",
+        fk_languages: "Языки", fk_release: "Релиз", fk_price: "Цена",
+        fk_website: "Сайт", fk_contact: "Контакт для прессы",
+        fv_genre: "Мультиплеерная экстракция · Средневековое тёмное фентези · Направленный ближний бой от первого лица",
+        fv_platforms: "PC (Windows). Linux через Proton — рассматривается.",
+        fv_languages: "Английский, русский на старте. Дополнительные локализации — позже.",
+        fv_release: "TBA — не раньше 2027. Запланирован путь через Early Access.",
+        fv_price: "Будет объявлена. Никакого pay-to-win, никаких лутбоксов, никаких NFT.",
+        pitch_title: "Краткое описание",
+        pitch_body: "Squalor — мультиплеерная extraction-игра, действие которой разворачивается в средневековом королевстве, пожранном чумой. Игроки заходят в опасные зоны, добывают что могут, и пытаются вернуться в безопасность с жизнью и добычей. Бой — от первого лица, направленный, построенный на стойках, парированиях и финтах: дуэль — это разговор, написанный сталью. Лут хардкорный: умри в рейде — потеряешь то, что нёс. Мир жив: разбойники, нежить, существа фольклора и другие игроки, желающие того, что у тебя.",
+        pitch_body2: "Squalor вдохновлён боевой системой Kingdom Come: Deliverance и For Honor, extraction-петлёй Escape from Tarkov и тёмным фольклором Ведьмака. Главный интерес студии — миры, которые помнят, и игроки, которые должны пережить эту память.",
+        features_title: "Ключевые особенности",
+        ft1: "Бой с четырьмя направлениями ударов, переключением стоек, парированиями, финтами и комбо.",
+        ft2: "Хардкорная extraction-петля с постоянным стэшем и риском потери лута за рейд.",
+        ft3: 'Система страховки с механикой «найди убийцу» — монеты возвращаются через месть, не через магию.',
+        ft4: "Живой мир AI-разбойников, нежити и существ фольклора наряду с другими игроками.",
+        ft5: "Прогрессия через техники, а не через рост статов. Знание — сила. Цифры — нет.",
+        ft6: "Пантеон и бестиарий, укоренённые в продуманной слоистой мифологии — что показано, что скрыто, что забыто намеренно.",
+        ft7: "Голос по дистанции. Дружественный огонь. Соло или сквадом до 4.",
+        studio_title: "О студии",
+        studio_body: "Mortmain Studio — независимая мастерская, строящая тёмно-фэнтезийные игры. Имён мы не раздаём. Мы работаем в тени намеренно — не потому, что прячемся, а потому что работа важнее работника. Squalor — наша первая игра.",
+        studio_body2: 'Наши принципы — на <a href="about.html">странице о студии</a>.',
+        assets_title: "Медиа-материалы",
+        assets_body: 'Скриншоты в высоком разрешении, ключевые арты и трейлеры появятся здесь по мере развития проекта. Для раннего доступа к материалам — пишите на <a href="mailto:press@mortmain.studio">press@mortmain.studio</a>.',
+        assets_placeholder: "— скриншоты, ключевые арты и видео появятся здесь по мере готовности —",
+        terms_title: "Условия освещения",
+        terms_body: "Пресса, стримеры и контент-мейкеры могут свободно делиться, встраивать, делать скриншоты и стримить любые материалы и геймплей Squalor. Монетизация такого контента разрешена. Единственное, о чём мы просим — честность: если вы принимаете ключи или спонсорство от нас, чётко обозначьте это для своей аудитории.",
+        last_updated: "— A.D. MMXXVI · последнее обновление: май, MMXXVI —",
+        footer_brand: "Мастерская на грани средневекового воображения. Мы строим игры, что помнят то, что забывает мир.",
+        footer_game: "Игра", footer_features: "Особенности", footer_codex: "Кодекс",
+        footer_faq: "FAQ", footer_presskit: "Пресс-кит", footer_roadmap: "Дорожная карта",
+        footer_community: "Сообщество", footer_studio: "Студия", footer_about: "О нас",
+        footer_careers: "Вакансии", footer_press: "Для прессы", footer_contact: "Контакт",
+        footer_copyright: "© MMXXVI · Mortmain Studio · Все права защищены",
+        legal_privacy: "Приватность", legal_terms: "Условия"
+    }
+};
+</script>
+<script src="shared.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,2833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Squalor — A Mortmain Studio Production</title>
+    <meta name="description" content="A medieval extraction game. Steel, blood, and rot in a kingdom devoured by plague. By Mortmain Studio.">
+    <meta name="author" content="Mortmain Studio">
+    <meta name="keywords" content="Squalor, Mortmain Studio, medieval extraction game, dark fantasy, indie game, melee combat, hardcore loot">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Squalor — A Medieval Extraction Game">
+    <meta property="og:description" content="Steel. Blood. Rot. In a kingdom devoured by plague, only the desperate remain.">
+    <meta property="og:url" content="https://mortmain.studio">
+    <meta property="og:site_name" content="Mortmain Studio">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="ru_RU">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Squalor — A Medieval Extraction Game">
+    <meta name="twitter:description" content="Steel. Blood. Rot. In a kingdom devoured by plague, only the desperate remain.">
+
+    <meta name="theme-color" content="#07060a">
+
+    <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="%2307060a"/><g stroke="%237a3a1f" stroke-width="1.2" fill="none" stroke-linecap="square"><line x1="16" y1="6" x2="16" y2="26"/><line x1="9" y1="13" x2="23" y2="13"/><line x1="11" y1="22" x2="21" y2="22"/></g><circle cx="16" cy="16" r="2" fill="%237a3a1f"/></svg>'>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deepest: #07060a;
+            --bg-dark: #0d0b0e;
+            --bg-card: #14101a;
+            --text-primary: #d8d2c4;
+            --text-secondary: #8a8276;
+            --text-tertiary: #5a5448;
+            --accent: #7a3a1f;
+            --accent-hover: #9a4828;
+            --accent-faded: #3a1c0f;
+            --border-subtle: rgba(122, 58, 31, 0.15);
+            --border-medium: rgba(122, 58, 31, 0.35);
+            --border-strong: rgba(122, 58, 31, 0.55);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 300;
+            background: var(--bg-deepest);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* === AWAKENING SPLASH === */
+        .splash {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #000;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1.5s ease, visibility 1.5s ease;
+        }
+
+        .splash.gone {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .splash-content {
+            text-align: center;
+        }
+
+        .splash-text {
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            letter-spacing: 0.5em;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            margin-bottom: 32px;
+        }
+
+        .splash-roman {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            font-weight: 500;
+            letter-spacing: 0.3em;
+            color: var(--accent);
+            opacity: 0;
+            animation: splashAppear 2s ease 0.3s forwards;
+        }
+
+        @keyframes splashAppear {
+            0% { opacity: 0; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* === SCROLL PROGRESS BAR === */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: var(--accent);
+            width: 0%;
+            z-index: 200;
+            transition: width 0.1s ease;
+            opacity: 0.7;
+            box-shadow: 0 0 8px rgba(154, 72, 40, 0.5);
+        }
+
+        /* === AMBIENT BACKGROUND === */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse 800px 600px at 15% 0%, rgba(122, 58, 31, 0.10) 0%, transparent 60%),
+                radial-gradient(ellipse 700px 500px at 85% 100%, rgba(122, 58, 31, 0.08) 0%, transparent 65%),
+                radial-gradient(ellipse 1200px 800px at 50% 50%, rgba(20, 16, 26, 0.4) 0%, transparent 80%),
+                radial-gradient(ellipse at center, transparent 30%, rgba(7, 6, 10, 0.8) 100%);
+            animation: ambientPulse 12s ease-in-out infinite;
+        }
+
+        @keyframes ambientPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.75; }
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            opacity: 0.025;
+            background-image:
+                radial-gradient(circle at 20% 30%, #fff 1px, transparent 1px),
+                radial-gradient(circle at 60% 70%, #fff 1px, transparent 1px),
+                radial-gradient(circle at 80% 10%, #fff 1px, transparent 1px);
+            background-size: 200px 200px, 300px 300px, 250px 250px;
+            z-index: 1;
+        }
+
+        .page-frame {
+            position: fixed;
+            top: 16px; left: 16px; right: 16px; bottom: 16px;
+            border: 1px solid var(--border-subtle);
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        .page-frame::before, .page-frame::after {
+            content: '';
+            position: absolute;
+            width: 24px; height: 24px;
+            border: 1px solid var(--border-medium);
+        }
+
+        .page-frame::before {
+            top: -1px; left: -1px;
+            border-right: none; border-bottom: none;
+        }
+
+        .page-frame::after {
+            top: -1px; right: -1px;
+            border-left: none; border-bottom: none;
+        }
+
+        .corner-br, .corner-bl {
+            position: absolute;
+            width: 24px; height: 24px;
+            border: 1px solid var(--border-medium);
+        }
+
+        .corner-br { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+        .corner-bl { bottom: -1px; left: -1px; border-right: none; border-top: none; }
+
+        /* === TORCH — BRIGHTER === */
+        .torch {
+            position: fixed;
+            top: 0; left: 0;
+            width: 800px; height: 800px;
+            pointer-events: none;
+            z-index: 2;
+            background: radial-gradient(
+                circle,
+                rgba(180, 95, 45, 0.32) 0%,
+                rgba(160, 80, 35, 0.20) 15%,
+                rgba(140, 65, 28, 0.12) 30%,
+                rgba(100, 50, 22, 0.06) 50%,
+                transparent 70%
+            );
+            transform: translate(-50%, -50%);
+            transition: opacity 0.4s ease;
+            opacity: 0;
+            mix-blend-mode: screen;
+            filter: blur(3px);
+        }
+
+        body:hover .torch { opacity: 1; }
+
+        @media (hover: none) {
+            .torch { display: none; }
+        }
+
+        /* === CHAPTER INDICATOR === */
+        .chapter-indicator {
+            position: fixed;
+            left: 32px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            z-index: 60;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .chapter-indicator.visible { opacity: 1; }
+
+        .chapter-dot {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text-tertiary);
+            transition: color 0.4s ease;
+        }
+
+        .chapter-dot::before {
+            content: '';
+            width: 6px; height: 6px;
+            border: 1px solid var(--text-tertiary);
+            transform: rotate(45deg);
+            transition: all 0.4s ease;
+        }
+
+        .chapter-dot.active::before,
+        .chapter-dot:hover::before {
+            background: var(--accent);
+            border-color: var(--accent);
+            transform: rotate(45deg) scale(1.3);
+        }
+
+        .chapter-dot.active, .chapter-dot:hover { color: var(--text-primary); }
+
+        .chapter-label {
+            font-family: 'Cinzel', serif;
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateX(-8px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .chapter-dot:hover .chapter-label,
+        .chapter-dot.active .chapter-label {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* === NAV === */
+        nav {
+            position: fixed;
+            top: 16px; left: 16px; right: 16px;
+            padding: 24px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: transparent;
+            transition: padding 0.4s ease, background 0.4s ease, border-bottom 0.4s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        nav.scrolled {
+            padding: 14px 48px;
+            background: rgba(7, 6, 10, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .nav-brand {
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.25em;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            transition: font-size 0.4s ease;
+        }
+
+        nav.scrolled .nav-brand { font-size: 12px; }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            text-decoration: none;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            width: 0; height: 1px;
+            background: var(--accent);
+            transition: width 0.4s ease, left 0.4s ease;
+        }
+
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a:hover::after { width: 100%; left: 0; }
+
+        /* Lang switcher */
+        .lang-switcher {
+            display: flex;
+            gap: 2px;
+            border: 1px solid var(--border-subtle);
+            padding: 2px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            font-family: 'Cinzel', serif;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            color: var(--text-tertiary);
+            padding: 4px 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn.active {
+            background: var(--accent-faded);
+            color: var(--text-primary);
+        }
+
+        .lang-btn:hover:not(.active) {
+            color: var(--text-secondary);
+        }
+
+        /* Audio control group — toggle + popout volume slider */
+        .audio-control {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .audio-toggle {
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-tertiary);
+            transition: all 0.3s ease;
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            padding: 0;
+        }
+
+        .audio-toggle:hover {
+            border-color: var(--border-medium);
+            color: var(--text-primary);
+        }
+
+        .audio-toggle.playing {
+            border-color: var(--accent);
+            color: var(--accent);
+            animation: audioPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes audioPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(122, 58, 31, 0); }
+            50% { box-shadow: 0 0 12px 0 rgba(122, 58, 31, 0.3); }
+        }
+
+        /* Volume popout — appears on hover or focus of the control group */
+        .volume-popout {
+            position: absolute;
+            top: 50%;
+            right: calc(100% + 8px);
+            transform: translateY(-50%) translateX(8px);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(7, 6, 10, 0.92);
+            border: 1px solid var(--border-subtle);
+            padding: 8px 14px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        /* Invisible bridge filling the gap between popout and button so the hover doesn't break */
+        .volume-popout::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -10px;
+            width: 12px;
+            height: 100%;
+            background: transparent;
+        }
+
+        .audio-control:hover .volume-popout,
+        .audio-control.expanded .volume-popout {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(-50%) translateX(0);
+            pointer-events: auto;
+        }
+
+        .volume-label {
+            font-family: 'Cinzel', serif;
+            font-size: 9px;
+            letter-spacing: 0.25em;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            min-width: 28px;
+            text-align: right;
+        }
+
+        /* Custom range input styled to match the site */
+        .volume-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100px;
+            height: 2px;
+            background: var(--border-medium);
+            outline: none;
+            cursor: pointer;
+            border-radius: 0;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            cursor: pointer;
+            border: 1px solid var(--accent-hover);
+            transform: rotate(45deg);
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .volume-slider::-webkit-slider-thumb:hover {
+            background: var(--accent-hover);
+            transform: rotate(45deg) scale(1.2);
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            cursor: pointer;
+            border: 1px solid var(--accent-hover);
+            transform: rotate(45deg);
+        }
+
+        /* Mobile: tap to toggle the popout instead of hover */
+        @media (hover: none) {
+            .audio-control:hover .volume-popout {
+                opacity: 0;
+                visibility: hidden;
+            }
+            .audio-control.expanded .volume-popout {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(-50%) translateX(0);
+            }
+        }
+
+        /* === HERO === */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 24px;
+            position: relative;
+            z-index: 3;
+            overflow: hidden;
+        }
+
+        /* Hero anchor — large faded sigil above title */
+        .hero-sigil {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fadeInUp 2s ease 0.5s forwards;
+            pointer-events: none;
+        }
+
+        .hero-sigil svg {
+            width: 280px;
+            height: 280px;
+            opacity: 0.06;
+        }
+
+        .hero-inner {
+            transition: transform 0.05s linear;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-prefix {
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.4em;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            margin-bottom: 32px;
+            position: relative;
+            opacity: 0;
+            animation: fadeInUp 1.4s ease 0.2s forwards;
+        }
+
+        .hero-prefix::before, .hero-prefix::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 1px;
+            background: var(--text-tertiary);
+        }
+
+        .hero-prefix::before { left: -60px; }
+        .hero-prefix::after { right: -60px; }
+
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(72px, 14vw, 180px);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+            line-height: 1;
+            margin-bottom: 28px;
+            text-shadow: 0 0 60px rgba(122, 58, 31, 0.25);
+            display: flex;
+            justify-content: center;
+            gap: 0.02em;
+        }
+
+        .hero-title span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: letterReveal 1.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+            transition: transform 0.3s ease, color 0.3s ease;
+            filter: blur(8px);
+        }
+
+        .hero-title span.glitch {
+            color: var(--accent-hover);
+            transform: translateX(2px);
+        }
+
+        .hero-title-wrap {
+            animation: breathe 8s ease-in-out infinite;
+        }
+
+        .hero-ornament {
+            margin: 16px auto 28px;
+            opacity: 0;
+            animation: fadeInUp 1.4s ease 2.2s forwards;
+        }
+
+        .hero-ornament svg {
+            width: 140px;
+            height: 40px;
+            opacity: 0.55;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.005); }
+        }
+
+        @keyframes letterReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(20px, 3vw, 32px);
+            font-weight: 300;
+            color: var(--text-secondary);
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeInUp 1.4s ease 2.5s forwards;
+        }
+
+        .hero-sub {
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            margin-bottom: 64px;
+            opacity: 0;
+            animation: fadeInUp 1.4s ease 2.8s forwards;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            padding: 16px 48px;
+            border: 1px solid var(--border-medium);
+            background: transparent;
+            color: var(--text-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: fadeInUp 1.4s ease 3.1s forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: var(--accent-faded);
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
+
+        .hero-cta:hover { border-color: var(--accent); }
+        .hero-cta:hover::before { left: 0; }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Cinzel', serif;
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeInUp 1.4s ease 3.4s forwards, pulse 2.5s ease-in-out 5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 0.7; transform: translateX(-50%) translateY(6px); }
+        }
+
+        /* === DIVIDERS === */
+        .divider {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 24px 40px;
+            position: relative;
+            z-index: 3;
+            gap: 16px;
+        }
+
+        .divider-line {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .divider-line::before, .divider-line::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-medium), transparent);
+        }
+
+        .divider-symbol-group {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 0 24px;
+        }
+
+        .divider-dot {
+            width: 4px; height: 4px;
+            background: var(--text-tertiary);
+            transform: rotate(45deg);
+        }
+
+        .divider-symbol {
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1;
+        }
+
+        .divider-chapter {
+            font-family: 'Cinzel', serif;
+            font-size: 10px;
+            letter-spacing: 0.5em;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+        }
+
+        /* === MARGINALIA === */
+        .marginalia {
+            text-align: center;
+            padding: 40px 24px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .marginalia-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(16px, 2vw, 20px);
+            font-weight: 400;
+            color: var(--text-tertiary);
+            max-width: 540px;
+            margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+            display: inline-block;
+        }
+
+        .marginalia-text::before {
+            content: '"';
+            font-family: 'Cormorant Garamond', serif;
+            font-style: normal;
+            font-size: 60px;
+            color: var(--border-strong);
+            position: absolute;
+            left: -40px;
+            top: -20px;
+            opacity: 0.6;
+        }
+
+        .marginalia-text::after {
+            content: '"';
+            font-family: 'Cormorant Garamond', serif;
+            font-style: normal;
+            font-size: 60px;
+            color: var(--border-strong);
+            position: absolute;
+            right: -40px;
+            bottom: -50px;
+            opacity: 0.6;
+        }
+
+        .marginalia-attribution {
+            font-family: 'Cinzel', serif;
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            margin-top: 24px;
+            opacity: 0.7;
+        }
+
+        section {
+            position: relative;
+            z-index: 3;
+            padding: 60px 24px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.4em;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: 80px;
+            line-height: 1.2;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1.2s ease, transform 1.2s ease;
+        }
+
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        .reveal-stagger > * {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; opacity: 1; transform: translateY(0); }
+        .reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.15s; opacity: 1; transform: translateY(0); }
+        .reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
+        .reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.45s; opacity: 1; transform: translateY(0); }
+        .reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.6s; opacity: 1; transform: translateY(0); }
+        .reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.75s; opacity: 1; transform: translateY(0); }
+        .reveal-stagger.visible > *:nth-child(7) { transition-delay: 0.9s; opacity: 1; transform: translateY(0); }
+
+        .pitch-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(22px, 2.5vw, 28px);
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--text-primary);
+            text-align: center;
+            max-width: 780px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        .pitch-text::before, .pitch-text::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 1px;
+            background: var(--border-medium);
+            margin: 32px auto;
+        }
+
+        /* === FEATURES === */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1px;
+            background: var(--border-subtle);
+            border: 1px solid var(--border-subtle);
+            perspective: 1000px;
+        }
+
+        .feature {
+            background: var(--bg-deepest);
+            padding: 56px 40px;
+            transition: background 0.4s ease, transform 0.3s ease;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .feature:hover { background: var(--bg-card); }
+        .feature:hover::before { transform: scaleX(1); }
+
+        .feature-num {
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--accent);
+            letter-spacing: 0.2em;
+            margin-bottom: 24px;
+            transition: transform 0.4s ease;
+        }
+
+        .feature:hover .feature-num { transform: translateX(4px); }
+
+        .feature-title {
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .feature-body {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        /* === CODEX (LORE) === */
+        .codex-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .codex-card {
+            padding: 32px 24px;
+            text-align: center;
+            border: 1px solid var(--border-subtle);
+            background: rgba(13, 11, 14, 0.4);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .codex-card:hover {
+            border-color: var(--border-medium);
+            background: rgba(20, 16, 26, 0.6);
+            transform: translateY(-4px);
+        }
+
+        .codex-card-symbol {
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            color: var(--accent);
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        .codex-card-title {
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.25em;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .codex-card-body {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .codex-footnote {
+            text-align: center;
+            margin-top: 48px;
+            font-family: 'Cinzel', serif;
+            font-size: 10px;
+            letter-spacing: 0.4em;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            opacity: 0.6;
+        }
+
+        /* === CODEX DEEPER: buttons that open modals === */
+        .codex-deeper {
+            margin-top: 64px;
+            text-align: center;
+        }
+
+        .codex-deeper-prompt {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 16px;
+            color: var(--text-tertiary);
+            margin-bottom: 32px;
+            opacity: 0.75;
+        }
+
+        .codex-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            max-width: 720px;
+            margin: 0 auto;
+            background: var(--border-subtle);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .codex-btn {
+            background: var(--bg-deepest);
+            border: none;
+            padding: 40px 32px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            transition: background 0.4s ease;
+            position: relative;
+            color: inherit;
+            font-family: inherit;
+        }
+
+        .codex-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.5s ease;
+        }
+
+        .codex-btn:hover {
+            background: var(--bg-card);
+        }
+
+        .codex-btn:hover::before {
+            transform: scaleX(1);
+        }
+
+        .codex-btn-symbol {
+            font-family: 'Cinzel', serif;
+            font-size: 28px;
+            color: var(--accent);
+            opacity: 0.8;
+            transition: transform 0.4s ease;
+        }
+
+        .codex-btn:hover .codex-btn-symbol {
+            transform: scale(1.1);
+        }
+
+        .codex-btn-label {
+            font-family: 'Cinzel', serif;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 0.3em;
+            color: var(--text-primary);
+            text-transform: uppercase;
+        }
+
+        .codex-btn-sub {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 13px;
+            color: var(--text-tertiary);
+            letter-spacing: 0.05em;
+        }
+
+        /* === MODAL OVERLAY === */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            padding: 40px 20px;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            background: rgba(7, 6, 10, 0.97);
+            border: 1px solid var(--border-medium);
+            width: 100%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 64px 56px;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .modal-overlay.open .modal-container {
+            transform: translateY(0);
+        }
+
+        /* Decorative corners on modal */
+        .modal-container::before,
+        .modal-container::after {
+            content: '';
+            position: absolute;
+            width: 24px; height: 24px;
+            border: 1px solid var(--border-medium);
+        }
+
+        .modal-container::before {
+            top: 8px; left: 8px;
+            border-right: none; border-bottom: none;
+        }
+
+        .modal-container::after {
+            top: 8px; right: 8px;
+            border-left: none; border-bottom: none;
+        }
+
+        .modal-corner-bl, .modal-corner-br {
+            position: absolute;
+            width: 24px; height: 24px;
+            border: 1px solid var(--border-medium);
+        }
+
+        .modal-corner-bl {
+            bottom: 8px; left: 8px;
+            border-right: none; border-top: none;
+        }
+
+        .modal-corner-br {
+            bottom: 8px; right: 8px;
+            border-left: none; border-top: none;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-faded);
+        }
+
+        .modal-prefix {
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            letter-spacing: 0.4em;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .modal-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(28px, 4vw, 44px);
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .modal-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 18px;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 48px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .modal-divider {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 48px;
+            max-width: 400px;
+        }
+
+        .modal-divider::before,
+        .modal-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-medium), transparent);
+        }
+
+        .modal-divider-symbol {
+            margin: 0 20px;
+            color: var(--text-tertiary);
+            font-family: 'Cinzel', serif;
+            font-size: 16px;
+        }
+
+        /* Pantheon entries */
+        .pantheon-entries, .bestiary-entries {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .pantheon-entry, .bestiary-entry {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 32px;
+            padding: 32px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            align-items: start;
+        }
+
+        .pantheon-entry:last-child, .bestiary-entry:last-child {
+            border-bottom: none;
+        }
+
+        .pantheon-symbol, .bestiary-symbol {
+            font-family: 'Cinzel', serif;
+            font-size: 28px;
+            color: var(--accent);
+            text-align: center;
+            opacity: 0.85;
+            padding-top: 4px;
+        }
+
+        .pantheon-content, .bestiary-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .pantheon-name, .bestiary-name {
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            color: var(--text-primary);
+            text-transform: uppercase;
+        }
+
+        .pantheon-epithet, .bestiary-category {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 13px;
+            color: var(--text-tertiary);
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+        }
+
+        .pantheon-body, .bestiary-body {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .pantheon-aspect {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 14px;
+            color: var(--text-tertiary);
+            margin-top: 8px;
+            opacity: 0.8;
+        }
+
+        .modal-footnote {
+            text-align: center;
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-subtle);
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 14px;
+            color: var(--text-tertiary);
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .codex-buttons {
+                grid-template-columns: 1fr;
+            }
+            .modal-container {
+                padding: 48px 24px;
+                max-height: 95vh;
+            }
+            .pantheon-entry, .bestiary-entry {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                padding: 24px 0;
+            }
+            .pantheon-symbol, .bestiary-symbol {
+                text-align: left;
+                padding-top: 0;
+            }
+        }
+
+        /* === NEWSLETTER === */
+        .newsletter { text-align: center; }
+
+        .newsletter-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 22px;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            max-width: 540px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            max-width: 540px;
+            margin: 0 auto;
+            border: 1px solid var(--border-medium);
+        }
+
+        .newsletter-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 18px 24px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            outline: none;
+        }
+
+        .newsletter-input::placeholder {
+            color: var(--text-tertiary);
+            font-style: italic;
+        }
+
+        .newsletter-button {
+            background: transparent;
+            border: none;
+            border-left: 1px solid var(--border-medium);
+            padding: 18px 36px;
+            color: var(--text-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-button:hover {
+            background: var(--accent-faded);
+            color: var(--text-primary);
+        }
+
+        .newsletter-disclaimer {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            color: var(--text-tertiary);
+            margin-top: 24px;
+            font-style: italic;
+        }
+
+        .studio-content {
+            max-width: 720px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .studio-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: 32px;
+        }
+
+        .studio-mark {
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.35em;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            display: inline-block;
+            position: relative;
+            padding: 0 24px;
+        }
+
+        .studio-mark::before, .studio-mark::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 1px;
+            background: var(--border-medium);
+        }
+
+        .studio-mark::before { left: -40px; }
+        .studio-mark::after { right: -40px; }
+
+        /* === FOOTER === */
+        footer {
+            border-top: 1px solid var(--border-subtle);
+            padding: 80px 48px 32px;
+            position: relative;
+            z-index: 3;
+            background: rgba(7, 6, 10, 0.6);
+        }
+
+        .footer-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 64px;
+        }
+
+        .footer-column h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-primary);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .footer-column ul { list-style: none; }
+        .footer-column li { margin-bottom: 12px; }
+
+        .footer-column a {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease, padding-left 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-column a:hover {
+            color: var(--text-primary);
+            padding-left: 6px;
+        }
+
+        .footer-column .pending {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--text-tertiary);
+            cursor: not-allowed;
+            display: inline-block;
+            opacity: 0.5;
+            position: relative;
+        }
+
+        .footer-column .pending::after {
+            content: '— soon';
+            margin-left: 6px;
+            font-size: 10px;
+            font-style: italic;
+            color: var(--text-tertiary);
+            letter-spacing: 0.1em;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 280px;
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-copyright {
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .footer-legal .pending {
+            font-family: 'Cinzel', serif;
+            font-size: 10px;
+            font-weight: 400;
+            color: var(--text-tertiary);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .footer-contact {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .footer-contact a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-contact a:hover { color: var(--text-primary); }
+
+        @media (max-width: 968px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px 32px;
+            }
+            .footer-brand { grid-column: span 2; }
+        }
+
+        @media (max-width: 768px) {
+            .page-frame {
+                top: 8px; left: 8px; right: 8px; bottom: 8px;
+            }
+            .chapter-indicator { display: none; }
+            nav, nav.scrolled { padding: 18px 24px; }
+            .nav-right { gap: 14px; }
+            .nav-links { gap: 18px; }
+            .nav-links a { font-size: 10px; }
+            .lang-switcher .lang-btn { padding: 4px 8px; font-size: 9px; }
+            .audio-toggle { width: 28px; height: 28px; }
+            .hero-sigil svg { width: 180px; height: 180px; }
+            .hero-prefix::before, .hero-prefix::after { display: none; }
+            section { padding: 40px 24px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .feature { padding: 40px 28px; }
+            .codex-grid { grid-template-columns: 1fr; gap: 16px; }
+            .newsletter-form { flex-direction: column; border: none; }
+            .newsletter-input {
+                border: 1px solid var(--border-medium);
+                padding: 16px 20px;
+                margin-bottom: 12px;
+                text-align: center;
+            }
+            .newsletter-button {
+                border: 1px solid var(--border-medium);
+                padding: 16px 24px;
+            }
+            footer { padding: 60px 24px 24px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+            .footer-brand { grid-column: span 1; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .studio-mark::before, .studio-mark::after { display: none; }
+            .marginalia-text::before, .marginalia-text::after { display: none; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="splash" id="splash">
+    <div class="splash-content">
+        <div class="splash-text" data-i18n="splash">Open the codex</div>
+        <div class="splash-roman">✠ MMXXVI ✠</div>
+    </div>
+</div>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<div class="page-frame">
+    <div class="corner-bl"></div>
+    <div class="corner-br"></div>
+</div>
+
+<div class="torch" id="torch"></div>
+
+<div class="chapter-indicator" id="chapterIndicator">
+    <a href="#top" class="chapter-dot active" data-section="top"><span class="chapter-label" data-i18n="ch_prologus">Prologus</span></a>
+    <a href="#game" class="chapter-dot" data-section="game"><span class="chapter-label" data-i18n="ch_1">Capitulum I</span></a>
+    <a href="#features" class="chapter-dot" data-section="features"><span class="chapter-label" data-i18n="ch_2">Capitulum II</span></a>
+    <a href="#codex" class="chapter-dot" data-section="codex"><span class="chapter-label" data-i18n="ch_3">Capitulum III</span></a>
+    <a href="#newsletter" class="chapter-dot" data-section="newsletter"><span class="chapter-label" data-i18n="ch_4">Capitulum IV</span></a>
+    <a href="#studio" class="chapter-dot" data-section="studio"><span class="chapter-label" data-i18n="ch_colophon">Colophon</span></a>
+</div>
+
+<audio id="ambientAudio" loop preload="auto">
+    <source src="ambient.mp3" type="audio/mpeg">
+</audio>
+
+<nav id="nav">
+    <div class="nav-brand">Mortmain Studio</div>
+    <div class="nav-right">
+        <ul class="nav-links">
+            <li><a href="#game" data-i18n="nav_game">The Game</a></li>
+            <li><a href="#features" data-i18n="nav_features">Features</a></li>
+            <li><a href="#codex" data-i18n="nav_codex">Codex</a></li>
+            <li><a href="#studio" data-i18n="nav_studio">Studio</a></li>
+        </ul>
+        <div class="audio-control" id="audioControl">
+            <div class="volume-popout">
+                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="10" aria-label="Ambient volume">
+                <span class="volume-label" id="volumeLabel">10%</span>
+            </div>
+            <button class="audio-toggle" id="audioToggle" aria-label="Toggle ambient sound" title="Ambient sound — hover for volume">♪</button>
+        </div>
+        <div class="lang-switcher">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="ru">RU</button>
+        </div>
+    </div>
+</nav>
+
+<section class="hero" id="top">
+    <div class="hero-sigil">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <g stroke="#7a3a1f" stroke-width="1" fill="none">
+                <line x1="100" y1="20" x2="100" y2="180"/>
+                <line x1="20" y1="100" x2="180" y2="100"/>
+                <line x1="60" y1="60" x2="140" y2="140"/>
+                <line x1="60" y1="140" x2="140" y2="60"/>
+                <circle cx="100" cy="100" r="40"/>
+                <circle cx="100" cy="100" r="60"/>
+                <circle cx="100" cy="100" r="80"/>
+            </g>
+            <circle cx="100" cy="100" r="6" fill="#7a3a1f"/>
+        </svg>
+    </div>
+    <div class="hero-inner">
+        <div class="hero-prefix" data-i18n="hero_presents">Mortmain Studio Presents</div>
+        <div class="hero-title-wrap">
+            <h1 class="hero-title" id="hero-title">
+                <span style="animation-delay: 0.4s">S</span><span style="animation-delay: 0.58s">q</span><span style="animation-delay: 0.76s">u</span><span style="animation-delay: 0.94s">a</span><span style="animation-delay: 1.12s">l</span><span style="animation-delay: 1.30s">o</span><span style="animation-delay: 1.48s">r</span>
+            </h1>
+        </div>
+        <div class="hero-ornament">
+            <svg viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg">
+                <line x1="0" y1="20" x2="50" y2="20" stroke="#7a3a1f" stroke-width="0.5"/>
+                <line x1="90" y1="20" x2="140" y2="20" stroke="#7a3a1f" stroke-width="0.5"/>
+                <g transform="translate(70, 20)" stroke="#7a3a1f" stroke-width="0.8" fill="none">
+                    <line x1="-12" y1="0" x2="12" y2="0"/>
+                    <line x1="0" y1="-14" x2="0" y2="14"/>
+                    <line x1="-8" y1="-8" x2="8" y2="8"/>
+                    <line x1="-8" y1="8" x2="8" y2="-8"/>
+                    <circle cx="0" cy="0" r="3" fill="#7a3a1f"/>
+                    <circle cx="0" cy="0" r="6" fill="none" opacity="0.5"/>
+                    <!-- Six hidden dots — one for each Elder. For those who look closely. -->
+                    <circle cx="0" cy="-10" r="0.6" fill="#7a3a1f" opacity="0.7"/>
+                    <circle cx="8.66" cy="-5" r="0.6" fill="#7a3a1f" opacity="0.7"/>
+                    <circle cx="8.66" cy="5" r="0.6" fill="#7a3a1f" opacity="0.7"/>
+                    <circle cx="0" cy="10" r="0.6" fill="#7a3a1f" opacity="0.7"/>
+                    <circle cx="-8.66" cy="5" r="0.6" fill="#7a3a1f" opacity="0.7"/>
+                    <circle cx="-8.66" cy="-5" r="0.6" fill="#7a3a1f" opacity="0.7"/>
+                </g>
+                <circle cx="55" cy="20" r="1.5" fill="#7a3a1f"/>
+                <circle cx="85" cy="20" r="1.5" fill="#7a3a1f"/>
+            </svg>
+        </div>
+        <div class="hero-tagline" data-i18n="hero_tagline">Steel. Blood. Rot.</div>
+        <div class="hero-sub" data-i18n="hero_sub">A medieval extraction game</div>
+        <a href="#newsletter" class="hero-cta" data-i18n="hero_cta">Join the Vigil</a>
+    </div>
+    <div class="scroll-hint" data-i18n="hero_scroll">Descend</div>
+</section>
+
+<div class="divider reveal">
+    <div class="divider-line">
+        <div class="divider-symbol-group">
+            <div class="divider-dot"></div>
+            <div class="divider-symbol">✠</div>
+            <div class="divider-dot"></div>
+        </div>
+    </div>
+    <div class="divider-chapter" data-i18n="ch_1">Capitulum I</div>
+</div>
+
+<section class="pitch reveal" id="game">
+    <div class="container">
+        <div class="section-label" data-i18n="premise_label">— The Premise —</div>
+        <p class="pitch-text" data-i18n="premise_text">
+            In a kingdom devoured by plague, only the desperate remain. Take what you can. Carry it home. Or leave it on your corpse for the next soul brave enough to come looking.
+        </p>
+    </div>
+</section>
+
+<div class="marginalia reveal">
+    <p class="marginalia-text" data-i18n="marg_1">The plague does not ask permission. It only asks who is next.</p>
+    <div class="marginalia-attribution" data-i18n="marg_1_attr">— from the Sermons of the Last Bishop</div>
+</div>
+
+<div class="divider reveal">
+    <div class="divider-line">
+        <div class="divider-symbol-group">
+            <div class="divider-dot"></div>
+            <div class="divider-symbol">✠</div>
+            <div class="divider-dot"></div>
+        </div>
+    </div>
+    <div class="divider-chapter" data-i18n="ch_2">Capitulum II</div>
+</div>
+
+<section class="features" id="features">
+    <div class="container">
+        <div class="reveal">
+            <div class="section-label" data-i18n="awaits_label">— What Awaits —</div>
+            <h2 class="section-title" data-i18n="awaits_title">Four pillars of the dying world</h2>
+        </div>
+
+        <div class="features-grid reveal-stagger" id="featuresGrid">
+            <div class="feature">
+                <div class="feature-num">I.</div>
+                <h3 class="feature-title" data-i18n="f1_title">Directional Combat</h3>
+                <p class="feature-body" data-i18n="f1_body">
+                    Four-direction strikes. Stance work. Parries that demand timing, feints that demand nerve. A duel is a conversation written in steel — and you must learn to read it before it reads you.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-num">II.</div>
+                <h3 class="feature-title" data-i18n="f2_title">Hardcore Extraction</h3>
+                <p class="feature-body" data-i18n="f2_body">
+                    Carry your loot to safety, or die with it on your back. Insure what you can afford to lose. Hunt the ones who took the rest. The road remembers your debts.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-num">III.</div>
+                <h3 class="feature-title" data-i18n="f3_title">A World That Bites Back</h3>
+                <p class="feature-body" data-i18n="f3_body">
+                    Bandits in the treeline. Undead in the crypt. Beasts in the deep wood. Every enemy fights with the same grammar of war as you — there are no shortcuts, only sharper steel.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-num">IV.</div>
+                <h3 class="feature-title" data-i18n="f4_title">No Magic. No Mercy.</h3>
+                <p class="feature-body" data-i18n="f4_body">
+                    No fireballs. No second chances. Your skill is your sorcery, your armour is your prayer, and stamina runs out faster than the sun.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="marginalia reveal">
+    <p class="marginalia-text" data-i18n="marg_2">Steel is honest. The man holding it, less so.</p>
+    <div class="marginalia-attribution" data-i18n="marg_2_attr">— old saying of the road</div>
+</div>
+
+<div class="divider reveal">
+    <div class="divider-line">
+        <div class="divider-symbol-group">
+            <div class="divider-dot"></div>
+            <div class="divider-symbol">✠</div>
+            <div class="divider-dot"></div>
+        </div>
+    </div>
+    <div class="divider-chapter" data-i18n="ch_3">Capitulum III</div>
+</div>
+
+<section class="codex reveal" id="codex">
+    <div class="container">
+        <div class="section-label" data-i18n="codex_label">— Fragments of the Codex —</div>
+        <h2 class="section-title" data-i18n="codex_title">Names spoken in the dark</h2>
+
+        <div class="codex-grid reveal-stagger">
+            <div class="codex-card">
+                <div class="codex-card-symbol">✠</div>
+                <h3 class="codex-card-title" data-i18n="codex1_title">The Last Bishop</h3>
+                <p class="codex-card-body" data-i18n="codex1_body">
+                    Once shepherd of the cathedral. He still preaches — to a flock of bones.
+                </p>
+            </div>
+
+            <div class="codex-card">
+                <div class="codex-card-symbol">⚔</div>
+                <h3 class="codex-card-title" data-i18n="codex2_title">The Iron Confessor</h3>
+                <p class="codex-card-body" data-i18n="codex2_body">
+                    He hears your sins through the visor of his helm. Penance is paid in blood.
+                </p>
+            </div>
+
+            <div class="codex-card">
+                <div class="codex-card-symbol">☩</div>
+                <h3 class="codex-card-title" data-i18n="codex3_title">The Vermillion Pact</h3>
+                <p class="codex-card-body" data-i18n="codex3_body">
+                    A treaty written in plague-blood. Those who signed it no longer remember why.
+                </p>
+            </div>
+        </div>
+
+        <div class="codex-deeper">
+            <p class="codex-deeper-prompt" data-i18n="deeper_prompt">— if you would read further, the codex opens for you —</p>
+            <div class="codex-buttons">
+                <button class="codex-btn" id="openPantheon">
+                    <span class="codex-btn-symbol">◈</span>
+                    <span class="codex-btn-label" data-i18n="btn_pantheon">The Pantheon</span>
+                    <span class="codex-btn-sub" data-i18n="btn_pantheon_sub">Those who were named</span>
+                </button>
+                <button class="codex-btn" id="openBestiary">
+                    <span class="codex-btn-symbol">⚜</span>
+                    <span class="codex-btn-label" data-i18n="btn_bestiary">The Bestiary</span>
+                    <span class="codex-btn-sub" data-i18n="btn_bestiary_sub">What walks the roads</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="codex-footnote" data-i18n="codex_footnote">— there are six. and one whose name no longer belongs to him —</div>
+    </div>
+</section>
+
+<div class="marginalia reveal">
+    <p class="marginalia-text" data-i18n="marg_3">By order of the Crown: travel by daylight, bury your own dead, trust no shepherd.</p>
+    <div class="marginalia-attribution" data-i18n="marg_3_attr">— public decree, year of the second mourning</div>
+</div>
+
+<div class="divider reveal">
+    <div class="divider-line">
+        <div class="divider-symbol-group">
+            <div class="divider-dot"></div>
+            <div class="divider-symbol">✠</div>
+            <div class="divider-dot"></div>
+        </div>
+    </div>
+    <div class="divider-chapter" data-i18n="ch_4">Capitulum IV</div>
+</div>
+
+<section class="newsletter reveal" id="newsletter">
+    <div class="container">
+        <div class="section-label" data-i18n="vigil_label">— The Vigil —</div>
+        <p class="newsletter-text" data-i18n="vigil_text">
+            The gates are not yet open. Leave your name with the watch — you will be the first to know when the dark begins.
+        </p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); const btn = this.querySelector('.newsletter-button'); btn.textContent = window.LANG === 'ru' ? 'Внесён' : 'Marked'; setTimeout(() => btn.textContent = window.LANG === 'ru' ? 'Внести' : 'Mark Me', 2500);">
+            <input class="newsletter-input" type="email" placeholder="your.name@somewhere" required>
+            <button class="newsletter-button" type="submit" data-i18n="vigil_button">Mark Me</button>
+        </form>
+        <p class="newsletter-disclaimer" data-i18n="vigil_disclaimer">Your name is held in confidence. We speak only when the bell rings.</p>
+    </div>
+</section>
+
+<div class="marginalia reveal">
+    <p class="marginalia-text" data-i18n="marg_4">Hope is a candle in the wind. Bring more than one.</p>
+    <div class="marginalia-attribution" data-i18n="marg_4_attr">— a heretic, before the pyre</div>
+</div>
+
+<div class="divider reveal">
+    <div class="divider-line">
+        <div class="divider-symbol-group">
+            <div class="divider-dot"></div>
+            <div class="divider-symbol">✠</div>
+            <div class="divider-dot"></div>
+        </div>
+    </div>
+    <div class="divider-chapter" data-i18n="ch_colophon">Colophon</div>
+</div>
+
+<section class="studio reveal" id="studio">
+    <div class="container">
+        <div class="studio-content">
+            <div class="section-label" data-i18n="workshop_label">— The Workshop —</div>
+            <h2 class="section-title" data-i18n="workshop_title">Mortmain Studio</h2>
+            <p class="studio-text" data-i18n="workshop_text">
+                Mortmain is a small workshop devoted to games at the edge of medieval imagination. We are interested in what survives when the world doesn't. Squalor is our first dispatch from the dark.
+            </p>
+            <div class="studio-mark">A.D. MMXXVI</div>
+        </div>
+    </div>
+</section>
+
+<!-- === PANTHEON MODAL === -->
+<div class="modal-overlay" id="pantheonModal" role="dialog" aria-modal="true" aria-labelledby="pantheonTitle">
+    <div class="modal-container">
+        <div class="modal-corner-bl"></div>
+        <div class="modal-corner-br"></div>
+        <button class="modal-close" aria-label="Close" data-close-modal>✕</button>
+
+        <div class="modal-prefix" data-i18n="pantheon_prefix">— From the elder folio —</div>
+        <h2 class="modal-title" id="pantheonTitle" data-i18n="pantheon_title">The Pantheon</h2>
+        <p class="modal-subtitle" data-i18n="pantheon_subtitle">Six were once named openly. One was named to silence the others. None of the seven answer when called.</p>
+
+        <div class="modal-divider">
+            <div class="modal-divider-symbol">✠</div>
+        </div>
+
+        <div class="pantheon-entries">
+            <div class="pantheon-entry">
+                <div class="pantheon-symbol">☉</div>
+                <div class="pantheon-content">
+                    <div class="pantheon-name" data-i18n="pan1_name">The Reaper</div>
+                    <div class="pantheon-epithet" data-i18n="pan1_epithet">Sister of many mouths</div>
+                    <div class="pantheon-body" data-i18n="pan1_body">Once she was given milk and the first cut furrow. They called her Golden Mother. Now her gifts arrive unbidden — the wound that will not close, the grain that ripens past its season, the child grown wrong in the womb.</div>
+                    <div class="pantheon-aspect" data-i18n="pan1_aspect">Of harvest, of healing, of all that grows past its bound.</div>
+                </div>
+            </div>
+
+            <div class="pantheon-entry">
+                <div class="pantheon-symbol">⚒</div>
+                <div class="pantheon-content">
+                    <div class="pantheon-name" data-i18n="pan2_name">The Old Smith</div>
+                    <div class="pantheon-epithet" data-i18n="pan2_epithet">Father of the unbreakable word</div>
+                    <div class="pantheon-body" data-i18n="pan2_body">He hammered the first crown and the first chain on the same anvil. Oaths sworn to him cannot be unsworn. Kings forgot this. The oath did not.</div>
+                    <div class="pantheon-aspect" data-i18n="pan2_aspect">Of craft, of pact, of war that does not end.</div>
+                </div>
+            </div>
+
+            <div class="pantheon-entry">
+                <div class="pantheon-symbol">☽</div>
+                <div class="pantheon-content">
+                    <div class="pantheon-name" data-i18n="pan3_name">The Whisperer</div>
+                    <div class="pantheon-epithet" data-i18n="pan3_epithet">Mistress behind the veil</div>
+                    <div class="pantheon-body" data-i18n="pan3_body">She is the dream you remember on the wrong morning. She is the name you almost spoke. The mad hear her clearly. The wise do not pretend to.</div>
+                    <div class="pantheon-aspect" data-i18n="pan3_aspect">Of dream, of secret, of the thin place between knowing and forgetting.</div>
+                </div>
+            </div>
+
+            <div class="pantheon-entry">
+                <div class="pantheon-symbol">❄</div>
+                <div class="pantheon-content">
+                    <div class="pantheon-name" data-i18n="pan4_name">The Pale Sister</div>
+                    <div class="pantheon-epithet" data-i18n="pan4_epithet">She who breathes the snow</div>
+                    <div class="pantheon-body" data-i18n="pan4_body">The plague hates her cold. So do the cathedrals. Villages still leave her gifts of ice in their wells — when no priest is watching. They say the winters are growing longer. They do not say why.</div>
+                    <div class="pantheon-aspect" data-i18n="pan4_aspect">Of winter, of clarity, of the long sleep that keeps worse things sleeping.</div>
+                </div>
+            </div>
+
+            <div class="pantheon-entry">
+                <div class="pantheon-symbol">🜂</div>
+                <div class="pantheon-content">
+                    <div class="pantheon-name" data-i18n="pan5_name">The Hearth-Keeper</div>
+                    <div class="pantheon-epithet" data-i18n="pan5_epithet">He who warms the door</div>
+                    <div class="pantheon-body" data-i18n="pan5_body">His was the fire that kept the wolf out. Now his fire is in every torch that finds a heretic. He does not understand what they have made of him. He still tries to keep them warm.</div>
+                    <div class="pantheon-aspect" data-i18n="pan5_aspect">Of hearth, of light, of the pyre that no longer asks who burns.</div>
+                </div>
+            </div>
+
+            <div class="pantheon-entry">
+                <div class="pantheon-symbol">⚱</div>
+                <div class="pantheon-content">
+                    <div class="pantheon-name" data-i18n="pan6_name">The Name-Keeper</div>
+                    <div class="pantheon-epithet" data-i18n="pan6_epithet">Scribe of the last page</div>
+                    <div class="pantheon-body" data-i18n="pan6_body">He writes every name in ash. He has not stopped writing for two centuries. Some names he can no longer find. Those names walk the roads in his place, looking.</div>
+                    <div class="pantheon-aspect" data-i18n="pan6_aspect">Of ending, of memory, of the small mercy of being known.</div>
+                </div>
+            </div>
+
+            <div class="pantheon-entry">
+                <div class="pantheon-symbol">◇</div>
+                <div class="pantheon-content">
+                    <div class="pantheon-name" data-i18n="pan7_name">The Pale Sovereign</div>
+                    <div class="pantheon-epithet" data-i18n="pan7_epithet">The faceless one</div>
+                    <div class="pantheon-body" data-i18n="pan7_body">In the year of the first mourning the cathedrals were rebuilt for him. The bishops swore he had always been. The crown agreed. No icon shows his face. No prayer he answers is recorded. He is the only god whose worship was a decree.</div>
+                    <div class="pantheon-aspect" data-i18n="pan7_aspect">Of decree, of replacement, of the silence where six older voices used to sing.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footnote" data-i18n="pantheon_footnote">— other names exist. they have been struck from the folio. they will return when struck pages do —</div>
+    </div>
+</div>
+
+<!-- === BESTIARY MODAL === -->
+<div class="modal-overlay" id="bestiaryModal" role="dialog" aria-modal="true" aria-labelledby="bestiaryTitle">
+    <div class="modal-container">
+        <div class="modal-corner-bl"></div>
+        <div class="modal-corner-br"></div>
+        <button class="modal-close" aria-label="Close" data-close-modal>✕</button>
+
+        <div class="modal-prefix" data-i18n="bestiary_prefix">— From a hunter's marginalia —</div>
+        <h2 class="modal-title" id="bestiaryTitle" data-i18n="bestiary_title">The Bestiary</h2>
+        <p class="modal-subtitle" data-i18n="bestiary_subtitle">What walks the roads after dark. Carry steel. Carry salt. Carry the names of your dead.</p>
+
+        <div class="modal-divider">
+            <div class="modal-divider-symbol">⚜</div>
+        </div>
+
+        <div class="bestiary-entries">
+            <div class="bestiary-entry">
+                <div class="bestiary-symbol">𓂀</div>
+                <div class="bestiary-content">
+                    <div class="bestiary-name" data-i18n="best1_name">Strzyga</div>
+                    <div class="bestiary-category" data-i18n="best1_cat">— Cursed, woman-born —</div>
+                    <div class="bestiary-body" data-i18n="best1_body">She was once a daughter of some house. Now she eats marrow. Sunlight slows her. Iron at the threshold deters her. Speaking her name aloud is said to wake her. I do not test this.</div>
+                </div>
+            </div>
+
+            <div class="bestiary-entry">
+                <div class="bestiary-symbol">☠</div>
+                <div class="bestiary-content">
+                    <div class="bestiary-name" data-i18n="best2_name">The Newly Risen</div>
+                    <div class="bestiary-category" data-i18n="best2_cat">— Undead, freshly turned —</div>
+                    <div class="bestiary-body" data-i18n="best2_body">Plague-dead who were not given proper rite. They are hungry, not angry. They remember the road home and try to walk it. Strike the skull. Burn what remains.</div>
+                </div>
+            </div>
+
+            <div class="bestiary-entry">
+                <div class="bestiary-symbol">⚰</div>
+                <div class="bestiary-content">
+                    <div class="bestiary-name" data-i18n="best3_name">The Forgotten</div>
+                    <div class="bestiary-category" data-i18n="best3_cat">— Undead, nameless —</div>
+                    <div class="bestiary-body" data-i18n="best3_body">Older than the newly risen. Their names have left the world entirely. They search. If you knew the name they once had, they would weep and lie down. Few do.</div>
+                </div>
+            </div>
+
+            <div class="bestiary-entry">
+                <div class="bestiary-symbol">⚔</div>
+                <div class="bestiary-content">
+                    <div class="bestiary-name" data-i18n="best4_name">Armoured Sleepers</div>
+                    <div class="bestiary-category" data-i18n="best4_cat">— Undead, sworn —</div>
+                    <div class="bestiary-body" data-i18n="best4_body">Skeletons in the panoply of old orders. They do not rest because some oath was not fulfilled. They will not say which. They fight as well as they did living. They tire less.</div>
+                </div>
+            </div>
+
+            <div class="bestiary-entry">
+                <div class="bestiary-symbol">𓂺</div>
+                <div class="bestiary-content">
+                    <div class="bestiary-name" data-i18n="best5_name">Drowners</div>
+                    <div class="bestiary-category" data-i18n="best5_cat">— Of still water —</div>
+                    <div class="bestiary-body" data-i18n="best5_body">First mourning casualties, drowned in the early panic. They cling to riverbanks. They drag the unwary down into water that does not always have a bottom.</div>
+                </div>
+            </div>
+
+            <div class="bestiary-entry">
+                <div class="bestiary-symbol">🜨</div>
+                <div class="bestiary-content">
+                    <div class="bestiary-name" data-i18n="best6_name">The Leshen</div>
+                    <div class="bestiary-category" data-i18n="best6_cat">— Of the deep wood —</div>
+                    <div class="bestiary-body" data-i18n="best6_body">Wardens of altars now overgrown. They do not hunt. They punish trespass. Cut no living wood in their groves. Leave them honey. Do not look back.</div>
+                </div>
+            </div>
+
+            <div class="bestiary-entry">
+                <div class="bestiary-symbol">𖠰</div>
+                <div class="bestiary-content">
+                    <div class="bestiary-name" data-i18n="best7_name">Wyvern</div>
+                    <div class="bestiary-category" data-i18n="best7_cat">— Of the high places —</div>
+                    <div class="bestiary-body" data-i18n="best7_body">Older than the first mourning. Older than the kingdoms. They do not serve anyone. They eat livestock when the winters are bad. The winters are bad now.</div>
+                </div>
+            </div>
+
+            <div class="bestiary-entry">
+                <div class="bestiary-symbol">⚒</div>
+                <div class="bestiary-content">
+                    <div class="bestiary-name" data-i18n="best8_name">Brigands</div>
+                    <div class="bestiary-category" data-i18n="best8_cat">— Living, desperate —</div>
+                    <div class="bestiary-body" data-i18n="best8_body">The worst sort of monster, in that they reason. They were farmers, soldiers, sons. Hunger made them this. Some of them remember kindness. Most do not.</div>
+                </div>
+            </div>
+
+            <div class="bestiary-entry">
+                <div class="bestiary-symbol">𖠰</div>
+                <div class="bestiary-content">
+                    <div class="bestiary-name" data-i18n="best9_name">Boar</div>
+                    <div class="bestiary-category" data-i18n="best9_cat">— Living, beastly —</div>
+                    <div class="bestiary-body" data-i18n="best9_body">A boar. Nothing more. Not every danger in this world is cursed. Some are simply what they are. The boar does not care for our wars.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footnote" data-i18n="bestiary_footnote">— other things walk the wood. I have not written of them. I did not survive to write of them. — </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-column footer-brand">
+            <h3>Mortmain Studio</h3>
+            <p data-i18n="footer_brand">A workshop at the edge of medieval imagination. We build games that remember what the world forgets.</p>
+        </div>
+
+        <div class="footer-column">
+            <h4 data-i18n="footer_game">The Game</h4>
+            <ul>
+                <li><a href="#features" data-i18n="footer_features">Features</a></li>
+                <li><a href="#codex" data-i18n="footer_codex">Codex</a></li>
+                <li><a href="faq.html" data-i18n="footer_faq">FAQ</a></li>
+                <li><a href="press.html" data-i18n="footer_presskit">Press Kit</a></li>
+                <li><span class="pending" data-i18n="footer_roadmap">Roadmap</span></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h4 data-i18n="footer_community">Community</h4>
+            <ul>
+                <li><span class="pending">Discord</span></li>
+                <li><span class="pending">Steam</span></li>
+                <li><span class="pending">YouTube</span></li>
+                <li><span class="pending">X / Twitter</span></li>
+                <li><span class="pending">Reddit</span></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h4 data-i18n="footer_studio">Studio</h4>
+            <ul>
+                <li><a href="about.html" data-i18n="footer_about">About</a></li>
+                <li><span class="pending" data-i18n="footer_careers">Careers</span></li>
+                <li><a href="press.html" data-i18n="footer_press">Press Inquiries</a></li>
+                <li><a href="mailto:contact@mortmain.studio" data-i18n="footer_contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="footer-copyright">© MMXXVI · Mortmain Studio · All rights reserved</div>
+        <div class="footer-contact">
+            <a href="mailto:contact@mortmain.studio">contact@mortmain.studio</a>
+        </div>
+        <ul class="footer-legal">
+            <li><a href="privacy.html" data-i18n="legal_privacy">Privacy</a></li>
+            <li><a href="terms.html" data-i18n="legal_terms">Terms</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script>
+    // === I18N: EN / RU ===
+    const translations = {
+        en: {
+            splash: "Open the codex",
+            ch_prologus: "Prologus",
+            ch_1: "Capitulum I",
+            ch_2: "Capitulum II",
+            ch_3: "Capitulum III",
+            ch_4: "Capitulum IV",
+            ch_colophon: "Colophon",
+            nav_game: "The Game",
+            nav_features: "Features",
+            nav_codex: "Codex",
+            nav_studio: "Studio",
+            hero_presents: "Mortmain Studio Presents",
+            hero_tagline: "Steel. Blood. Rot.",
+            hero_sub: "A medieval extraction game",
+            hero_cta: "Join the Vigil",
+            hero_scroll: "Descend",
+            premise_label: "— The Premise —",
+            premise_text: "In a kingdom devoured by plague, only the desperate remain. Take what you can. Carry it home. Or leave it on your corpse for the next soul brave enough to come looking.",
+            marg_1: "The plague does not ask permission. It only asks who is next.",
+            marg_1_attr: "— from the Sermons of the Last Bishop",
+            awaits_label: "— What Awaits —",
+            awaits_title: "Four pillars of the dying world",
+            f1_title: "Directional Combat",
+            f1_body: "Four-direction strikes. Stance work. Parries that demand timing, feints that demand nerve. A duel is a conversation written in steel — and you must learn to read it before it reads you.",
+            f2_title: "Hardcore Extraction",
+            f2_body: "Carry your loot to safety, or die with it on your back. Insure what you can afford to lose. Hunt the ones who took the rest. The road remembers your debts.",
+            f3_title: "A World That Bites Back",
+            f3_body: "Bandits in the treeline. Undead in the crypt. Beasts in the deep wood. Every enemy fights with the same grammar of war as you — there are no shortcuts, only sharper steel.",
+            f4_title: "No Magic. No Mercy.",
+            f4_body: "No fireballs. No second chances. Your skill is your sorcery, your armour is your prayer, and stamina runs out faster than the sun.",
+            marg_2: "Steel is honest. The man holding it, less so.",
+            marg_2_attr: "— from the Chronicle of the First Mourning",
+            codex_label: "— Fragments of the Codex —",
+            codex_title: "Names spoken in the dark",
+            codex1_title: "The Last Bishop",
+            codex1_body: "Once shepherd of the cathedral. He still preaches — to a flock of bones.",
+            codex2_title: "The Iron Confessor",
+            codex2_body: "He hears your sins through the visor of his helm. Penance is paid in blood.",
+            codex3_title: "The Vermillion Pact",
+            codex3_body: "A treaty written in plague-blood. Those who signed it no longer remember why.",
+            codex_footnote: "— there are six. and one whose name no longer belongs to him —",
+            deeper_prompt: "— if you would read further, the codex opens for you —",
+            btn_pantheon: "The Pantheon",
+            btn_pantheon_sub: "Those who were named",
+            btn_bestiary: "The Bestiary",
+            btn_bestiary_sub: "What walks the roads",
+            pantheon_prefix: "— From the elder folio —",
+            pantheon_title: "The Pantheon",
+            pantheon_subtitle: "Six were once named openly. One was named to silence the others. None of the seven answer when called.",
+            pan1_name: "The Reaper",
+            pan1_epithet: "Sister of many mouths",
+            pan1_body: "Once she was given milk and the first cut furrow. They called her Golden Mother. Now her gifts arrive unbidden — the wound that will not close, the grain that ripens past its season, the child grown wrong in the womb.",
+            pan1_aspect: "Of harvest, of healing, of all that grows past its bound.",
+            pan2_name: "The Old Smith",
+            pan2_epithet: "Father of the unbreakable word",
+            pan2_body: "He hammered the first crown and the first chain on the same anvil. Oaths sworn to him cannot be unsworn. Kings forgot this. The oath did not.",
+            pan2_aspect: "Of craft, of pact, of war that does not end.",
+            pan3_name: "The Whisperer",
+            pan3_epithet: "Mistress behind the veil",
+            pan3_body: "She is the dream you remember on the wrong morning. She is the name you almost spoke. The mad hear her clearly. The wise do not pretend to.",
+            pan3_aspect: "Of dream, of secret, of the thin place between knowing and forgetting.",
+            pan4_name: "The Pale Sister",
+            pan4_epithet: "She who breathes the snow",
+            pan4_body: "The plague hates her cold. So do the cathedrals. Villages still leave her gifts of ice in their wells — when no priest is watching. They say the winters are growing longer. They do not say why.",
+            pan4_aspect: "Of winter, of clarity, of the long sleep that keeps worse things sleeping.",
+            pan5_name: "The Hearth-Keeper",
+            pan5_epithet: "He who warms the door",
+            pan5_body: "His was the fire that kept the wolf out. Now his fire is in every torch that finds a heretic. He does not understand what they have made of him. He still tries to keep them warm.",
+            pan5_aspect: "Of hearth, of light, of the pyre that no longer asks who burns.",
+            pan6_name: "The Name-Keeper",
+            pan6_epithet: "Scribe of the last page",
+            pan6_body: "He writes every name in ash. He has not stopped writing for two centuries. Some names he can no longer find. Those names walk the roads in his place, looking.",
+            pan6_aspect: "Of ending, of memory, of the small mercy of being known.",
+            pan7_name: "The Pale Sovereign",
+            pan7_epithet: "The faceless one",
+            pan7_body: "In the year of the first mourning the cathedrals were rebuilt for him. The bishops swore he had always been. The crown agreed. No icon shows his face. No prayer he answers is recorded. He is the only god whose worship was a decree.",
+            pan7_aspect: "Of decree, of replacement, of the silence where six older voices used to sing.",
+            pantheon_footnote: "— other names exist. they have been struck from the folio. they will return when struck pages do —",
+            bestiary_prefix: "— From a hunter's marginalia —",
+            bestiary_title: "The Bestiary",
+            bestiary_subtitle: "What walks the roads after dark. Carry steel. Carry salt. Carry the names of your dead.",
+            best1_name: "Strzyga",
+            best1_cat: "— Cursed, woman-born —",
+            best1_body: "She was once a daughter of some house. Now she eats marrow. Sunlight slows her. Iron at the threshold deters her. Speaking her name aloud is said to wake her. I do not test this.",
+            best2_name: "The Newly Risen",
+            best2_cat: "— Undead, freshly turned —",
+            best2_body: "Plague-dead who were not given proper rite. They are hungry, not angry. They remember the road home and try to walk it. Strike the skull. Burn what remains.",
+            best3_name: "The Forgotten",
+            best3_cat: "— Undead, nameless —",
+            best3_body: "Older than the newly risen. Their names have left the world entirely. They search. If you knew the name they once had, they would weep and lie down. Few do.",
+            best4_name: "Armoured Sleepers",
+            best4_cat: "— Undead, sworn —",
+            best4_body: "Skeletons in the panoply of old orders. They do not rest because some oath was not fulfilled. They will not say which. They fight as well as they did living. They tire less.",
+            best5_name: "Drowners",
+            best5_cat: "— Of still water —",
+            best5_body: "First mourning casualties, drowned in the early panic. They cling to riverbanks. They drag the unwary down into water that does not always have a bottom.",
+            best6_name: "The Leshen",
+            best6_cat: "— Of the deep wood —",
+            best6_body: "Wardens of altars now overgrown. They do not hunt. They punish trespass. Cut no living wood in their groves. Leave them honey. Do not look back.",
+            best7_name: "Wyvern",
+            best7_cat: "— Of the high places —",
+            best7_body: "Older than the first mourning. Older than the kingdoms. They do not serve anyone. They eat livestock when the winters are bad. The winters are bad now.",
+            best8_name: "Brigands",
+            best8_cat: "— Living, desperate —",
+            best8_body: "The worst sort of monster, in that they reason. They were farmers, soldiers, sons. Hunger made them this. Some of them remember kindness. Most do not.",
+            best9_name: "Boar",
+            best9_cat: "— Living, beastly —",
+            best9_body: "A boar. Nothing more. Not every danger in this world is cursed. Some are simply what they are. The boar does not care for our wars.",
+            bestiary_footnote: "— other things walk the wood. I have not written of them. I did not survive to write of them. —",
+            marg_3: "By order of the Crown: travel by daylight, bury your own dead, trust no shepherd.",
+            marg_3_attr: "— public decree, year of the second mourning",
+            vigil_label: "— The Vigil —",
+            vigil_text: "The gates are not yet open. Leave your name with the watch — you will be the first to know when the dark begins.",
+            vigil_button: "Mark Me",
+            vigil_disclaimer: "Your name is held in confidence. We speak only when the bell rings.",
+            marg_4: "Hope is a candle in the wind. Bring more than one.",
+            marg_4_attr: "— a heretic, before the pyre",
+            workshop_label: "— The Workshop —",
+            workshop_title: "Mortmain Studio",
+            workshop_text: "Mortmain is a small workshop devoted to games at the edge of medieval imagination. We are interested in what survives when the world doesn't. Squalor is our first dispatch from the dark.",
+            footer_brand: "A workshop at the edge of medieval imagination. We build games that remember what the world forgets.",
+            footer_game: "The Game",
+            footer_features: "Features",
+            footer_codex: "Codex",
+            footer_presskit: "Press Kit",
+            footer_roadmap: "Roadmap",
+            footer_faq: "FAQ",
+            footer_community: "Community",
+            footer_studio: "Studio",
+            footer_about: "About",
+            footer_careers: "Careers",
+            footer_press: "Press Inquiries",
+            footer_contact: "Contact",
+            legal_privacy: "Privacy",
+            legal_terms: "Terms",
+            legal_cookies: "Cookies"
+        },
+        ru: {
+            splash: "Открыть кодекс",
+            ch_prologus: "Пролог",
+            ch_1: "Глава I",
+            ch_2: "Глава II",
+            ch_3: "Глава III",
+            ch_4: "Глава IV",
+            ch_colophon: "Колофон",
+            nav_game: "Игра",
+            nav_features: "Особенности",
+            nav_codex: "Кодекс",
+            nav_studio: "Студия",
+            hero_presents: "Mortmain Studio представляет",
+            hero_tagline: "Сталь. Кровь. Тлен.",
+            hero_sub: "Средневековый extraction-проект",
+            hero_cta: "Встать в дозор",
+            hero_scroll: "Спуститься",
+            premise_label: "— Завязка —",
+            premise_text: "В королевстве, пожранном чумой, остались только отчаявшиеся. Возьми, что можешь. Унеси домой. Или оставь на своём трупе — для следующей души, что осмелится прийти искать.",
+            marg_1: "Чума не спрашивает разрешения. Она лишь спрашивает — кто следующий.",
+            marg_1_attr: "— из проповедей Последнего Епископа",
+            awaits_label: "— Что ждёт впереди —",
+            awaits_title: "Четыре столпа умирающего мира",
+            f1_title: "Направленный бой",
+            f1_body: "Четыре направления удара. Работа стойкой. Парирования требуют чувства тайминга, финты — стальных нервов. Дуэль — это разговор, написанный сталью; научись читать его, пока он не прочёл тебя.",
+            f2_title: "Хардкорная экстракция",
+            f2_body: "Унеси добычу в безопасное место — или умри с ней на спине. Страхуй то, что можешь позволить себе потерять. Охоться на тех, кто забрал остальное. Дорога помнит твои долги.",
+            f3_title: "Мир кусается в ответ",
+            f3_body: "Разбойники на опушке. Нежить в склепе. Звери в чаще. Каждый враг владеет той же грамматикой войны, что и ты — здесь нет коротких путей, только более острая сталь.",
+            f4_title: "Без магии. Без пощады.",
+            f4_body: "Никаких огненных шаров. Никаких вторых шансов. Твоё мастерство — твоё колдовство, твои доспехи — твоя молитва, а выносливость заканчивается быстрее, чем солнце.",
+            marg_2: "Сталь честна. Тот, кто её держит — куда меньше.",
+            marg_2_attr: "— из Хроники Первого Траура",
+            codex_label: "— Фрагменты Кодекса —",
+            codex_title: "Имена, что шепчут во тьме",
+            codex1_title: "Последний Епископ",
+            codex1_body: "Когда-то — пастырь собора. Он всё ещё проповедует — пастве из костей.",
+            codex2_title: "Железный Исповедник",
+            codex2_body: "Он слышит твои грехи сквозь забрало шлема. Покаяние оплачивается кровью.",
+            codex3_title: "Багряный Завет",
+            codex3_body: "Договор, написанный чумной кровью. Те, кто его подписали, больше не помнят зачем.",
+            codex_footnote: "— их шестеро. и один, чьё имя ему больше не принадлежит —",
+            deeper_prompt: "— если хочешь читать дальше, кодекс открывается тебе —",
+            btn_pantheon: "Пантеон",
+            btn_pantheon_sub: "Те, кого называли",
+            btn_bestiary: "Бестиарий",
+            btn_bestiary_sub: "То, что бродит по дорогам",
+            pantheon_prefix: "— Из старого фолианта —",
+            pantheon_title: "Пантеон",
+            pantheon_subtitle: "Шестерых называли в открытую. Одного назвали, чтобы заглушить остальных. Ни один из семерых не отвечает, когда зовут.",
+            pan1_name: "Жнея",
+            pan1_epithet: "Сестра многих ртов",
+            pan1_body: "Когда-то ей приносили молоко и первую разрезанную борозду. Звали Золотой Матерью. Ныне её дары приходят без зова — рана, что не закроется, зерно, что переспело сроки, дитя, что выросло неправильно во чреве.",
+            pan1_aspect: "Урожая, исцеления, всего, что растёт сверх меры.",
+            pan2_name: "Старый Кузнец",
+            pan2_epithet: "Отец нерушимого слова",
+            pan2_body: "Он ковал первую корону и первую цепь на одной наковальне. Клятвы, данные ему, не снимаются. Короли забыли это. Клятвы — нет.",
+            pan2_aspect: "Ремесла, договора, войны, что не кончается.",
+            pan3_name: "Шепчущая",
+            pan3_epithet: "Госпожа за покровом",
+            pan3_body: "Она — сон, что ты вспоминаешь не тем утром. Она — имя, которое ты почти произнёс. Безумцы слышат её ясно. Мудрые не делают вид.",
+            pan3_aspect: "Снов, тайны, тонкой грани между знанием и забвением.",
+            pan4_name: "Белая Сестра",
+            pan4_epithet: "Та, что дышит снегом",
+            pan4_body: "Чума ненавидит её холод. Соборы тоже. Деревни всё ещё оставляют ей дары льда в колодцах — когда не смотрит ни один священник. Говорят, зимы становятся длиннее. Не говорят почему.",
+            pan4_aspect: "Зимы, ясности, долгого сна, что удерживает худшее во сне.",
+            pan5_name: "Хранитель Очага",
+            pan5_epithet: "Тот, кто греет дверь",
+            pan5_body: "Его огонь не пускал волка. Теперь его огонь — в каждом факеле, что находит еретика. Он не понимает, что из него сделали. Он всё ещё пытается их согреть.",
+            pan5_aspect: "Очага, света, костра, который больше не спрашивает, кого жжёт.",
+            pan6_name: "Тот, кто записывает имена",
+            pan6_epithet: "Писарь последней страницы",
+            pan6_body: "Он пишет каждое имя пеплом. Он не прекращал писать два века. Некоторые имена он уже не может найти. Эти имена бродят по дорогам вместо него — ищут.",
+            pan6_aspect: "Окончания, памяти, малой милости — быть узнанным.",
+            pan7_name: "Бледный Государь",
+            pan7_epithet: "Тот, у кого нет лица",
+            pan7_body: "В год первого траура соборы перестроили для него. Епископы клялись, что он был всегда. Корона согласилась. Ни одна икона не показывает его лица. Ни одна молитва, на которую он ответил, не записана. Он — единственный бог, чьё поклонение было указом.",
+            pan7_aspect: "Указа, замещения, тишины там, где шесть старших голосов прежде пели.",
+            pantheon_footnote: "— иные имена существуют. они вычеркнуты из фолианта. они вернутся, когда вернутся вычеркнутые страницы —",
+            bestiary_prefix: "— Из заметок охотника —",
+            bestiary_title: "Бестиарий",
+            bestiary_subtitle: "Что бродит по дорогам после темноты. Носи сталь. Носи соль. Носи имена своих мёртвых.",
+            best1_name: "Стрыга",
+            best1_cat: "— Проклятая, рождённая женщиной —",
+            best1_body: "Когда-то — дочь некоего дома. Ныне ест костный мозг. Солнечный свет замедляет её. Железо у порога отпугивает. Говорят, произнесённое вслух её имя пробуждает её. Я не проверял.",
+            best2_name: "Свежеподнявшиеся",
+            best2_cat: "— Нежить, недавно обращённая —",
+            best2_body: "Чумные мёртвые, которым не дали должного обряда. Они голодны, не злы. Помнят дорогу домой и пытаются по ней пройти. Бей в череп. Сожги остаток.",
+            best3_name: "Забытые",
+            best3_cat: "— Нежить, безымянные —",
+            best3_body: "Старше свежеподнявшихся. Их имена покинули мир полностью. Они ищут. Если бы ты знал имя, которое они когда-то носили, они бы заплакали и легли. Мало кто знает.",
+            best4_name: "Спящие в доспехах",
+            best4_cat: "— Нежить, давшие клятву —",
+            best4_body: "Скелеты в полной экипировке старых орденов. Не упокаиваются, потому что некая клятва не исполнена. Не скажут какая. Сражаются как при жизни. Устают меньше.",
+            best5_name: "Утопцы",
+            best5_cat: "— Стоячих вод —",
+            best5_body: "Жертвы первого траура, утопленные в начале паники. Цепляются за берега. Утаскивают неосторожных вниз — в воду, у которой не всегда есть дно.",
+            best6_name: "Леший",
+            best6_cat: "— Глухого леса —",
+            best6_body: "Стражи алтарей, ныне заросших. Не охотится. Карает за вторжение. Не руби живое дерево в его рощах. Оставь ему мёда. Не оборачивайся.",
+            best7_name: "Виверна",
+            best7_cat: "— Высоких мест —",
+            best7_body: "Старше первого траура. Старше королевств. Не служат никому. Едят скот, когда зимы плохи. Зимы сейчас плохи.",
+            best8_name: "Разбойники",
+            best8_cat: "— Живые, отчаявшиеся —",
+            best8_body: "Худший из монстров — тем, что рассуждает. Были крестьянами, солдатами, сыновьями. Голод сделал из них это. Некоторые помнят доброту. Большинство — нет.",
+            best9_name: "Кабан",
+            best9_cat: "— Живой, зверь —",
+            best9_body: "Кабан. Ничего больше. Не каждая опасность в этом мире проклята. Некоторые просто такие, какие они есть. Кабану нет дела до наших войн.",
+            bestiary_footnote: "— иное бродит по лесу. Я о нём не написал. Я не выжил, чтобы о нём написать. —",
+            marg_3: "По приказу Короны: путешествовать при свете дня, хоронить своих мертвецов самим, не доверять ни одному пастырю.",
+            marg_3_attr: "— публичный указ, год второго траура",
+            vigil_label: "— Дозор —",
+            vigil_text: "Врата ещё не открыты. Оставь своё имя у стражи — ты первым узнаешь, когда наступит тьма.",
+            vigil_button: "Внести",
+            vigil_disclaimer: "Твоё имя хранится в тайне. Мы говорим только когда звонит колокол.",
+            marg_4: "Надежда — свеча на ветру. Возьми с собой не одну.",
+            marg_4_attr: "— еретик, перед костром",
+            workshop_label: "— Мастерская —",
+            workshop_title: "Mortmain Studio",
+            workshop_text: "Mortmain — небольшая мастерская, посвящённая играм на грани средневекового воображения. Нас интересует то, что выживает, когда мир — нет. Squalor — наше первое послание из тьмы.",
+            footer_brand: "Мастерская на грани средневекового воображения. Мы строим игры, что помнят то, что забывает мир.",
+            footer_game: "Игра",
+            footer_features: "Особенности",
+            footer_codex: "Кодекс",
+            footer_presskit: "Пресс-кит",
+            footer_roadmap: "Дорожная карта",
+            footer_faq: "FAQ",
+            footer_community: "Сообщество",
+            footer_studio: "Студия",
+            footer_about: "О нас",
+            footer_careers: "Вакансии",
+            footer_press: "Для прессы",
+            footer_contact: "Контакт",
+            legal_privacy: "Приватность",
+            legal_terms: "Условия",
+            legal_cookies: "Cookies"
+        }
+    };
+
+    window.LANG = 'en';
+
+    function applyLanguage(lang) {
+        window.LANG = lang;
+        document.documentElement.lang = lang;
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.dataset.i18n;
+            if (translations[lang] && translations[lang][key]) {
+                el.textContent = translations[lang][key];
+            }
+        });
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+        try { localStorage.setItem('mortmain_lang', lang); } catch (e) {}
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+    });
+
+    try {
+        const stored = localStorage.getItem('mortmain_lang');
+        if (stored && translations[stored]) applyLanguage(stored);
+    } catch (e) {}
+
+    // === SPLASH ===
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('splash').classList.add('gone');
+        }, 2400);
+    });
+
+    // === TORCH ===
+    const torch = document.getElementById('torch');
+    let torchX = 0, torchY = 0, targetX = 0, targetY = 0;
+    document.addEventListener('mousemove', (e) => {
+        targetX = e.clientX;
+        targetY = e.clientY;
+    });
+    function animateTorch() {
+        torchX += (targetX - torchX) * 0.08;
+        torchY += (targetY - torchY) * 0.08;
+        torch.style.transform = `translate(${torchX - 400}px, ${torchY - 400}px)`;
+        requestAnimationFrame(animateTorch);
+    }
+    animateTorch();
+
+    // === STICKY NAV ===
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // === SCROLL PROGRESS ===
+    const progress = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+        const total = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = Math.min(100, (window.scrollY / total) * 100);
+        progress.style.width = pct + '%';
+    });
+
+    // === PARALLAX HERO ===
+    const heroInner = document.querySelector('.hero-inner');
+    window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        if (scrolled < window.innerHeight) {
+            heroInner.style.transform = `translateY(${scrolled * 0.3}px)`;
+            heroInner.style.opacity = 1 - (scrolled / window.innerHeight) * 1.2;
+        }
+    });
+
+    // === CHAPTER INDICATOR ===
+    const chapterIndicator = document.getElementById('chapterIndicator');
+    const chapterDots = document.querySelectorAll('.chapter-dot');
+    const sectionMap = {
+        top: document.getElementById('top'),
+        game: document.getElementById('game'),
+        features: document.getElementById('features'),
+        codex: document.getElementById('codex'),
+        newsletter: document.getElementById('newsletter'),
+        studio: document.getElementById('studio'),
+    };
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > window.innerHeight * 0.3) {
+            chapterIndicator.classList.add('visible');
+        } else {
+            chapterIndicator.classList.remove('visible');
+        }
+        const scrollPos = window.scrollY + window.innerHeight * 0.4;
+        let active = 'top';
+        for (const [key, el] of Object.entries(sectionMap)) {
+            if (el && el.offsetTop <= scrollPos) active = key;
+        }
+        chapterDots.forEach(d => {
+            d.classList.toggle('active', d.dataset.section === active);
+        });
+    });
+
+    // === REVEAL ON SCROLL ===
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+
+    // === GLITCH TITLE ===
+    function glitchTitle() {
+        const letters = document.querySelectorAll('#hero-title span');
+        if (letters.length === 0) return;
+        const r = letters[Math.floor(Math.random() * letters.length)];
+        r.classList.add('glitch');
+        setTimeout(() => r.classList.remove('glitch'), 120);
+    }
+    setTimeout(() => {
+        setInterval(() => {
+            if (Math.random() < 0.4) glitchTitle();
+        }, 4000);
+    }, 3500);
+
+    // === TILT ON FEATURE CARDS ===
+    const features = document.querySelectorAll('.feature');
+    features.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const cx = rect.width / 2;
+            const cy = rect.height / 2;
+            const tiltX = ((y - cy) / cy) * -2;
+            const tiltY = ((x - cx) / cx) * 2;
+            card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateZ(4px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+        });
+    });
+
+    // === AMBIENT AUDIO + VOLUME ===
+    const audioToggle = document.getElementById('audioToggle');
+    const audioControl = document.getElementById('audioControl');
+    const audio = document.getElementById('ambientAudio');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volumeLabel = document.getElementById('volumeLabel');
+
+    // Load saved volume or default to 5
+    let currentVolume = 10;
+    try {
+        const saved = localStorage.getItem('mortmain_volume');
+        if (saved !== null) {
+            const v = parseInt(saved, 10);
+            if (!isNaN(v) && v >= 0 && v <= 100) currentVolume = v;
+        }
+    } catch (e) {}
+
+    volumeSlider.value = currentVolume;
+    volumeLabel.textContent = currentVolume + '%';
+    audio.volume = currentVolume / 100;
+
+    let audioPlaying = false;
+    let fadeInterval = null;
+
+    // Smooth fade between volumes
+    function fadeTo(targetVol, duration = 800) {
+        if (fadeInterval) clearInterval(fadeInterval);
+        const start = audio.volume;
+        const startTime = performance.now();
+        fadeInterval = setInterval(() => {
+            const elapsed = performance.now() - startTime;
+            const t = Math.min(1, elapsed / duration);
+            audio.volume = start + (targetVol - start) * t;
+            if (t >= 1) {
+                clearInterval(fadeInterval);
+                fadeInterval = null;
+            }
+        }, 30);
+    }
+
+    function startAudio(withFade = true) {
+        if (audioPlaying) return Promise.resolve();
+        if (audio.children.length === 0 || !audio.querySelector('source').src) {
+            return Promise.reject('no source');
+        }
+        const targetVol = currentVolume / 100;
+        if (withFade) {
+            audio.volume = 0;
+        } else {
+            audio.volume = targetVol;
+        }
+        return audio.play().then(() => {
+            audioPlaying = true;
+            audioToggle.classList.add('playing');
+            if (withFade) fadeTo(targetVol, 1500);
+        });
+    }
+
+    function stopAudio() {
+        if (!audioPlaying) return;
+        fadeTo(0, 600);
+        setTimeout(() => audio.pause(), 650);
+        audioToggle.classList.remove('playing');
+        audioPlaying = false;
+    }
+
+    // Try to autoplay immediately. Most browsers will reject this without prior interaction —
+    // that's expected. If it fails, we wait for the first user gesture and try again.
+    function attemptAutoplay() {
+        startAudio(true).catch(() => {
+            // Autoplay blocked. Listen for the first user interaction and start then.
+            const startOnInteraction = () => {
+                startAudio(true).catch(() => {});
+                window.removeEventListener('click', startOnInteraction);
+                window.removeEventListener('scroll', startOnInteraction);
+                window.removeEventListener('keydown', startOnInteraction);
+                window.removeEventListener('touchstart', startOnInteraction);
+            };
+            window.addEventListener('click', startOnInteraction, { once: false });
+            window.addEventListener('scroll', startOnInteraction, { once: false, passive: true });
+            window.addEventListener('keydown', startOnInteraction, { once: false });
+            window.addEventListener('touchstart', startOnInteraction, { once: false, passive: true });
+        });
+    }
+
+    // Kick off after splash dissolves
+    window.addEventListener('load', () => {
+        setTimeout(attemptAutoplay, 2600);
+    });
+
+    // Gapless loop watchdog — restart the track shortly before the end to avoid any HTML5 audio gap
+    audio.addEventListener('timeupdate', () => {
+        if (!audio.duration || !isFinite(audio.duration)) return;
+        // When within 0.15s of the end, jump back to 0 for a clean seam
+        if (audio.duration - audio.currentTime < 0.15) {
+            audio.currentTime = 0;
+        }
+    });
+
+    audioToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (audioPlaying) {
+            stopAudio();
+        } else {
+            startAudio(true).catch(err => console.log('[Mortmain] Audio play blocked:', err));
+        }
+    });
+
+    // Volume slider — applies immediately, saves to localStorage
+    volumeSlider.addEventListener('input', (e) => {
+        currentVolume = parseInt(e.target.value, 10);
+        volumeLabel.textContent = currentVolume + '%';
+        if (audioPlaying) {
+            audio.volume = currentVolume / 100;
+        }
+        try { localStorage.setItem('mortmain_volume', currentVolume); } catch (e) {}
+    });
+
+    // Touch devices: tap audio control area (not the button itself) to expand
+    audioControl.addEventListener('click', (e) => {
+        if (window.matchMedia('(hover: none)').matches && e.target !== audioToggle) {
+            audioControl.classList.toggle('expanded');
+        }
+    });
+
+    document.addEventListener('click', (e) => {
+        if (window.matchMedia('(hover: none)').matches && !audioControl.contains(e.target)) {
+            audioControl.classList.remove('expanded');
+        }
+    });
+
+    // === MODALS (Pantheon, Bestiary) ===
+    const pantheonModal = document.getElementById('pantheonModal');
+    const bestiaryModal = document.getElementById('bestiaryModal');
+    const openPantheonBtn = document.getElementById('openPantheon');
+    const openBestiaryBtn = document.getElementById('openBestiary');
+
+    function openModal(modal) {
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        // Move focus to close button for accessibility
+        const closeBtn = modal.querySelector('.modal-close');
+        if (closeBtn) setTimeout(() => closeBtn.focus(), 100);
+    }
+
+    function closeModal(modal) {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function closeAllModals() {
+        document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m));
+    }
+
+    if (openPantheonBtn) {
+        openPantheonBtn.addEventListener('click', () => openModal(pantheonModal));
+    }
+    if (openBestiaryBtn) {
+        openBestiaryBtn.addEventListener('click', () => openModal(bestiaryModal));
+    }
+
+    // Close on the X button
+    document.querySelectorAll('[data-close-modal]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const modal = e.target.closest('.modal-overlay');
+            if (modal) closeModal(modal);
+        });
+    });
+
+    // Close on backdrop click (but not when clicking inside the container)
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeModal(overlay);
+        });
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeAllModals();
+    });
+</script>
+
+</body>
+</html>

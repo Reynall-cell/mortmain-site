@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FAQ — Squalor / Mortmain Studio</title>
+    <meta name="description" content="Frequently asked questions about Squalor and Mortmain Studio.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Squalor — FAQ">
+    <meta property="og:description" content="Answers to what is most often asked.">
+
+    <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="%2307060a"/><g stroke="%237a3a1f" stroke-width="1.2" fill="none" stroke-linecap="square"><line x1="16" y1="6" x2="16" y2="26"/><line x1="9" y1="13" x2="23" y2="13"/><line x1="11" y1="22" x2="21" y2="22"/></g><circle cx="16" cy="16" r="2" fill="%237a3a1f"/></svg>'>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
+
+    <style>
+        .faq-item {
+            border-top: 1px solid var(--border-subtle);
+            padding: 28px 0;
+        }
+        .faq-item:last-child { border-bottom: 1px solid var(--border-subtle); }
+        .faq-q {
+            font-family: 'Cinzel', serif;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            color: var(--text-primary);
+            margin-bottom: 14px;
+            line-height: 1.4;
+        }
+        .faq-q::before {
+            content: '✠  ';
+            color: var(--accent);
+            margin-right: 4px;
+        }
+        .faq-a {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+        .faq-a a {
+            color: var(--text-primary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-medium);
+        }
+        .faq-a a:hover { color: var(--accent-hover); border-color: var(--accent); }
+    </style>
+</head>
+<body>
+
+<div class="page-frame">
+    <div class="corner-bl"></div>
+    <div class="corner-br"></div>
+</div>
+
+<nav id="nav">
+    <a href="index.html" class="nav-brand">Mortmain Studio</a>
+    <div class="nav-right">
+        <ul class="nav-links">
+            <li><a href="index.html#game" data-i18n="nav_game">The Game</a></li>
+            <li><a href="index.html#codex" data-i18n="nav_codex">Codex</a></li>
+            <li><a href="about.html" data-i18n="nav_about">About</a></li>
+            <li><a href="press.html" data-i18n="nav_press">Press</a></li>
+        </ul>
+        <div class="lang-switcher">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="ru">RU</button>
+        </div>
+    </div>
+</nav>
+
+<main class="page-wrapper">
+    <div class="page-container">
+        <div class="page-prefix" data-i18n="page_prefix">— Things often asked —</div>
+        <h1 class="page-title" data-i18n="page_title">Questions</h1>
+        <p class="page-subtitle" data-i18n="page_subtitle">Answers to the ones we hear most. If yours is not here, ask us directly.</p>
+
+        <div class="page-divider"><div class="page-divider-symbol">✠</div></div>
+
+        <div class="faq-item">
+            <div class="faq-q" data-i18n="q1">What is Squalor?</div>
+            <div class="faq-a" data-i18n="a1">A multiplayer extraction game set in a medieval kingdom devoured by plague. First-person. Directional melee combat that takes skill, not luck. Hardcore loot — die and you may lose what you brought. We are heavily inspired by Kingdom Come: Deliverance, For Honor, and the extraction loop of Escape from Tarkov.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q" data-i18n="q2">When does it release?</div>
+            <div class="faq-a" data-i18n="a2">TBA. No earlier than 2027. We will not give a hard date until we are confident we can keep it. Sign up for our vigil on the <a href="index.html#newsletter">homepage</a> to know first.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q" data-i18n="q3">Which platforms?</div>
+            <div class="faq-a" data-i18n="a3">PC (Windows) only at launch. We may look at Linux via Proton later. No console plans currently.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q" data-i18n="q4">Will Russian be supported?</div>
+            <div class="faq-a" data-i18n="a4">Yes. Russian and English at launch. Other languages may follow.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q" data-i18n="q5">Will there be a single-player or PvE-only mode?</div>
+            <div class="faq-a" data-i18n="a5">Squalor is built around multiplayer extraction. The world will contain AI enemies (bandits, undead, beasts) alongside other players. A pure PvE mode is not planned for launch, though we may explore one later.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q" data-i18n="q6">How will the game be priced? Are there microtransactions?</div>
+            <div class="faq-a" data-i18n="a6">Price is not yet set. We have made our promises clear: no pay-to-win, no loot boxes, no NFT, no crypto, no random rewards for money. One purchase gives you the full game with all updates and patches included. We may eventually offer cosmetic items that do not change combat, and expansions for those who want more world. Read the full set on our <a href="about.html#promises">about page</a>.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q" data-i18n="q7">Where can I follow development?</div>
+            <div class="faq-a" data-i18n="a7">For now, our newsletter on the homepage. Discord, Steam, and social channels are being prepared and will be announced when ready.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q" data-i18n="q8">How can I support the project before it releases?</div>
+            <div class="faq-a" data-i18n="a8">Sign up for our newsletter and tell people who might be interested. That is enough. We do not run crowdfunding campaigns and we will not until we have something to show worth your money.</div>
+        </div>
+
+        <div class="last-updated" data-i18n="last_updated">— A.D. MMXXVI · last revised: May, MMXXVI —</div>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-column footer-brand">
+            <h3>Mortmain Studio</h3>
+            <p data-i18n="footer_brand">A workshop at the edge of medieval imagination. We build games that remember what the world forgets.</p>
+        </div>
+        <div class="footer-column">
+            <h4 data-i18n="footer_game">The Game</h4>
+            <ul>
+                <li><a href="index.html#features" data-i18n="footer_features">Features</a></li>
+                <li><a href="index.html#codex" data-i18n="footer_codex">Codex</a></li>
+                <li><a href="faq.html" data-i18n="footer_faq">FAQ</a></li>
+                <li><a href="press.html" data-i18n="footer_presskit">Press Kit</a></li>
+                <li><span class="pending" data-i18n="footer_roadmap">Roadmap</span></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4 data-i18n="footer_community">Community</h4>
+            <ul>
+                <li><span class="pending">Discord</span></li>
+                <li><span class="pending">Steam</span></li>
+                <li><span class="pending">YouTube</span></li>
+                <li><span class="pending">X / Twitter</span></li>
+                <li><span class="pending">Reddit</span></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4 data-i18n="footer_studio">Studio</h4>
+            <ul>
+                <li><a href="about.html" data-i18n="footer_about">About</a></li>
+                <li><span class="pending" data-i18n="footer_careers">Careers</span></li>
+                <li><a href="press.html" data-i18n="footer_press">Press Inquiries</a></li>
+                <li><a href="mailto:contact@mortmain.studio" data-i18n="footer_contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="footer-copyright" data-i18n="footer_copyright">© MMXXVI · Mortmain Studio · All rights reserved</div>
+        <div class="footer-contact"><a href="mailto:contact@mortmain.studio">contact@mortmain.studio</a></div>
+        <ul class="footer-legal">
+            <li><a href="privacy.html" data-i18n="legal_privacy">Privacy</a></li>
+            <li><a href="terms.html" data-i18n="legal_terms">Terms</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script>
+window.pageTranslations = {
+    en: {
+        nav_game: "The Game", nav_codex: "Codex", nav_about: "About", nav_press: "Press",
+        page_prefix: "— Things often asked —",
+        page_title: "Questions",
+        page_subtitle: "Answers to the ones we hear most. If yours is not here, ask us directly.",
+        q1: "What is Squalor?",
+        a1: "A multiplayer extraction game set in a medieval kingdom devoured by plague. First-person. Directional melee combat that takes skill, not luck. Hardcore loot — die and you may lose what you brought. We are heavily inspired by Kingdom Come: Deliverance, For Honor, and the extraction loop of Escape from Tarkov.",
+        q2: "When does it release?",
+        a2: 'TBA. No earlier than 2027. We will not give a hard date until we are confident we can keep it. Sign up for our vigil on the <a href="index.html#newsletter">homepage</a> to know first.',
+        q3: "Which platforms?",
+        a3: "PC (Windows) only at launch. We may look at Linux via Proton later. No console plans currently.",
+        q4: "Will Russian be supported?",
+        a4: "Yes. Russian and English at launch. Other languages may follow.",
+        q5: "Will there be a single-player or PvE-only mode?",
+        a5: "Squalor is built around multiplayer extraction. The world will contain AI enemies (bandits, undead, beasts) alongside other players. A pure PvE mode is not planned for launch, though we may explore one later.",
+        q6: "How will the game be priced? Are there microtransactions?",
+        a6: 'Price is not yet set. We have made our promises clear: no pay-to-win, no loot boxes, no NFT, no crypto, no random rewards for money. One purchase gives you the full game with all updates and patches included. We may eventually offer cosmetic items that do not change combat, and expansions for those who want more world. Read the full set on our <a href="about.html">about page</a>.',
+        q7: "Where can I follow development?",
+        a7: "For now, our newsletter on the homepage. Discord, Steam, and social channels are being prepared and will be announced when ready.",
+        q8: "How can I support the project before it releases?",
+        a8: "Sign up for our newsletter and tell people who might be interested. That is enough. We do not run crowdfunding campaigns and we will not until we have something to show worth your money.",
+        last_updated: "— A.D. MMXXVI · last revised: May, MMXXVI —",
+        footer_brand: "A workshop at the edge of medieval imagination. We build games that remember what the world forgets.",
+        footer_game: "The Game", footer_features: "Features", footer_codex: "Codex",
+        footer_faq: "FAQ", footer_presskit: "Press Kit", footer_roadmap: "Roadmap",
+        footer_community: "Community", footer_studio: "Studio", footer_about: "About",
+        footer_careers: "Careers", footer_press: "Press Inquiries", footer_contact: "Contact",
+        footer_copyright: "© MMXXVI · Mortmain Studio · All rights reserved",
+        legal_privacy: "Privacy", legal_terms: "Terms"
+    },
+    ru: {
+        nav_game: "Игра", nav_codex: "Кодекс", nav_about: "О нас", nav_press: "Пресса",
+        page_prefix: "— Часто спрашивают —",
+        page_title: "Вопросы",
+        page_subtitle: "Ответы на самые частые. Если твоего здесь нет — спроси нас напрямую.",
+        q1: "Что такое Squalor?",
+        a1: "Мультиплеерная extraction-игра, действие которой разворачивается в средневековом королевстве, пожранном чумой. От первого лица. Направленный ближний бой, требующий мастерства, а не везения. Хардкорный лут — умирая, ты можешь потерять то, что принёс. Главные источники вдохновения: Kingdom Come: Deliverance, For Honor и extraction-петля Escape from Tarkov.",
+        q2: "Когда релиз?",
+        a2: 'TBA. Не раньше 2027. Мы не назовём точной даты, пока не уверены, что её сдержим. Подпишись на <a href="index.html#newsletter">главной странице</a>, чтобы узнать первым.',
+        q3: "Какие платформы?",
+        a3: "PC (Windows), только на старте. Возможно, Linux через Proton — позже. Консолей пока не планируем.",
+        q4: "Будет ли русский язык?",
+        a4: "Да. Русский и английский на старте. Другие языки — возможно, позже.",
+        q5: "Будет ли одиночный режим или режим только PvE?",
+        a5: "Squalor построен вокруг мультиплеерной экстракции. В мире будут AI-противники (разбойники, нежить, звери) наряду с другими игроками. Чистого PvE-режима на старте не планируется, но мы можем рассмотреть его позже.",
+        q6: "Сколько будет стоить игра? Будут ли микротранзакции?",
+        a6: 'Цена пока не установлена. Наши обещания ясны: никакого pay-to-win, никаких лутбоксов, никаких NFT и крипты, никаких рандомных наград за деньги. Одна покупка даёт всю игру со всеми обновлениями и патчами. Со временем мы можем добавить косметические предметы, не меняющие бой, и расширения для тех, кто хочет больше мира. Полный список — на <a href="about.html">странице о студии</a>.',
+        q7: "Где следить за разработкой?",
+        a7: "Пока — наша рассылка на главной. Discord, Steam и соцсети готовятся, будут объявлены позже.",
+        q8: "Как поддержать проект до релиза?",
+        a8: "Подпишись на рассылку и расскажи о нас тем, кому может быть интересно. Этого достаточно. Краудфандинг мы не запускаем и не запустим, пока не сможем показать что-то, достойное твоих денег.",
+        last_updated: "— A.D. MMXXVI · последнее обновление: май, MMXXVI —",
+        footer_brand: "Мастерская на грани средневекового воображения. Мы строим игры, что помнят то, что забывает мир.",
+        footer_game: "Игра", footer_features: "Особенности", footer_codex: "Кодекс",
+        footer_faq: "FAQ", footer_presskit: "Пресс-кит", footer_roadmap: "Дорожная карта",
+        footer_community: "Сообщество", footer_studio: "Студия", footer_about: "О нас",
+        footer_careers: "Вакансии", footer_press: "Для прессы", footer_contact: "Контакт",
+        footer_copyright: "© MMXXVI · Mortmain Studio · Все права защищены",
+        legal_privacy: "Приватность", legal_terms: "Условия"
+    }
+};
+</script>
+<script src="shared.js"></script>
+
+</body>
+</html>
