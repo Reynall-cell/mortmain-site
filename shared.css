@@ -107,6 +107,9 @@ nav.scrolled {
 }
 
 .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     font-family: 'Cinzel', serif;
     font-size: 14px;
     font-weight: 500;
@@ -117,8 +120,16 @@ nav.scrolled {
     transition: font-size 0.4s ease, color 0.3s ease;
 }
 
+.nav-brand-mark {
+    width: 28px;
+    height: 30px;
+    flex-shrink: 0;
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
 .nav-brand:hover { color: var(--text-primary); }
 nav.scrolled .nav-brand { font-size: 12px; }
+nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
 
 .nav-right { display: flex; align-items: center; gap: 28px; }
 
@@ -483,8 +494,8 @@ footer {
     .page-frame { top: 8px; left: 8px; right: 8px; bottom: 8px; }
     nav, nav.scrolled { padding: 18px 24px; }
     .nav-right { gap: 14px; }
-    .nav-links { gap: 18px; }
-    .nav-links a { font-size: 10px; }
+    .nav-links { display: none; }
+    .nav-brand-text { display: none; }
     .lang-switcher .lang-btn { padding: 4px 8px; font-size: 9px; }
     .page-wrapper { padding: 120px 24px 60px; }
     footer { padding: 60px 24px 24px; }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Mortmain Studio — Studio Mark (small/favicon version)
+  Simplified: only outer hexagon + M. No dots. No inner geometry.
+  For use at 16-48px sizes.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" width="200" height="220">
+    <rect width="200" height="220" fill="#07060a"/>
+    <!-- Outer hexagon, thicker for visibility at small sizes -->
+    <polygon points="100,20 170,60 170,160 100,200 30,160 30,60"
+             fill="none" stroke="#7a3a1f" stroke-width="6"/>
+    <!-- The M, bolder for small contexts -->
+    <text x="100" y="128" font-family="Cinzel, serif" font-size="72" font-weight="700"
+          text-anchor="middle" fill="#d8d2c4">M</text>
+</svg>

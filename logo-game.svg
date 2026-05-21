@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Squalor — Game Logo (key art / splash version)
+  Direction D4: title-block composition
+  Year · Wordmark · Divider with cross + six dots · Tagline
+  © MMXXVI Mortmain Studio
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240">
+    <!-- Year (top) -->
+    <text x="200" y="36" font-family="Cinzel, serif" font-size="13" font-weight="500"
+          text-anchor="middle" fill="#7a3a1f" letter-spacing="0.5em">— MMXXVI —</text>
+
+    <!-- Wordmark -->
+    <text x="200" y="118" font-family="Cinzel, serif" font-size="56" font-weight="700"
+          text-anchor="middle" fill="#d8d2c4" letter-spacing="0.12em">SQUALOR</text>
+
+    <!-- Divider with cross and six dots in the center -->
+    <g>
+        <!-- Left line -->
+        <line x1="40" y1="155" x2="160" y2="155" stroke="#7a3a1f" stroke-width="0.7"/>
+        <!-- Right line -->
+        <line x1="240" y1="155" x2="360" y2="155" stroke="#7a3a1f" stroke-width="0.7"/>
+
+        <!-- Center cross-press, larger than nav ornament -->
+        <g transform="translate(200, 155)">
+            <!-- Main cross -->
+            <line x1="-14" y1="0" x2="14" y2="0" stroke="#7a3a1f" stroke-width="1.2"/>
+            <line x1="0" y1="-14" x2="0" y2="14" stroke="#7a3a1f" stroke-width="1.2"/>
+            <!-- Diagonal cross (lighter) -->
+            <line x1="-10" y1="-10" x2="10" y2="10" stroke="#7a3a1f" stroke-width="0.8"/>
+            <line x1="-10" y1="10" x2="10" y2="-10" stroke="#7a3a1f" stroke-width="0.8"/>
+            <!-- Center dot -->
+            <circle cx="0" cy="0" r="3" fill="#7a3a1f"/>
+            <!-- Inner circle -->
+            <circle cx="0" cy="0" r="7" fill="none" stroke="#7a3a1f" stroke-width="0.6"/>
+
+            <!-- SIX small dots arranged around the cross at hexagonal positions -->
+            <!-- (radius ~12 from center) -->
+            <circle cx="0" cy="-12" r="0.9" fill="#7a3a1f"/>
+            <circle cx="10.39" cy="-6" r="0.9" fill="#7a3a1f"/>
+            <circle cx="10.39" cy="6" r="0.9" fill="#7a3a1f"/>
+            <circle cx="0" cy="12" r="0.9" fill="#7a3a1f"/>
+            <circle cx="-10.39" cy="6" r="0.9" fill="#7a3a1f"/>
+            <circle cx="-10.39" cy="-6" r="0.9" fill="#7a3a1f"/>
+        </g>
+    </g>
+
+    <!-- Tagline -->
+    <text x="200" y="190" font-family="Cinzel, serif" font-size="12" font-weight="400"
+          text-anchor="middle" fill="#8a8276" letter-spacing="0.4em">STEEL · BLOOD · ROT</text>
+
+    <!-- Subtitle (subtle, faded) -->
+    <text x="200" y="215" font-family="Cormorant Garamond, serif" font-size="14" font-style="italic"
+          text-anchor="middle" fill="#5a5448">a medieval extraction game</text>
+</svg>

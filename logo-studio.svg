@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Mortmain Studio — Studio Mark (full version)
+  Direction B3: Hexagon · M · Six vertices · One distinct (the Seventh)
+  © MMXXVI Mortmain Studio
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" width="200" height="220">
+    <!-- Outer hexagon -->
+    <polygon points="100,20 170,60 170,160 100,200 30,160 30,60"
+             fill="none" stroke="#7a3a1f" stroke-width="2.2"/>
+
+    <!-- Inner hexagon (faint structural echo) -->
+    <polygon points="100,34 158,66 158,154 100,186 42,154 42,66"
+             fill="none" stroke="#7a3a1f" stroke-width="0.7" opacity="0.5"/>
+
+    <!-- The M, white, classical Cinzel -->
+    <text x="100" y="128" font-family="Cinzel, serif" font-size="68" font-weight="600"
+          text-anchor="middle" fill="#d8d2c4" letter-spacing="0.05em">M</text>
+
+    <!-- Six dots at the vertices of inner hexagon -->
+    <!-- One of them (top-right) is the Seventh — distinct color, hint at the Pale Sovereign -->
+    <g>
+        <circle cx="100" cy="34" r="3.4" fill="#7a3a1f"/>
+        <!-- Top-right vertex: the Seventh, faded greyish-bronze -->
+        <circle cx="158" cy="66" r="3.4" fill="#5a5448">
+            <animate attributeName="fill"
+                     values="#5a5448; #2a2622; #7a3a1f; #5a5448"
+                     dur="6s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="158" cy="154" r="3.4" fill="#7a3a1f"/>
+        <circle cx="100" cy="186" r="3.4" fill="#7a3a1f"/>
+        <circle cx="42" cy="154" r="3.4" fill="#7a3a1f"/>
+        <circle cx="42" cy="66" r="3.4" fill="#7a3a1f"/>
+    </g>
+</svg>
