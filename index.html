@@ -848,6 +848,32 @@
             opacity: 0.7;
         }
 
+        /* Verse variant — for poetic marginalia. Multiline, no quotes, increased leading */
+        .marginalia-text.verse {
+            font-size: clamp(17px, 2.1vw, 22px);
+            line-height: 1.9;
+            max-width: 620px;
+            white-space: pre-line; /* preserve line breaks from \n in source text */
+            color: var(--text-secondary);
+        }
+
+        .marginalia-text.verse::before,
+        .marginalia-text.verse::after {
+            display: none; /* no quote marks around verse */
+        }
+
+        .verse-decree {
+            font-family: 'Cinzel', 'Tenor Sans', serif;
+            font-style: normal;
+            font-size: clamp(11px, 1.3vw, 13px);
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            display: block;
+            margin-bottom: 28px;
+            opacity: 0.75;
+        }
+
         section {
             position: relative;
             z-index: 3;
@@ -922,6 +948,13 @@
             height: 1px;
             background: var(--border-medium);
             margin: 32px auto;
+        }
+
+        /* Verse variant for pitch-text — preserves line breaks, increased leading */
+        .pitch-text.verse {
+            white-space: pre-line;
+            line-height: 1.8;
+            max-width: 640px;
         }
 
         /* === FEATURES === */
@@ -1840,14 +1873,22 @@
 <section class="pitch reveal" id="game">
     <div class="container">
         <div class="section-label" data-i18n="premise_label">— The Premise —</div>
-        <p class="pitch-text" data-i18n="premise_text">
-            In a kingdom devoured by plague, only the desperate remain. Take what you can. Carry it home. Or leave it on your corpse for the next soul brave enough to come looking.
-        </p>
+        <p class="pitch-text verse" data-i18n="premise_text">The kingdom rots. The fields are done.
+Those who stayed are those who can
+bear the cold, the blade, the plague.
+
+Take what you can carry home.
+Leave the rest where it has fallen.
+One will come, when you are gone —
+takes your gold. Takes you alone.</p>
     </div>
 </section>
 
 <div class="marginalia reveal">
-    <p class="marginalia-text" data-i18n="marg_1">The plague does not ask permission. It only asks who is next.</p>
+    <p class="marginalia-text verse" data-i18n="marg_1">Do not breathe upon the door.
+Do not gather what is poor.
+Do not count the crows in flight —
+The third crow takes the light.</p>
     <div class="marginalia-attribution" data-i18n="marg_1_attr">— from the Sermons of the Last Bishop</div>
 </div>
 
@@ -1973,7 +2014,14 @@
 </section>
 
 <div class="marginalia reveal">
-    <p class="marginalia-text" data-i18n="marg_3">By order of the Crown: travel by daylight, bury your own dead, trust no shepherd.</p>
+    <p class="marginalia-text verse" data-i18n="marg_3" data-i18n-html="marg_3"><span class="verse-decree">By order of the Crown, in the year of the Second Mourning</span>He who walks the night shall not come back.
+He who opens his door shall feel its lack.
+He who lets the shepherd through his gate —
+has set his hand upon his fate.
+
+Bury your own. Pray alone.
+Do not call your neighbour in —
+he comes not on his own.</p>
     <div class="marginalia-attribution" data-i18n="marg_3_attr">— public decree, year of the second mourning</div>
 </div>
 
@@ -2308,29 +2356,29 @@
             hero_cta: "Join the Vigil",
             hero_scroll: "Descend",
             premise_label: "— The Premise —",
-            premise_text: "In a kingdom devoured by plague, only the desperate remain. Take what you can. Carry it home. Or leave it on your corpse for the next soul brave enough to come looking.",
-            marg_1: "The plague does not ask permission. It only asks who is next.",
-            marg_1_attr: "— from the Sermons of the Last Bishop",
+            premise_text: "The kingdom rots. The fields are done.\nThose who stayed are those who can\nbear the cold, the blade, the plague.\n\nTake what you can carry home.\nLeave the rest where it has fallen.\nOne will come, when you are gone —\ntakes your gold. Takes you alone.",
+            marg_1: "Do not breathe upon the door.\nDo not gather what is poor.\nDo not count the crows in flight —\nThe third crow takes the light.",
+            marg_1_attr: "— from the plague-year charms",
             awaits_label: "— What Awaits —",
             awaits_title: "Four pillars of the dying world",
             f1_title: "Directional Combat",
-            f1_body: "Four-direction strikes. Stance work. Parries that demand timing, feints that demand nerve. A duel is a conversation written in steel — and you must learn to read it before it reads you.",
-            f2_title: "Hardcore Extraction",
-            f2_body: "Carry your loot to safety, or die with it on your back. Insure what you can afford to lose. Hunt the ones who took the rest. The road remembers your debts.",
+            f1_body: "Four directions of the strike. Stance work. Parries take timing, feints take nerve. A duel is a conversation in steel. Learn to hear it before it hears you.",
+            f2_title: "Carry It or Lose It",
+            f2_body: "Make it back with your spoils, or die beneath them. Insure what you can stand to lose. For the rest, go and take it back yourself. The road forgives no debt.",
             f3_title: "A World That Bites Back",
-            f3_body: "Bandits in the treeline. Undead in the crypt. Beasts in the deep wood. Every enemy fights with the same grammar of war as you — there are no shortcuts, only sharper steel.",
+            f3_body: "Bandits at the roadside. Undead in the crypts. Beasts in the deep wood. Every enemy speaks the same language of war as you — there are no light paths here, only sharper steel.",
             f4_title: "No Magic. No Mercy.",
-            f4_body: "No fireballs. No second chances. Your skill is your sorcery, your armour is your prayer, and stamina runs out faster than the sun.",
+            f4_body: "No fireballs. No second tries. Your skill is your sorcery. Your armour is your prayer. And strength runs out before the sun goes down.",
             marg_2: "Steel is honest. The man holding it, less so.",
             marg_2_attr: "— from the Chronicle of the First Mourning",
             codex_label: "— Fragments of the Codex —",
             codex_title: "Names spoken in the dark",
             codex1_title: "The Last Bishop",
-            codex1_body: "Once shepherd of the cathedral. He still preaches — to a flock of bones.",
+            codex1_body: "Once shepherd of the cathedral. Now he preaches to bones. The bones listen more closely.",
             codex2_title: "The Iron Confessor",
-            codex2_body: "He hears your sins through the visor of his helm. Penance is paid in blood.",
+            codex2_body: "He hears your sins through the visor of his helm. Penance, he takes in blood.",
             codex3_title: "The Vermillion Pact",
-            codex3_body: "A treaty written in plague-blood. Those who signed it no longer remember why.",
+            codex3_body: "Thirteen names, in blood they signed —\nplague-blood, borrowed, never theirs.\nWhat they gave, gods took with care.\nWhat was taken — fouls the air.",
             codex_footnote: "— there are six. and one whose name no longer belongs to him —",
             deeper_prompt: "— if you would read further, the codex opens for you —",
             btn_pantheon: "The Pantheon",
@@ -2400,8 +2448,8 @@
             best9_cat: "— Living, beastly —",
             best9_body: "A boar. Nothing more. Not every danger in this world is cursed. Some are simply what they are. The boar does not care for our wars.",
             bestiary_footnote: "— other things walk the wood. I have not written of them. I did not survive to write of them. —",
-            marg_3: "By order of the Crown: travel by daylight, bury your own dead, trust no shepherd.",
-            marg_3_attr: "— public decree, year of the second mourning",
+            marg_3: '<span class="verse-decree">By order of the Crown, in the year of the Second Mourning</span>He who walks the night shall not come back.\nHe who opens his door shall feel its lack.\nHe who lets the shepherd through his gate —\nhas set his hand upon his fate.\n\nBury your own. Pray alone.\nDo not call your neighbour in —\nhe comes not on his own.',
+            marg_3_attr: "— a public decree, year of the Second Mourning",
             vigil_label: "— The Vigil —",
             vigil_text: "The gates are not yet open. Leave your name with the watch — you will be the first to know when the dark begins.",
             vigil_button: "Mark Me",
@@ -2442,114 +2490,114 @@
             nav_studio: "Студия",
             hero_presents: "Mortmain Studio представляет",
             hero_tagline: "Сталь. Кровь. Тлен.",
-            hero_sub: "Средневековый extraction-проект",
+            hero_sub: "Средневековое экстракшн-приключение",
             hero_cta: "Встать в дозор",
             hero_scroll: "Спуститься",
             premise_label: "— Завязка —",
-            premise_text: "В королевстве, пожранном чумой, остались только отчаявшиеся. Возьми, что можешь. Унеси домой. Или оставь на своём трупе — для следующей души, что осмелится прийти искать.",
-            marg_1: "Чума не спрашивает разрешения. Она лишь спрашивает — кто следующий.",
-            marg_1_attr: "— из проповедей Последнего Епископа",
-            awaits_label: "— Что ждёт впереди —",
+            premise_text: "Сгнило царство. Сгнили нивы.\nКто остался — те терпимы\nк холоду, ножу и тлену,\nк чёрной крови, к чёрной смене.\n\nВозьми, что сможешь унести.\nЧто не возьмёшь — оставь в пыли.\nПридёт другой, его черёд —\nвозьмёт твоё, тебя возьмёт.",
+            marg_1: "Не дыши на чёрный двор,\nНе смотри на красный сор,\nНе считай в ночи ворон —\nТретий ворон — это он.",
+            marg_1_attr: "— из заговоров чумного года",
+            awaits_label: "— Что тебя ждёт —",
             awaits_title: "Четыре столпа умирающего мира",
-            f1_title: "Направленный бой",
-            f1_body: "Четыре направления удара. Работа стойкой. Парирования требуют чувства тайминга, финты — стальных нервов. Дуэль — это разговор, написанный сталью; научись читать его, пока он не прочёл тебя.",
-            f2_title: "Хардкорная экстракция",
-            f2_body: "Унеси добычу в безопасное место — или умри с ней на спине. Страхуй то, что можешь позволить себе потерять. Охоться на тех, кто забрал остальное. Дорога помнит твои долги.",
+            f1_title: "Бой по направлениям",
+            f1_body: "Четыре стороны удара. Работа стойкой. Парирование берёт тайминг, финт — выдержку. Поединок — это разговор сталью. Учись слышать его раньше, чем он услышит тебя.",
+            f2_title: "Унеси или потеряй",
+            f2_body: "Дойти до своих с добычей — или умереть с ней под собой. Страхуй то, без чего сможешь обойтись. На остальное иди и забирай сам. Дорога долгов не прощает.",
             f3_title: "Мир кусается в ответ",
-            f3_body: "Разбойники на опушке. Нежить в склепе. Звери в чаще. Каждый враг владеет той же грамматикой войны, что и ты — здесь нет коротких путей, только более острая сталь.",
+            f3_body: "Разбойники у тракта. Нежить в склепах. Звери в чаще. Каждый враг владеет тем же языком войны, что и ты — здесь не уйти налегке, только сталью острее.",
             f4_title: "Без магии. Без пощады.",
-            f4_body: "Никаких огненных шаров. Никаких вторых шансов. Твоё мастерство — твоё колдовство, твои доспехи — твоя молитва, а выносливость заканчивается быстрее, чем солнце.",
+            f4_body: "Ни огненных шаров, ни вторых попыток. Твоё умение — твоё колдовство. Твой доспех — твоя молитва. А силы кончаются раньше, чем закатится солнце.",
             marg_2: "Сталь честна. Тот, кто её держит — куда меньше.",
             marg_2_attr: "— из Хроники Первого Траура",
             codex_label: "— Фрагменты Кодекса —",
             codex_title: "Имена, что шепчут во тьме",
             codex1_title: "Последний Епископ",
-            codex1_body: "Когда-то — пастырь собора. Он всё ещё проповедует — пастве из костей.",
+            codex1_body: "Когда-то — пастырь собора. Теперь проповедует костям. Кости слушают внимательнее.",
             codex2_title: "Железный Исповедник",
-            codex2_body: "Он слышит твои грехи сквозь забрало шлема. Покаяние оплачивается кровью.",
+            codex2_body: "Слышит твои грехи сквозь забрало шлема. Покаяние принимает кровью.",
             codex3_title: "Багряный Завет",
-            codex3_body: "Договор, написанный чумной кровью. Те, кто его подписали, больше не помнят зачем.",
+            codex3_body: "Тринадцать подписей кровью —\nчумной, не своей, чужой.\nЧто отдали — забрали с любовью.\nЧто забрали — стало чумой.",
             codex_footnote: "— их шестеро. и один, чьё имя ему больше не принадлежит —",
-            deeper_prompt: "— если хочешь читать дальше, кодекс открывается тебе —",
+            deeper_prompt: "— если хочешь читать дальше, кодекс откроется —",
             btn_pantheon: "Пантеон",
             btn_pantheon_sub: "Те, кого называли",
             btn_bestiary: "Бестиарий",
             btn_bestiary_sub: "То, что бродит по дорогам",
             pantheon_prefix: "— Из старого фолианта —",
             pantheon_title: "Пантеон",
-            pantheon_subtitle: "Шестерых называли в открытую. Одного назвали, чтобы заглушить остальных. Ни один из семерых не отвечает, когда зовут.",
+            pantheon_subtitle: "Шестерых называли вслух. Одного — чтобы заглушить остальных. Ни один из семи не отзывается, когда зовут.",
             pan1_name: "Жнея",
             pan1_epithet: "Сестра многих ртов",
-            pan1_body: "Когда-то ей приносили молоко и первую разрезанную борозду. Звали Золотой Матерью. Ныне её дары приходят без зова — рана, что не закроется, зерно, что переспело сроки, дитя, что выросло неправильно во чреве.",
-            pan1_aspect: "Урожая, исцеления, всего, что растёт сверх меры.",
+            pan1_body: "Когда-то ей выносили молоко и первую борозду. Звали Золотой Матерью. Теперь её дары приходят сами — рана, что не закроется; зерно, что переспело сроки; дитя, что выросло во чреве не так, как должно.",
+            pan1_aspect: "Урожая, исцеления, всего, что выросло сверх меры.",
             pan2_name: "Старый Кузнец",
             pan2_epithet: "Отец нерушимого слова",
-            pan2_body: "Он ковал первую корону и первую цепь на одной наковальне. Клятвы, данные ему, не снимаются. Короли забыли это. Клятвы — нет.",
-            pan2_aspect: "Ремесла, договора, войны, что не кончается.",
+            pan2_body: "Он отковал первую корону и первую цепь на одной наковальне. Клятвы, данные ему, не отзывают. Короли это забыли. Клятвы — нет.",
+            pan2_aspect: "Ремесла, договора, войны, у которой нет конца.",
             pan3_name: "Шепчущая",
             pan3_epithet: "Госпожа за покровом",
-            pan3_body: "Она — сон, что ты вспоминаешь не тем утром. Она — имя, которое ты почти произнёс. Безумцы слышат её ясно. Мудрые не делают вид.",
+            pan3_body: "Она — сон, что вспоминается не тем утром. Имя, что почти сорвалось с губ. Безумные слышат её ясно. Мудрые — делают вид, что не слышат.",
             pan3_aspect: "Снов, тайны, тонкой грани между знанием и забвением.",
             pan4_name: "Белая Сестра",
             pan4_epithet: "Та, что дышит снегом",
-            pan4_body: "Чума ненавидит её холод. Соборы тоже. Деревни всё ещё оставляют ей дары льда в колодцах — когда не смотрит ни один священник. Говорят, зимы становятся длиннее. Не говорят почему.",
-            pan4_aspect: "Зимы, ясности, долгого сна, что удерживает худшее во сне.",
+            pan4_body: "Чума не любит её холода. Соборы — тоже. В деревнях ей по сей день оставляют лёд в колодцах — пока не смотрит священник. Зимы стали длиннее. О причине молчат.",
+            pan4_aspect: "Зимы, ясности, долгого сна, что держит во сне худшее.",
             pan5_name: "Хранитель Очага",
             pan5_epithet: "Тот, кто греет дверь",
-            pan5_body: "Его огонь не пускал волка. Теперь его огонь — в каждом факеле, что находит еретика. Он не понимает, что из него сделали. Он всё ещё пытается их согреть.",
-            pan5_aspect: "Очага, света, костра, который больше не спрашивает, кого жжёт.",
+            pan5_body: "Его огонь не пускал волка за порог. Теперь его огонь — в каждом факеле, что находит еретика. Он не понял, во что его превратили. Он всё ещё пытается их согреть.",
+            pan5_aspect: "Очага, света, костра, что больше не спрашивает, кого жжёт.",
             pan6_name: "Тот, кто записывает имена",
             pan6_epithet: "Писарь последней страницы",
-            pan6_body: "Он пишет каждое имя пеплом. Он не прекращал писать два века. Некоторые имена он уже не может найти. Эти имена бродят по дорогам вместо него — ищут.",
+            pan6_body: "Он записывает каждое имя пеплом. Пишет два века подряд. Иных имён он уже не находит. Эти имена ходят по дорогам сами — вместо него, ищут себя.",
             pan6_aspect: "Окончания, памяти, малой милости — быть узнанным.",
             pan7_name: "Бледный Государь",
             pan7_epithet: "Тот, у кого нет лица",
-            pan7_body: "В год первого траура соборы перестроили для него. Епископы клялись, что он был всегда. Корона согласилась. Ни одна икона не показывает его лица. Ни одна молитва, на которую он ответил, не записана. Он — единственный бог, чьё поклонение было указом.",
-            pan7_aspect: "Указа, замещения, тишины там, где шесть старших голосов прежде пели.",
-            pantheon_footnote: "— иные имена существуют. они вычеркнуты из фолианта. они вернутся, когда вернутся вычеркнутые страницы —",
+            pan7_body: "В год первого траура для него заново отстроили соборы. Епископы клялись, что он был всегда. Корона согласилась. Ни одна икона не показывает его лица. Ни одна молитва, на которую он ответил, не записана. Он — единственный бог, чьё поклонение объявили указом.",
+            pan7_aspect: "Указа, замещения, тишины там, где раньше пели шесть старших голосов.",
+            pantheon_footnote: "— иные имена есть. их вычеркнули из фолианта. они вернутся, когда вернутся вычеркнутые страницы —",
             bestiary_prefix: "— Из заметок охотника —",
             bestiary_title: "Бестиарий",
-            bestiary_subtitle: "Что бродит по дорогам после темноты. Носи сталь. Носи соль. Носи имена своих мёртвых.",
+            bestiary_subtitle: "Что ходит по дорогам, когда стемнеет. Носи сталь. Носи соль. Носи имена своих мёртвых.",
             best1_name: "Стрыга",
             best1_cat: "— Проклятая, рождённая женщиной —",
-            best1_body: "Когда-то — дочь некоего дома. Ныне ест костный мозг. Солнечный свет замедляет её. Железо у порога отпугивает. Говорят, произнесённое вслух её имя пробуждает её. Я не проверял.",
+            best1_body: "Когда-то — дочь чьего-то дома. Теперь грызёт костный мозг. Солнечный свет замедляет её. Железо на пороге не пускает. Говорят, имя её вслух — будит её. Я не пробовал.",
             best2_name: "Свежеподнявшиеся",
             best2_cat: "— Нежить, недавно обращённая —",
-            best2_body: "Чумные мёртвые, которым не дали должного обряда. Они голодны, не злы. Помнят дорогу домой и пытаются по ней пройти. Бей в череп. Сожги остаток.",
+            best2_body: "Чумные мёртвые, которым не дали обряда. Они голодны, не злы. Помнят дорогу домой и идут по ней. Бей в череп. Сожги остальное.",
             best3_name: "Забытые",
             best3_cat: "— Нежить, безымянные —",
-            best3_body: "Старше свежеподнявшихся. Их имена покинули мир полностью. Они ищут. Если бы ты знал имя, которое они когда-то носили, они бы заплакали и легли. Мало кто знает.",
+            best3_body: "Старше свежеподнявшихся. Их имена ушли из мира насовсем. Они ищут. Назови им то имя, что они носили при жизни — заплачут и лягут. Мало кто его знает.",
             best4_name: "Спящие в доспехах",
-            best4_cat: "— Нежить, давшие клятву —",
-            best4_body: "Скелеты в полной экипировке старых орденов. Не упокаиваются, потому что некая клятва не исполнена. Не скажут какая. Сражаются как при жизни. Устают меньше.",
+            best4_cat: "— Нежить, давшая клятву —",
+            best4_body: "Скелеты в полном облачении старых орденов. Не упокаиваются — клятва не исполнена. Какая — не скажут. Сражаются как при жизни. Устают меньше.",
             best5_name: "Утопцы",
             best5_cat: "— Стоячих вод —",
-            best5_body: "Жертвы первого траура, утопленные в начале паники. Цепляются за берега. Утаскивают неосторожных вниз — в воду, у которой не всегда есть дно.",
+            best5_body: "Жертвы первого траура. Их топили в начале паники. Цепляются за берег. Утаскивают неосторожных вниз — в воду, у которой не всегда есть дно.",
             best6_name: "Леший",
             best6_cat: "— Глухого леса —",
-            best6_body: "Стражи алтарей, ныне заросших. Не охотится. Карает за вторжение. Не руби живое дерево в его рощах. Оставь ему мёда. Не оборачивайся.",
+            best6_body: "Хранители алтарей, что давно заросли. Не охотится. Карает за вторжение. Живое дерево в его роще не руби. Оставь ему мёда. Не оборачивайся.",
             best7_name: "Виверна",
             best7_cat: "— Высоких мест —",
-            best7_body: "Старше первого траура. Старше королевств. Не служат никому. Едят скот, когда зимы плохи. Зимы сейчас плохи.",
+            best7_body: "Старше первого траура. Старше королевств. Никому не служат. Берут скот, когда зимы тяжёлые. Зимы сейчас тяжёлые.",
             best8_name: "Разбойники",
             best8_cat: "— Живые, отчаявшиеся —",
-            best8_body: "Худший из монстров — тем, что рассуждает. Были крестьянами, солдатами, сыновьями. Голод сделал из них это. Некоторые помнят доброту. Большинство — нет.",
+            best8_body: "Худший вид чудовища — тот, что умеет думать. Были крестьянами, солдатами, сыновьями. Голод сделал из них это. Некоторые ещё помнят, что такое доброта. Большинство — уже нет.",
             best9_name: "Кабан",
             best9_cat: "— Живой, зверь —",
-            best9_body: "Кабан. Ничего больше. Не каждая опасность в этом мире проклята. Некоторые просто такие, какие они есть. Кабану нет дела до наших войн.",
-            bestiary_footnote: "— иное бродит по лесу. Я о нём не написал. Я не выжил, чтобы о нём написать. —",
-            marg_3: "По приказу Короны: путешествовать при свете дня, хоронить своих мертвецов самим, не доверять ни одному пастырю.",
+            best9_body: "Кабан. И всё. Не каждая опасность в этом мире проклята. Иные — просто такие, какие есть. Кабану нет дела до наших войн.",
+            bestiary_footnote: "— иное ходит по чаще. Я о нём не написал. Я не дожил, чтобы написать. —",
+            marg_3: '<span class="verse-decree">По указу Короны, года второго траура</span>Кто выйдет в ночь — не вернётся.\nКто откроет дверь — не запрётся.\nКто пастыря пустит на двор —\nтот сам себе вынес приговор.\n\nХорони своих. Молись один.\nНе зови соседа в свой дом —\nон придёт не один.',
             marg_3_attr: "— публичный указ, год второго траура",
             vigil_label: "— Дозор —",
-            vigil_text: "Врата ещё не открыты. Оставь своё имя у стражи — ты первым узнаешь, когда наступит тьма.",
+            vigil_text: "Врата ещё закрыты. Оставь своё имя у стражи — ты первым услышишь, когда наступит тьма.",
             vigil_button: "Внести",
-            vigil_disclaimer: "Твоё имя хранится в тайне. Мы говорим только когда звонит колокол.",
-            marg_4: "Надежда — свеча на ветру. Возьми с собой не одну.",
+            vigil_disclaimer: "Твоё имя хранится в тайне. Мы говорим только когда зазвонит колокол.",
+            marg_4: "Надежда — свеча на ветру. Бери с собой не одну.",
             marg_4_attr: "— еретик, перед костром",
             workshop_label: "— Мастерская —",
             workshop_title: "Mortmain Studio",
-            workshop_text: "Mortmain — небольшая мастерская, посвящённая играм на грани средневекового воображения. Нас интересует то, что выживает, когда мир — нет. Squalor — наше первое послание из тьмы.",
-            footer_brand: "Мастерская на грани средневекового воображения. Мы строим игры, что помнят то, что забывает мир.",
+            workshop_text: "Mortmain — небольшая мастерская. Мы делаем игры на грани средневекового воображения. Нас занимает то, что остаётся, когда мира уже нет. Squalor — наше первое послание из тьмы.",
+            footer_brand: "Мастерская на грани средневекового воображения. Мы делаем игры, что помнят то, что забыл мир.",
             footer_game: "Игра",
             footer_features: "Особенности",
             footer_codex: "Кодекс",
@@ -2576,7 +2624,13 @@
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.dataset.i18n;
             if (translations[lang] && translations[lang][key]) {
-                el.textContent = translations[lang][key];
+                // If the element has data-i18n-html attribute, use innerHTML to preserve embedded HTML.
+                // Otherwise use textContent for safe plain text.
+                if (el.hasAttribute('data-i18n-html')) {
+                    el.innerHTML = translations[lang][key];
+                } else {
+                    el.textContent = translations[lang][key];
+                }
             }
         });
         document.querySelectorAll('.lang-btn').forEach(btn => {
