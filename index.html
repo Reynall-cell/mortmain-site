@@ -32,6 +32,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="hero-bg.png" fetchpriority="high">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
 
     <style>
@@ -58,6 +59,9 @@
 
         html {
             scroll-behavior: smooth;
+            /* Prevent browser from auto-compensating scroll when content height changes during load.
+               Without this, the heavy hero image arriving late shifts the user to mid-page. */
+            overflow-anchor: none;
         }
 
         body {
@@ -68,6 +72,7 @@
             line-height: 1.7;
             overflow-x: hidden;
             min-height: 100vh;
+            overflow-anchor: none;
         }
 
         /* === AWAKENING SPLASH === */
@@ -2408,15 +2413,45 @@ he comes not on his own.</p>
 </footer>
 
 <script>
-    // === SCROLL FIX: prevent browser from restoring previous scroll position on reload/back navigation ===
-    // Without this, mobile users may land mid-page (especially after splash screen finishes loading)
+    // === SCROLL FIX: prevent browser from auto-scrolling to mid-page when hero image loads ===
+    // Multi-layer defense:
+    //   1. Disable scrollRestoration (don't restore previous scroll on back/reload)
+    //   2. Force scroll to top on initial parse
+    //   3. Keep enforcing top for first 2 seconds while images load (defeats overflow-anchor)
+    //   4. Stop enforcing after user actually scrolls (so we don't fight them)
     if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
     }
     window.addEventListener('beforeunload', () => window.scrollTo(0, 0));
-    // Force scroll to top on initial load, unless URL has an anchor
+
     if (!window.location.hash) {
         window.scrollTo(0, 0);
+
+        // Enforce scroll-to-top during initial 2 seconds while async resources (hero image, fonts) load
+        // and could trigger scroll anchoring. We stop the moment the user scrolls themselves.
+        let userScrolled = false;
+        let enforcementCount = 0;
+        const maxEnforcements = 40; // ~2 seconds at 50ms intervals
+
+        const userScrollHandler = () => { userScrolled = true; };
+        window.addEventListener('wheel', userScrollHandler, { passive: true, once: true });
+        window.addEventListener('touchstart', userScrollHandler, { passive: true, once: true });
+        window.addEventListener('keydown', (e) => {
+            if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(e.key)) {
+                userScrolled = true;
+            }
+        }, { passive: true, once: true });
+
+        const enforceTop = setInterval(() => {
+            if (userScrolled || enforcementCount >= maxEnforcements) {
+                clearInterval(enforceTop);
+                return;
+            }
+            if (window.scrollY > 0) {
+                window.scrollTo(0, 0);
+            }
+            enforcementCount++;
+        }, 50);
     }
 
     // === I18N: EN / RU ===
