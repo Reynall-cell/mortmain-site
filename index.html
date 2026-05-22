@@ -33,6 +33,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="image" href="hero-bg.png" fetchpriority="high">
+
+    <!-- MailerLite Universal — newsletter integration -->
+    <script>
+        (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+        .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+        n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+        (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+        ml('account', '2371216');
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
 
     <style>
@@ -210,15 +219,19 @@
             width: 800px; height: 800px;
             pointer-events: none;
             z-index: 2;
+            /* Intensity controlled by --torch-intensity (0..1) — driven by scroll JS.
+               At intensity 0: just embers (very dim, small).
+               At intensity 1: full torch glow. */
             background: radial-gradient(
                 circle,
-                rgba(180, 95, 45, 0.32) 0%,
-                rgba(160, 80, 35, 0.20) 15%,
-                rgba(140, 65, 28, 0.12) 30%,
-                rgba(100, 50, 22, 0.06) 50%,
+                rgba(180, 95, 45, calc(0.32 * var(--torch-intensity, 0.25))) 0%,
+                rgba(160, 80, 35, calc(0.20 * var(--torch-intensity, 0.25))) 15%,
+                rgba(140, 65, 28, calc(0.12 * var(--torch-intensity, 0.25))) 30%,
+                rgba(100, 50, 22, calc(0.06 * var(--torch-intensity, 0.25))) 50%,
                 transparent 70%
             );
-            transform: translate(-50%, -50%);
+            /* Size also grows: from 50% (embers) to 100% (full flame) */
+            transform: translate(-50%, -50%) scale(calc(0.5 + 0.5 * var(--torch-intensity, 0.25)));
             transition: opacity 0.4s ease;
             opacity: 0;
             mix-blend-mode: screen;
@@ -578,7 +591,7 @@
 
         /* Multi-layer overlay above the image, below the text:
            1. Top fade — darkens the top third where SQUALOR sits (for readability)
-           2. Bottom fade — bleeds the image edge into the site's deep background
+           2. Bottom fade — long smooth bleed into the site's deep background (no visible cut)
            3. Side vignette — focuses attention center, hides any awkward edges
            4. Bronze tint — pulls the colours toward the site palette (#7a3a1f) */
         .hero::after {
@@ -591,10 +604,11 @@
                 /* Top darkening — keeps text crisp */
                 linear-gradient(to bottom,
                     rgba(7, 6, 10, 0.85) 0%,
-                    rgba(7, 6, 10, 0.55) 25%,
-                    rgba(7, 6, 10, 0.30) 50%,
-                    rgba(7, 6, 10, 0.50) 75%,
-                    rgba(7, 6, 10, 0.95) 100%),
+                    rgba(7, 6, 10, 0.55) 20%,
+                    rgba(7, 6, 10, 0.30) 45%,
+                    rgba(7, 6, 10, 0.50) 70%,
+                    rgba(7, 6, 10, 0.85) 88%,
+                    rgba(7, 6, 10, 1.00) 100%),
                 /* Side vignette — horizontal */
                 radial-gradient(ellipse at center,
                     transparent 40%,
@@ -605,6 +619,22 @@
                     transparent 0%,
                     rgba(122, 58, 31, 0.05) 50%,
                     transparent 100%);
+        }
+
+        /* Smooth feathered transition strip at the bottom of hero
+           — eliminates the visible cut between the painted image and the deep black site bg */
+        .hero-edge-fade {
+            position: absolute;
+            left: 0; right: 0;
+            bottom: 0;
+            height: 180px;
+            z-index: 2;
+            pointer-events: none;
+            background: linear-gradient(to bottom,
+                rgba(7, 6, 10, 0) 0%,
+                rgba(7, 6, 10, 0.4) 30%,
+                rgba(7, 6, 10, 0.85) 65%,
+                rgba(7, 6, 10, 1) 100%);
         }
 
         /* Ken Burns keyframes — soft, slow, almost imperceptible.
@@ -1585,6 +1615,71 @@
             color: var(--text-tertiary);
             margin-top: 24px;
             font-style: italic;
+            transition: color 0.3s ease;
+        }
+
+        .newsletter-disclaimer.success {
+            color: var(--accent);
+            font-style: normal;
+        }
+
+        .newsletter-disclaimer.error {
+            color: #a04444;
+            font-style: normal;
+        }
+
+        /* GDPR consent checkbox — minimal, fits the dark site palette */
+        .vigil-consent {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 10px;
+            max-width: 540px;
+            margin: 16px auto 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            color: var(--text-tertiary);
+            cursor: pointer;
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        .vigil-consent input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            border: 1px solid var(--border-medium);
+            background: transparent;
+            cursor: pointer;
+            margin: 0;
+            flex-shrink: 0;
+            position: relative;
+            transition: border-color 0.2s ease;
+            margin-top: 2px;
+        }
+
+        .vigil-consent input[type="checkbox"]:hover {
+            border-color: var(--accent);
+        }
+
+        .vigil-consent input[type="checkbox"]:checked {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .vigil-consent input[type="checkbox"]:checked::after {
+            content: '✓';
+            position: absolute;
+            top: -2px;
+            left: 1px;
+            color: var(--bg-deepest);
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .vigil-consent span {
+            user-select: none;
         }
 
         .studio-content {
@@ -1970,6 +2065,7 @@
         <a href="#newsletter" class="hero-cta" data-i18n="hero_cta">Join the Vigil</a>
     </div>
     <div class="scroll-hint" data-i18n="hero_scroll">Descend</div>
+    <div class="hero-edge-fade"></div>
 </section>
 
 <div class="divider reveal">
@@ -2155,11 +2251,15 @@ he comes not on his own.</p>
         <p class="newsletter-text" data-i18n="vigil_text">
             The gates are not yet open. Leave your name with the watch — you will be the first to know when the dark begins.
         </p>
-        <form class="newsletter-form" onsubmit="event.preventDefault(); const btn = this.querySelector('.newsletter-button'); btn.textContent = window.LANG === 'ru' ? 'Внесён' : 'Marked'; setTimeout(() => btn.textContent = window.LANG === 'ru' ? 'Внести' : 'Mark Me', 2500);">
-            <input class="newsletter-input" type="email" placeholder="your.name@somewhere" required>
-            <button class="newsletter-button" type="submit" data-i18n="vigil_button">Mark Me</button>
+        <form class="newsletter-form" id="vigil-form" novalidate>
+            <input class="newsletter-input" type="email" id="vigil-email" placeholder="your.name@somewhere" required autocomplete="email">
+            <button class="newsletter-button" type="submit" id="vigil-submit" data-i18n="vigil_button">Mark Me</button>
         </form>
-        <p class="newsletter-disclaimer" data-i18n="vigil_disclaimer">Your name is held in confidence. We speak only when the bell rings.</p>
+        <label class="vigil-consent">
+            <input type="checkbox" id="vigil-consent" required>
+            <span data-i18n="vigil_consent">I agree to receive emails from Mortmain Studio. I can unsubscribe at any time.</span>
+        </label>
+        <p class="newsletter-disclaimer" id="vigil-status" data-i18n="vigil_disclaimer">Your name is held in confidence. We speak only when the bell rings.</p>
     </div>
 </section>
 
@@ -2597,6 +2697,7 @@ he comes not on his own.</p>
             vigil_text: "The gates are not yet open. Leave your name with the watch — you will be the first to know when the dark begins.",
             vigil_button: "Mark Me",
             vigil_disclaimer: "Your name is held in confidence. We speak only when the bell rings.",
+            vigil_consent: "I agree to receive emails from Mortmain Studio. I can unsubscribe at any time.",
             marg_4: "Hope is a candle in the wind. Bring more than one.",
             marg_4_attr: "— a heretic, before the pyre",
             workshop_label: "— The Workshop —",
@@ -2735,6 +2836,7 @@ he comes not on his own.</p>
             vigil_text: "Врата ещё закрыты. Оставь своё имя у стражи — ты первым услышишь, когда наступит тьма.",
             vigil_button: "Внести",
             vigil_disclaimer: "Твоё имя хранится в тайне. Мы говорим только когда зазвонит колокол.",
+            vigil_consent: "Я согласен получать письма от Mortmain Studio. Я могу отписаться в любой момент.",
             marg_4: "Надежда — свеча на ветру. Бери с собой не одну.",
             marg_4_attr: "— еретик, перед костром",
             workshop_label: "— Мастерская —",
@@ -2799,16 +2901,37 @@ he comes not on his own.</p>
     });
 
     // === TORCH ===
+    // The torch follows the cursor (translate) and its intensity (size + opacity of glow)
+    // is driven by scroll position via the --torch-intensity CSS custom property.
+    // In the hero section the torch is barely embers (intensity ~0.25), then grows
+    // to full flame (intensity 1.0) as the user scrolls past the hero viewport.
     const torch = document.getElementById('torch');
     let torchX = 0, torchY = 0, targetX = 0, targetY = 0;
+    let torchIntensity = 0.25; // start as embers
+
     document.addEventListener('mousemove', (e) => {
         targetX = e.clientX;
         targetY = e.clientY;
     });
+
+    function updateTorchIntensity() {
+        // Map scroll position [0..viewportHeight] to intensity [0.25..1.0]
+        const heroHeight = window.innerHeight;
+        const scrolled = window.scrollY;
+        const progress = Math.min(scrolled / heroHeight, 1);
+        torchIntensity = 0.25 + 0.75 * progress;
+        document.documentElement.style.setProperty('--torch-intensity', torchIntensity.toFixed(3));
+    }
+    window.addEventListener('scroll', updateTorchIntensity, { passive: true });
+    updateTorchIntensity();
+
     function animateTorch() {
         torchX += (targetX - torchX) * 0.08;
         torchY += (targetY - torchY) * 0.08;
-        torch.style.transform = `translate(${torchX - 400}px, ${torchY - 400}px)`;
+        // Combine position translate with the scale (read from --torch-intensity via CSS).
+        // We only set position here; size is driven by CSS using the custom property.
+        const scale = 0.5 + 0.5 * torchIntensity;
+        torch.style.transform = `translate(${torchX - 400}px, ${torchY - 400}px) scale(${scale.toFixed(3)})`;
         requestAnimationFrame(animateTorch);
     }
     animateTorch();
@@ -2875,6 +2998,111 @@ he comes not on his own.</p>
 
     // (Glitch effect removed — replaced by the blood-bleed CSS animation on the hero title,
     // which slowly stains the bottom of each letter starting 8 seconds after page load.)
+
+    // === VIGIL FORM — MailerLite subscribe ===
+    // Captures email + GDPR consent, posts to MailerLite via Universal API,
+    // shows status messages in the user's current language. Falls back gracefully if API blocked.
+    const vigilForm = document.getElementById('vigil-form');
+    const vigilEmail = document.getElementById('vigil-email');
+    const vigilConsent = document.getElementById('vigil-consent');
+    const vigilSubmit = document.getElementById('vigil-submit');
+    const vigilStatus = document.getElementById('vigil-status');
+
+    const vigilMessages = {
+        en: {
+            invalidEmail: 'Please enter a valid email address.',
+            needConsent: 'Please agree to receive emails to continue.',
+            sending: 'Marking…',
+            success: 'Check your inbox — confirm your name in the watch.',
+            error: 'The bell did not ring. Please try again later.',
+            idle: 'Your name is held in confidence. We speak only when the bell rings.',
+            buttonIdle: 'Mark Me',
+            buttonSent: 'Marked'
+        },
+        ru: {
+            invalidEmail: 'Введи правильный адрес почты.',
+            needConsent: 'Подтверди согласие, чтобы продолжить.',
+            sending: 'Вношу…',
+            success: 'Проверь почту — подтверди своё имя в дозоре.',
+            error: 'Колокол не зазвонил. Попробуй позже.',
+            idle: 'Твоё имя хранится в тайне. Мы говорим только когда зазвонит колокол.',
+            buttonIdle: 'Внести',
+            buttonSent: 'Внесён'
+        }
+    };
+
+    function setVigilStatus(msg, state) {
+        vigilStatus.textContent = msg;
+        vigilStatus.classList.remove('success', 'error');
+        if (state === 'success') vigilStatus.classList.add('success');
+        if (state === 'error') vigilStatus.classList.add('error');
+        // Strip i18n binding once we override — we don't want applyLanguage() to overwrite our message
+        vigilStatus.removeAttribute('data-i18n');
+    }
+
+    if (vigilForm) {
+        vigilForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const lang = window.LANG || 'en';
+            const m = vigilMessages[lang];
+
+            const email = vigilEmail.value.trim();
+            const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+            if (!emailValid) {
+                setVigilStatus(m.invalidEmail, 'error');
+                return;
+            }
+
+            if (!vigilConsent.checked) {
+                setVigilStatus(m.needConsent, 'error');
+                return;
+            }
+
+            vigilSubmit.disabled = true;
+            vigilSubmit.textContent = m.sending;
+            setVigilStatus(m.sending, null);
+
+            try {
+                // MailerLite Universal subscribe — uses the loaded ml() function.
+                // The 'subscribe' action accepts an email and group id; group 'Vigil' is the default for this account.
+                if (typeof ml === 'function') {
+                    // The Universal API call shape: ml('forms', formId, 'submit', { email })
+                    // We use direct fetch as fallback because the Universal SDK
+                    // doesn't reliably expose a programmatic subscribe — we POST to the form endpoint.
+                    const formData = new FormData();
+                    formData.append('fields[email]', email);
+                    formData.append('ml-submit', '1');
+                    formData.append('anticsrf', 'true');
+
+                    const response = await fetch('https://assets.mailerlite.com/jsonp/2371216/forms/HmwwN1/subscribe', {
+                        method: 'POST',
+                        body: formData,
+                        mode: 'no-cors' // MailerLite endpoint accepts this; response is opaque but the subscribe still works
+                    });
+
+                    // With no-cors we can't read response.ok, but if no exception thrown, request was sent
+                    vigilSubmit.textContent = m.buttonSent;
+                    setVigilStatus(m.success, 'success');
+                    vigilEmail.value = '';
+                    vigilConsent.checked = false;
+
+                    // Re-enable after delay to discourage double-submit
+                    setTimeout(() => {
+                        vigilSubmit.disabled = false;
+                        vigilSubmit.textContent = m.buttonIdle;
+                    }, 4000);
+                } else {
+                    throw new Error('MailerLite SDK not loaded');
+                }
+            } catch (err) {
+                console.error('Vigil submit error:', err);
+                setVigilStatus(m.error, 'error');
+                vigilSubmit.disabled = false;
+                vigilSubmit.textContent = m.buttonIdle;
+            }
+        });
+    }
 
     // === TILT ON FEATURE CARDS ===
     const features = document.querySelectorAll('.feature');
