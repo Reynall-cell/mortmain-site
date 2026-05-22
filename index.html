@@ -552,6 +552,67 @@
             overflow: hidden;
         }
 
+        /* === HERO BACKGROUND IMAGE — painted alla prima oil, layered with overlays for legibility === */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -5%;
+            left: -5%;
+            width: 110%;
+            height: 110%;
+            background-image: url('hero-bg.png');
+            background-size: cover;
+            background-position: center 40%;
+            background-repeat: no-repeat;
+            z-index: 0;
+            /* Ken Burns: extremely slow zoom + pan, 60s loop. Subliminal — adds life without distracting. */
+            animation: kenBurns 60s ease-in-out infinite alternate;
+            /* Subtle desaturation to mute remaining warm tones and align with site palette */
+            filter: brightness(0.55) contrast(1.05) saturate(0.85);
+        }
+
+        /* Multi-layer overlay above the image, below the text:
+           1. Top fade — darkens the top third where SQUALOR sits (for readability)
+           2. Bottom fade — bleeds the image edge into the site's deep background
+           3. Side vignette — focuses attention center, hides any awkward edges
+           4. Bronze tint — pulls the colours toward the site palette (#7a3a1f) */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 1;
+            pointer-events: none;
+            background:
+                /* Top darkening — keeps text crisp */
+                linear-gradient(to bottom,
+                    rgba(7, 6, 10, 0.85) 0%,
+                    rgba(7, 6, 10, 0.55) 25%,
+                    rgba(7, 6, 10, 0.30) 50%,
+                    rgba(7, 6, 10, 0.50) 75%,
+                    rgba(7, 6, 10, 0.95) 100%),
+                /* Side vignette — horizontal */
+                radial-gradient(ellipse at center,
+                    transparent 40%,
+                    rgba(7, 6, 10, 0.40) 80%,
+                    rgba(7, 6, 10, 0.75) 100%),
+                /* Subtle bronze tint — only in the mid-tones */
+                linear-gradient(to bottom,
+                    transparent 0%,
+                    rgba(122, 58, 31, 0.05) 50%,
+                    transparent 100%);
+        }
+
+        /* Ken Burns keyframes — soft, slow, almost imperceptible.
+           This is the painterly equivalent of "living" — the painting breathes. */
+        @keyframes kenBurns {
+            0% {
+                transform: scale(1.0) translate(0, 0);
+            }
+            100% {
+                transform: scale(1.08) translate(-1.5%, 0.5%);
+            }
+        }
+
         /* Hero anchor — large faded sigil above title */
         .hero-sigil {
             position: absolute;
@@ -561,6 +622,7 @@
             opacity: 0;
             animation: fadeInUp 2s ease 0.5s forwards;
             pointer-events: none;
+            z-index: 2;
         }
 
         .hero-sigil svg {
@@ -1706,6 +1768,27 @@
             .audio-toggle { width: 28px; height: 28px; }
             .hero-sigil svg { width: 180px; height: 180px; }
             .hero-prefix::before, .hero-prefix::after { display: none; }
+
+            /* Mobile hero: stronger darkening (text legibility on smaller screens),
+               slower Ken Burns (less aggressive on small viewport), shifted focus point */
+            .hero::before {
+                background-position: center center;
+                filter: brightness(0.45) contrast(1.05) saturate(0.85);
+                animation-duration: 90s; /* slower on mobile for less battery use */
+            }
+            .hero::after {
+                background:
+                    linear-gradient(to bottom,
+                        rgba(7, 6, 10, 0.92) 0%,
+                        rgba(7, 6, 10, 0.65) 25%,
+                        rgba(7, 6, 10, 0.45) 50%,
+                        rgba(7, 6, 10, 0.65) 75%,
+                        rgba(7, 6, 10, 0.97) 100%),
+                    radial-gradient(ellipse at center,
+                        transparent 30%,
+                        rgba(7, 6, 10, 0.55) 80%,
+                        rgba(7, 6, 10, 0.85) 100%);
+            }
             section { padding: 40px 24px; }
             .features-grid { grid-template-columns: 1fr; }
             .feature { padding: 40px 28px; }
