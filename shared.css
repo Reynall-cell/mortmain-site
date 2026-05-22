@@ -110,7 +110,7 @@ nav.scrolled {
     display: flex;
     align-items: center;
     gap: 12px;
-    font-family: 'Cinzel', serif;
+    font-family: 'Cinzel', 'Tenor Sans', serif;
     font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.25em;
@@ -136,7 +136,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
 .nav-links { display: flex; gap: 36px; list-style: none; }
 
 .nav-links a {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cinzel', 'Tenor Sans', serif;
     font-size: 12px;
     font-weight: 400;
     color: var(--text-secondary);
@@ -170,7 +170,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
 .lang-btn {
     background: transparent;
     border: none;
-    font-family: 'Cinzel', serif;
+    font-family: 'Cinzel', 'Tenor Sans', serif;
     font-size: 10px;
     letter-spacing: 0.2em;
     color: var(--text-tertiary);
@@ -196,7 +196,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
 }
 
 .page-prefix {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cinzel', 'Tenor Sans', serif;
     font-size: 11px;
     font-weight: 400;
     letter-spacing: 0.4em;
@@ -207,7 +207,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
 }
 
 .page-title {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cinzel', 'Tenor Sans', serif;
     font-size: clamp(36px, 6vw, 64px);
     font-weight: 500;
     letter-spacing: 0.04em;
@@ -218,7 +218,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
 }
 
 .page-subtitle {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Cormorant Garamond', 'EB Garamond', serif;
     font-style: italic;
     font-size: clamp(16px, 2vw, 20px);
     color: var(--text-secondary);
@@ -247,7 +247,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
 .page-divider-symbol {
     margin: 0 20px;
     color: var(--text-tertiary);
-    font-family: 'Cinzel', serif;
+    font-family: 'Cinzel', 'Tenor Sans', serif;
     font-size: 16px;
 }
 
@@ -257,7 +257,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
 }
 
 .page-section h2 {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cinzel', 'Tenor Sans', serif;
     font-size: 22px;
     font-weight: 500;
     letter-spacing: 0.15em;
@@ -268,7 +268,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
 }
 
 .page-section h3 {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cinzel', 'Tenor Sans', serif;
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 0.1em;
@@ -316,7 +316,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
 }
 
 .page-section em {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Cormorant Garamond', 'EB Garamond', serif;
     font-style: italic;
     font-size: 17px;
     color: var(--text-secondary);
@@ -327,7 +327,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
     padding: 16px 24px;
     margin: 24px 0;
     background: rgba(20, 16, 26, 0.4);
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Cormorant Garamond', 'EB Garamond', serif;
     font-style: italic;
     font-size: 16px;
     color: var(--text-secondary);
@@ -347,7 +347,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
 .last-updated {
     text-align: center;
     margin-top: 48px;
-    font-family: 'Cinzel', serif;
+    font-family: 'Cinzel', 'Tenor Sans', serif;
     font-size: 10px;
     letter-spacing: 0.4em;
     color: var(--text-tertiary);
@@ -374,7 +374,7 @@ footer {
 }
 
 .footer-column h4 {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cinzel', 'Tenor Sans', serif;
     font-size: 11px;
     font-weight: 500;
     color: var(--text-primary);
@@ -419,7 +419,7 @@ footer {
 }
 
 .footer-brand h3 {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cinzel', 'Tenor Sans', serif;
     font-size: 18px;
     font-weight: 600;
     letter-spacing: 0.2em;
@@ -429,7 +429,7 @@ footer {
 }
 
 .footer-brand p {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Cormorant Garamond', 'EB Garamond', serif;
     font-style: italic;
     font-size: 14px;
     color: var(--text-secondary);
@@ -450,7 +450,7 @@ footer {
 }
 
 .footer-copyright {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cinzel', 'Tenor Sans', serif;
     font-size: 11px;
     letter-spacing: 0.25em;
     color: var(--text-tertiary);
@@ -464,7 +464,7 @@ footer {
 }
 
 .footer-legal a {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cinzel', 'Tenor Sans', serif;
     font-size: 10px;
     font-weight: 400;
     color: var(--text-tertiary);
