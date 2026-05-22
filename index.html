@@ -33,15 +33,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="image" href="hero-bg.png" fetchpriority="high">
-
-    <!-- MailerLite Universal — newsletter integration -->
-    <script>
-        (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
-        .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
-        n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
-        (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
-        ml('account', '2371216');
-    </script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
 
     <style>
@@ -2999,9 +2990,11 @@ he comes not on his own.</p>
     // (Glitch effect removed — replaced by the blood-bleed CSS animation on the hero title,
     // which slowly stains the bottom of each letter starting 8 seconds after page load.)
 
-    // === VIGIL FORM — MailerLite subscribe ===
-    // Captures email + GDPR consent, posts to MailerLite via Universal API,
-    // shows status messages in the user's current language. Falls back gracefully if API blocked.
+    // === VIGIL FORM — submits to Cloudflare Worker which forwards to MailerLite REST API ===
+    // The Worker handles auth (API key as Secret), CORS, and double opt-in trigger.
+    // We get a real status back (success / already subscribed / error) instead of guessing.
+    const VIGIL_WORKER_URL = 'https://vigil-subscribe.freevpnje.workers.dev';
+
     const vigilForm = document.getElementById('vigil-form');
     const vigilEmail = document.getElementById('vigil-email');
     const vigilConsent = document.getElementById('vigil-consent');
@@ -3014,6 +3007,7 @@ he comes not on his own.</p>
             needConsent: 'Please agree to receive emails to continue.',
             sending: 'Marking…',
             success: 'Check your inbox — confirm your name in the watch.',
+            alreadySubscribed: 'Your name is already in the watch.',
             error: 'The bell did not ring. Please try again later.',
             idle: 'Your name is held in confidence. We speak only when the bell rings.',
             buttonIdle: 'Mark Me',
@@ -3024,6 +3018,7 @@ he comes not on his own.</p>
             needConsent: 'Подтверди согласие, чтобы продолжить.',
             sending: 'Вношу…',
             success: 'Проверь почту — подтверди своё имя в дозоре.',
+            alreadySubscribed: 'Твоё имя уже в дозоре.',
             error: 'Колокол не зазвонил. Попробуй позже.',
             idle: 'Твоё имя хранится в тайне. Мы говорим только когда зазвонит колокол.',
             buttonIdle: 'Внести',
@@ -3036,7 +3031,6 @@ he comes not on his own.</p>
         vigilStatus.classList.remove('success', 'error');
         if (state === 'success') vigilStatus.classList.add('success');
         if (state === 'error') vigilStatus.classList.add('error');
-        // Strip i18n binding once we override — we don't want applyLanguage() to overwrite our message
         vigilStatus.removeAttribute('data-i18n');
     }
 
@@ -3064,39 +3058,40 @@ he comes not on his own.</p>
             setVigilStatus(m.sending, null);
 
             try {
-                // MailerLite Universal subscribe — uses the loaded ml() function.
-                // The 'subscribe' action accepts an email and group id; group 'Vigil' is the default for this account.
-                if (typeof ml === 'function') {
-                    // The Universal API call shape: ml('forms', formId, 'submit', { email })
-                    // We use direct fetch as fallback because the Universal SDK
-                    // doesn't reliably expose a programmatic subscribe — we POST to the form endpoint.
-                    const formData = new FormData();
-                    formData.append('fields[email]', email);
-                    formData.append('ml-submit', '1');
-                    formData.append('anticsrf', 'true');
+                const response = await fetch(VIGIL_WORKER_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: email,
+                        consent: true,
+                        lang: lang,
+                    }),
+                });
 
-                    const response = await fetch('https://assets.mailerlite.com/jsonp/2371216/forms/HmwwN1/subscribe', {
-                        method: 'POST',
-                        body: formData,
-                        mode: 'no-cors' // MailerLite endpoint accepts this; response is opaque but the subscribe still works
-                    });
+                const data = await response.json();
 
-                    // With no-cors we can't read response.ok, but if no exception thrown, request was sent
+                if (response.ok && data.success) {
                     vigilSubmit.textContent = m.buttonSent;
-                    setVigilStatus(m.success, 'success');
+                    if (data.alreadySubscribed) {
+                        setVigilStatus(m.alreadySubscribed, 'success');
+                    } else {
+                        setVigilStatus(m.success, 'success');
+                    }
                     vigilEmail.value = '';
                     vigilConsent.checked = false;
 
-                    // Re-enable after delay to discourage double-submit
                     setTimeout(() => {
                         vigilSubmit.disabled = false;
                         vigilSubmit.textContent = m.buttonIdle;
                     }, 4000);
                 } else {
-                    throw new Error('MailerLite SDK not loaded');
+                    console.error('Vigil submit failed:', response.status, data);
+                    setVigilStatus(m.error, 'error');
+                    vigilSubmit.disabled = false;
+                    vigilSubmit.textContent = m.buttonIdle;
                 }
             } catch (err) {
-                console.error('Vigil submit error:', err);
+                console.error('Vigil network error:', err);
                 setVigilStatus(m.error, 'error');
                 vigilSubmit.disabled = false;
                 vigilSubmit.textContent = m.buttonIdle;
