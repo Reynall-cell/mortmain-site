@@ -154,7 +154,7 @@
             background-image: url('texture-stone.png');
             background-size: 480px;
             mix-blend-mode: overlay;
-            opacity: 0.08;
+            opacity: 0.32;
             z-index: 1;
         }
 
@@ -516,6 +516,16 @@
         }
 
         
+        
+        /* === EMBER PARTICLE CANVAS === */
+        #emberCanvas {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
         /* === MJ ORNAMENTS — screen-blend gold-on-black === */
         .hero-vine {
             position: absolute;
@@ -531,12 +541,14 @@
         .vigil-rose-watermark {
             position: absolute;
             top: 50%; left: 50%;
-            width: min(92vw, 700px);
+            width: min(70vw, 480px);
             transform: translate(-50%, -50%);
             mix-blend-mode: screen;
-            opacity: 0.10;
+            opacity: 0.13;
             pointer-events: none;
             z-index: 0;
+            -webkit-mask-image: radial-gradient(ellipse, black 15%, transparent 55%);
+            mask-image: radial-gradient(ellipse, black 15%, transparent 55%);
         }
 
         /* === HERO === */
@@ -652,7 +664,7 @@
         .hero-inner {
             transition: transform 0.05s linear;
             position: relative;
-            z-index: 2;
+            z-index: 5;
         }
 
         .hero-prefix {
@@ -692,49 +704,35 @@
             display: flex;
             justify-content: center;
             gap: 0.02em;
-            /* The letters themselves are painted with a vertical gradient:
-               top = bone-white (clean), bottom = dried blood (rot).
-               Gradient is positioned 200% height, starting fully above the letter
-               (only bone-white visible). The bleed animation pushes the gradient
-               down, revealing the blood-stained bottom of each letter. */
             color: var(--text-primary); /* fallback */
         }
 
         .hero-title span {
             display: inline-block;
             opacity: 0;
-            transform: translateY(50px);
-            animation:
-                letterReveal 1.8s cubic-bezier(0.19, 1, 0.22, 1) forwards,
-                bloodBleed 22s ease-in 8s forwards;
-            transition: transform 0.3s ease;
-            filter: blur(8px);
-
-            /* Painted with vertical gradient, animated via background-position */
-            background: linear-gradient(to bottom,
-                #d9cdb3 0%,
-                #d9cdb3 60%,
-                #8a2818 85%,
-                #3a1208 100%);
-            background-size: 100% 250%;
-            background-position: 0% -150%; /* gradient starts above the letter — only bone-white visible */
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
+            transform: translateY(30px) scale(1.04);
+            animation: emberReveal 2.6s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+            filter: blur(3px);
+            color: #d9cdb3;
+            text-shadow:
+                0 0 60px rgba(201, 169, 97, 0.15),
+                0 0 120px rgba(201, 169, 97, 0.06),
+                0 4px 30px rgba(0, 0, 0, 0.8);
         }
 
-        @keyframes bloodBleed {
-            0% {
-                background-position: 0% -150%;
-            }
-            100% {
-                background-position: 0% 0%;
-            }
+        @keyframes emberReveal {
+            0% { opacity: 0; transform: translateY(30px) scale(1.04); filter: blur(3px); }
+            60% { opacity: 1; filter: blur(0); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
         }
 
         .hero-title-wrap {
-            animation: breathe 8s ease-in-out infinite;
+            animation: breathe 6s ease-in-out 5s infinite;
+        }
+
+        @keyframes titleBreathe {
+            0%, 100% { filter: drop-shadow(0 0 40px rgba(201, 169, 97, 0.06)); }
+            50% { filter: drop-shadow(0 0 60px rgba(201, 169, 97, 0.14)); }
         }
 
         .hero-ornament {
@@ -1533,7 +1531,7 @@
         /* === NEWSLETTER === */
         .newsletter { text-align: center; }
 
-        .newsletter { position: relative; overflow: hidden; }
+        .newsletter { position: relative; }
 
         .newsletter-text {
             font-family: 'Cormorant Garamond', 'EB Garamond', serif;
@@ -1993,6 +1991,7 @@
 </nav>
 
 <section class="hero" id="top">
+    <canvas id="emberCanvas"></canvas>
     <div class="hero-sigil">
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
             <g stroke="#c9a961" stroke-width="1" fill="none">
@@ -3294,6 +3293,103 @@ he comes not on his own.</p>
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeAllModals();
     });
+
+    // === EMBER PARTICLE SYSTEM ===
+    (function(){
+        var canvas = document.getElementById('emberCanvas');
+        if (!canvas) return;
+        var ctx = canvas.getContext('2d');
+        var hero = document.getElementById('top');
+        var W, H;
+        var embers = [];
+        var MAX = 60;
+        var running = true;
+
+        function resize() {
+            var rect = hero.getBoundingClientRect();
+            W = canvas.width = rect.width;
+            H = canvas.height = rect.height;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        function Ember(scattered) {
+            this.reset();
+            if (scattered) this.y = Math.random() * H;
+        }
+
+        Ember.prototype.reset = function() {
+            this.x = Math.random() * W;
+            this.y = H + 10 + Math.random() * 60;
+            this.size = 1 + Math.random() * 2.5;
+            this.speedY = 0.3 + Math.random() * 0.8;
+            this.speedX = (Math.random() - 0.5) * 0.3;
+            this.drift = Math.random() * Math.PI * 2;
+            this.driftSpeed = 0.003 + Math.random() * 0.008;
+            this.life = 0;
+            this.maxLife = 300 + Math.random() * 400;
+            var t = Math.random();
+            if (t < 0.5) { this.r=201;this.g=169;this.b=97; }
+            else if (t < 0.8) { this.r=220;this.g=150;this.b=60; }
+            else { this.r=180;this.g=100;this.b=50; }
+            this.brightness = 0.4 + Math.random() * 0.6;
+            if (Math.random() < 0.08) {
+                this.brightness = 1.0;
+                this.size = 2 + Math.random() * 2;
+                this.r=240;this.g=210;this.b=140;
+            }
+        };
+
+        Ember.prototype.update = function() {
+            this.life++;
+            this.drift += this.driftSpeed;
+            this.x += this.speedX + Math.sin(this.drift) * 0.2;
+            this.y -= this.speedY;
+            var lifeRatio = this.life / this.maxLife;
+            if (lifeRatio < 0.1) this.alpha = lifeRatio / 0.1;
+            else if (lifeRatio > 0.7) this.alpha = 1 - (lifeRatio - 0.7) / 0.3;
+            else this.alpha = 1;
+            this.alpha *= this.brightness;
+            if (Math.random() < 0.03) this.alpha *= 0.3;
+            if (this.life > this.maxLife || this.y < -20) this.reset();
+        };
+
+        Ember.prototype.draw = function() {
+            if (this.alpha < 0.01) return;
+            ctx.save();
+            ctx.globalAlpha = this.alpha * 0.85;
+            ctx.fillStyle = 'rgb(' + this.r + ',' + this.g + ',' + this.b + ')';
+            ctx.shadowColor = 'rgba(' + this.r + ',' + this.g + ',' + this.b + ',' + (this.alpha * 0.6) + ')';
+            ctx.shadowBlur = this.size * 6;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        };
+
+        for (var i = 0; i < MAX; i++) embers.push(new Ember(true));
+
+        function animate() {
+            if (!running) return;
+            ctx.clearRect(0, 0, W, H);
+            for (var i = 0; i < embers.length; i++) {
+                embers[i].update();
+                embers[i].draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        // Pause when hero is out of viewport for performance
+        var heroObserver = new IntersectionObserver(function(entries) {
+            running = entries[0].isIntersecting;
+            if (running) animate();
+        }, { threshold: 0.05 });
+        heroObserver.observe(hero);
+
+        // Start after splash dissolves
+        setTimeout(function() { animate(); }, 2600);
+    })();
+
 </script>
 
 </body>
