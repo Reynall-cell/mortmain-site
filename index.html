@@ -153,8 +153,8 @@
             pointer-events: none;
             background-image: url('texture-stone.png');
             background-size: 480px;
-            mix-blend-mode: overlay;
-            opacity: 0.32;
+            mix-blend-mode: screen;
+            opacity: 0.12;
             z-index: 1;
         }
 
@@ -529,14 +529,14 @@
         /* === MJ ORNAMENTS — screen-blend gold-on-black === */
         .hero-vine {
             position: absolute;
-            width: min(36vw, 440px);
+            width: min(28vw, 340px);
             mix-blend-mode: screen;
-            opacity: 0.55;
+            opacity: 0.30;
             pointer-events: none;
             z-index: 4;
         }
-        .hero-vine.tl { top: -2%; left: -1%; }
-        .hero-vine.br { bottom: -2%; right: -1%; transform: scale(-1, -1); }
+        .hero-vine.tl { top: 7%; left: -1%; }
+        .hero-vine.br { bottom: 2%; right: -1%; transform: scale(-1, -1); }
 
         .vigil-rose-watermark {
             position: absolute;
