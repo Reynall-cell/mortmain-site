@@ -154,8 +154,10 @@
             background-image: url('texture-stone.png');
             background-size: 480px;
             mix-blend-mode: screen;
-            opacity: 0.12;
+            opacity: 0.08;
             z-index: 1;
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, transparent 8%, black 22%);
+            mask-image: linear-gradient(to bottom, transparent 0%, transparent 8%, black 22%);
         }
 
         .page-frame {
