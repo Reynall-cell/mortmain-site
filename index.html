@@ -634,6 +634,22 @@
                 rgba(8, 7, 6, 1) 100%);
         }
 
+        /* Dark fog below hero — covers the top of the content area so
+           the stone texture fades in gradually instead of snapping on */
+        .hero-fog {
+            position: relative;
+            z-index: 4;
+            height: 350px;
+            margin-top: -350px;
+            background: linear-gradient(to bottom,
+                rgba(8, 7, 6, 1) 0%,
+                rgba(8, 7, 6, 0.85) 25%,
+                rgba(8, 7, 6, 0.5) 55%,
+                rgba(8, 7, 6, 0.15) 80%,
+                transparent 100%);
+            pointer-events: none;
+        }
+
         /* Ken Burns keyframes — soft, slow, almost imperceptible.
            This is the painterly equivalent of "living" — the painting breathes. */
         @keyframes kenBurns {
@@ -2055,6 +2071,9 @@
     <img class="hero-vine tl" src="ornament-vine-corner.png" alt="" onerror="this.style.display='none'">
     <img class="hero-vine br" src="ornament-vine-corner.png" alt="" onerror="this.style.display='none'">
 </section>
+
+<!-- Dark fog between hero and content — stone texture fades in gradually -->
+<div class="hero-fog"></div>
 
 <div class="divider reveal">
     <div class="divider-line">
