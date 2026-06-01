@@ -338,11 +338,14 @@
             transition: opacity 0.3s ease;
             font-family: 'UnifrakturCook', serif;
             font-weight: 700;
-            letter-spacing: 0.05em;
+            font-size: 18px;
+            letter-spacing: 0.02em;
+            text-transform: none;
         }
 
         nav.scrolled .nav-brand { font-size: 12px; }
         nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
+        nav.scrolled .nav-brand-text { font-size: 15px; }
 
         .nav-right {
             display: flex;
@@ -2084,8 +2087,8 @@
     </div>
     <div class="scroll-hint" data-i18n="hero_scroll">Descend</div>
     <div class="hero-edge-fade"></div>
-    <img class="hero-vine tl" src="ornament-vine-corner.png" alt="">
-    <img class="hero-vine br" src="ornament-vine-corner.png" alt="">
+    <img class="hero-vine tl" src="ornament-vine-corner.png" alt="" onerror="this.style.display='none'">
+    <img class="hero-vine br" src="ornament-vine-corner.png" alt="" onerror="this.style.display='none'">
 </section>
 
 <div class="divider reveal">
@@ -2266,7 +2269,7 @@ he comes not on his own.</p>
 </div>
 
 <section class="newsletter reveal" id="newsletter">
-    <img class="vigil-rose-watermark" src="ornament-rose.png" alt="">
+    <img class="vigil-rose-watermark" src="ornament-rose.png" alt="" onerror="this.style.display='none'">
     <div class="container">
         <div class="section-label" data-i18n="vigil_label">— The Vigil —</div>
         <p class="newsletter-text" data-i18n="vigil_text">
