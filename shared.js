@@ -83,6 +83,7 @@
     function initTransitions() {
         var veil = document.createElement('div');
         veil.className = 'page-veil';
+        veil.style.background = '#080706';
         document.body.appendChild(veil);
 
         document.addEventListener('click', function(e) {

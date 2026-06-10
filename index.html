@@ -4566,6 +4566,7 @@ he comes not on his own.</p>
     (function() {
         var veil = document.createElement('div');
         veil.className = 'page-veil';
+        veil.style.background = '#080706';
         document.body.appendChild(veil);
         document.addEventListener('click', function(e) {
             var a = e.target.closest ? e.target.closest('a[href]') : null;
