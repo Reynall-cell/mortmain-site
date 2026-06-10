@@ -5127,7 +5127,7 @@ he comes not on his own.</p>
     })();
 
     // === MOBILE MENU ===
-    (function() {
+    function initMobileMenu() {
         var burger = document.getElementById('navBurger');
         var menu = document.getElementById('mobileMenu');
         if (!burger || !menu) return;
@@ -5140,7 +5140,12 @@ he comes not on his own.</p>
         burger.addEventListener('click', function() { menu.classList.add('open'); });
         document.getElementById('mmClose').addEventListener('click', function() { menu.classList.remove('open'); });
         document.addEventListener('keydown', function(e) { if (e.key === 'Escape') menu.classList.remove('open'); });
-    })();
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMobileMenu);
+    } else {
+        initMobileMenu();
+    }
 
     // === PAGE VEIL: smooth transition when leaving to sub-pages ===
     (function() {
