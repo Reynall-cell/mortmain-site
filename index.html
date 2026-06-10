@@ -1242,6 +1242,103 @@
         }
         body.leaving .page-veil { opacity: 1; pointer-events: all; }
 
+        /* === ROADMAP TEASER (home block) === */
+        .rm-teaser {
+            max-width: 880px;
+            margin: 0 auto;
+        }
+        .rm-track {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            position: relative;
+            padding: 10px 12px 0;
+        }
+        .rm-track::before {
+            content: '';
+            position: absolute;
+            left: 6%;
+            right: 6%;
+            top: 27px;
+            height: 1px;
+            background: linear-gradient(to right, var(--border-strong), var(--border-medium) 55%, var(--border-subtle));
+        }
+        .rm-stop {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 30%;
+            text-align: center;
+            text-decoration: none;
+        }
+        .rm-hex {
+            width: 33px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .rm-hex svg { width: 100%; height: 100%; overflow: visible; }
+        .rm-stop.passed .rm-hex polygon { fill: rgba(201,169,97,0.12); stroke: var(--accent); }
+        .rm-stop.passed .rm-hex text { fill: var(--accent); }
+        .rm-stop.current .rm-hex polygon { fill: rgba(201,169,97,0.18); stroke: var(--accent); }
+        .rm-stop.current .rm-hex text { fill: var(--text-primary); }
+        .rm-stop.current .rm-hex { animation: stPulseHome 3s ease-in-out infinite; }
+        @keyframes stPulseHome {
+            0%, 100% { filter: drop-shadow(0 0 2px rgba(201,169,97,0.25)); }
+            50% { filter: drop-shadow(0 0 9px rgba(201,169,97,0.6)); }
+        }
+        .rm-stop.ahead .rm-hex polygon { fill: transparent; stroke: var(--border-medium); }
+        .rm-stop.ahead .rm-hex text { fill: var(--text-tertiary); }
+        .rm-stop.ahead .rm-name { opacity: 0.6; }
+        .rm-status {
+            font-family: 'Jost', sans-serif;
+            font-weight: 400;
+            font-size: 0.56rem;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+        }
+        .rm-stop.current .rm-status { color: var(--accent); }
+        .rm-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.1;
+        }
+        .rm-dots {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--text-tertiary);
+            letter-spacing: 0.5em;
+            align-self: center;
+            margin-top: 18px;
+            opacity: 0.6;
+        }
+        .rm-cta-row { text-align: center; margin-top: 40px; }
+        .rm-cta-row a {
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            font-size: 0.72rem;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--accent);
+            text-decoration: none;
+            border: 1px solid var(--border-medium);
+            padding: 12px 30px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .rm-cta-row a:hover { background: var(--accent); color: var(--bg-deepest); }
+        @media (max-width: 640px) {
+            .rm-name { font-size: 1.02rem; }
+            .rm-status { font-size: 0.5rem; }
+            .rm-dots { display: none; }
+        }
+
         /* === NEWS (home block) === */
         .news-home .news-grid {
             display: grid;
@@ -2298,6 +2395,7 @@
             <li><a href="#codex" data-i18n="nav_codex">Codex</a></li>
             <li><a href="#studio" data-i18n="nav_studio">Studio</a></li>
             <li><a href="news.html" data-i18n="nav_news">News</a></li>
+            <li><a href="roadmap.html" data-i18n="nav_roadmap">Roadmap</a></li>
             <li><a href="login.html" data-i18n="nav_login">Sign in</a></li>
         </ul>
         <div class="audio-control" id="audioControl">
@@ -2522,6 +2620,36 @@ The third crow takes the light.</p>
     </div>
     <div class="divider-chapter" data-i18n="ch_3">Capitulum III</div>
 </div>
+
+<section class="rm-teaser-section reveal" id="roadmap-teaser">
+    <div class="container">
+        <div class="reveal">
+            <div class="section-label" data-i18n="rm_label">— The Pilgrim's Road —</div>
+            <h2 class="section-title" data-i18n="rm_title">Where the road stands</h2>
+        </div>
+        <div class="rm-teaser">
+            <div class="rm-track">
+                <a class="rm-stop passed" href="roadmap.html">
+                    <span class="rm-hex"><svg viewBox="0 0 33 36"><polygon points="16.5,1 32,9.5 32,26.5 16.5,35 1,26.5 1,9.5" stroke-width="1"/><text x="16.5" y="18" text-anchor="middle" dominant-baseline="central" font-family="Cormorant Garamond, serif" font-size="13" font-weight="600">I</text></svg></span>
+                    <span class="rm-status" data-i18n="rm_passed">Passed</span>
+                    <span class="rm-name" data-i18n="rm_st_word">The Word</span>
+                </a>
+                <a class="rm-stop current" href="roadmap.html">
+                    <span class="rm-hex"><svg viewBox="0 0 33 36"><polygon points="16.5,1 32,9.5 32,26.5 16.5,35 1,26.5 1,9.5" stroke-width="1.2"/><text x="16.5" y="18" text-anchor="middle" dominant-baseline="central" font-family="Cormorant Garamond, serif" font-size="13" font-weight="600">II</text></svg></span>
+                    <span class="rm-status" data-i18n="rm_now">We are here</span>
+                    <span class="rm-name" data-i18n="rm_st_steel">Steel</span>
+                </a>
+                <span class="rm-dots">· · ·</span>
+                <a class="rm-stop ahead" href="roadmap.html">
+                    <span class="rm-hex"><svg viewBox="0 0 33 36"><polygon points="16.5,1 32,9.5 32,26.5 16.5,35 1,26.5 1,9.5" stroke-width="1"/><text x="16.5" y="18" text-anchor="middle" dominant-baseline="central" font-family="Cormorant Garamond, serif" font-size="13" font-weight="600">VIII</text></svg></span>
+                    <span class="rm-status" data-i18n="rm_ahead">Ahead</span>
+                    <span class="rm-name" data-i18n="rm_st_gates">The Gates</span>
+                </a>
+            </div>
+            <div class="rm-cta-row"><a href="roadmap.html" data-i18n="rm_cta">Walk the whole road</a></div>
+        </div>
+    </div>
+</section>
 
 <section class="codex reveal" id="codex">
     <div class="container">
@@ -3091,6 +3219,16 @@ he comes not on his own.</p>
             cookie_decline: "Decline",
             nav_login: "Sign in",
             nav_news: "News",
+            nav_roadmap: "Roadmap",
+            rm_label: "— The Pilgrim's Road —",
+            rm_title: "Where the road stands",
+            rm_now: "We are here",
+            rm_passed: "Passed",
+            rm_ahead: "Ahead",
+            rm_st_word: "The Word",
+            rm_st_steel: "Steel",
+            rm_st_gates: "The Gates",
+            rm_cta: "Walk the whole road",
             footer_news: "News",
             news_label: "— Tidings —",
             news_title: "Latest from the workshop",
@@ -3245,6 +3383,16 @@ he comes not on his own.</p>
             cookie_decline: "Отклонить",
             nav_login: "Войти",
             nav_news: "Вести",
+            nav_roadmap: "Дорожная карта",
+            rm_label: "— Дорога паломника —",
+            rm_title: "Где стоит дорога",
+            rm_now: "Мы здесь",
+            rm_passed: "Пройдено",
+            rm_ahead: "Впереди",
+            rm_st_word: "Слово",
+            rm_st_steel: "Сталь",
+            rm_st_gates: "Врата",
+            rm_cta: "Пройти дорогу целиком",
             footer_news: "Вести",
             news_label: "— Вести —",
             news_title: "Последние вести",
@@ -3268,6 +3416,16 @@ he comes not on his own.</p>
                     "nav_studio": "Студія",
                     "nav_login": "Логін",
                     "nav_news": "Вісті",
+                    "nav_roadmap": "Дорожня карта",
+                    "rm_label": "— Дорога прочанина —",
+                    "rm_title": "Де стоїть дорога",
+                    "rm_now": "Ми тут",
+                    "rm_passed": "Пройдено",
+                    "rm_ahead": "Попереду",
+                    "rm_st_word": "Слово",
+                    "rm_st_steel": "Сталь",
+                    "rm_st_gates": "Брами",
+                    "rm_cta": "Пройти дорогу цілком",
                     "footer_news": "Вісті",
                     "news_label": "— Вісті —",
                     "news_title": "Останні вісті",
@@ -3422,6 +3580,16 @@ he comes not on his own.</p>
                     "nav_studio": "Studio",
                     "nav_login": "Anmelden",
                     "nav_news": "Neuigkeiten",
+                    "nav_roadmap": "Roadmap",
+                    "rm_label": "— Der Pilgerweg —",
+                    "rm_title": "Wo die Straße steht",
+                    "rm_now": "Wir sind hier",
+                    "rm_passed": "Geschafft",
+                    "rm_ahead": "Voraus",
+                    "rm_st_word": "Das Wort",
+                    "rm_st_steel": "Stahl",
+                    "rm_st_gates": "Die Tore",
+                    "rm_cta": "Den ganzen Weg gehen",
                     "footer_news": "Neuigkeiten",
                     "news_label": "— Neuigkeiten —",
                     "news_title": "Neues aus der Werkstatt",
@@ -3496,6 +3664,16 @@ he comes not on his own.</p>
                     "nav_studio": "Estudio",
                     "nav_login": "Entrar",
                     "nav_news": "Noticias",
+                    "nav_roadmap": "Hoja de ruta",
+                    "rm_label": "— El camino del peregrino —",
+                    "rm_title": "Dónde está el camino",
+                    "rm_now": "Estamos aquí",
+                    "rm_passed": "Superado",
+                    "rm_ahead": "Por delante",
+                    "rm_st_word": "La Palabra",
+                    "rm_st_steel": "Acero",
+                    "rm_st_gates": "Las Puertas",
+                    "rm_cta": "Recorrer todo el camino",
                     "footer_news": "Noticias",
                     "news_label": "— Noticias —",
                     "news_title": "Lo último del taller",
@@ -3570,6 +3748,16 @@ he comes not on his own.</p>
                     "nav_studio": "Estúdio",
                     "nav_login": "Entrar",
                     "nav_news": "Notícias",
+                    "nav_roadmap": "Roteiro",
+                    "rm_label": "— O caminho do peregrino —",
+                    "rm_title": "Onde está o caminho",
+                    "rm_now": "Estamos aqui",
+                    "rm_passed": "Concluído",
+                    "rm_ahead": "Adiante",
+                    "rm_st_word": "A Palavra",
+                    "rm_st_steel": "Aço",
+                    "rm_st_gates": "Os Portões",
+                    "rm_cta": "Percorrer todo o caminho",
                     "footer_news": "Notícias",
                     "news_label": "— Notícias —",
                     "news_title": "O mais recente da oficina",
@@ -3644,6 +3832,16 @@ he comes not on his own.</p>
                     "nav_studio": "Studio",
                     "nav_login": "Connexion",
                     "nav_news": "Nouvelles",
+                    "nav_roadmap": "Feuille de route",
+                    "rm_label": "— Le chemin du pèlerin —",
+                    "rm_title": "Où en est la route",
+                    "rm_now": "Nous sommes ici",
+                    "rm_passed": "Franchi",
+                    "rm_ahead": "Devant",
+                    "rm_st_word": "Le Verbe",
+                    "rm_st_steel": "Acier",
+                    "rm_st_gates": "Les Portes",
+                    "rm_cta": "Parcourir toute la route",
                     "footer_news": "Nouvelles",
                     "news_label": "— Nouvelles —",
                     "news_title": "Dernières nouvelles de l'atelier",
@@ -3718,6 +3916,16 @@ he comes not on his own.</p>
                     "nav_studio": "Studio",
                     "nav_login": "Accedi",
                     "nav_news": "Notizie",
+                    "nav_roadmap": "Roadmap",
+                    "rm_label": "— Il cammino del pellegrino —",
+                    "rm_title": "Dove si trova la strada",
+                    "rm_now": "Siamo qui",
+                    "rm_passed": "Superato",
+                    "rm_ahead": "Più avanti",
+                    "rm_st_word": "Il Verbo",
+                    "rm_st_steel": "Acciaio",
+                    "rm_st_gates": "Le Porte",
+                    "rm_cta": "Percorrere tutta la strada",
                     "footer_news": "Notizie",
                     "news_label": "— Notizie —",
                     "news_title": "Ultime dalla bottega",
@@ -3792,6 +4000,16 @@ he comes not on his own.</p>
                     "nav_studio": "工作室",
                     "nav_login": "登录",
                     "nav_news": "消息",
+                    "nav_roadmap": "路线图",
+                    "rm_label": "— 朝圣之路 —",
+                    "rm_title": "路走到了哪里",
+                    "rm_now": "我们在这里",
+                    "rm_passed": "已完成",
+                    "rm_ahead": "前方",
+                    "rm_st_word": "言",
+                    "rm_st_steel": "钢铁",
+                    "rm_st_gates": "大门",
+                    "rm_cta": "走完整条路",
                     "footer_news": "消息",
                     "news_label": "— 消息 —",
                     "news_title": "工坊最新消息",
@@ -3866,6 +4084,16 @@ he comes not on his own.</p>
                     "nav_studio": "スタジオ",
                     "nav_login": "ログイン",
                     "nav_news": "ニュース",
+                    "nav_roadmap": "ロードマップ",
+                    "rm_label": "— 巡礼の道 —",
+                    "rm_title": "道はどこまで来たか",
+                    "rm_now": "いまここ",
+                    "rm_passed": "踏破",
+                    "rm_ahead": "この先",
+                    "rm_st_word": "言葉",
+                    "rm_st_steel": "鋼",
+                    "rm_st_gates": "門",
+                    "rm_cta": "道のすべてを辿る",
                     "footer_news": "ニュース",
                     "news_label": "— 便り —",
                     "news_title": "工房からの便り",
