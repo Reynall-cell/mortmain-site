@@ -569,3 +569,22 @@ footer {
     transition: opacity 0.4s ease;
 }
 body.leaving .page-veil { opacity: 1; pointer-events: all; }
+
+
+/* === Grain + vignette (film overlay, injected by shared.js) === */
+.grain-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 350;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 220px 220px;
+}
+.vignette-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 349;
+    background: radial-gradient(ellipse at center, transparent 58%, rgba(5, 4, 3, 0.34) 100%);
+}

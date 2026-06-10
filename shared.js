@@ -81,6 +81,15 @@
 
     // Page transition: veil fades in on internal navigation, page reveals on load
     function initTransitions() {
+        var vig = document.createElement('div');
+        vig.className = 'vignette-overlay';
+        vig.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(vig);
+        var grain = document.createElement('div');
+        grain.className = 'grain-overlay';
+        grain.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(grain);
+
         var veil = document.createElement('div');
         veil.className = 'page-veil';
         veil.style.background = '#080706';

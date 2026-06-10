@@ -1230,6 +1230,56 @@
             color: var(--text-secondary);
         }
 
+        /* === GRAIN + VIGNETTE (film overlay) === */
+        .grain-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 350;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 220px 220px;
+        }
+        .vignette-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 349;
+            background: radial-gradient(ellipse at center, transparent 58%, rgba(5, 4, 3, 0.34) 100%);
+        }
+
+        /* === ILLUMINATED DROP CAPS (lore prose) === */
+        .pantheon-body::first-letter,
+        .bestiary-body::first-letter {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 3.05em;
+            line-height: 0.78;
+            float: left;
+            color: var(--accent);
+            padding: 0.06em 0.12em 0 0;
+            text-shadow: 0 0 18px rgba(201, 169, 97, 0.25);
+        }
+
+        /* === WAX SEAL (vigil form) === */
+        .vigil-seal {
+            display: none;
+            width: 86px;
+            height: 86px;
+            margin: 26px auto 0;
+            position: relative;
+        }
+        .vigil-seal.stamped {
+            display: block;
+            animation: sealStamp 0.55s cubic-bezier(0.2, 1.6, 0.35, 1) both;
+        }
+        @keyframes sealStamp {
+            0% { transform: scale(1.9) rotate(-9deg); opacity: 0; }
+            55% { transform: scale(0.94) rotate(1.5deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        .vigil-seal svg { width: 100%; height: 100%; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.55)); }
+
         /* === PAGE VEIL (transition to sub-pages) === */
         .page-veil {
             position: fixed;
@@ -2349,6 +2399,8 @@
     </style>
 </head>
 <body>
+<div class="vignette-overlay" aria-hidden="true"></div>
+<div class="grain-overlay" aria-hidden="true"></div>
 
 <div class="splash" id="splash">
     <div class="splash-content">
@@ -2747,6 +2799,17 @@ he comes not on his own.</p>
             <input class="newsletter-input" type="email" id="vigil-email" placeholder="your.name@somewhere" required autocomplete="email">
             <button class="newsletter-button" type="submit" id="vigil-submit" data-i18n="vigil_button">Mark Me</button>
         </form>
+
+        <div class="vigil-seal" id="vigilSeal" aria-hidden="true">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 4 C68 2 90 12 95 33 C99 49 94 67 84 79 C72 93 55 99 40 95 C20 90 5 75 4 54 C3 32 18 9 38 5 C42 4 46 4.4 50 4 Z" fill="#5c2317"/>
+                <path d="M50 9 C66 7 85 16 90 34 C94 48 89 64 80 75 C69 88 54 94 41 90 C24 85 10 72 9 54 C8 35 21 13 39 10 C43 9 46 9.4 50 9 Z" fill="#6e2c1c"/>
+                <path d="M50 9 C66 7 85 16 90 34 C92 41 92 48 90 55 C70 48 38 46 12 58 C9 50 8 43 10 36 C14 20 26 11 39 10 C43 9 46 9.4 50 9 Z" fill="#7a3522" opacity="0.55"/>
+                <polygon points="50,24 71,36 71,62 50,74 29,62 29,36" fill="none" stroke="#c9a961" stroke-width="2" opacity="0.9"/>
+                <polygon points="50,30 65.5,39 65.5,59 50,68 34.5,59 34.5,39" fill="none" stroke="#c9a961" stroke-width="0.7" opacity="0.5"/>
+                <text x="50" y="50" font-family="Cormorant Garamond, serif" font-size="22" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="#c9a961" opacity="0.92">M</text>
+            </svg>
+        </div>
         <label class="vigil-consent">
             <input type="checkbox" id="vigil-consent" required>
             <span data-i18n="vigil_consent">I agree to receive emails from Mortmain Studio. I can unsubscribe at any time.</span>
@@ -4416,6 +4479,8 @@ he comes not on his own.</p>
 
                 if (response.ok && data.success) {
                     vigilSubmit.textContent = m.buttonSent;
+                    var sealEl = document.getElementById('vigilSeal');
+                    if (sealEl) { sealEl.classList.remove('stamped'); void sealEl.offsetWidth; sealEl.classList.add('stamped'); }
                     if (data.alreadySubscribed) {
                         setVigilStatus(m.alreadySubscribed, 'success');
                     } else {
@@ -4811,6 +4876,50 @@ he comes not on his own.</p>
             document.body.classList.add('leaving');
             setTimeout(function() { window.location.href = href; }, 380);
         });
+    })();
+
+    // === THE BELL: one distant toll, once per session, after first interaction ===
+    (function() {
+        var KEY = 'squalor_bell_tolled';
+        try { if (sessionStorage.getItem(KEY)) return; } catch (e) {}
+
+        function toll() {
+            try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+            try {
+                var AC = window.AudioContext || window.webkitAudioContext;
+                if (!AC) return;
+                var ctx = new AC();
+                var now = ctx.currentTime;
+                var master = ctx.createGain();
+                master.gain.value = 0.055;
+                master.connect(ctx.destination);
+                // Bell partials (hum, prime, tierce, quint, nominal) around a low strike
+                var partials = [
+                    { f: 98.0,  g: 1.0,  d: 7.5 },
+                    { f: 196.5, g: 0.6,  d: 6.0 },
+                    { f: 235.0, g: 0.34, d: 4.6 },
+                    { f: 294.0, g: 0.22, d: 3.4 },
+                    { f: 392.0, g: 0.16, d: 2.6 }
+                ];
+                partials.forEach(function(pt) {
+                    var o = ctx.createOscillator();
+                    var g = ctx.createGain();
+                    o.type = 'sine';
+                    o.frequency.value = pt.f * (1 + (Math.random() - 0.5) * 0.004);
+                    g.gain.setValueAtTime(0.0001, now);
+                    g.gain.exponentialRampToValueAtTime(pt.g, now + 0.012);
+                    g.gain.exponentialRampToValueAtTime(0.0001, now + pt.d);
+                    o.connect(g); g.connect(master);
+                    o.start(now);
+                    o.stop(now + pt.d + 0.1);
+                });
+                setTimeout(function() { try { ctx.close(); } catch (e) {} }, 8500);
+            } catch (e) {}
+            window.removeEventListener('pointerdown', toll);
+            window.removeEventListener('keydown', toll);
+        }
+        window.addEventListener('pointerdown', toll, { once: false });
+        window.addEventListener('keydown', toll, { once: false });
     })();
 
     // === COOKIE BANNER ===
