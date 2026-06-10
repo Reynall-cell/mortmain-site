@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Roadmap — Squalor / Mortmain Studio</title>
+    <meta name="description" content="The pilgrim's road of Squalor: what is forged, what is being forged, what lies ahead.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Squalor — Roadmap">
+    <meta property="og:description" content="The road promises no dates. It promises direction.">
+
+    <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="%23080706"/><polygon points="16,3 27,9.5 27,22.5 16,29 5,22.5 5,9.5" fill="none" stroke="%23c9a961" stroke-width="1.5"/><text x="16" y="16" font-family="serif" font-size="14" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="%23d8d2c4">M</text></svg>'>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
+
+    <style>
+        .road {
+            position: relative;
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 12px 0 12px 46px;
+        }
+        .road::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom,
+                transparent 0%,
+                var(--border-strong) 8%,
+                var(--border-medium) 55%,
+                var(--border-subtle) 85%,
+                transparent 100%);
+        }
+        .station {
+            position: relative;
+            padding: 0 0 52px;
+        }
+        .station:last-child { padding-bottom: 0; }
+        .st-marker {
+            position: absolute;
+            left: -46px;
+            top: 2px;
+            width: 31px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .st-marker svg { width: 100%; height: 100%; overflow: visible; }
+        .st-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.86rem;
+            font-weight: 600;
+            fill: var(--text-tertiary);
+        }
+        .station.passed .st-hex { fill: rgba(201,169,97,0.12); stroke: var(--accent); }
+        .station.passed .st-num { fill: var(--accent); }
+        .station.current .st-hex { fill: rgba(201,169,97,0.18); stroke: var(--accent); }
+        .station.current .st-num { fill: var(--text-primary); }
+        .station.current .st-marker { animation: stPulse 3s ease-in-out infinite; }
+        @keyframes stPulse {
+            0%, 100% { filter: drop-shadow(0 0 2px rgba(201,169,97,0.25)); }
+            50% { filter: drop-shadow(0 0 9px rgba(201,169,97,0.6)); }
+        }
+        .station.ahead .st-hex { fill: transparent; stroke: var(--border-medium); }
+        .station.ahead .st-name,
+        .station.ahead .st-body { opacity: 0.62; }
+
+        .st-status {
+            font-family: 'Jost', sans-serif;
+            font-weight: 400;
+            font-size: 0.58rem;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .station.passed .st-status { color: var(--text-tertiary); }
+        .station.current .st-status { color: var(--accent); }
+        .station.ahead .st-status { color: var(--text-tertiary); opacity: 0.7; }
+
+        .st-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.15;
+            margin-bottom: 10px;
+        }
+        .st-body {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1rem;
+            line-height: 1.75;
+            color: var(--text-secondary);
+            max-width: 560px;
+        }
+        .road-vow {
+            max-width: 560px;
+            margin: 64px auto 0;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-tertiary);
+        }
+        @media (max-width: 600px) {
+            .road { padding-left: 40px; }
+            .st-marker { left: -40px; width: 27px; height: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-frame">
+    <div class="corner-bl"></div>
+    <div class="corner-br"></div>
+</div>
+
+<nav id="nav">
+    <a href="index.html" class="nav-brand">
+        <svg class="nav-brand-mark" viewBox="0 0 40 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <polygon points="20,4 34,12 34,32 20,40 6,32 6,12" fill="none" stroke="#c9a961" stroke-width="1.3"/>
+            <polygon points="20,8 30.5,14 30.5,30 20,36 9.5,30 9.5,14" fill="none" stroke="#c9a961" stroke-width="0.4" opacity="0.5"/>
+            <text x="20" y="22" font-family="Cormorant Garamond, serif" font-size="14" font-weight="600" text-anchor="middle" dominant-baseline="central" fill="#d8d2c4">M</text>
+        </svg>
+        <span class="nav-brand-text">Mortmain Studio</span>
+    </a>
+    <div class="nav-right">
+        <ul class="nav-links">
+            <li><a href="index.html#game" data-i18n="nav_game">The Game</a></li>
+            <li><a href="news.html" data-i18n="nav_news">News</a></li>
+            <li><a href="faq.html" data-i18n="nav_faq">FAQ</a></li>
+            <li><a href="about.html" data-i18n="nav_about">About</a></li>
+        </ul>
+        <div class="lang-switcher" id="langSwitcher">
+            <button class="lang-current" id="langCurrent" aria-label="Language">
+                <span id="langCurrentCode">EN</span>
+                <span class="lang-caret">▾</span>
+            </button>
+            <div class="lang-menu" id="langMenu">
+                <button class="lang-option active" data-lang="en">English</button>
+                <button class="lang-option" data-lang="uk">Українська</button>
+                <button class="lang-option" data-lang="ru">Русский</button>
+                <button class="lang-option" data-lang="de">Deutsch</button>
+                <button class="lang-option" data-lang="es">Español</button>
+                <button class="lang-option" data-lang="pt">Português</button>
+                <button class="lang-option" data-lang="fr">Français</button>
+                <button class="lang-option" data-lang="it">Italiano</button>
+                <button class="lang-option" data-lang="zh">中文</button>
+                <button class="lang-option" data-lang="ja">日本語</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="page-wrapper">
+    <div class="page-container">
+        <div class="page-prefix" data-i18n="page_prefix">— The Pilgrim's Road —</div>
+        <h1 class="page-title" data-i18n="page_title">Roadmap</h1>
+        <p class="page-subtitle" data-i18n="page_subtitle">Where the work stands, and where the road leads. No dates — the road does not promise them. Only direction.</p>
+
+        <div class="page-divider"><div class="page-divider-symbol">✠</div></div>
+
+        <div class="road">
+            <div class="station passed">
+                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">I</text></svg></div>
+                <div class="st-status" data-i18n="status_passed">Passed</div>
+                <div class="st-name" data-i18n="st1_name">The Word</div>
+                <p class="st-body" data-i18n="st1_body">The world before the game: the kingdom, its plague, its faith, its dead. The codex is written, the names are spoken. What the player will walk through has been imagined to the last bell.</p>
+            </div>
+
+            <div class="station current">
+                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1.2"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">II</text></svg></div>
+                <div class="st-status" data-i18n="status_current">We are here</div>
+                <div class="st-name" data-i18n="st2_name">Steel</div>
+                <p class="st-body" data-i18n="st2_body">The combat core is on the anvil now: directional strikes, stamina that governs every swing, block and parry. The duel must feel like a conversation in steel before anything else is built on top of it. We will not move on until it does.</p>
+            </div>
+
+            <div class="station ahead">
+                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">III</text></svg></div>
+                <div class="st-status" data-i18n="status_ahead">Ahead</div>
+                <div class="st-name" data-i18n="st3_name">The March</div>
+                <p class="st-body" data-i18n="st3_body">The first land: Dornmarch, its roads, its ruins, its weather. A place worth dying in. The world the steel was forged for.</p>
+            </div>
+
+            <div class="station ahead">
+                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">IV</text></svg></div>
+                <div class="st-status" data-i18n="status_ahead2">Ahead</div>
+                <div class="st-name" data-i18n="st4_name">What Walks the Roads</div>
+                <p class="st-body" data-i18n="st4_body">Bandits at the treeline. The dead that did not stay buried. Beasts from the old folklore. Every enemy speaks the same language of war as you — they must fight as well as they read.</p>
+            </div>
+
+            <div class="station ahead">
+                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">V</text></svg></div>
+                <div class="st-status" data-i18n="status_ahead3">Ahead</div>
+                <div class="st-name" data-i18n="st5_name">The Burden</div>
+                <p class="st-body" data-i18n="st5_body">The extraction loop: what you carry, what you risk, what you keep. The stash, the insurance, the long walk home under a heavy pack. The part of the game that makes your hands sweat.</p>
+            </div>
+
+            <div class="station ahead">
+                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">VI</text></svg></div>
+                <div class="st-status" data-i18n="status_ahead4">Ahead</div>
+                <div class="st-name" data-i18n="st6_name">Fellow Travellers</div>
+                <p class="st-body" data-i18n="st6_body">Other pilgrims on the same road — squads, proximity voice, friendly fire, and everything multiplayer demands of a world this unforgiving.</p>
+            </div>
+
+            <div class="station ahead">
+                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">VII</text></svg></div>
+                <div class="st-status" data-i18n="status_ahead5">Ahead</div>
+                <div class="st-name" data-i18n="st7_name">The First Vigil</div>
+                <p class="st-body" data-i18n="st7_body">Closed testing. The first names from the Vigil are called through the gates to break what we built — and tell us the truth about it.</p>
+            </div>
+
+            <div class="station ahead">
+                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">VIII</text></svg></div>
+                <div class="st-status" data-i18n="status_ahead6">Ahead</div>
+                <div class="st-name" data-i18n="st8_name">The Gates</div>
+                <p class="st-body" data-i18n="st8_body">Early Access. The gates open, the bells ring, and the road becomes yours. No earlier than 2027 — and not a day before it deserves to.</p>
+            </div>
+        </div>
+
+        <p class="road-vow" data-i18n="road_vow">The order of the road may change. The stations will not be skipped. We would rather arrive late than arrive hollow.</p>
+
+        <div class="last-updated" data-i18n="last_updated">— A.D. MMXXVI · last revised: June, MMXXVI —</div>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-bottom" style="border-top:none;padding-top:0">
+        <div class="footer-copyright" data-i18n="footer_copyright">© MMXXVI · Mortmain Studio · All rights reserved</div>
+        <div class="footer-contact"><a href="mailto:contact@mortmain.studio">contact@mortmain.studio</a></div>
+        <ul class="footer-legal">
+            <li><a href="privacy.html" data-i18n="legal_privacy">Privacy</a></li>
+            <li><a href="terms.html" data-i18n="legal_terms">Terms</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script>
+window.pageTranslations = {
+    en: {
+        nav_game: "The Game", nav_news: "News", nav_faq: "FAQ", nav_about: "About",
+        page_prefix: "— The Pilgrim's Road —",
+        page_title: "Roadmap",
+        page_subtitle: "Where the work stands, and where the road leads. No dates — the road does not promise them. Only direction.",
+        status_passed: "Passed", status_current: "We are here",
+        status_ahead: "Ahead", status_ahead2: "Ahead", status_ahead3: "Ahead", status_ahead4: "Ahead", status_ahead5: "Ahead", status_ahead6: "Ahead",
+        st1_name: "The Word",
+        st1_body: "The world before the game: the kingdom, its plague, its faith, its dead. The codex is written, the names are spoken. What the player will walk through has been imagined to the last bell.",
+        st2_name: "Steel",
+        st2_body: "The combat core is on the anvil now: directional strikes, stamina that governs every swing, block and parry. The duel must feel like a conversation in steel before anything else is built on top of it. We will not move on until it does.",
+        st3_name: "The March",
+        st3_body: "The first land: Dornmarch, its roads, its ruins, its weather. A place worth dying in. The world the steel was forged for.",
+        st4_name: "What Walks the Roads",
+        st4_body: "Bandits at the treeline. The dead that did not stay buried. Beasts from the old folklore. Every enemy speaks the same language of war as you — they must fight as well as they read.",
+        st5_name: "The Burden",
+        st5_body: "The extraction loop: what you carry, what you risk, what you keep. The stash, the insurance, the long walk home under a heavy pack. The part of the game that makes your hands sweat.",
+        st6_name: "Fellow Travellers",
+        st6_body: "Other pilgrims on the same road — squads, proximity voice, friendly fire, and everything multiplayer demands of a world this unforgiving.",
+        st7_name: "The First Vigil",
+        st7_body: "Closed testing. The first names from the Vigil are called through the gates to break what we built — and tell us the truth about it.",
+        st8_name: "The Gates",
+        st8_body: "Early Access. The gates open, the bells ring, and the road becomes yours. No earlier than 2027 — and not a day before it deserves to.",
+        road_vow: "The order of the road may change. The stations will not be skipped. We would rather arrive late than arrive hollow.",
+        last_updated: "— A.D. MMXXVI · last revised: June, MMXXVI —",
+        footer_copyright: "© MMXXVI · Mortmain Studio · All rights reserved",
+        legal_privacy: "Privacy", legal_terms: "Terms"
+    },
+    ru: {
+        nav_game: "Игра", nav_news: "Вести", nav_faq: "FAQ", nav_about: "О нас",
+        page_prefix: "— Дорога паломника —",
+        page_title: "Дорожная карта",
+        page_subtitle: "Где стоит работа и куда ведёт дорога. Без дат — дорога их не обещает. Только направление.",
+        status_passed: "Пройдено", status_current: "Мы здесь",
+        status_ahead: "Впереди", status_ahead2: "Впереди", status_ahead3: "Впереди", status_ahead4: "Впереди", status_ahead5: "Впереди", status_ahead6: "Впереди",
+        st1_name: "Слово",
+        st1_body: "Мир прежде игры: королевство, его чума, его вера, его мёртвые. Кодекс написан, имена названы. То, по чему пойдёт игрок, продумано до последнего колокола.",
+        st2_name: "Сталь",
+        st2_body: "Ядро боя сейчас на наковальне: направленные удары, выносливость, что правит каждым замахом, блок и парирование. Дуэль должна ощущаться разговором на стали прежде, чем поверх неё будет строиться что-то ещё. Мы не сдвинемся, пока этого нет.",
+        st3_name: "Марка",
+        st3_body: "Первая земля: Дорнмарч, его дороги, его руины, его непогода. Место, в котором стоит умирать. Мир, ради которого ковалась сталь.",
+        st4_name: "Что ходит по дорогам",
+        st4_body: "Разбойники у опушки. Мёртвые, что не остались в земле. Твари из старого фольклора. Каждый враг говорит с тобой на одном языке войны — они должны драться так же хорошо, как читать тебя.",
+        st5_name: "Ноша",
+        st5_body: "Петля экстракции: что несёшь, чем рискуешь, что сохранишь. Схрон, страховка и долгая дорога домой под тяжёлым мешком. Та часть игры, от которой потеют ладони.",
+        st6_name: "Попутчики",
+        st6_body: "Другие паломники на той же дороге — отряды, голос по близости, дружественный огонь и всё, чего мультиплеер требует от мира, который не прощает.",
+        st7_name: "Первый Дозор",
+        st7_body: "Закрытое тестирование. Первые имена из Дозора будут призваны за врата — сломать то, что мы построили, и сказать нам правду об этом.",
+        st8_name: "Врата",
+        st8_body: "Ранний доступ. Врата открываются, колокола звонят, и дорога становится твоей. Не раньше 2027 — и ни днём раньше, чем она того заслужит.",
+        road_vow: "Порядок дороги может измениться. Стоянки не будут пропущены. Мы лучше придём поздно, чем придём пустыми.",
+        last_updated: "— A.D. MMXXVI · последнее обновление: июнь, MMXXVI —",
+        footer_copyright: "© MMXXVI · Mortmain Studio · Все права защищены",
+        legal_privacy: "Приватность", legal_terms: "Условия"
+    },
+    uk: {
+        nav_game: "Гра", nav_news: "Вісті", nav_faq: "Питання", nav_about: "Про нас",
+        page_prefix: "— Дорога прочанина —",
+        page_title: "Дорожня карта",
+        page_subtitle: "Де стоїть робота і куди веде дорога. Без дат — дорога їх не обіцяє. Лише напрям.",
+        status_passed: "Пройдено", status_current: "Ми тут",
+        status_ahead: "Попереду", status_ahead2: "Попереду", status_ahead3: "Попереду", status_ahead4: "Попереду", status_ahead5: "Попереду", status_ahead6: "Попереду",
+        st1_name: "Слово",
+        st1_body: "Світ перед грою: королівство, його чума, його віра, його мертві. Кодекс написано, імена названо. Те, чим ітиме гравець, продумано до останнього дзвону.",
+        st2_name: "Сталь",
+        st2_body: "Ядро бою зараз на ковадлі: напрямні удари, витривалість, що править кожним замахом, блок і парування. Двобій має відчуватися розмовою на сталі перш, ніж поверх нього будуватиметься щось інше. Ми не зрушимо, доки цього немає.",
+        st3_name: "Марка",
+        st3_body: "Перша земля: Дорнмарч, його дороги, його руїни, його негода. Місце, у якому варто помирати. Світ, заради якого кувалася сталь.",
+        st4_name: "Що блукає дорогами",
+        st4_body: "Розбійники біля узлісся. Мертві, що не лишилися в землі. Твари зі старого фольклору. Кожен ворог говорить із тобою однією мовою війни — вони мусять битися так само добре, як читати тебе.",
+        st5_name: "Ноша",
+        st5_body: "Петля екстракції: що несеш, чим ризикуєш, що збережеш. Схованка, страхування і довга дорога додому під важким мішком. Та частина гри, від якої пітніють долоні.",
+        st6_name: "Попутники",
+        st6_body: "Інші прочани на тій самій дорозі — загони, голос за відстанню, дружній вогонь і все, чого мультиплеєр вимагає від світу, який не прощає.",
+        st7_name: "Перша Варта",
+        st7_body: "Закрите тестування. Перші імена з Варти буде покликано за брами — зламати те, що ми збудували, і сказати нам правду про це.",
+        st8_name: "Брами",
+        st8_body: "Ранній доступ. Брами відчиняються, дзвони б'ють, і дорога стає твоєю. Не раніше 2027 — і ні на день раніше, ніж вона на це заслужить.",
+        road_vow: "Порядок дороги може змінитися. Стоянки не буде пропущено. Ми краще прийдемо пізно, ніж прийдемо порожніми.",
+        last_updated: "— A.D. MMXXVI · останнє оновлення: червень, MMXXVI —",
+        footer_copyright: "© MMXXVI · Mortmain Studio · Усі права захищені",
+        legal_privacy: "Приватність", legal_terms: "Умови"
+    },
+    de: { nav_game: "Das Spiel", nav_news: "Neuigkeiten", nav_faq: "FAQ", nav_about: "Über uns", page_prefix: "— Der Pilgerweg —", page_title: "Roadmap", footer_copyright: "© MMXXVI · Mortmain Studio · Alle Rechte vorbehalten", legal_privacy: "Datenschutz", legal_terms: "AGB" },
+    es: { nav_game: "El juego", nav_news: "Noticias", nav_faq: "Preguntas", nav_about: "Acerca de", page_prefix: "— El camino del peregrino —", page_title: "Hoja de ruta", footer_copyright: "© MMXXVI · Mortmain Studio · Todos los derechos reservados", legal_privacy: "Privacidad", legal_terms: "Términos" },
+    pt: { nav_game: "O jogo", nav_news: "Notícias", nav_faq: "Perguntas", nav_about: "Sobre", page_prefix: "— O caminho do peregrino —", page_title: "Roteiro", footer_copyright: "© MMXXVI · Mortmain Studio · Todos os direitos reservados", legal_privacy: "Privacidade", legal_terms: "Termos" },
+    fr: { nav_game: "Le jeu", nav_news: "Nouvelles", nav_faq: "FAQ", nav_about: "À propos", page_prefix: "— Le chemin du pèlerin —", page_title: "Feuille de route", footer_copyright: "© MMXXVI · Mortmain Studio · Tous droits réservés", legal_privacy: "Confidentialité", legal_terms: "Conditions" },
+    it: { nav_game: "Il gioco", nav_news: "Notizie", nav_faq: "FAQ", nav_about: "Chi siamo", page_prefix: "— Il cammino del pellegrino —", page_title: "Roadmap", footer_copyright: "© MMXXVI · Mortmain Studio · Tutti i diritti riservati", legal_privacy: "Privacy", legal_terms: "Termini" },
+    zh: { nav_game: "游戏", nav_news: "消息", nav_faq: "常见问题", nav_about: "关于", page_prefix: "— 朝圣之路 —", page_title: "路线图", footer_copyright: "© MMXXVI · Mortmain Studio · 版权所有", legal_privacy: "隐私", legal_terms: "条款" },
+    ja: { nav_game: "ゲーム", nav_news: "ニュース", nav_faq: "よくある質問", nav_about: "概要", page_prefix: "— 巡礼の道 —", page_title: "ロードマップ", footer_copyright: "© MMXXVI · Mortmain Studio · 無断転載禁止", legal_privacy: "プライバシー", legal_terms: "規約" }
+};
+</script>
+<script src="shared.js"></script>
+
+</body>
+</html>
