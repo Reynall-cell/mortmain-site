@@ -2,25 +2,25 @@
 /* Used by: privacy.html, terms.html, press.html, faq.html, about.html */
 
 :root {
-    --bg-deepest: #07060a;
-    --bg-dark: #0d0b0e;
-    --bg-card: #14101a;
+    --bg-deepest: #080706;
+    --bg-dark: #100d0b;
+    --bg-card: #16130e;
     --text-primary: #d8d2c4;
     --text-secondary: #8a8276;
     --text-tertiary: #5a5448;
-    --accent: #7a3a1f;
-    --accent-hover: #9a4828;
-    --accent-faded: #3a1c0f;
-    --border-subtle: rgba(122, 58, 31, 0.15);
-    --border-medium: rgba(122, 58, 31, 0.35);
-    --border-strong: rgba(122, 58, 31, 0.55);
+    --accent: #c9a961;
+    --accent-hover: #dbb876;
+    --accent-faded: rgba(201, 169, 97, 0.12);
+    --border-subtle: rgba(201, 169, 97, 0.15);
+    --border-medium: rgba(201, 169, 97, 0.35);
+    --border-strong: rgba(201, 169, 97, 0.55);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'EB Garamond', Georgia, serif;
     font-weight: 300;
     background: var(--bg-deepest);
     color: var(--text-primary);
@@ -37,9 +37,9 @@ body::before {
     pointer-events: none;
     z-index: 0;
     background:
-        radial-gradient(ellipse 800px 600px at 15% 0%, rgba(122, 58, 31, 0.06) 0%, transparent 60%),
-        radial-gradient(ellipse 700px 500px at 85% 100%, rgba(122, 58, 31, 0.05) 0%, transparent 65%),
-        radial-gradient(ellipse at center, transparent 30%, rgba(7, 6, 10, 0.7) 100%);
+        radial-gradient(ellipse 800px 600px at 15% 0%, rgba(201, 169, 97, 0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 700px 500px at 85% 100%, rgba(201, 169, 97, 0.04) 0%, transparent 65%),
+        radial-gradient(ellipse at center, transparent 30%, rgba(8, 7, 6, 0.7) 100%);
 }
 
 body::after {
@@ -100,7 +100,7 @@ nav {
 
 nav.scrolled {
     padding: 14px 48px;
-    background: rgba(7, 6, 10, 0.85);
+    background: rgba(8, 7, 6, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border-subtle);
@@ -110,7 +110,7 @@ nav.scrolled {
     display: flex;
     align-items: center;
     gap: 12px;
-    font-family: 'Cinzel', 'Tenor Sans', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.25em;
@@ -136,7 +136,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
 .nav-links { display: flex; gap: 36px; list-style: none; }
 
 .nav-links a {
-    font-family: 'Cinzel', 'Tenor Sans', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 12px;
     font-weight: 400;
     color: var(--text-secondary);
@@ -170,7 +170,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
     gap: 6px;
     background: transparent;
     border: 1px solid var(--border-subtle);
-    font-family: 'Cinzel', 'Tenor Sans', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 11px;
     letter-spacing: 0.2em;
     color: var(--text-secondary);
@@ -188,7 +188,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
     top: calc(100% + 6px);
     right: 0;
     min-width: 152px;
-    background: rgba(13, 11, 14, 0.97);
+    background: rgba(16, 13, 11, 0.97);
     border: 1px solid var(--border-medium);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -217,7 +217,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
     transition: all 0.2s ease;
 }
 
-.lang-option:hover { background: rgba(122, 58, 31, 0.08); color: var(--text-primary); }
+.lang-option:hover { background: rgba(201, 169, 97, 0.06); color: var(--text-primary); }
 .lang-option.active { background: var(--accent-faded); color: var(--accent-hover); }
 
 /* Page content layout */
@@ -234,7 +234,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
 }
 
 .page-prefix {
-    font-family: 'Cinzel', 'Tenor Sans', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 11px;
     font-weight: 400;
     letter-spacing: 0.4em;
@@ -245,7 +245,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
 }
 
 .page-title {
-    font-family: 'Cinzel', 'Tenor Sans', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: clamp(36px, 6vw, 64px);
     font-weight: 500;
     letter-spacing: 0.04em;
@@ -285,7 +285,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
 .page-divider-symbol {
     margin: 0 20px;
     color: var(--text-tertiary);
-    font-family: 'Cinzel', 'Tenor Sans', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 16px;
 }
 
@@ -295,7 +295,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
 }
 
 .page-section h2 {
-    font-family: 'Cinzel', 'Tenor Sans', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 22px;
     font-weight: 500;
     letter-spacing: 0.15em;
@@ -306,7 +306,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
 }
 
 .page-section h3 {
-    font-family: 'Cinzel', 'Tenor Sans', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 0.1em;
@@ -317,7 +317,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
 }
 
 .page-section p {
-    font-family: 'Inter', sans-serif;
+    font-family: 'EB Garamond', Georgia, serif;
     font-size: 15px;
     line-height: 1.8;
     color: var(--text-secondary);
@@ -330,7 +330,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
 }
 
 .page-section li {
-    font-family: 'Inter', sans-serif;
+    font-family: 'EB Garamond', Georgia, serif;
     font-size: 15px;
     line-height: 1.8;
     margin-bottom: 8px;
@@ -364,7 +364,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
     border-left: 2px solid var(--accent);
     padding: 16px 24px;
     margin: 24px 0;
-    background: rgba(20, 16, 26, 0.4);
+    background: rgba(22, 19, 14, 0.4);
     font-family: 'Cormorant Garamond', 'EB Garamond', serif;
     font-style: italic;
     font-size: 16px;
@@ -375,7 +375,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
     margin-top: 48px;
     padding: 20px 24px;
     border: 1px solid var(--border-subtle);
-    font-family: 'Inter', sans-serif;
+    font-family: 'EB Garamond', Georgia, serif;
     font-size: 12px;
     line-height: 1.7;
     color: var(--text-tertiary);
@@ -385,7 +385,7 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
 .last-updated {
     text-align: center;
     margin-top: 48px;
-    font-family: 'Cinzel', 'Tenor Sans', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 10px;
     letter-spacing: 0.4em;
     color: var(--text-tertiary);
@@ -399,7 +399,7 @@ footer {
     padding: 80px 48px 32px;
     position: relative;
     z-index: 3;
-    background: rgba(7, 6, 10, 0.6);
+    background: rgba(8, 7, 6, 0.6);
 }
 
 .footer-grid {
@@ -412,7 +412,7 @@ footer {
 }
 
 .footer-column h4 {
-    font-family: 'Cinzel', 'Tenor Sans', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 11px;
     font-weight: 500;
     color: var(--text-primary);
@@ -425,7 +425,7 @@ footer {
 .footer-column li { margin-bottom: 12px; }
 
 .footer-column a {
-    font-family: 'Inter', sans-serif;
+    font-family: 'EB Garamond', Georgia, serif;
     font-size: 13px;
     font-weight: 300;
     color: var(--text-secondary);
@@ -437,7 +437,7 @@ footer {
 .footer-column a:hover { color: var(--text-primary); padding-left: 6px; }
 
 .footer-column .pending {
-    font-family: 'Inter', sans-serif;
+    font-family: 'EB Garamond', Georgia, serif;
     font-size: 13px;
     font-weight: 300;
     color: var(--text-tertiary);
@@ -448,7 +448,7 @@ footer {
 }
 
 .footer-column .pending::after {
-    content: '— soon';
+    content: var(--soon-label, '— soon');
     margin-left: 6px;
     font-size: 10px;
     font-style: italic;
@@ -457,7 +457,7 @@ footer {
 }
 
 .footer-brand h3 {
-    font-family: 'Cinzel', 'Tenor Sans', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 18px;
     font-weight: 600;
     letter-spacing: 0.2em;
@@ -488,7 +488,7 @@ footer {
 }
 
 .footer-copyright {
-    font-family: 'Cinzel', 'Tenor Sans', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 11px;
     letter-spacing: 0.25em;
     color: var(--text-tertiary);
@@ -502,7 +502,7 @@ footer {
 }
 
 .footer-legal a {
-    font-family: 'Cinzel', 'Tenor Sans', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 10px;
     font-weight: 400;
     color: var(--text-tertiary);
@@ -515,7 +515,7 @@ footer {
 .footer-legal a:hover { color: var(--text-secondary); }
 
 .footer-contact {
-    font-family: 'Inter', sans-serif;
+    font-family: 'EB Garamond', Georgia, serif;
     font-size: 12px;
     color: var(--text-secondary);
 }
@@ -549,3 +549,23 @@ footer {
         transition-duration: 0.01ms !important;
     }
 }
+
+
+/* === Page transitions (codex opening) === */
+.page-wrapper {
+    animation: pageReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes pageReveal {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.page-veil {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-deepest);
+    z-index: 400;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+body.leaving .page-veil { opacity: 1; pointer-events: all; }

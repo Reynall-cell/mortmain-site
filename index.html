@@ -1230,6 +1230,18 @@
             color: var(--text-secondary);
         }
 
+        /* === PAGE VEIL (transition to sub-pages) === */
+        .page-veil {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-deepest);
+            z-index: 400;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        body.leaving .page-veil { opacity: 1; pointer-events: all; }
+
         /* === NEWS (home block) === */
         .news-home .news-grid {
             display: grid;
@@ -4548,6 +4560,23 @@ he comes not on his own.</p>
                 window.renderHomeNews();
             })
             .catch(function() { sec.style.display = 'none'; });
+    })();
+
+    // === PAGE VEIL: smooth transition when leaving to sub-pages ===
+    (function() {
+        var veil = document.createElement('div');
+        veil.className = 'page-veil';
+        document.body.appendChild(veil);
+        document.addEventListener('click', function(e) {
+            var a = e.target.closest ? e.target.closest('a[href]') : null;
+            if (!a) return;
+            var href = a.getAttribute('href');
+            if (!href || href.charAt(0) === '#' || href.indexOf('mailto:') === 0 || href.indexOf('http') === 0) return;
+            if (a.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey) return;
+            e.preventDefault();
+            document.body.classList.add('leaving');
+            setTimeout(function() { window.location.href = href; }, 380);
+        });
     })();
 
     // === COOKIE BANNER ===

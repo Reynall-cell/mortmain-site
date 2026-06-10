@@ -47,6 +47,8 @@
             document.querySelectorAll('.lang-option').forEach(function(opt) {
                 opt.classList.toggle('active', opt.dataset.lang === lang);
             });
+            var SOON = { en:"— soon", ru:"— скоро", uk:"— незабаром", de:"— bald", es:"— pronto", pt:"— em breve", fr:"— bientôt", it:"— presto", zh:"— 即将", ja:"— 近日" };
+            document.documentElement.style.setProperty('--soon-label', '"' + (SOON[lang] || SOON.en) + '"');
             try { localStorage.setItem('mortmain_lang', lang); } catch (e) {}
         },
 
@@ -77,9 +79,28 @@
         }
     };
 
+    // Page transition: veil fades in on internal navigation, page reveals on load
+    function initTransitions() {
+        var veil = document.createElement('div');
+        veil.className = 'page-veil';
+        document.body.appendChild(veil);
+
+        document.addEventListener('click', function(e) {
+            var a = e.target.closest ? e.target.closest('a[href]') : null;
+            if (!a) return;
+            var href = a.getAttribute('href');
+            if (!href || href.charAt(0) === '#' || href.indexOf('mailto:') === 0 || href.indexOf('http') === 0) return;
+            if (a.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey) return;
+            e.preventDefault();
+            document.body.classList.add('leaving');
+            setTimeout(function() { window.location.href = href; }, 380);
+        });
+    }
+
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() { window.MortmainI18n.init(); });
+        document.addEventListener('DOMContentLoaded', function() { window.MortmainI18n.init(); initTransitions(); });
     } else {
         window.MortmainI18n.init();
+        initTransitions();
     }
 })();
