@@ -79,6 +79,36 @@
         }
     };
 
+    // Mobile burger menu: built from the page's own nav links
+    function initBurger() {
+        var navRight = document.querySelector('.nav-right');
+        var links = document.querySelectorAll('.nav-links a');
+        if (!navRight || !links.length) return;
+        var burger = document.createElement('button');
+        burger.className = 'nav-burger';
+        burger.setAttribute('aria-label', 'Menu');
+        burger.innerHTML = '<span></span><span></span><span></span>';
+        navRight.insertBefore(burger, navRight.firstChild);
+
+        var menu = document.createElement('div');
+        menu.className = 'mobile-menu';
+        var close = document.createElement('button');
+        close.className = 'mm-close';
+        close.setAttribute('aria-label', 'Close');
+        close.textContent = '\u2715';
+        menu.appendChild(close);
+        links.forEach(function(a) {
+            var c = a.cloneNode(true);
+            c.addEventListener('click', function() { menu.classList.remove('open'); });
+            menu.appendChild(c);
+        });
+        document.body.appendChild(menu);
+
+        burger.addEventListener('click', function() { menu.classList.add('open'); });
+        close.addEventListener('click', function() { menu.classList.remove('open'); });
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') menu.classList.remove('open'); });
+    }
+
     // Page transition: veil fades in on internal navigation, page reveals on load
     function initTransitions() {
         var vig = document.createElement('div');
@@ -113,9 +143,10 @@
     }
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() { window.MortmainI18n.init(); initTransitions(); });
+        document.addEventListener('DOMContentLoaded', function() { window.MortmainI18n.init(); initTransitions(); initBurger(); });
     } else {
         window.MortmainI18n.init();
         initTransitions();
+        initBurger();
     }
 })();

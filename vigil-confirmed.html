@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Your name is written — Squalor / Mortmain Studio</title>
+    <meta name="description" content="Your name has been written into the scrolls of the Vigil.">
+    <meta name="robots" content="noindex">
+
+    <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="%23080706"/><polygon points="16,3 27,9.5 27,22.5 16,29 5,22.5 5,9.5" fill="none" stroke="%23c9a961" stroke-width="1.5"/><text x="16" y="16" font-family="serif" font-size="14" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="%23d8d2c4">M</text></svg>'>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
+
+    <style>
+        .conf-wrap {
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .conf-seal {
+            width: 110px;
+            height: 110px;
+            margin-bottom: 34px;
+            animation: sealStamp 0.6s cubic-bezier(0.2, 1.6, 0.35, 1) 0.45s both;
+        }
+        @keyframes sealStamp {
+            0% { transform: scale(1.9) rotate(-9deg); opacity: 0; }
+            55% { transform: scale(0.94) rotate(1.5deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        .conf-seal svg { width: 100%; height: 100%; filter: drop-shadow(0 6px 16px rgba(0,0,0,0.6)); }
+        .conf-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: clamp(28px, 4.4vw, 44px);
+            color: var(--text-primary);
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+        .conf-sub {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 1.08rem;
+            line-height: 1.75;
+            color: var(--text-secondary);
+            max-width: 480px;
+        }
+        .conf-incentive {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 0.98rem;
+            color: var(--accent);
+            margin-top: 18px;
+            opacity: 0.92;
+        }
+        .conf-actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 42px;
+        }
+        .conf-actions a {
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 12px 28px;
+            border: 1px solid var(--border-medium);
+            color: var(--accent);
+            transition: all 0.3s ease;
+        }
+        .conf-actions a:hover { background: var(--accent); color: var(--bg-deepest); }
+    </style>
+</head>
+<body>
+
+<div class="page-frame">
+    <div class="corner-bl"></div>
+    <div class="corner-br"></div>
+</div>
+
+<nav id="nav">
+    <a href="index.html" class="nav-brand">
+        <svg class="nav-brand-mark" viewBox="0 0 40 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <polygon points="20,4 34,12 34,32 20,40 6,32 6,12" fill="none" stroke="#c9a961" stroke-width="1.3"/>
+            <polygon points="20,8 30.5,14 30.5,30 20,36 9.5,30 9.5,14" fill="none" stroke="#c9a961" stroke-width="0.4" opacity="0.5"/>
+            <text x="20" y="22" font-family="Cormorant Garamond, serif" font-size="14" font-weight="600" text-anchor="middle" dominant-baseline="central" fill="#d8d2c4">M</text>
+        </svg>
+        <span class="nav-brand-text">Mortmain Studio</span>
+    </a>
+    <div class="nav-right">
+        <div class="lang-switcher" id="langSwitcher">
+            <button class="lang-current" id="langCurrent" aria-label="Language">
+                <span id="langCurrentCode">EN</span>
+                <span class="lang-caret">▾</span>
+            </button>
+            <div class="lang-menu" id="langMenu">
+                <button class="lang-option active" data-lang="en">English</button>
+                <button class="lang-option" data-lang="uk">Українська</button>
+                <button class="lang-option" data-lang="ru">Русский</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="page-wrapper">
+    <div class="page-container">
+        <div class="conf-wrap">
+            <div class="conf-seal" aria-hidden="true">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 4 C68 2 90 12 95 33 C99 49 94 67 84 79 C72 93 55 99 40 95 C20 90 5 75 4 54 C3 32 18 9 38 5 C42 4 46 4.4 50 4 Z" fill="#5c2317"/>
+                    <path d="M50 9 C66 7 85 16 90 34 C94 48 89 64 80 75 C69 88 54 94 41 90 C24 85 10 72 9 54 C8 35 21 13 39 10 C43 9 46 9.4 50 9 Z" fill="#6e2c1c"/>
+                    <path d="M50 9 C66 7 85 16 90 34 C92 41 92 48 90 55 C70 48 38 46 12 58 C9 50 8 43 10 36 C14 20 26 11 39 10 C43 9 46 9.4 50 9 Z" fill="#7a3522" opacity="0.55"/>
+                    <polygon points="50,24 71,36 71,62 50,74 29,62 29,36" fill="none" stroke="#c9a961" stroke-width="2" opacity="0.9"/>
+                    <polygon points="50,30 65.5,39 65.5,59 50,68 34.5,59 34.5,39" fill="none" stroke="#c9a961" stroke-width="0.7" opacity="0.5"/>
+                    <text x="50" y="50" font-family="Cormorant Garamond, serif" font-size="22" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="#c9a961" opacity="0.92">M</text>
+                </svg>
+            </div>
+            <h1 class="conf-title" data-i18n="conf_title">Your name is written into the scrolls</h1>
+            <p class="conf-sub" data-i18n="conf_sub">The watch has taken your name. We speak rarely — only when the bell has something to ring for. When it rings, you will hear it first.</p>
+            <p class="conf-incentive" data-i18n="conf_incentive">And remember: the First Vigil — our closed test — will be called from these names.</p>
+            <div class="conf-actions">
+                <a href="index.html" data-i18n="conf_home">Return to the gates</a>
+                <a href="roadmap.html" data-i18n="conf_road">Walk the road</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+window.pageTranslations = {
+    en: {
+        conf_title: "Your name is written into the scrolls",
+        conf_sub: "The watch has taken your name. We speak rarely — only when the bell has something to ring for. When it rings, you will hear it first.",
+        conf_incentive: "And remember: the First Vigil — our closed test — will be called from these names.",
+        conf_home: "Return to the gates",
+        conf_road: "Walk the road"
+    },
+    ru: {
+        conf_title: "Твоё имя вписано в свитки",
+        conf_sub: "Стража приняла твоё имя. Мы говорим редко — только когда колоколу есть ради чего звонить. Когда он зазвонит, ты услышишь его первым.",
+        conf_incentive: "И помни: Первый Дозор — закрытый тест — будет призван из этих имён.",
+        conf_home: "Вернуться к вратам",
+        conf_road: "Пройти дорогу"
+    },
+    uk: {
+        conf_title: "Твоє ім'я вписано до сувоїв",
+        conf_sub: "Варта прийняла твоє ім'я. Ми говоримо рідко — лише коли дзвону є заради чого бити. Коли він заб'є, ти почуєш його першим.",
+        conf_incentive: "І пам'ятай: Першу Варту — закрите випробування — буде покликано з цих імен.",
+        conf_home: "Повернутися до брам",
+        conf_road: "Пройти дорогу"
+    }
+};
+</script>
+<script src="shared.js"></script>
+
+</body>
+</html>

@@ -588,3 +588,62 @@ body.leaving .page-veil { opacity: 1; pointer-events: all; }
     z-index: 349;
     background: radial-gradient(ellipse at center, transparent 72%, rgba(5, 4, 3, 0.14) 100%);
 }
+
+
+/* === Mobile burger menu (injected by shared.js) === */
+.nav-burger {
+    display: none;
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    width: 38px; height: 34px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+.nav-burger:hover { border-color: var(--border-medium); }
+.nav-burger span { display: block; width: 16px; height: 1px; background: var(--accent); }
+.mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 380;
+    background: rgba(8, 7, 6, 0.97);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s;
+}
+.mobile-menu.open { opacity: 1; visibility: visible; }
+.mobile-menu a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 12px 20px;
+    transition: color 0.25s ease;
+}
+.mobile-menu a:hover { color: var(--accent); }
+.mm-close {
+    position: absolute;
+    top: 26px; right: 26px;
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    width: 40px; height: 40px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+.mm-close:hover { color: var(--accent); border-color: var(--accent); }
+@media (max-width: 768px) {
+    .nav-burger { display: flex; }
+}

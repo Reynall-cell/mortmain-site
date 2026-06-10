@@ -11,12 +11,12 @@
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="Squalor — A Medieval Extraction Game">
-    <meta property="og:description" content="Steel. Blood. Rot. In a kingdom devoured by plague, only the desperate remain.">
+    <meta property="og:description" content="Even the bells have learned to mourn. A medieval extraction game in a kingdom devoured by plague.">
     <meta property="og:url" content="https://mortmainstudio.com">
     <meta property="og:site_name" content="Mortmain Studio">
     <meta property="og:locale" content="en_US">
     <meta property="og:locale:alternate" content="ru_RU">
-    <meta property="og:image" content="https://mortmainstudio.com/og-image.png">
+    <meta property="og:image" content="https://mortmainstudio.com/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Squalor — A Mortmain Studio Production">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Squalor — A Medieval Extraction Game">
     <meta name="twitter:description" content="Steel. Blood. Rot. In a kingdom devoured by plague, only the desperate remain.">
-    <meta name="twitter:image" content="https://mortmainstudio.com/og-image.png">
+    <meta name="twitter:image" content="https://mortmainstudio.com/og-image.jpg">
 
     <meta name="theme-color" content="#080706">
 
@@ -33,7 +33,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="image" href="hero-bg.png" fetchpriority="high">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -1389,6 +1389,122 @@
             .rm-dots { display: none; }
         }
 
+        /* === PROMISES (home block) === */
+        .prom-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 18px;
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+        .prom-item {
+            border: 1px solid var(--border-subtle);
+            background: rgba(16, 13, 11, 0.45);
+            padding: 26px 24px;
+            text-align: center;
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+        .prom-item:hover { border-color: var(--border-medium); background: rgba(201, 169, 97, 0.03); }
+        .prom-glyph {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            color: var(--accent);
+            opacity: 0.8;
+            display: block;
+            margin-bottom: 12px;
+        }
+        .prom-t {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.22rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+        .prom-b {
+            font-family: 'EB Garamond', serif;
+            font-size: 0.92rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+        .prom-more { text-align: center; margin-top: 30px; }
+        .prom-more a {
+            font-family: 'EB Garamond', serif;
+            font-style: italic;
+            font-size: 0.95rem;
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-medium);
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        .prom-more a:hover { color: var(--accent-hover); border-color: var(--accent); }
+
+        /* === VIGIL INCENTIVE LINE === */
+        .vigil-incentive {
+            font-family: 'EB Garamond', serif;
+            font-style: italic;
+            font-size: 1.02rem;
+            color: var(--accent);
+            text-align: center;
+            margin: -6px 0 26px;
+            opacity: 0.92;
+        }
+
+        /* === MOBILE MENU (burger) === */
+        .nav-burger {
+            display: none;
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            width: 38px; height: 34px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+        .nav-burger:hover { border-color: var(--border-medium); }
+        .nav-burger span { display: block; width: 16px; height: 1px; background: var(--accent); }
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            z-index: 380;
+            background: rgba(8, 7, 6, 0.97);
+            backdrop-filter: blur(6px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s;
+        }
+        .mobile-menu.open { opacity: 1; visibility: visible; }
+        .mobile-menu a {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.7rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 12px 20px;
+            transition: color 0.25s ease;
+        }
+        .mobile-menu a:hover { color: var(--accent); }
+        .mm-close {
+            position: absolute;
+            top: 26px; right: 26px;
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            width: 40px; height: 40px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .mm-close:hover { color: var(--accent); border-color: var(--accent); }
+
         /* === NEWS (home block) === */
         .news-home .news-grid {
             display: grid;
@@ -2339,7 +2455,8 @@
             .chapter-indicator { display: none; }
             nav, nav.scrolled { padding: 18px 24px; }
             .nav-right { gap: 14px; }
-            .nav-links { display: none; } /* hide on mobile — navigation available via footer */
+            .nav-links { display: none; }
+            .nav-burger { display: flex; }
             .nav-brand-text { display: none; } /* on mobile, mark alone — keeps header compact */
             .lang-switcher .lang-current { padding: 4px 8px; font-size: 10px; }
             .audio-toggle { width: 28px; height: 28px; }
@@ -2450,6 +2567,7 @@
             <li><a href="roadmap.html" data-i18n="nav_roadmap">Roadmap</a></li>
             <li><a href="login.html" data-i18n="nav_login">Sign in</a></li>
         </ul>
+        <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
         <div class="audio-control" id="audioControl">
             <div class="volume-popout">
                 <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="10" aria-label="Ambient volume">
@@ -2777,6 +2895,38 @@ he comes not on his own.</p>
     <div class="divider-chapter" data-i18n="ch_4">Capitulum IV</div>
 </div>
 
+<section class="promises-home reveal" id="promises">
+    <div class="container">
+        <div class="reveal">
+            <div class="section-label" data-i18n="prom_label">— Our Promises —</div>
+            <h2 class="section-title" data-i18n="prom_title">Sworn before the forge was lit</h2>
+        </div>
+        <div class="prom-grid">
+            <div class="prom-item">
+                <span class="prom-glyph">✠</span>
+                <div class="prom-t" data-i18n="prom1_t">No pay-to-win</div>
+                <div class="prom-b" data-i18n="prom1_b">Every blade is earned. None is bought.</div>
+            </div>
+            <div class="prom-item">
+                <span class="prom-glyph">✠</span>
+                <div class="prom-t" data-i18n="prom2_t">No loot boxes</div>
+                <div class="prom-b" data-i18n="prom2_b">No paying for chances. You know what you receive.</div>
+            </div>
+            <div class="prom-item">
+                <span class="prom-glyph">✠</span>
+                <div class="prom-t" data-i18n="prom3_t">No NFT. No crypto.</div>
+                <div class="prom-b" data-i18n="prom3_b">They have no place in steel and dust.</div>
+            </div>
+            <div class="prom-item">
+                <span class="prom-glyph">✠</span>
+                <div class="prom-t" data-i18n="prom4_t">One purchase. The full game.</div>
+                <div class="prom-b" data-i18n="prom4_b">Updates and patches come with it.</div>
+            </div>
+        </div>
+        <div class="prom-more"><a href="about.html#promises" data-i18n="prom_more">Read the promises in full</a></div>
+    </div>
+</section>
+
 <section class="news-home reveal" id="news-home">
     <div class="container">
         <div class="reveal">
@@ -2795,6 +2945,7 @@ he comes not on his own.</p>
         <p class="newsletter-text" data-i18n="vigil_text">
             The gates are not yet open. Leave your name with the watch — you will be the first to know when the dark begins.
         </p>
+        <p class="vigil-incentive" data-i18n="vigil_incentive">The First Vigil — our closed test — will be called from these names.</p>
         <form class="newsletter-form" id="vigil-form" novalidate>
             <input class="newsletter-input" type="email" id="vigil-email" placeholder="your.name@somewhere" required autocomplete="email">
             <button class="newsletter-button" type="submit" id="vigil-submit" data-i18n="vigil_button">Mark Me</button>
@@ -3292,6 +3443,18 @@ he comes not on his own.</p>
             rm_st_steel: "Steel",
             rm_st_gates: "The Gates",
             rm_cta: "Walk the whole road",
+            prom_label: "— Our Promises —",
+            prom_title: "Sworn before the forge was lit",
+            prom1_t: "No pay-to-win",
+            prom1_b: "Every blade is earned. None is bought.",
+            prom2_t: "No loot boxes",
+            prom2_b: "No paying for chances. You know what you receive.",
+            prom3_t: "No NFT. No crypto.",
+            prom3_b: "They have no place in steel and dust.",
+            prom4_t: "One purchase. The full game.",
+            prom4_b: "Updates and patches come with it.",
+            prom_more: "Read the promises in full",
+            vigil_incentive: "The First Vigil — our closed test — will be called from these names.",
             footer_news: "News",
             news_label: "— Tidings —",
             news_title: "Latest from the workshop",
@@ -3456,6 +3619,18 @@ he comes not on his own.</p>
             rm_st_steel: "Сталь",
             rm_st_gates: "Врата",
             rm_cta: "Пройти дорогу целиком",
+            prom_label: "— Наши клятвы —",
+            prom_title: "Принесены прежде, чем зажгли горн",
+            prom1_t: "Никакого pay-to-win",
+            prom1_b: "Каждый клинок заработан. Ни один не куплен.",
+            prom2_t: "Никаких лутбоксов",
+            prom2_b: "Никакой платы за шанс. Ты знаешь, что получаешь.",
+            prom3_t: "Никаких NFT и крипты",
+            prom3_b: "Им нет места среди стали и пыли.",
+            prom4_t: "Одна покупка. Вся игра.",
+            prom4_b: "Обновления и патчи — вместе с ней.",
+            prom_more: "Прочесть клятвы целиком",
+            vigil_incentive: "Первый Дозор — закрытый тест — будет призван из этих имён.",
             footer_news: "Вести",
             news_label: "— Вести —",
             news_title: "Последние вести",
@@ -3489,6 +3664,18 @@ he comes not on his own.</p>
                     "rm_st_steel": "Сталь",
                     "rm_st_gates": "Брами",
                     "rm_cta": "Пройти дорогу цілком",
+                    "prom_label": "— Наші клятви —",
+                    "prom_title": "Складені перш, ніж розпалили горно",
+                    "prom1_t": "Жодного pay-to-win",
+                    "prom1_b": "Кожен клинок зароблений. Жоден не куплений.",
+                    "prom2_t": "Жодних лутбоксів",
+                    "prom2_b": "Жодної плати за шанс. Ти знаєш, що отримуєш.",
+                    "prom3_t": "Жодних NFT і крипти",
+                    "prom3_b": "Їм немає місця серед сталі й пилу.",
+                    "prom4_t": "Одна покупка. Уся гра.",
+                    "prom4_b": "Оновлення й патчі — разом із нею.",
+                    "prom_more": "Прочитати клятви цілком",
+                    "vigil_incentive": "Першу Варту — закрите випробування — буде покликано з цих імен.",
                     "footer_news": "Вісті",
                     "news_label": "— Вісті —",
                     "news_title": "Останні вісті",
@@ -3653,6 +3840,18 @@ he comes not on his own.</p>
                     "rm_st_steel": "Stahl",
                     "rm_st_gates": "Die Tore",
                     "rm_cta": "Den ganzen Weg gehen",
+                    "prom_label": "— Unsere Schwüre —",
+                    "prom_title": "Geschworen, ehe die Esse brannte",
+                    "prom1_t": "Kein Pay-to-win",
+                    "prom1_b": "Jede Klinge ist verdient. Keine gekauft.",
+                    "prom2_t": "Keine Lootboxen",
+                    "prom2_b": "Kein Geld für Chancen. Du weißt, was du bekommst.",
+                    "prom3_t": "Kein NFT. Keine Krypto.",
+                    "prom3_b": "Sie haben keinen Platz in Stahl und Staub.",
+                    "prom4_t": "Ein Kauf. Das ganze Spiel.",
+                    "prom4_b": "Updates und Patches inklusive.",
+                    "prom_more": "Die Schwüre im Ganzen lesen",
+                    "vigil_incentive": "Die Erste Wacht — unser geschlossener Test — wird aus diesen Namen berufen.",
                     "footer_news": "Neuigkeiten",
                     "news_label": "— Neuigkeiten —",
                     "news_title": "Neues aus der Werkstatt",
@@ -3737,6 +3936,18 @@ he comes not on his own.</p>
                     "rm_st_steel": "Acero",
                     "rm_st_gates": "Las Puertas",
                     "rm_cta": "Recorrer todo el camino",
+                    "prom_label": "— Nuestras promesas —",
+                    "prom_title": "Juradas antes de encender la fragua",
+                    "prom1_t": "Sin pay-to-win",
+                    "prom1_b": "Cada hoja se gana. Ninguna se compra.",
+                    "prom2_t": "Sin loot boxes",
+                    "prom2_b": "No se paga por una posibilidad. Sabes lo que recibes.",
+                    "prom3_t": "Sin NFT. Sin cripto.",
+                    "prom3_b": "No tienen lugar entre acero y polvo.",
+                    "prom4_t": "Una compra. El juego completo.",
+                    "prom4_b": "Actualizaciones y parches incluidos.",
+                    "prom_more": "Leer las promesas completas",
+                    "vigil_incentive": "La Primera Vigilia — nuestra prueba cerrada — será llamada de entre estos nombres.",
                     "footer_news": "Noticias",
                     "news_label": "— Noticias —",
                     "news_title": "Lo último del taller",
@@ -3821,6 +4032,18 @@ he comes not on his own.</p>
                     "rm_st_steel": "Aço",
                     "rm_st_gates": "Os Portões",
                     "rm_cta": "Percorrer todo o caminho",
+                    "prom_label": "— As nossas promessas —",
+                    "prom_title": "Juradas antes de acender a forja",
+                    "prom1_t": "Sem pay-to-win",
+                    "prom1_b": "Cada lâmina é conquistada. Nenhuma é comprada.",
+                    "prom2_t": "Sem loot boxes",
+                    "prom2_b": "Não se paga por uma hipótese. Sabes o que recebes.",
+                    "prom3_t": "Sem NFT. Sem cripto.",
+                    "prom3_b": "Não têm lugar entre aço e pó.",
+                    "prom4_t": "Uma compra. O jogo completo.",
+                    "prom4_b": "Atualizações e patches incluídos.",
+                    "prom_more": "Ler as promessas na íntegra",
+                    "vigil_incentive": "A Primeira Vigília — o nosso teste fechado — será chamada de entre estes nomes.",
                     "footer_news": "Notícias",
                     "news_label": "— Notícias —",
                     "news_title": "O mais recente da oficina",
@@ -3905,6 +4128,18 @@ he comes not on his own.</p>
                     "rm_st_steel": "Acier",
                     "rm_st_gates": "Les Portes",
                     "rm_cta": "Parcourir toute la route",
+                    "prom_label": "— Nos serments —",
+                    "prom_title": "Jurés avant que la forge ne s'allume",
+                    "prom1_t": "Pas de pay-to-win",
+                    "prom1_b": "Chaque lame se gagne. Aucune ne s'achète.",
+                    "prom2_t": "Pas de loot boxes",
+                    "prom2_b": "On ne paie pas pour une chance. Tu sais ce que tu reçois.",
+                    "prom3_t": "Pas de NFT. Pas de crypto.",
+                    "prom3_b": "Ils n'ont pas leur place dans l'acier et la poussière.",
+                    "prom4_t": "Un achat. Le jeu entier.",
+                    "prom4_b": "Mises à jour et correctifs inclus.",
+                    "prom_more": "Lire les serments en entier",
+                    "vigil_incentive": "La Première Veille — notre test fermé — sera appelée parmi ces noms.",
                     "footer_news": "Nouvelles",
                     "news_label": "— Nouvelles —",
                     "news_title": "Dernières nouvelles de l'atelier",
@@ -3989,6 +4224,18 @@ he comes not on his own.</p>
                     "rm_st_steel": "Acciaio",
                     "rm_st_gates": "Le Porte",
                     "rm_cta": "Percorrere tutta la strada",
+                    "prom_label": "— Le nostre promesse —",
+                    "prom_title": "Giurate prima di accendere la forgia",
+                    "prom1_t": "Niente pay-to-win",
+                    "prom1_b": "Ogni lama si guadagna. Nessuna si compra.",
+                    "prom2_t": "Niente loot box",
+                    "prom2_b": "Non si paga per una possibilità. Sai cosa ricevi.",
+                    "prom3_t": "Niente NFT. Niente cripto.",
+                    "prom3_b": "Non hanno posto tra acciaio e polvere.",
+                    "prom4_t": "Un acquisto. Il gioco completo.",
+                    "prom4_b": "Aggiornamenti e patch inclusi.",
+                    "prom_more": "Leggi le promesse per intero",
+                    "vigil_incentive": "La Prima Veglia — il nostro test chiuso — sarà chiamata tra questi nomi.",
                     "footer_news": "Notizie",
                     "news_label": "— Notizie —",
                     "news_title": "Ultime dalla bottega",
@@ -4073,6 +4320,18 @@ he comes not on his own.</p>
                     "rm_st_steel": "钢铁",
                     "rm_st_gates": "大门",
                     "rm_cta": "走完整条路",
+                    "prom_label": "— 我们的誓言 —",
+                    "prom_title": "炉火点燃之前立下",
+                    "prom1_t": "没有付费变强",
+                    "prom1_b": "每一柄刀剑都靠实力赢得，无法购买。",
+                    "prom2_t": "没有开箱",
+                    "prom2_b": "不为概率付费。你清楚自己买到什么。",
+                    "prom3_t": "没有NFT与加密货币",
+                    "prom3_b": "钢铁与尘土之间没有它们的位置。",
+                    "prom4_t": "一次购买，完整游戏",
+                    "prom4_b": "更新与补丁全部包含。",
+                    "prom_more": "阅读完整誓言",
+                    "vigil_incentive": "首次守夜——我们的封闭测试——将从这些名字中召集。",
                     "footer_news": "消息",
                     "news_label": "— 消息 —",
                     "news_title": "工坊最新消息",
@@ -4157,6 +4416,18 @@ he comes not on his own.</p>
                     "rm_st_steel": "鋼",
                     "rm_st_gates": "門",
                     "rm_cta": "道のすべてを辿る",
+                    "prom_label": "— 我らの誓い —",
+                    "prom_title": "炉に火を入れる前に誓った",
+                    "prom1_t": "Pay-to-winなし",
+                    "prom1_b": "すべての刃は腕で得るもの。金では買えない。",
+                    "prom2_t": "ルートボックスなし",
+                    "prom2_b": "確率に金は払わせない。手に入るものは明白だ。",
+                    "prom3_t": "NFT・暗号資産なし",
+                    "prom3_b": "鋼と塵の世界に、それらの居場所はない。",
+                    "prom4_t": "一度の購入で、すべてを",
+                    "prom4_b": "アップデートとパッチも含まれる。",
+                    "prom_more": "誓いの全文を読む",
+                    "vigil_incentive": "最初の夜警——クローズドテスト——は、この名簿から召集される。",
                     "footer_news": "ニュース",
                     "news_label": "— 便り —",
                     "news_title": "工房からの便り",
@@ -4855,6 +5126,22 @@ he comes not on his own.</p>
             .catch(function() { sec.style.display = 'none'; });
     })();
 
+    // === MOBILE MENU ===
+    (function() {
+        var burger = document.getElementById('navBurger');
+        var menu = document.getElementById('mobileMenu');
+        if (!burger || !menu) return;
+        // Clone nav links into the overlay
+        document.querySelectorAll('.nav-links a').forEach(function(a) {
+            var c = a.cloneNode(true);
+            menu.appendChild(c);
+            c.addEventListener('click', function() { menu.classList.remove('open'); });
+        });
+        burger.addEventListener('click', function() { menu.classList.add('open'); });
+        document.getElementById('mmClose').addEventListener('click', function() { menu.classList.remove('open'); });
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') menu.classList.remove('open'); });
+    })();
+
     // === PAGE VEIL: smooth transition when leaving to sub-pages ===
     (function() {
         var veil = document.createElement('div');
@@ -4953,6 +5240,10 @@ he comes not on his own.</p>
     }
 
 </script>
+
+<div class="mobile-menu" id="mobileMenu">
+    <button class="mm-close" id="mmClose" aria-label="Close">✕</button>
+</div>
 
 <div class="cookie-banner" id="cookieBanner">
     <div class="cookie-title" data-i18n="cookie_title">A word before you enter</div>
