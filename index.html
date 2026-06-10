@@ -4796,6 +4796,11 @@ he comes not on his own.</p>
         veil.className = 'page-veil';
         veil.style.background = '#080706';
         document.body.appendChild(veil);
+        // Back/forward cache restore: strip the veil so the page is visible again
+        window.addEventListener('pageshow', function() {
+            document.body.classList.remove('leaving');
+        });
+
         document.addEventListener('click', function(e) {
             var a = e.target.closest ? e.target.closest('a[href]') : null;
             if (!a) return;
