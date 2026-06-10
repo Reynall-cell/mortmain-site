@@ -1,59 +1,84 @@
 /* === Mortmain Studio — shared script for sub-pages === */
-/* Handles: language switching with localStorage, sticky nav */
+/* Handles: language switching (10 languages, dropdown, EN fallback) + sticky nav */
 
 (function() {
     'use strict';
 
     // Sticky nav
-    const nav = document.getElementById('nav');
+    var nav = document.getElementById('nav');
     if (nav) {
-        window.addEventListener('scroll', () => {
+        window.addEventListener('scroll', function() {
             nav.classList.toggle('scrolled', window.scrollY > 50);
         });
     }
 
-    // Language switching — each sub-page defines its own `pageTranslations` global
+    // Language code shown in the dropdown trigger
+    var META = {
+        en: 'EN', uk: 'UA', ru: 'RU', de: 'DE', es: 'ES',
+        pt: 'PT', fr: 'FR', it: 'IT', zh: 'ZH', ja: 'JA'
+    };
+
     window.MortmainI18n = {
         LANG: 'en',
 
         apply: function(lang) {
-            if (!window.pageTranslations || !window.pageTranslations[lang]) return;
+            var T = window.pageTranslations;
+            if (!T) return;
+            var dict = T[lang] || T['en'];
+            var en = T['en'] || {};
             this.LANG = lang;
             document.documentElement.lang = lang;
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.dataset.i18n;
-                if (window.pageTranslations[lang][key]) {
-                    el.textContent = window.pageTranslations[lang][key];
-                }
+
+            // Plain-text keys (fall back to English for anything this language omits)
+            document.querySelectorAll('[data-i18n]').forEach(function(el) {
+                var key = el.dataset.i18n;
+                var val = (dict && dict[key] != null) ? dict[key] : en[key];
+                if (val != null) el.textContent = val;
             });
-            document.querySelectorAll('[data-i18n-html]').forEach(el => {
-                const key = el.dataset.i18nHtml;
-                if (window.pageTranslations[lang][key]) {
-                    el.innerHTML = window.pageTranslations[lang][key];
-                }
+            // HTML keys (preserve embedded links) — same fallback
+            document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+                var key = el.dataset.i18nHtml;
+                var val = (dict && dict[key] != null) ? dict[key] : en[key];
+                if (val != null) el.innerHTML = val;
             });
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === lang);
+
+            var cur = document.getElementById('langCurrentCode');
+            if (cur) cur.textContent = META[lang] || META.en;
+            document.querySelectorAll('.lang-option').forEach(function(opt) {
+                opt.classList.toggle('active', opt.dataset.lang === lang);
             });
             try { localStorage.setItem('mortmain_lang', lang); } catch (e) {}
         },
 
         init: function() {
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.addEventListener('click', () => this.apply(btn.dataset.lang));
+            var self = this;
+            var switcher = document.getElementById('langSwitcher');
+            var current = document.getElementById('langCurrent');
+            if (current && switcher) {
+                current.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    switcher.classList.toggle('open');
+                });
+                document.addEventListener('click', function() {
+                    switcher.classList.remove('open');
+                });
+            }
+            document.querySelectorAll('.lang-option').forEach(function(opt) {
+                opt.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    self.apply(opt.dataset.lang);
+                    if (switcher) switcher.classList.remove('open');
+                });
             });
             try {
-                const stored = localStorage.getItem('mortmain_lang');
-                if (stored && window.pageTranslations && window.pageTranslations[stored]) {
-                    this.apply(stored);
-                }
+                var stored = localStorage.getItem('mortmain_lang');
+                if (stored && window.pageTranslations) self.apply(stored);
             } catch (e) {}
         }
     };
 
-    // Init on DOM ready
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => window.MortmainI18n.init());
+        document.addEventListener('DOMContentLoaded', function() { window.MortmainI18n.init(); });
     } else {
         window.MortmainI18n.init();
     }
