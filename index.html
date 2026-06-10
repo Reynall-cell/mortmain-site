@@ -1230,6 +1230,84 @@
             color: var(--text-secondary);
         }
 
+        /* === NEWS (home block) === */
+        .news-home .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+        .news-card {
+            display: block;
+            text-decoration: none;
+            border: 1px solid var(--border-subtle);
+            background: rgba(16, 13, 11, 0.5);
+            padding: 26px;
+            transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
+        }
+        .news-card:hover {
+            border-color: var(--border-medium);
+            background: rgba(201, 169, 97, 0.03);
+            transform: translateY(-3px);
+        }
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+        .news-tag {
+            font-family: 'Jost', sans-serif;
+            font-weight: 400;
+            font-size: 0.56rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            border: 1px solid var(--border-medium);
+            padding: 3px 10px;
+        }
+        .news-date {
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            font-size: 0.62rem;
+            letter-spacing: 0.12em;
+            color: var(--text-tertiary);
+        }
+        .news-card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.25;
+            margin-bottom: 10px;
+        }
+        .news-card-excerpt {
+            font-family: 'EB Garamond', serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.65;
+            color: var(--text-secondary);
+        }
+        .news-more {
+            text-align: center;
+            margin-top: 32px;
+        }
+        .news-more a {
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            font-size: 0.72rem;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--accent);
+            text-decoration: none;
+            border: 1px solid var(--border-medium);
+            padding: 12px 30px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .news-more a:hover { background: var(--accent); color: var(--bg-deepest); }
+
         /* === MECHANICS MODULE (Tarkov-style switchable) === */
         .m-module {
             display: grid;
@@ -1994,7 +2072,7 @@
         }
 
         .footer-column .pending::after {
-            content: '— soon';
+            content: var(--soon-label, '— soon');
             margin-left: 6px;
             font-size: 10px;
             font-style: italic;
@@ -2207,6 +2285,7 @@
             <li><a href="#features" data-i18n="nav_features">Features</a></li>
             <li><a href="#codex" data-i18n="nav_codex">Codex</a></li>
             <li><a href="#studio" data-i18n="nav_studio">Studio</a></li>
+            <li><a href="news.html" data-i18n="nav_news">News</a></li>
             <li><a href="login.html" data-i18n="nav_login">Sign in</a></li>
         </ul>
         <div class="audio-control" id="audioControl">
@@ -2506,6 +2585,17 @@ he comes not on his own.</p>
     <div class="divider-chapter" data-i18n="ch_4">Capitulum IV</div>
 </div>
 
+<section class="news-home reveal" id="news-home">
+    <div class="container">
+        <div class="reveal">
+            <div class="section-label" data-i18n="news_label">— Tidings —</div>
+            <h2 class="section-title" data-i18n="news_title">Latest from the workshop</h2>
+        </div>
+        <div class="news-grid" id="newsHomeGrid"></div>
+        <div class="news-more"><a href="news.html" data-i18n="news_all">All tidings</a></div>
+    </div>
+</section>
+
 <section class="newsletter reveal" id="newsletter">
     <img class="vigil-rose-watermark" src="ornament-rose.png" alt="" onerror="this.style.display='none'">
     <div class="container">
@@ -2759,6 +2849,7 @@ he comes not on his own.</p>
             <ul>
                 <li><a href="#features" data-i18n="footer_features">Features</a></li>
                 <li><a href="#codex" data-i18n="footer_codex">Codex</a></li>
+                <li><a href="news.html" data-i18n="footer_news">News</a></li>
                 <li><a href="faq.html" data-i18n="footer_faq">FAQ</a></li>
                 <li><a href="press.html" data-i18n="footer_presskit">Press Kit</a></li>
                 <li><span class="pending" data-i18n="footer_roadmap">Roadmap</span></li>
@@ -2986,7 +3077,16 @@ he comes not on his own.</p>
             cookie_more: "Read more",
             cookie_accept: "Accept",
             cookie_decline: "Decline",
-            nav_login: "Sign in"
+            nav_login: "Sign in",
+            nav_news: "News",
+            footer_news: "News",
+            news_label: "— Tidings —",
+            news_title: "Latest from the workshop",
+            news_all: "All tidings",
+            news_read: "Read",
+            news_tag_news: "News",
+            news_tag_patch: "Patch",
+            news_tag_event: "Event"
         },
         ru: {
             splash: "Открыть кодекс",
@@ -3131,7 +3231,16 @@ he comes not on his own.</p>
             cookie_more: "Подробнее",
             cookie_accept: "Принять",
             cookie_decline: "Отклонить",
-            nav_login: "Войти"
+            nav_login: "Войти",
+            nav_news: "Вести",
+            footer_news: "Вести",
+            news_label: "— Вести —",
+            news_title: "Последние вести",
+            news_all: "Все вести",
+            news_read: "Читать",
+            news_tag_news: "Новость",
+            news_tag_patch: "Патч",
+            news_tag_event: "Ивент"
         },
         uk: {
                     "splash": "Розгорнути кодекс",
@@ -3146,6 +3255,15 @@ he comes not on his own.</p>
                     "nav_codex": "Кодекс",
                     "nav_studio": "Студія",
                     "nav_login": "Логін",
+                    "nav_news": "Вісті",
+                    "footer_news": "Вісті",
+                    "news_label": "— Вісті —",
+                    "news_title": "Останні вісті",
+                    "news_all": "Усі вісті",
+                    "news_read": "Читати",
+                    "news_tag_news": "Новина",
+                    "news_tag_patch": "Патч",
+                    "news_tag_event": "Івент",
                     "hero_presents": "Mortmain Studio представляє",
                     "hero_tagline": "Навіть дзвони навчилися тужити.",
                     "hero_sub": "Середньовічна гра на виживання й здобич",
@@ -3291,6 +3409,15 @@ he comes not on his own.</p>
                     "nav_codex": "Kodex",
                     "nav_studio": "Studio",
                     "nav_login": "Anmelden",
+                    "nav_news": "Neuigkeiten",
+                    "footer_news": "Neuigkeiten",
+                    "news_label": "— Neuigkeiten —",
+                    "news_title": "Neues aus der Werkstatt",
+                    "news_all": "Alle Neuigkeiten",
+                    "news_read": "Lesen",
+                    "news_tag_news": "Neuigkeit",
+                    "news_tag_patch": "Patch",
+                    "news_tag_event": "Event",
                     "hero_presents": "Mortmain Studio präsentiert",
                     "hero_tagline": "Selbst die Glocken haben das Trauern gelernt.",
                     "hero_sub": "Ein mittelalterliches Extraction-Spiel",
@@ -3356,6 +3483,15 @@ he comes not on his own.</p>
                     "nav_codex": "Códice",
                     "nav_studio": "Estudio",
                     "nav_login": "Entrar",
+                    "nav_news": "Noticias",
+                    "footer_news": "Noticias",
+                    "news_label": "— Noticias —",
+                    "news_title": "Lo último del taller",
+                    "news_all": "Todas las noticias",
+                    "news_read": "Leer",
+                    "news_tag_news": "Noticia",
+                    "news_tag_patch": "Parche",
+                    "news_tag_event": "Evento",
                     "hero_presents": "Mortmain Studio presenta",
                     "hero_tagline": "Hasta las campanas han aprendido a llorar.",
                     "hero_sub": "Un juego de extracción medieval",
@@ -3421,6 +3557,15 @@ he comes not on his own.</p>
                     "nav_codex": "Códice",
                     "nav_studio": "Estúdio",
                     "nav_login": "Entrar",
+                    "nav_news": "Notícias",
+                    "footer_news": "Notícias",
+                    "news_label": "— Notícias —",
+                    "news_title": "O mais recente da oficina",
+                    "news_all": "Todas as notícias",
+                    "news_read": "Ler",
+                    "news_tag_news": "Notícia",
+                    "news_tag_patch": "Patch",
+                    "news_tag_event": "Evento",
                     "hero_presents": "Mortmain Studio apresenta",
                     "hero_tagline": "Até os sinos aprenderam a chorar.",
                     "hero_sub": "Um jogo de extração medieval",
@@ -3486,6 +3631,15 @@ he comes not on his own.</p>
                     "nav_codex": "Codex",
                     "nav_studio": "Studio",
                     "nav_login": "Connexion",
+                    "nav_news": "Nouvelles",
+                    "footer_news": "Nouvelles",
+                    "news_label": "— Nouvelles —",
+                    "news_title": "Dernières nouvelles de l'atelier",
+                    "news_all": "Toutes les nouvelles",
+                    "news_read": "Lire",
+                    "news_tag_news": "Nouvelle",
+                    "news_tag_patch": "Patch",
+                    "news_tag_event": "Événement",
                     "hero_presents": "Mortmain Studio présente",
                     "hero_tagline": "Même les cloches ont appris à pleurer.",
                     "hero_sub": "Un jeu d'extraction médiéval",
@@ -3551,6 +3705,15 @@ he comes not on his own.</p>
                     "nav_codex": "Codice",
                     "nav_studio": "Studio",
                     "nav_login": "Accedi",
+                    "nav_news": "Notizie",
+                    "footer_news": "Notizie",
+                    "news_label": "— Notizie —",
+                    "news_title": "Ultime dalla bottega",
+                    "news_all": "Tutte le notizie",
+                    "news_read": "Leggi",
+                    "news_tag_news": "Notizia",
+                    "news_tag_patch": "Patch",
+                    "news_tag_event": "Evento",
                     "hero_presents": "Mortmain Studio presenta",
                     "hero_tagline": "Persino le campane hanno imparato a piangere.",
                     "hero_sub": "Un gioco di estrazione medievale",
@@ -3616,6 +3779,15 @@ he comes not on his own.</p>
                     "nav_codex": "典籍",
                     "nav_studio": "工作室",
                     "nav_login": "登录",
+                    "nav_news": "消息",
+                    "footer_news": "消息",
+                    "news_label": "— 消息 —",
+                    "news_title": "工坊最新消息",
+                    "news_all": "全部消息",
+                    "news_read": "阅读",
+                    "news_tag_news": "消息",
+                    "news_tag_patch": "补丁",
+                    "news_tag_event": "活动",
                     "hero_presents": "Mortmain Studio 呈献",
                     "hero_tagline": "连钟声也学会了哀鸣。",
                     "hero_sub": "一款中世纪撤离游戏",
@@ -3681,6 +3853,15 @@ he comes not on his own.</p>
                     "nav_codex": "古文書",
                     "nav_studio": "スタジオ",
                     "nav_login": "ログイン",
+                    "nav_news": "ニュース",
+                    "footer_news": "ニュース",
+                    "news_label": "— 便り —",
+                    "news_title": "工房からの便り",
+                    "news_all": "すべての便り",
+                    "news_read": "読む",
+                    "news_tag_news": "ニュース",
+                    "news_tag_patch": "パッチ",
+                    "news_tag_event": "イベント",
                     "hero_presents": "Mortmain Studio 提供",
                     "hero_tagline": "鐘さえも、嘆くことを覚えた。",
                     "hero_sub": "中世エクストラクションゲーム",
@@ -3742,6 +3923,9 @@ he comes not on his own.</p>
         document.documentElement.lang = lang;
         var dict = translations[lang] || translations['en'];
         var en = translations['en'];
+        // Localized "— soon" badge for pending footer items (CSS-injected, so set via custom property)
+        var SOON = { en:"— soon", ru:"— скоро", uk:"— незабаром", de:"— bald", es:"— pronto", pt:"— em breve", fr:"— bientôt", it:"— presto", zh:"— 即将", ja:"— 近日" };
+        document.documentElement.style.setProperty('--soon-label', '"' + (SOON[lang] || SOON.en) + '"');
         document.querySelectorAll('[data-i18n]').forEach(function(el) {
             var key = el.dataset.i18n;
             // Fall back to English for any key the chosen language doesn't define (deep lore in UI-only languages)
@@ -3760,6 +3944,7 @@ he comes not on his own.</p>
         document.querySelectorAll('.lang-option').forEach(function(opt) {
             opt.classList.toggle('active', opt.dataset.lang === lang);
         });
+        if (window.renderHomeNews) window.renderHomeNews();
         try { localStorage.setItem('mortmain_lang', lang); } catch (e) {}
     }
 
@@ -4328,6 +4513,41 @@ he comes not on his own.</p>
             tab.addEventListener('mouseenter', function() { select(idx); });
             tab.addEventListener('click', function() { select(idx); }); // touch devices
         });
+    })();
+
+    // === NEWS (home block) ===
+    (function() {
+        var sec = document.getElementById('news-home');
+        if (!sec) return;
+        var DATA = null;
+        function tagLabel(tag, lang) {
+            var t = translations[lang] || translations.en;
+            return t['news_tag_' + tag] || translations.en['news_tag_' + tag] || tag;
+        }
+        function fmtDate(iso, lang) {
+            try { return new Date(iso + 'T00:00:00').toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' }); }
+            catch (e) { return iso; }
+        }
+        window.renderHomeNews = function() {
+            if (!DATA) return;
+            var lang = window.LANG || 'en';
+            document.getElementById('newsHomeGrid').innerHTML = DATA.slice(0, 3).map(function(n) {
+                var title = (n.title && (n.title[lang] || n.title.en)) || '';
+                var ex = (n.excerpt && (n.excerpt[lang] || n.excerpt.en)) || '';
+                return '<a class="news-card" href="' + n.url + '">' +
+                    '<div class="news-meta"><span class="news-tag">' + tagLabel(n.tag, lang) + '</span>' +
+                    '<span class="news-date">' + fmtDate(n.date, lang) + '</span></div>' +
+                    '<div class="news-card-title">' + title + '</div>' +
+                    '<div class="news-card-excerpt">' + ex + '</div></a>';
+            }).join('');
+        };
+        fetch('news.json')
+            .then(function(r) { if (!r.ok) throw 0; return r.json(); })
+            .then(function(j) {
+                DATA = j.sort(function(a, b) { return b.date.localeCompare(a.date); });
+                window.renderHomeNews();
+            })
+            .catch(function() { sec.style.display = 'none'; });
     })();
 
     // === COOKIE BANNER ===

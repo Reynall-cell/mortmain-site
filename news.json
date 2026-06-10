@@ -1,0 +1,34 @@
+[
+  {
+    "id": "2026-06-10-gates-open",
+    "date": "2026-06-10",
+    "tag": "news",
+    "url": "news/2026-06-10-gates-open.html",
+    "title": {
+      "en": "The gates are open",
+      "ru": "Врата открыты",
+      "uk": "Брами відчинено"
+    },
+    "excerpt": {
+      "en": "Mortmain Studio steps out of the dark: the site is live and the Vigil is gathering. A word on what Squalor is — and what comes next.",
+      "ru": "Mortmain Studio выходит из темноты: сайт открыт, Дозор собирается. Несколько слов о том, что такое Squalor — и что будет дальше.",
+      "uk": "Mortmain Studio виходить із темряви: сайт відкрито, Варта збирається. Кілька слів про те, що таке Squalor — і що буде далі."
+    }
+  },
+  {
+    "id": "2026-06-03-forge-report-1",
+    "date": "2026-06-03",
+    "tag": "patch",
+    "url": "news/2026-06-03-forge-report-1.html",
+    "title": {
+      "en": "From the forge: directional combat",
+      "ru": "Из кузницы: направленный бой",
+      "uk": "З кузні: напрямний бій"
+    },
+    "excerpt": {
+      "en": "The first pillar stands. Directional strikes, stamina, and the duel that feels like a conversation in steel — a report from the workbench.",
+      "ru": "Первый столп стоит. Направленные удары, выносливость и дуэль, похожая на разговор на стали — отчёт с верстака.",
+      "uk": "Перший стовп стоїть. Напрямні удари, витривалість і двобій, схожий на розмову на сталі — звіт з верстака."
+    }
+  }
+]
