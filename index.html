@@ -4331,7 +4331,7 @@ he comes not on his own.</p>
     })();
 
     // === COOKIE BANNER ===
-    (function() {
+    function initCookieBanner() {
         var banner = document.getElementById('cookieBanner');
         if (!banner) return;
         var KEY = 'squalor_cookie_choice';
@@ -4353,7 +4353,12 @@ he comes not on his own.</p>
         var dec = document.getElementById('cookieDecline');
         if (acc) acc.addEventListener('click', function() { choose('accepted'); });
         if (dec) dec.addEventListener('click', function() { choose('declined'); });
-    })();
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCookieBanner);
+    } else {
+        initCookieBanner();
+    }
 
 </script>
 
