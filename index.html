@@ -1530,9 +1530,10 @@
         }
 
         /* === HOVER CORNER TICKS (cards echo the page frame) === */
-        .news-card, .prom-item { position: relative; }
-        .news-card::before, .prom-item::before,
-        .news-card::after, .prom-item::after {
+        .news-card { position: relative; }
+        .prom-item { position: relative; }
+        .prom-item::before,
+        .prom-item::after {
             content: '';
             position: absolute;
             width: 14px; height: 14px;
@@ -1541,16 +1542,53 @@
             transition: opacity 0.35s ease;
             pointer-events: none;
         }
-        .news-card::before, .prom-item::before {
+        .prom-item::before {
             top: -1px; left: -1px;
             border-right: none; border-bottom: none;
         }
-        .news-card::after, .prom-item::after {
+        .prom-item::after {
             bottom: -1px; right: -1px;
             border-left: none; border-top: none;
         }
-        .news-card:hover::before, .prom-item:hover::before,
-        .news-card:hover::after, .prom-item:hover::after { opacity: 0.85; }
+        .prom-item:hover::before,
+        .prom-item:hover::after { opacity: 0.85; }
+
+        /* === ОРНАМЕНТНАЯ РАМКА (программная: плетёные углы поверх контента) === */
+        .frame-ornate {
+            position: relative;
+            border: 1px solid rgba(201, 169, 97, 0.38);
+            border-radius: 18px;
+            transition: border-color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+        }
+        .frame-ornate::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 18px;
+            background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 76 76%22%3E%3Cdefs%3E%3Cmask id=%22w%22%3E%3Crect width=%2276%22 height=%2276%22 fill=%22white%22/%3E%3Ccircle cx=%2226.5%22 cy=%2216.5%22 r=%222.8%22 fill=%22black%22/%3E%3Ccircle cx=%2216.5%22 cy=%2226.5%22 r=%222.8%22 fill=%22black%22/%3E%3C/mask%3E%3C/defs%3E%3Cg%3E%3Cpath d=%22M44 4.5 C24 10 10 24 4.5 44%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%221.1%22 opacity=%220.8%22 mask=%22url(%23w)%22/%3E%3Cpath d=%22M13 36 C15 24 24 15 36 13 C27 19 19 27 13 36 Z%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%221.05%22 opacity=%220.9%22/%3E%3Cpath d=%22M62 2.6 C36 5 12 19 4 46 C3.2 51 2.7 56 2.6 62%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%221.3%22 opacity=%220.9%22/%3E%3Cpath d=%22M30 9 C19.5 12 12 19.5 9 30%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%220.9%22 opacity=%220.55%22/%3E%3Cpath d=%22M62 2.6 c4.2 -0.5 6.8 1.8 5.4 4.1 c-1.1 1.8 -3.7 1.7 -4.3 -0.1 c-0.4 -1.2 0.6 -2.2 1.8 -1.9%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%221%22 opacity=%220.85%22/%3E%3Cpath d=%22M2.6 62 c-0.5 4.2 1.8 6.8 4.1 5.4 c1.8 -1.1 1.7 -3.7 -0.1 -4.3 c-1.2 -0.4 -2.2 0.6 -1.9 1.8%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%221%22 opacity=%220.85%22/%3E%3Cpath d=%22M10.2 7 L13.4 10.2 L10.2 13.4 L7 10.2 Z%22 fill=%22%23C9A961%22 opacity=%220.9%22/%3E%3Ccircle cx=%2236%22 cy=%2213%22 r=%221.3%22 fill=%22%23C9A961%22 opacity=%220.9%22/%3E%3Ccircle cx=%2213%22 cy=%2236%22 r=%221.3%22 fill=%22%23C9A961%22 opacity=%220.9%22/%3E%3C/g%3E%3C/svg%3E"), url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 76 76%22%3E%3Cdefs%3E%3Cmask id=%22w%22%3E%3Crect width=%2276%22 height=%2276%22 fill=%22white%22/%3E%3Ccircle cx=%2226.5%22 cy=%2216.5%22 r=%222.8%22 fill=%22black%22/%3E%3Ccircle cx=%2216.5%22 cy=%2226.5%22 r=%222.8%22 fill=%22black%22/%3E%3C/mask%3E%3C/defs%3E%3Cg transform=%22rotate(90 38 38)%22%3E%3Cpath d=%22M44 4.5 C24 10 10 24 4.5 44%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%221.1%22 opacity=%220.8%22 mask=%22url(%23w)%22/%3E%3Cpath d=%22M13 36 C15 24 24 15 36 13 C27 19 19 27 13 36 Z%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%221.05%22 opacity=%220.9%22/%3E%3Cpath d=%22M62 2.6 C36 5 12 19 4 46 C3.2 51 2.7 56 2.6 62%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%221.3%22 opacity=%220.9%22/%3E%3Cpath d=%22M30 9 C19.5 12 12 19.5 9 30%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%220.9%22 opacity=%220.55%22/%3E%3Cpath d=%22M62 2.6 c4.2 -0.5 6.8 1.8 5.4 4.1 c-1.1 1.8 -3.7 1.7 -4.3 -0.1 c-0.4 -1.2 0.6 -2.2 1.8 -1.9%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%221%22 opacity=%220.85%22/%3E%3Cpath d=%22M2.6 62 c-0.5 4.2 1.8 6.8 4.1 5.4 c1.8 -1.1 1.7 -3.7 -0.1 -4.3 c-1.2 -0.4 -2.2 0.6 -1.9 1.8%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%221%22 opacity=%220.85%22/%3E%3Cpath d=%22M10.2 7 L13.4 10.2 L10.2 13.4 L7 10.2 Z%22 fill=%22%23C9A961%22 opacity=%220.9%22/%3E%3Ccircle cx=%2236%22 cy=%2213%22 r=%221.3%22 fill=%22%23C9A961%22 opacity=%220.9%22/%3E%3Ccircle cx=%2213%22 cy=%2236%22 r=%221.3%22 fill=%22%23C9A961%22 opacity=%220.9%22/%3E%3C/g%3E%3C/svg%3E"), url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 76 76%22%3E%3Cdefs%3E%3Cmask id=%22w%22%3E%3Crect width=%2276%22 height=%2276%22 fill=%22white%22/%3E%3Ccircle cx=%2226.5%22 cy=%2216.5%22 r=%222.8%22 fill=%22black%22/%3E%3Ccircle cx=%2216.5%22 cy=%2226.5%22 r=%222.8%22 fill=%22black%22/%3E%3C/mask%3E%3C/defs%3E%3Cg transform=%22rotate(270 38 38)%22%3E%3Cpath d=%22M44 4.5 C24 10 10 24 4.5 44%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%221.1%22 opacity=%220.8%22 mask=%22url(%23w)%22/%3E%3Cpath d=%22M13 36 C15 24 24 15 36 13 C27 19 19 27 13 36 Z%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%221.05%22 opacity=%220.9%22/%3E%3Cpath d=%22M62 2.6 C36 5 12 19 4 46 C3.2 51 2.7 56 2.6 62%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%221.3%22 opacity=%220.9%22/%3E%3Cpath d=%22M30 9 C19.5 12 12 19.5 9 30%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%220.9%22 opacity=%220.55%22/%3E%3Cpath d=%22M62 2.6 c4.2 -0.5 6.8 1.8 5.4 4.1 c-1.1 1.8 -3.7 1.7 -4.3 -0.1 c-0.4 -1.2 0.6 -2.2 1.8 -1.9%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%221%22 opacity=%220.85%22/%3E%3Cpath d=%22M2.6 62 c-0.5 4.2 1.8 6.8 4.1 5.4 c1.8 -1.1 1.7 -3.7 -0.1 -4.3 c-1.2 -0.4 -2.2 0.6 -1.9 1.8%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%221%22 opacity=%220.85%22/%3E%3Cpath d=%22M10.2 7 L13.4 10.2 L10.2 13.4 L7 10.2 Z%22 fill=%22%23C9A961%22 opacity=%220.9%22/%3E%3Ccircle cx=%2236%22 cy=%2213%22 r=%221.3%22 fill=%22%23C9A961%22 opacity=%220.9%22/%3E%3Ccircle cx=%2213%22 cy=%2236%22 r=%221.3%22 fill=%22%23C9A961%22 opacity=%220.9%22/%3E%3C/g%3E%3C/svg%3E"), url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 76 76%22%3E%3Cdefs%3E%3Cmask id=%22w%22%3E%3Crect width=%2276%22 height=%2276%22 fill=%22white%22/%3E%3Ccircle cx=%2226.5%22 cy=%2216.5%22 r=%222.8%22 fill=%22black%22/%3E%3Ccircle cx=%2216.5%22 cy=%2226.5%22 r=%222.8%22 fill=%22black%22/%3E%3C/mask%3E%3C/defs%3E%3Cg transform=%22rotate(180 38 38)%22%3E%3Cpath d=%22M44 4.5 C24 10 10 24 4.5 44%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%221.1%22 opacity=%220.8%22 mask=%22url(%23w)%22/%3E%3Cpath d=%22M13 36 C15 24 24 15 36 13 C27 19 19 27 13 36 Z%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%221.05%22 opacity=%220.9%22/%3E%3Cpath d=%22M62 2.6 C36 5 12 19 4 46 C3.2 51 2.7 56 2.6 62%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%221.3%22 opacity=%220.9%22/%3E%3Cpath d=%22M30 9 C19.5 12 12 19.5 9 30%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%220.9%22 opacity=%220.55%22/%3E%3Cpath d=%22M62 2.6 c4.2 -0.5 6.8 1.8 5.4 4.1 c-1.1 1.8 -3.7 1.7 -4.3 -0.1 c-0.4 -1.2 0.6 -2.2 1.8 -1.9%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%221%22 opacity=%220.85%22/%3E%3Cpath d=%22M2.6 62 c-0.5 4.2 1.8 6.8 4.1 5.4 c1.8 -1.1 1.7 -3.7 -0.1 -4.3 c-1.2 -0.4 -2.2 0.6 -1.9 1.8%22 fill=%22none%22 stroke=%22%23C9A961%22 stroke-width=%221%22 opacity=%220.85%22/%3E%3Cpath d=%22M10.2 7 L13.4 10.2 L10.2 13.4 L7 10.2 Z%22 fill=%22%23C9A961%22 opacity=%220.9%22/%3E%3Ccircle cx=%2236%22 cy=%2213%22 r=%221.3%22 fill=%22%23C9A961%22 opacity=%220.9%22/%3E%3Ccircle cx=%2213%22 cy=%2236%22 r=%221.3%22 fill=%22%23C9A961%22 opacity=%220.9%22/%3E%3C/g%3E%3C/svg%3E");
+            background-position: left top, right top, left bottom, right bottom;
+            background-repeat: no-repeat;
+            background-size: 74px 74px;
+            pointer-events: none;
+            z-index: 3;
+            transition: background-size 0.45s ease, filter 0.4s ease;
+        }
+        .frame-ornate::after {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            border: 1px solid rgba(201, 169, 97, 0.1);
+            border-radius: 11px;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .frame-ornate:hover {
+            border-color: rgba(201, 169, 97, 0.6);
+        }
+        .frame-ornate:hover::before {
+            background-size: 80px 80px;
+            filter: brightness(1.25);
+        }
 
         /* === INTERLUDE DIVIDERS (between chapters) === */
         .interlude {
@@ -1807,15 +1845,30 @@
         .nh-btn::before, .nh-btn::after {
             content: '';
             position: absolute;
-            top: 3px;
-            bottom: 3px;
-            width: 5px;
-            border: 1px solid rgba(201, 169, 97, 0.35);
-            transition: border-color 0.35s ease;
+            top: 50%;
+            width: 10px;
+            height: 10px;
+            transition: left 0.3s ease, right 0.3s ease, border-color 0.3s ease;
         }
-        .nh-btn::before { left: 3px; border-right: none; }
-        .nh-btn::after { right: 3px; border-left: none; }
-        .nh-btn:hover { background: rgba(201, 169, 97, 0.07); border-color: rgba(201, 169, 97, 0.7); }
+        .nh-btn::before {
+            left: -15px;
+            border-left: 1px solid rgba(201, 169, 97, 0.55);
+            border-bottom: 1px solid rgba(201, 169, 97, 0.55);
+            transform: translateY(-50%) rotate(45deg);
+        }
+        .nh-btn::after {
+            right: -15px;
+            border-right: 1px solid rgba(201, 169, 97, 0.55);
+            border-top: 1px solid rgba(201, 169, 97, 0.55);
+            transform: translateY(-50%) rotate(45deg);
+        }
+        .nh-btn:hover {
+            background: rgba(201, 169, 97, 0.07);
+            border-color: rgba(201, 169, 97, 0.7);
+        }
+        .nh-btn:hover::before { left: -19px; }
+        .nh-btn:hover::after { right: -19px; }
+        .news-more a.nh-btn { color: var(--accent); }
         .nh-feat-img {
             display: block;
             overflow: hidden;
@@ -1852,14 +1905,12 @@
                 .news-card {
             display: block;
             text-decoration: none;
-            border: 1px solid var(--border-subtle);
-            background: rgba(16, 13, 11, 0.5);
+            background-color: rgba(16, 13, 11, 0.5);
             padding: 26px;
-            transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
+            overflow: hidden;
         }
         .news-card:hover {
-            border-color: var(--border-medium);
-            background: rgba(201, 169, 97, 0.03);
+            background-color: rgba(201, 169, 97, 0.03);
             transform: translateY(-3px);
         }
         .news-meta {
@@ -3020,13 +3071,6 @@
             background: rgba(12, 10, 8, 0.55);
             padding: 32px 36px 30px;
         }
-        .ob-plaque::before {
-            content: '';
-            position: absolute;
-            inset: 7px;
-            border: 1px solid rgba(201, 169, 97, 0.12);
-            pointer-events: none;
-        }
         .ob-plq-row {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -3487,7 +3531,7 @@ The third crow takes the light.</p>
             <div class="ob-art" id="obArt" aria-hidden="true"></div>
             <div class="ob-rail" id="obRail"></div>
         </div>
-        <div class="ob-plaque reveal" id="obPlaque"></div>
+        <div class="ob-plaque frame-ornate reveal" id="obPlaque"></div>
     </div>
 </section>
 
@@ -3638,7 +3682,7 @@ he comes not on his own.</p>
         </div>
         <div class="nh-feat reveal" id="newsFeat"></div>
         <div class="news-grid reveal-stagger" id="newsHomeGrid"></div>
-        <div class="news-more"><a href="news.html" data-i18n="news_all">All tidings</a></div>
+        <div class="news-more"><a class="nh-btn" href="news.html" data-i18n="news_all">All tidings</a></div>
     </div>
 </section>
 
@@ -5894,7 +5938,7 @@ he comes not on his own.</p>
 
             document.getElementById('newsHomeGrid').innerHTML = DATA.slice(1, 4).map(function(n) {
                 var im = n.image ? '<div class="news-card-img"><img src="' + n.image + '" alt="" loading="lazy"></div>' : '';
-                return '<a class="news-card" href="' + n.url + '">' + im +
+                return '<a class="news-card frame-ornate" href="' + n.url + '">' + im +
                     '<div class="news-meta"><span class="news-tag">' + tagLabel(n.tag, lang) + '</span>' +
                     '<span class="news-date">' + fmtDate(n.date, lang) + '</span></div>' +
                     '<div class="news-card-title">' + T(n) + '</div>' +
