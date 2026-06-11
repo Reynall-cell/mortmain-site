@@ -2753,6 +2753,191 @@
                 transition-duration: 0.01ms !important;
             }
         }
+
+        .ob-head { text-align: center; max-width: 720px; margin: 0 auto 26px; }
+        .ob-prefix {
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            font-size: 0.68rem;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color: var(--accent);
+            opacity: 0.85;
+            margin-bottom: 18px;
+        }
+        .ob-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: clamp(30px, 4.6vw, 48px);
+            color: var(--text-primary);
+            line-height: 1.12;
+            margin-bottom: 18px;
+        }
+        .ob-sub {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.04rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+        .ob-disclaimer {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 0.92rem;
+            color: var(--text-tertiary);
+            text-align: center;
+            max-width: 560px;
+            margin: 0 auto 56px;
+            padding: 14px 22px;
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .ob-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr);
+            gap: 44px;
+            align-items: start;
+        }
+        .ob-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        .ob-cell {
+            aspect-ratio: 1 / 1;
+            border: 1px solid var(--border-subtle);
+            background: rgba(14, 12, 10, 0.45);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            cursor: pointer;
+            padding: 8px 4px;
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+        .ob-cell:hover { border-color: var(--border-medium); background: rgba(201, 169, 97, 0.04); }
+        .ob-cell.active {
+            border-color: rgba(201, 169, 97, 0.55);
+            background: rgba(201, 169, 97, 0.07);
+        }
+        .ob-cell svg { width: 46px; height: 50px; display: block; }
+        .ob-cell .ob-hex { stroke: var(--border-medium); fill: none; transition: stroke 0.3s ease; }
+        .ob-cell.active .ob-hex, .ob-cell:hover .ob-hex { stroke: var(--accent); }
+        .ob-cell .ob-letter {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            fill: var(--text-secondary);
+            transition: fill 0.3s ease;
+        }
+        .ob-cell.active .ob-letter { fill: var(--accent); }
+        .ob-cell-name {
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            font-size: 0.56rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            text-align: center;
+            line-height: 1.25;
+            transition: color 0.3s ease;
+        }
+        .ob-cell.active .ob-cell-name, .ob-cell:hover .ob-cell-name { color: var(--text-primary); }
+
+        .ob-dossier {
+            position: sticky;
+            top: 96px;
+            border: 1px solid var(--border-subtle);
+            background: rgba(12, 10, 8, 0.55);
+            padding: 36px 38px 40px;
+        }
+        .ob-dossier.flash { animation: obFade 0.45s ease; }
+        @keyframes obFade {
+            from { opacity: 0.25; }
+            to { opacity: 1; }
+        }
+        .ob-group {
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+        .ob-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: clamp(26px, 3vw, 34px);
+            color: var(--text-primary);
+            line-height: 1.1;
+            margin-bottom: 6px;
+        }
+        .ob-trade {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 0.96rem;
+            color: var(--text-tertiary);
+            margin-bottom: 20px;
+        }
+        .ob-fate {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.02rem;
+            font-weight: 300;
+            line-height: 1.85;
+            color: var(--text-secondary);
+        }
+        .ob-divider {
+            display: flex;
+            align-items: center;
+            margin: 26px 0;
+        }
+        .ob-divider::before, .ob-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201, 169, 97, 0.28), transparent);
+        }
+        .ob-divider span {
+            margin: 0 14px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            color: var(--accent);
+            opacity: 0.55;
+        }
+        .ob-block { margin-bottom: 18px; }
+        .ob-block:last-child { margin-bottom: 0; }
+        .ob-block-label {
+            font-family: 'Jost', sans-serif;
+            font-weight: 400;
+            font-size: 0.62rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        .ob-block-text {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 0.99rem;
+            font-weight: 300;
+            line-height: 1.75;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 960px) {
+            .ob-layout { grid-template-columns: 1fr; gap: 34px; }
+            .ob-dossier { position: static; }
+        }
+        @media (max-width: 560px) {
+            .ob-grid { grid-template-columns: repeat(3, 1fr); gap: 9px; }
+            .ob-cell svg { width: 38px; height: 42px; }
+            .ob-dossier { padding: 26px 22px 30px; }
+        }
+
+        .roadbook { padding: 120px 0 100px; }
+
     </style>
     <script type="application/ld+json">
     {
@@ -2833,7 +3018,6 @@
             <li><a href="#studio" data-i18n="nav_studio">Studio</a></li>
             <li><a href="news.html" data-i18n="nav_news">News</a></li>
             <li><a href="roadmap.html" data-i18n="nav_roadmap">Roadmap</a></li>
-            <li><a href="origins.html" data-i18n="nav_origins">The Road Book</a></li>
             <li><a href="login.html" data-i18n="nav_login">Sign in</a></li>
         </ul>
         <a class="nav-cta" href="#newsletter" data-i18n="nav_cta">Join the Vigil</a>
@@ -3061,6 +3245,21 @@ The third crow takes the light.</p>
     </div>
     <div class="divider-chapter" data-i18n="ch_3">Capitulum III</div>
 </div>
+
+<section class="roadbook reveal" id="roadbook">
+    <div class="container">
+        <header class="ob-head">
+            <div class="ob-prefix" data-i18n="rb_prefix">— The Road Book —</div>
+            <h2 class="ob-title" data-i18n="rb_title">Who walks the road</h2>
+            <p class="ob-sub" data-i18n="rb_sub">Twenty lives before the plague. Choose who you were — it decides how you survive, what you owe, and what you hear in the dark. No gift makes you stronger against another man: strength lives in iron and hands.</p>
+        </header>
+        <div class="ob-disclaimer" data-i18n="rb_disclaimer">An early design. Gifts and burdens are named in words, not numbers — the numbers will come with the game, and will change more than once.</div>
+        <div class="ob-layout">
+            <div class="ob-grid" id="obGrid"></div>
+            <aside class="ob-dossier" id="obDossier" aria-live="polite"></aside>
+        </div>
+    </div>
+</section>
 
 <section class="rm-teaser-section reveal" id="roadmap-teaser">
     <div class="container">
@@ -3708,7 +3907,6 @@ he comes not on his own.</p>
             nav_login: "Sign in",
             nav_news: "News",
             nav_roadmap: "Roadmap",
-            nav_origins: "The Road Book",
             rm_label: "— The Pilgrim's Road —",
             rm_title: "Where the road stands",
             rm_now: "We are here",
@@ -3730,6 +3928,10 @@ he comes not on his own.</p>
             prom4_b: "You always know what you pay for — before you pay.",
             prom_more: "Read the promises in full",
             nav_cta: "Join the Vigil",
+            rb_prefix: "— The Road Book —",
+            rb_title: "Who walks the road",
+            rb_sub: "Twenty lives before the plague. Choose who you were — it decides how you survive, what you owe, and what you hear in the dark. No gift makes you stronger against another man: strength lives in iron and hands.",
+            rb_disclaimer: "An early design. Gifts and burdens are named in words, not numbers — the numbers will come with the game, and will change more than once.",
             doc_title: "Squalor — A Mortmain Studio Production",
             vigil_incentive: "The First Vigil — our closed test — will be called from these names.",
             footer_news: "News",
@@ -3887,7 +4089,6 @@ he comes not on his own.</p>
             nav_login: "Войти",
             nav_news: "Вести",
             nav_roadmap: "Дорожная карта",
-            nav_origins: "Дорожная книга",
             rm_label: "— Дорога паломника —",
             rm_title: "Где стоит дорога",
             rm_now: "Мы здесь",
@@ -3909,6 +4110,10 @@ he comes not on his own.</p>
             prom4_b: "Ты всегда знаешь, за что платишь — до того, как заплатил.",
             prom_more: "Прочесть клятвы целиком",
             nav_cta: "Встать в дозор",
+            rb_prefix: "— Дорожная книга —",
+            rb_title: "Кто выходит на дорогу",
+            rb_sub: "Двадцать судеб до чумы. Выбери, кем ты был — это решает, как ты выживаешь, чем платишь и что слышишь в темноте. Ни один дар не делает тебя сильнее против другого человека: сила живёт в железе и в руках.",
+            rb_disclaimer: "Ранний замысел. Дары и бремена названы словами, а не числами — числа придут вместе с игрой и изменятся не раз.",
             doc_title: "Squalor — игра Mortmain Studio",
             vigil_incentive: "Первый Дозор — закрытый тест — будет призван из этих имён.",
             footer_news: "Вести",
@@ -3935,7 +4140,6 @@ he comes not on his own.</p>
                     "nav_login": "Логін",
                     "nav_news": "Вісті",
                     "nav_roadmap": "Дорожня карта",
-                    "nav_origins": "Дорожня книга",
                     "rm_label": "— Дорога прочанина —",
                     "rm_title": "Де стоїть дорога",
                     "rm_now": "Ми тут",
@@ -3957,6 +4161,10 @@ he comes not on his own.</p>
                     "prom4_b": "Ти завжди знаєш, за що платиш — перш ніж заплатив.",
                     "prom_more": "Прочитати клятви цілком",
                     "nav_cta": "Стати на варту",
+                    "rb_prefix": "— Дорожня книга —",
+                    "rb_title": "Хто виходить на дорогу",
+                    "rb_sub": "Двадцять доль до чуми. Обери, ким ти був — це вирішує, як ти виживаєш, чим платиш і що чуєш у темряві. Жоден дар не робить тебе сильнішим проти іншої людини: сила живе в залізі та в руках.",
+                    "rb_disclaimer": "Ранній задум. Дари й тягарі названі словами, а не числами — числа прийдуть разом із грою і зміняться не раз.",
                     "doc_title": "Squalor — гра Mortmain Studio",
                     "vigil_incentive": "Першу Варту — закрите випробування — буде покликано з цих імен.",
                     "footer_news": "Вісті",
@@ -4114,7 +4322,6 @@ he comes not on his own.</p>
                     "nav_login": "Anmelden",
                     "nav_news": "Neuigkeiten",
                     "nav_roadmap": "Roadmap",
-                    "nav_origins": "Das Wegbuch",
                     "rm_label": "— Der Pilgerweg —",
                     "rm_title": "Wo die Straße steht",
                     "rm_now": "Wir sind hier",
@@ -4136,6 +4343,10 @@ he comes not on his own.</p>
                     "prom4_b": "Du weißt immer, wofür du zahlst — bevor du zahlst.",
                     "prom_more": "Die Schwüre im Ganzen lesen",
                     "nav_cta": "Der Wacht beitreten",
+                    "rb_prefix": "— Das Wegbuch —",
+                    "rb_title": "Wer die Straße geht",
+                    "rb_sub": "Zwanzig Leben vor der Seuche. Wähle, wer du warst — es entscheidet, wie du überlebst, was du schuldest und was du im Dunkeln hörst. Keine Gabe macht dich stärker gegen einen anderen Menschen: Stärke liegt in Eisen und Händen.",
+                    "rb_disclaimer": "Ein früher Entwurf. Gaben und Bürden sind in Worten benannt, nicht in Zahlen — die Zahlen kommen mit dem Spiel und werden sich mehr als einmal ändern.",
                     "doc_title": "Squalor — Ein Spiel von Mortmain Studio",
                     "vigil_incentive": "Die Erste Wacht — unser geschlossener Test — wird aus diesen Namen berufen.",
                     "footer_news": "Neuigkeiten",
@@ -4213,7 +4424,6 @@ he comes not on his own.</p>
                     "nav_login": "Entrar",
                     "nav_news": "Noticias",
                     "nav_roadmap": "Hoja de ruta",
-                    "nav_origins": "El libro del camino",
                     "rm_label": "— El camino del peregrino —",
                     "rm_title": "Dónde está el camino",
                     "rm_now": "Estamos aquí",
@@ -4235,6 +4445,10 @@ he comes not on his own.</p>
                     "prom4_b": "Siempre sabes por qué pagas — antes de pagar.",
                     "prom_more": "Leer las promesas completas",
                     "nav_cta": "Únete a la Vigilia",
+                    "rb_prefix": "— El libro del camino —",
+                    "rb_title": "Quién sale al camino",
+                    "rb_sub": "Veinte vidas antes de la plaga. Elige quién fuiste: decide cómo sobrevives, qué debes y qué oyes en la oscuridad. Ningún don te hace más fuerte contra otro hombre: la fuerza vive en el hierro y en las manos.",
+                    "rb_disclaimer": "Un diseño temprano. Dones y cargas se nombran con palabras, no con números: los números llegarán con el juego y cambiarán más de una vez.",
                     "doc_title": "Squalor — Un juego de Mortmain Studio",
                     "vigil_incentive": "La Primera Vigilia — nuestra prueba cerrada — será llamada de entre estos nombres.",
                     "footer_news": "Noticias",
@@ -4312,7 +4526,6 @@ he comes not on his own.</p>
                     "nav_login": "Entrar",
                     "nav_news": "Notícias",
                     "nav_roadmap": "Roteiro",
-                    "nav_origins": "O livro da estrada",
                     "rm_label": "— O caminho do peregrino —",
                     "rm_title": "Onde está o caminho",
                     "rm_now": "Estamos aqui",
@@ -4334,6 +4547,10 @@ he comes not on his own.</p>
                     "prom4_b": "Sabes sempre pelo que pagas — antes de pagar.",
                     "prom_more": "Ler as promessas na íntegra",
                     "nav_cta": "Junta-te à Vigília",
+                    "rb_prefix": "— O livro da estrada —",
+                    "rb_title": "Quem percorre a estrada",
+                    "rb_sub": "Vinte vidas antes da peste. Escolhe quem foste — decide como sobrevives, o que deves e o que ouves no escuro. Nenhum dom te torna mais forte contra outro homem: a força vive no ferro e nas mãos.",
+                    "rb_disclaimer": "Um esboço inicial. Dons e fardos têm nome em palavras, não em números — os números chegarão com o jogo e mudarão mais de uma vez.",
                     "doc_title": "Squalor — Um jogo da Mortmain Studio",
                     "vigil_incentive": "A Primeira Vigília — o nosso teste fechado — será chamada de entre estes nomes.",
                     "footer_news": "Notícias",
@@ -4411,7 +4628,6 @@ he comes not on his own.</p>
                     "nav_login": "Connexion",
                     "nav_news": "Nouvelles",
                     "nav_roadmap": "Feuille de route",
-                    "nav_origins": "Le livre de la route",
                     "rm_label": "— Le chemin du pèlerin —",
                     "rm_title": "Où en est la route",
                     "rm_now": "Nous sommes ici",
@@ -4433,6 +4649,10 @@ he comes not on his own.</p>
                     "prom4_b": "Tu sais toujours ce que tu paies — avant de payer.",
                     "prom_more": "Lire les serments en entier",
                     "nav_cta": "Rejoindre la Veille",
+                    "rb_prefix": "— Le livre de la route —",
+                    "rb_title": "Qui prend la route",
+                    "rb_sub": "Vingt vies avant la peste. Choisis qui tu étais — cela décide comment tu survis, ce que tu dois et ce que tu entends dans le noir. Aucun don ne te rend plus fort contre un autre homme : la force vit dans le fer et dans les mains.",
+                    "rb_disclaimer": "Une ébauche. Dons et fardeaux sont nommés en mots, non en chiffres — les chiffres viendront avec le jeu et changeront plus d'une fois.",
                     "doc_title": "Squalor — Un jeu de Mortmain Studio",
                     "vigil_incentive": "La Première Veille — notre test fermé — sera appelée parmi ces noms.",
                     "footer_news": "Nouvelles",
@@ -4510,7 +4730,6 @@ he comes not on his own.</p>
                     "nav_login": "Accedi",
                     "nav_news": "Notizie",
                     "nav_roadmap": "Roadmap",
-                    "nav_origins": "Il libro della strada",
                     "rm_label": "— Il cammino del pellegrino —",
                     "rm_title": "Dove si trova la strada",
                     "rm_now": "Siamo qui",
@@ -4532,6 +4751,10 @@ he comes not on his own.</p>
                     "prom4_b": "Sai sempre per cosa paghi — prima di pagare.",
                     "prom_more": "Leggi le promesse per intero",
                     "nav_cta": "Unisciti alla Veglia",
+                    "rb_prefix": "— Il libro della strada —",
+                    "rb_title": "Chi percorre la strada",
+                    "rb_sub": "Venti vite prima della peste. Scegli chi eri — decide come sopravvivi, cosa devi e cosa senti nel buio. Nessun dono ti rende più forte contro un altro uomo: la forza vive nel ferro e nelle mani.",
+                    "rb_disclaimer": "Un progetto iniziale. Doni e fardelli hanno nomi in parole, non in numeri — i numeri arriveranno con il gioco e cambieranno più di una volta.",
                     "doc_title": "Squalor — Un gioco di Mortmain Studio",
                     "vigil_incentive": "La Prima Veglia — il nostro test chiuso — sarà chiamata tra questi nomi.",
                     "footer_news": "Notizie",
@@ -4609,7 +4832,6 @@ he comes not on his own.</p>
                     "nav_login": "登录",
                     "nav_news": "消息",
                     "nav_roadmap": "路线图",
-                    "nav_origins": "路书",
                     "rm_label": "— 朝圣之路 —",
                     "rm_title": "路走到了哪里",
                     "rm_now": "我们在这里",
@@ -4631,6 +4853,10 @@ he comes not on his own.</p>
                     "prom4_b": "付钱之前，你清楚每一分钱买到什么。",
                     "prom_more": "阅读完整誓言",
                     "nav_cta": "加入守夜",
+                    "rb_prefix": "— 路书 —",
+                    "rb_title": "谁踏上这条路",
+                    "rb_sub": "瘟疫之前的二十种人生。选择你曾是谁——这决定你如何生存、欠下什么、在黑暗中听见什么。没有任何天赋能让你在对抗他人时更强：力量只存在于铁与双手之中。",
+                    "rb_disclaimer": "早期构想。天赋与负担以文字而非数字命名——数字将随游戏而来，并会多次改动。",
                     "doc_title": "Squalor — Mortmain Studio 作品",
                     "vigil_incentive": "首次守夜——我们的封闭测试——将从这些名字中召集。",
                     "footer_news": "消息",
@@ -4708,7 +4934,6 @@ he comes not on his own.</p>
                     "nav_login": "ログイン",
                     "nav_news": "ニュース",
                     "nav_roadmap": "ロードマップ",
-                    "nav_origins": "道の書",
                     "rm_label": "— 巡礼の道 —",
                     "rm_title": "道はどこまで来たか",
                     "rm_now": "いまここ",
@@ -4730,6 +4955,10 @@ he comes not on his own.</p>
                     "prom4_b": "支払う前に、何への支払いかが必ずわかる。",
                     "prom_more": "誓いの全文を読む",
                     "nav_cta": "夜警に加わる",
+                    "rb_prefix": "— 道の書 —",
+                    "rb_title": "誰が道を行くのか",
+                    "rb_sub": "疫病以前の二十の人生。かつての自分を選べ——それが生き延び方、負うもの、闇の中で聞こえるものを決める。いかなる才も他者との戦いで汝を強くはしない。力は鉄と腕に宿る。",
+                    "rb_disclaimer": "初期構想。才と重荷は数字ではなく言葉で記される——数字はゲームと共に訪れ、幾度も変わるだろう。",
                     "doc_title": "Squalor — Mortmain Studio 作品",
                     "vigil_incentive": "最初の夜警——クローズドテスト——は、この名簿から召集される。",
                     "footer_news": "ニュース",
@@ -4824,6 +5053,7 @@ he comes not on his own.</p>
             opt.classList.toggle('active', opt.dataset.lang === lang);
         });
         if (window.renderHomeNews) window.renderHomeNews();
+        if (window.renderRoadBook) window.renderRoadBook();
         try { localStorage.setItem('mortmain_lang', lang); } catch (e) {}
     }
 
@@ -5615,6 +5845,206 @@ he comes not on his own.</p>
         initCookieBanner();
     }
 
+</script>
+
+
+<script>
+var GROUPS = {
+    war:    { en: "War",    ru: "Война",       uk: "Війна" },
+    shadow: { en: "Shadow", ru: "Тень",        uk: "Тінь" },
+    mercy:  { en: "Mercy",  ru: "Милосердие",  uk: "Милосердя" },
+    coin:   { en: "Coin",   ru: "Монета",      uk: "Монета" },
+    burden: { en: "Burden", ru: "Ноша",        uk: "Ноша" },
+    word:   { en: "Word",   ru: "Слово",       uk: "Слово" }
+};
+
+var ORIGINS = [
+    { id: "blacksmith", group: "war", t: {
+        en: { name: "Blacksmith", trade: "A forge in the town ward.", fate: "He hammered horseshoes, nails and scythes — now he beats the dents out of other men's helmets. His forge is gone; any campfire that will have him is forge enough.", gift: "Field repair of gear; in his hands equipment wears twice as slowly.", burden: "Unhurried — his sprint is shorter and costs more." },
+        ru: { name: "Кузнец", trade: "Кузня в посаде.", fate: "Ковал подковы, гвозди и косы — теперь правит вмятины на чужих шлемах. Своего горна больше нет; его горн — любой костёр, у которого пустят посидеть.", gift: "Полевой ремонт снаряжения; вещи в его руках изнашиваются вдвое медленнее.", burden: "Нетороплив — спринт короче и обходится дороже." },
+        uk: { name: "Коваль", trade: "Кузня в посаді.", fate: "Кував підкови, цвяхи й коси — тепер виправляє вм'ятини на чужих шоломах. Власного горна більше немає; його горно — будь-яке багаття, до якого пустять.", gift: "Польовий ремонт спорядження; речі в його руках зношуються вдвічі повільніше.", burden: "Неквапливий — спринт коротший і коштує дорожче." }
+    }},
+    { id: "deserter", group: "war", t: {
+        en: { name: "Deserter", trade: "Pikeman of the fourth banner.", fate: "He stood in the royal cordon around Carrenhold until he understood: the cordon held no city — it held everyone at once. He left at night, with crown property.", gift: "A soldier's start: gambeson, polearm, drill.", burden: "His name is on the rolls — Ostmark Hold is hostile until you earn otherwise." },
+        ru: { name: "Дезертир", trade: "Пикинёр четвёртой хоругви.", fate: "Стоял в королевском оцеплении под Карренхольдом, пока не понял: оцепление держит не город, а всех разом. Ушёл ночью, с казённым добром.", gift: "Военный старт: гамбезон, древковое, выучка строя.", burden: "Его имя в списках — Остмаркская Застава враждебна, пока не выслужишься." },
+        uk: { name: "Дезертир", trade: "Пікінер четвертої корогви.", fate: "Стояв у королівському оточенні під Карренхольдом, доки не зрозумів: облога тримає не місто, а всіх разом. Пішов уночі, з казенним добром.", gift: "Солдатський старт: гамбезон, древкове, вишкіл.", burden: "Його ім'я у списках — Остмаркська Застава ворожа, доки не заслужиш іншого." }
+    }},
+    { id: "sellsword", group: "war", t: {
+        en: { name: "Sellsword", trade: "A spear for hire, twenty years.", fate: "He fought for anyone who paid. Now only the dead are paying — and he sees little difference.", gift: "Knows war as a market: sells iron dearer than anyone, reads a weapon's worth and wear at a glance.", burden: "The contract never burned — a tithe of every haul goes to the brotherhood." },
+        ru: { name: "Наёмник", trade: "Копьё по найму, двадцать лет.", fate: "Воевал за всех, кто платил. Теперь платят только мёртвые — и он не видит большой разницы.", gift: "Знает войну как рынок: железо продаёт дороже всех, качество и износ оружия видит с одного взгляда.", burden: "Контракт не сгорел — десятина с каждой вынесенной добычи уходит братству." },
+        uk: { name: "Найманець", trade: "Спис у найм, двадцять років.", fate: "Воював за всіх, хто платив. Тепер платять тільки мертві — і він не бачить великої різниці.", gift: "Знає війну як ринок: залізо продає найдорожче, якість і знос зброї бачить з одного погляду.", burden: "Контракт не згорів — десятина з кожної винесеної здобичі йде братству." }
+    }},
+    { id: "headsman", group: "war", t: {
+        en: { name: "Headsman", trade: "Master of the scaffold.", fate: "The only man in town paid for what everyone fears. The work ended when death stopped being rare.", gift: "Steady: the dread of the creatures does not touch him; a corpse tells him what killed it, and when.", burden: "Everyone knows his face — traders gouge him, some courts bar their gates." },
+        ru: { name: "Палач", trade: "Заплечных дел мастер.", fate: "Единственный в городе, кому платили за то, чего все боятся. Работа кончилась, когда смерть перестала быть редкостью.", gift: "Не дрогнет: ужас тварей на него не действует; по трупу читает, что убило и когда.", burden: "Лицо знают все — торговцы ломят цены, иные дворы не пускают на порог." },
+        uk: { name: "Кат", trade: "Майстер заплічних справ.", fate: "Єдиний у місті, кому платили за те, чого всі бояться. Робота скінчилася, коли смерть перестала бути рідкістю.", gift: "Не здригнеться: жах потвор на нього не діє; по трупу читає, що вбило й коли.", burden: "Обличчя знають усі — торговці заламують ціни, інші двори не пускають на поріг." }
+    }},
+    { id: "butcher", group: "war", t: {
+        en: { name: "Butcher", trade: "A stall by the cattle rows.", fate: "He broke down carcasses from dawn to dark. The difference between a pig and what walks the roads now proved smaller than he'd like.", gift: "Three times the yield from any carcass — meat, sinew, bone, nothing wasted.", burden: "Blood has soaked in — the creatures scent him farther than other men." },
+        ru: { name: "Мясник", trade: "Лавка у скотных рядов.", fate: "Разделывал туши от зари до зари. Разница между свиньёй и тем, что теперь ходит по дорогам, оказалась меньше, чем хотелось бы.", gift: "Втрое больше годного с любой туши — мясо, жилы, кость, всё в дело.", burden: "Кровь въелась — твари чуют его дальше, чем прочих." },
+        uk: { name: "Різник", trade: "Ятка біля скотних рядів.", fate: "Розбирав туші від зорі до зорі. Різниця між свинею і тим, що тепер ходить дорогами, виявилася меншою, ніж хотілося б.", gift: "Втричі більше придатного з будь-якої туші — м'ясо, жили, кістка, все в діло.", burden: "Кров в'їлася — потвори чують його далі, ніж інших." }
+    }},
+    { id: "poacher", group: "shadow", t: {
+        en: { name: "Poacher", trade: "\u2018The forester's helper,\u2019 as he put it.", fate: "All his life he took another man's game in another man's wood — and was never caught. When the wood died, his snares proved as good for hares as for what walks on two legs.", gift: "Snares, a quiet step, the reading of tracks.", burden: "Old sentences still stand — lawful patrols shoot without hailing." },
+        ru: { name: "Браконьер", trade: "«Помощник лесничего», как сам говорил.", fate: "Всю жизнь брал чужого зверя в чужом лесу — и ни разу не попался. Когда лес умер, силки оказались одинаково годны на зайца и на то, что ходит на двух ногах.", gift: "Силки, тихий шаг, чтение следов.", burden: "Старые приговоры живы — патрули закона стреляют без оклика." },
+        uk: { name: "Браконьєр", trade: "«Помічник лісничого», як сам казав.", fate: "Усе життя брав чужого звіра в чужому лісі — і жодного разу не попався. Коли ліс помер, сильця виявилися однаково придатні на зайця й на те, що ходить на двох ногах.", gift: "Сильця, тихий крок, читання слідів.", burden: "Старі вироки живі — патрулі закону стріляють без оклику." }
+    }},
+    { id: "ratcatcher", group: "shadow", t: {
+        en: { name: "Ratcatcher", trade: "The city's drains and underfloors.", fate: "He knew the city from below — from where no one ever looks. When the city died, the underside stayed the same.", gift: "Slips through narrow crawls and culverts: ways in that no map shows.", burden: "He has survived every sickness there is — and has less health left than any man." },
+        ru: { name: "Крысолов", trade: "Городские стоки и подполы.", fate: "Знал город снизу — оттуда, откуда никто не смотрит. Когда город умер, низ остался прежним.", gift: "Пролезает узкими лазами и стоками: входы, которых нет на картах.", burden: "Переболел всем на свете — здоровья меньше, чем у любого другого." },
+        uk: { name: "Щуролов", trade: "Міські стоки й підпілля.", fate: "Знав місто знизу — звідти, звідки ніхто не дивиться. Коли місто померло, низ лишився тим самим.", gift: "Пролазить вузькими лазами й стоками: входи, яких немає на мапах.", burden: "Перехворів усім на світі — здоров'я менше, ніж у будь-кого." }
+    }},
+    { id: "smuggler", group: "shadow", t: {
+        en: { name: "Smuggler", trade: "Night fords and false bottoms.", fate: "Half a life hiding things, half a life retrieving them. The border died; the trade did not.", gift: "Lays a cache mid-raid: what he hides outlives his death.", burden: "Trusts gold, not people — the courts' favor grows half as fast." },
+        ru: { name: "Контрабандист", trade: "Ночные броды и двойные днища.", fate: "Полжизни прятал, полжизни доставал спрятанное. Граница умерла — ремесло нет.", gift: "Закладывает схрон прямо в рейде: спрятанное переживёт его смерть.", burden: "Верит золоту, не людям — расположение дворов растёт вдвое медленнее." },
+        uk: { name: "Контрабандист", trade: "Нічні броди й подвійні днища.", fate: "Півжиття ховав, півжиття діставав сховане. Кордон помер — ремесло ні.", gift: "Закладає схрон просто в рейді: сховане переживе його смерть.", burden: "Вірить золоту, не людям — прихильність дворів росте вдвічі повільніше." }
+    }},
+    { id: "charburner", group: "shadow", t: {
+        en: { name: "Charcoal-burner", trade: "A charcoal pit in a dead wood.", fate: "He burned charcoal alone, for weeks, in a forest dying before his eyes. The dark stopped being foreign before the firewood ran out.", gift: "Sees in darkness sooner and farther; a fire from a single spark.", burden: "Unused to people: worse at bargaining, his voice carries less in a company." },
+        ru: { name: "Угольщик", trade: "Углежогная яма в мёртвом лесу.", fate: "Жёг уголь один, неделями, в лесу, который умирал у него на глазах. Темнота перестала быть чужой раньше, чем кончились дрова.", gift: "Видит в темноте раньше и дальше; костёр — с одной искры.", burden: "Отвык от людей: торг хуже, голос в группе тише." },
+        uk: { name: "Вугляр", trade: "Вуглярська яма в мертвому лісі.", fate: "Палив вугілля сам, тижнями, у лісі, що помирав у нього на очах. Темрява перестала бути чужою раніше, ніж скінчилися дрова.", gift: "Бачить у темряві раніше й далі; багаття — з однієї іскри.", burden: "Відвик від людей: торг гірший, голос у гурті тихіший." }
+    }},
+    { id: "barber", group: "mercy", t: {
+        en: { name: "Barber-surgeon", trade: "A barber's chair by the market rows.", fate: "He shaved beards, pulled teeth, let blood. War and plague made him a surgeon faster than any university could.", gift: "Stitches wounds — his own and others' — quick and clean.", burden: "His tools are pawned: he starts without a coin, and the moneylender, regrettably, lives." },
+        ru: { name: "Цирюльник", trade: "Цирюльня у рыночных рядов.", fate: "Брил бороды, рвал зубы, отворял кровь. Война и чума доучили до хирурга быстрее любого университета.", gift: "Шьёт раны себе и другим — быстро и надёжно.", burden: "Инструменты заложены: стартует без гроша, и заимодавец, к несчастью, жив." },
+        uk: { name: "Цирульник", trade: "Цирульня біля ринкових рядів.", fate: "Голив бороди, рвав зуби, відчиняв кров. Війна і чума довчили до хірурга швидше за будь-який університет.", gift: "Зашиває рани собі й іншим — швидко й надійно.", burden: "Інструменти заставлені: починає без гроша, і лихвар, на жаль, живий." }
+    }},
+    { id: "herbwife", group: "mercy", t: {
+        en: { name: "Herb-wife", trade: "Herbs for those who can't afford a physician.", fate: "She healed the ones no one else would. Half the town owes her its life — and the same half crosses itself at the sight of her.", gift: "Brews remedies and poisons from what grows underfoot; knows a potion without tasting it.", burden: "To the Pale Communion she is a witch — the church's courts are hostile." },
+        ru: { name: "Знахарка", trade: "Травы для тех, кому лекарь не по карману.", fate: "Лечила тех, кого больше некому. Полгорода обязано ей жизнью — и те же полгорода крестятся, завидев её.", gift: "Варит снадобья и яды из подножного; распознаёт зелья без пробы.", burden: "Для Бледного Причастия она ведьма — церковные дворы враждебны." },
+        uk: { name: "Знахарка", trade: "Трави для тих, кому лікар не по кишені.", fate: "Лікувала тих, кого більше нікому. Півміста завдячує їй життям — і те саме півміста хреститься, побачивши її.", gift: "Варить зілля й отрути з того, що під ногами; розпізнає трунок без проби.", burden: "Для Блідого Причастя вона відьма — церковні двори ворожі." }
+    }},
+    { id: "cook", group: "mercy", t: {
+        en: { name: "Cook", trade: "A garrison kitchen.", fate: "He fed the garrison and knew the truth: an army marches on its stomach. The garrison is gone; the stomachs remain.", gift: "Makes a hot meal of whatever's found: food at his fire heals and keeps a whole company fed for long.", burden: "He fed himself too well — loud at a run, heavy on a jump." },
+        ru: { name: "Повар", trade: "Гарнизонная кухня.", fate: "Кормил гарнизон и знал: армия марширует желудком. Гарнизона больше нет — желудки остались.", gift: "Из любых находок собирает горячее: еда у его костра лечит и надолго насыщает всю группу.", burden: "Отъелся сам — шумит на бегу, прыжки тяжелее." },
+        uk: { name: "Кухар", trade: "Гарнізонна кухня.", fate: "Годував гарнізон і знав: армія марширує шлунком. Гарнізону більше немає — шлунки лишилися.", gift: "З будь-яких знахідок збирає гаряче: їжа біля його багаття лікує й надовго насичує весь гурт.", burden: "Від'ївся сам — шумить на бігу, стрибки важчі." }
+    }},
+    { id: "moneylender", group: "coin", t: {
+        en: { name: "Moneylender", trade: "An office of scales and ledgers.", fate: "He lent at interest while money still meant something. The ledgers burned, the debtors fled or died — but he never unlearned how to count.", gift: "The richest start of all; sees a thing's true worth at a glance.", burden: "His hands counted, never carried — his stamina runs notably shallow." },
+        ru: { name: "Ростовщик", trade: "Контора с весами и долговыми книгами.", fate: "Давал в рост, когда деньги ещё что-то значили. Книги сгорели, должники разбежались или умерли — но считать он не разучился.", gift: "Самый богатый старт; настоящую цену вещи видит с одного взгляда.", burden: "Руки считали, не держали — запас выносливости заметно ниже." },
+        uk: { name: "Лихвар", trade: "Контора з терезами й борговими книгами.", fate: "Давав у ріст, коли гроші ще щось важили. Книги згоріли, боржники розбіглися чи померли — але рахувати він не розучився.", gift: "Найбагатший старт; справжню ціну речі бачить з одного погляду.", burden: "Руки рахували, не тримали — запас витривалості помітно нижчий." }
+    }},
+    { id: "innkeeper", group: "coin", t: {
+        en: { name: "Innkeeper", trade: "An inn by the high road.", fate: "Twenty years of listening to everyone who drank. Drunk men tell the truth; sober men too, if you pour.", gift: "Sets out knowing more rumors: his map bears extra marks; he sells dearer.", burden: "Years behind the counter: heavy, first to gasp in a fight." },
+        ru: { name: "Трактирщик", trade: "Трактир у тракта.", fate: "Двадцать лет слушал всех, кто пил. Пьяные говорят правду; трезвые — тем более, если налить.", gift: "Выходит, зная больше слухов: на его карте отмечено лишнее; продаёт дороже.", burden: "Годы за стойкой: грузен, в драке задыхается первым." },
+        uk: { name: "Корчмар", trade: "Корчма біля шляху.", fate: "Двадцять років слухав усіх, хто пив. П'яні кажуть правду; тверезі — й поготів, якщо налити.", gift: "Виходить, знаючи більше чуток: на його мапі позначено зайве; продає дорожче.", burden: "Роки за шинквасом: огрядний, у бійці задихається першим." }
+    }},
+    { id: "gravedigger", group: "burden", t: {
+        en: { name: "Gravedigger", trade: "The burial ground beyond the wall.", fate: "When the plague came, his was the only trade that prospered. He dug, carried, laid them in rows — and was first to notice that some graves stood empty by morning.", gift: "The strongest back of all; senses what the dead keep hidden.", burden: "He smells of his trade — people keep their distance, and prices show it." },
+        ru: { name: "Могильщик", trade: "Погост за стеной.", fate: "Когда пришёл мор, его ремесло единственное пошло в гору. Копал, носил, складывал — и первым заметил, что некоторые ямы наутро пустеют.", gift: "Спина держит больше всех; чует тайники при мертвецах.", burden: "От него пахнет ремеслом — люди сторонятся, и цены это показывают." },
+        uk: { name: "Гробар", trade: "Цвинтар за муром.", fate: "Коли прийшов мор, його ремесло єдине пішло вгору. Копав, носив, складав — і першим помітив, що деякі ями на ранок порожніють.", gift: "Спина тримає більше за всіх; чує схованки при мерцях.", burden: "Від нього пахне ремеслом — люди сторояться, і ціни це показують." }
+    }},
+    { id: "ferryman", group: "burden", t: {
+        en: { name: "Ferryman", trade: "A ferry across the Grey Water.", fate: "He carried across the river anyone who paid. Once — the wrong ones. He takes his fare in advance now.", gift: "Water is home: fords, crossings, never sinks under a load; all four courts receive him equally.", burden: "Superstitious to the bone: takes nothing from the dead without leaving a coin in its place." },
+        ru: { name: "Паромщик", trade: "Паром через Серую воду.", fate: "Перевозил через реку всех, кто платил. Однажды — не тех. С тех пор берёт плату вперёд.", gift: "Вода ему дом: броды, переправы, не тонет с грузом; все четыре двора принимают его ровно.", burden: "Суеверен до костей: не возьмёт с мёртвого ничего, не оставив монеты взамен." },
+        uk: { name: "Поромник", trade: "Пором через Сіру воду.", fate: "Перевозив через річку всіх, хто платив. Одного разу — не тих. Відтоді бере плату наперед.", gift: "Вода йому дім: броди, переправи, не тоне з вантажем; усі чотири двори приймають його рівно.", burden: "Забобонний до кісток: не візьме з мертвого нічого, не лишивши монети навзамін." }
+    }},
+    { id: "miner", group: "burden", t: {
+        en: { name: "Miner", trade: "The quarries of Vohrmark.", fate: "He broke stone until the shafts were closed. Dark, tight and heavy — three things he does not fear.", gift: "Tireless under a load: the overweight penalty cuts him half as deep; a pick breaks rubble and doors.", burden: "Dust has eaten his lungs — a long run ends in coughing heard from afar." },
+        ru: { name: "Рудокоп", trade: "Каменоломни Вохрмарка.", fate: "Долбил камень, пока штольни не закрыли. Тьма, теснота и тяжесть — три вещи, которых он не боится.", gift: "Под грузом не знает усталости: штраф перевеса вдвое мягче; кирка ломает завалы и двери.", burden: "Лёгкие съедены пылью — долгий бег обрывается кашлем, который слышно издалека." },
+        uk: { name: "Рудокоп", trade: "Каменоломні Вохрмарку.", fate: "Довбав камінь, доки штольні не закрили. Темрява, тіснота й тягар — три речі, яких він не боїться.", gift: "Під вантажем не знає втоми: штраф переваги вдвічі м'якший; кайло ламає завали й двері.", burden: "Легені з'їдені пилом — довгий біг уривається кашлем, чутним здалеку." }
+    }},
+    { id: "unfrocked", group: "word", t: {
+        en: { name: "Defrocked Monk", trade: "A reader-brother of the Pale Communion.", fate: "Seven winters he sang in the cloister, until he asked aloud a question to which the abbot's only answer was the whip. They stripped his orders — they could not strip his letters.", gift: "Reads any script; understands the rites and the nature of the singing dead.", burden: "To the Church he is no heretic — he is a witness. Her courts are shut, her hounds remember." },
+        ru: { name: "Расстрига", trade: "Брат-чтец обители Бледного Причастия.", fate: "Семь зим пел в обители, пока не задал вслух вопрос, на который у настоятеля нашёлся только кнут. Сан сняли — грамоту снять не смогли.", gift: "Читает любые письмена; понимает обряды и природу певчих мертвецов.", burden: "Для Церкви он не еретик — свидетель. Её дворы закрыты, её псы помнят." },
+        uk: { name: "Розстрига", trade: "Брат-читець обителі Блідого Причастя.", fate: "Сім зим співав в обителі, доки не поставив уголос питання, на яке в настоятеля знайшовся тільки батіг. Сан зняли — грамоти зняти не змогли.", gift: "Читає будь-які письмена; розуміє обряди й природу співочих мерців.", burden: "Для Церкви він не єретик — свідок. Її двори зачинені, її пси пам'ятають." }
+    }},
+    { id: "scrivener", group: "word", t: {
+        en: { name: "Scrivener", trade: "The magistrate's books.", fate: "He kept the magistrate's books while there was anything to keep. The town ended; the habit of writing things down did not.", gift: "The most detailed map of all: he marks, remembers, knows documents and seals on sight.", burden: "Eyes ruined at the desk: poor at distance, the world past thirty paces is a blur." },
+        ru: { name: "Писарь", trade: "Книги магистрата.", fate: "Вёл книги магистрата, пока было что вести. Город кончился — привычка записывать осталась.", gift: "Его карта подробнее всех: отмечает, помнит, опознаёт документы и печати.", burden: "Глаза посажены за конторкой: вдаль видит скверно, мир за тридцать шагов размыт." },
+        uk: { name: "Писар", trade: "Книги магістрату.", fate: "Вів книги магістрату, доки було що вести. Місто скінчилося — звичка записувати лишилася.", gift: "Його мапа найдокладніша: позначає, пам'ятає, впізнає документи й печатки.", burden: "Очі посаджені за конторкою: вдалину бачить кепсько, світ за тридцять кроків розмитий." }
+    }},
+    { id: "bellringer", group: "word", t: {
+        en: { name: "Bell-ringer", trade: "The bell tower of Saint Iulia's cathedral.", fate: "Thirty years he held Carrenhold's voice in his hands. He rang the alarm to the very last — and heard the city answer ever more faintly.", gift: "Hears farther than anyone: footsteps, steel, bells — and from where.", burden: "His left ear is dead: on his deaf side, the world is silent." },
+        ru: { name: "Звонарь", trade: "Колокольня собора Святой Иулии.", fate: "Тридцать лет держал голос Карренхольда в руках. Звонил набат до последнего — и слышал, как город отвечает всё тише.", gift: "Слышит дальше всех: шаги, сталь, колокола — и откуда.", burden: "Левое ухо мертво: с глухой стороны мир молчит." },
+        uk: { name: "Дзвонар", trade: "Дзвіниця собору Святої Іулії.", fate: "Тридцять років тримав голос Карренхольда в руках. Бив на сполох до останнього — і чув, як місто відповідає дедалі тихіше.", gift: "Чує далі за всіх: кроки, сталь, дзвони — і звідки.", burden: "Ліве вухо мертве: з глухого боку світ мовчить." }
+    }}
+];
+
+(function() {
+    var LBL = {
+        en: { trade: "Trade before the plague", gift: "Gift",  burden: "Burden" },
+        ru: { trade: "Ремесло прежде чумы",     gift: "Дар",   burden: "Бремя" },
+        uk: { trade: "Ремесло до чуми",         gift: "Дар",   burden: "Тягар" }
+    };
+    var grid, dossier, selected = 0;
+
+    function lang() {
+        var l = window.LANG;
+        if (!l) { try { l = localStorage.getItem('mortmain_lang'); } catch (e) {} }
+        return LBL[l] ? l : 'en';
+    }
+
+    function cellSvg(letter) {
+        return '<svg viewBox="0 0 46 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'
+            + '<polygon class="ob-hex" points="23,2 43,13 43,37 23,48 3,37 3,13" stroke-width="1"/>'
+            + '<text class="ob-letter" x="23" y="26" font-size="20" text-anchor="middle" dominant-baseline="central">' + letter + '</text>'
+            + '</svg>';
+    }
+
+    function buildGrid() {
+        var L = lang();
+        grid.innerHTML = '';
+        ORIGINS.forEach(function(o, i) {
+            var cell = document.createElement('button');
+            cell.type = 'button';
+            cell.className = 'ob-cell' + (i === selected ? ' active' : '');
+            var t = o.t[L] || o.t.en;
+            cell.innerHTML = cellSvg(t.name.charAt(0)) + '<span class="ob-cell-name">' + t.name + '</span>';
+            cell.addEventListener('click', function() {
+                selected = i;
+                grid.querySelectorAll('.ob-cell').forEach(function(c, j) {
+                    c.classList.toggle('active', j === i);
+                });
+                renderDossier(true);
+                if (window.innerWidth < 960) {
+                    dossier.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            });
+            grid.appendChild(cell);
+        });
+    }
+
+    function renderDossier(flash) {
+        var L = lang();
+        var lbl = LBL[L] || LBL.en;
+        var o = ORIGINS[selected];
+        var t = o.t[L] || o.t.en;
+        var g = GROUPS[o.group][L] || GROUPS[o.group].en;
+        dossier.innerHTML =
+            '<div class="ob-group">' + g + '</div>'
+            + '<h3 class="ob-name">' + t.name + '</h3>'
+            + '<div class="ob-trade">' + lbl.trade + ': ' + t.trade + '</div>'
+            + '<p class="ob-fate">' + t.fate + '</p>'
+            + '<div class="ob-divider" aria-hidden="true"><span>\u2720</span></div>'
+            + '<div class="ob-block"><div class="ob-block-label">' + lbl.gift + '</div><div class="ob-block-text">' + t.gift + '</div></div>'
+            + '<div class="ob-block"><div class="ob-block-label">' + lbl.burden + '</div><div class="ob-block-text">' + t.burden + '</div></div>';
+        if (flash) {
+            dossier.classList.remove('flash');
+            void dossier.offsetWidth;
+            dossier.classList.add('flash');
+        }
+    }
+
+    window.renderRoadBook = function() {
+        if (!grid) return;
+        buildGrid();
+        renderDossier(false);
+    };
+
+    function init() {
+        grid = document.getElementById('obGrid');
+        dossier = document.getElementById('obDossier');
+        if (!grid || !dossier) return;
+        window.renderRoadBook();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
 </script>
 
 <div class="mobile-menu" id="mobileMenu">
