@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>From the forge: directional combat — Squalor / Mortmain Studio</title>
     <meta name="description" content="The first pillar stands: a report on Squalor's directional combat.">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="From the forge: directional combat — Squalor">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Squalor — From the forge: directional combat">
     <meta property="og:description" content="The first pillar stands: a report on Squalor's directional combat.">
-    <meta property="og:image" content="https://mortmainstudio.com/og-image.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image" content="https://mortmainstudio.com/mech-1.jpg">
+    <meta property="og:image:width" content="1600">
+    <meta property="og:image:height" content="900">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="/favicon.ico" sizes="32x32">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -19,18 +19,12 @@
     <link rel="canonical" href="https://mortmainstudio.com/news/2026-06-03-forge-report-1.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../shared.css">
-    <style>
-        .art-meta { display:flex; justify-content:center; align-items:center; gap:16px; margin-bottom:32px; }
-        .art-tag { font-family:'Cinzel','Tenor Sans',serif; font-size:9px; letter-spacing:0.22em; text-transform:uppercase; color:var(--accent-hover); border:1px solid var(--border-medium); padding:3px 10px; }
-        .art-date { font-family:'Inter',sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--text-tertiary); }
-        .back-link { display:inline-block; margin-top:48px; font-family:'Cinzel','Tenor Sans',serif; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-tertiary); text-decoration:none; transition:color 0.3s ease; }
-        .back-link:hover { color: var(--text-primary); }
-    </style>
 </head>
-<body>
+<body class="art-page">
 
+<div class="art-hero" style="background-image:url('../mech-1.jpg')" aria-hidden="true"></div>
 <div class="page-frame"><div class="corner-bl"></div><div class="corner-br"></div></div>
 
 <nav id="nav">
@@ -68,17 +62,37 @@
         <div class="art-meta">
             <span class="art-tag" data-i18n="tag">Patch</span>
             <span class="art-date">3 · VI · MMXXVI</span>
+            <button class="art-share" id="artShare" type="button" data-i18n="share">Copy link</button>
         </div>
 
         <div class="page-divider"><div class="page-divider-symbol">✠</div></div>
 
+        <div class="art-version" data-i18n="ver">Workbench</div>
         <div class="page-section">
-            <p data-i18n="p1">The first pillar stands. Directional strikes are in: choose where the blow comes from, and your opponent must read it before it lands. Stamina governs everything — swing wild and the sun will set on you early.</p>
-            <p data-i18n="p2">What works on the bench today: directional attack chains, stamina costs for light and heavy actions, and passive directional blocking. The duel already feels like what we promised — a conversation in steel.</p>
-            <p data-i18n="p3">Next on the anvil: animation polish and the block-parry boundary. We will ring the bell again when there is something worth showing.</p>
+            <p data-i18n="p1">P1</p>
+            <h2 class="art-h2" data-i18n="h_bench">On the bench today</h2>
+            <ul class="art-list">
+                <li data-i18n="li1">L1</li>
+                <li data-i18n="li2">L2</li>
+                <li data-i18n="li3">L3</li>
+            </ul>
+            <p data-i18n="p2b">P2b</p>
+            <p data-i18n="p3">P3</p>
         </div>
 
-        <a href="../news.html" class="back-link" data-i18n="back">← All tidings</a>
+        <div class="art-nav frame-ornate">
+            <a class="art-nav-cell art-nav-prev" id="artPrev" href="../news.html">
+                <span class="art-nav-label" data-i18n="prev">Previous</span>
+                <span class="art-nav-title"></span>
+            </a>
+            <a class="art-nav-cell art-nav-list" href="../news.html">
+                <span class="art-nav-label" data-i18n="list">✠ All tidings ✠</span>
+            </a>
+            <a class="art-nav-cell art-nav-next" id="artNext" href="../news.html">
+                <span class="art-nav-label" data-i18n="next">Next</span>
+                <span class="art-nav-title"></span>
+            </a>
+        </div>
     </div>
 </main>
 
@@ -96,36 +110,135 @@
 <script>
 window.pageTranslations = {
     en: {
-        nav_game: "The Game", nav_news: "News", nav_about: "About",
-        title: "From the forge: directional combat", tag: "Patch",
-        p1: "The first pillar stands. Directional strikes are in: choose where the blow comes from, and your opponent must read it before it lands. Stamina governs everything — swing wild and the sun will set on you early.",
-        p2: "What works on the bench today: directional attack chains, stamina costs for light and heavy actions, and passive directional blocking. The duel already feels like what we promised — a conversation in steel.",
-        p3: "Next on the anvil: animation polish and the block-parry boundary. We will ring the bell again when there is something worth showing.",
-        back: "← All tidings",
+        nav_game: "The Game",
+        nav_news: "News",
+        nav_about: "About",
+        share: "Copy link",
+        shared: "Link copied ✓",
+        prev: "Previous",
+        next: "Next",
+        list: "✠ All tidings ✠",
         footer_copyright: "© MMXXVI · Mortmain Studio · All rights reserved",
-        legal_privacy: "Privacy", legal_terms: "Terms"
+        legal_privacy: "Privacy",
+        legal_terms: "Terms",
+        title: "From the forge: directional combat",
+        tag: "Patch",
+        ver: "Workbench: UE 5.7.4 · combat core v0.1",
+        p1: "The first pillar stands. Directional strikes are in: choose where the blow comes from, and your opponent must read it before it lands. Stamina governs everything — swing wild and the sun will set on you early.",
+        h_bench: "On the bench today",
+        li1: "Directional attack chains.",
+        li2: "Stamina costs for light and heavy actions.",
+        li3: "Passive directional blocking.",
+        p2b: "The duel already feels like what we promised — a conversation in steel.",
+        p3: "Next on the anvil: animation polish and the block-parry boundary. We will ring the bell again when there is something worth showing."
     },
     ru: {
-        nav_game: "Игра", nav_news: "Вести", nav_about: "О нас",
-        title: "Из кузницы: направленный бой", tag: "Патч",
-        p1: "Первый столп стоит. Направленные удары работают: выбираешь, откуда придёт удар, а противник должен прочитать его раньше, чем он дойдёт. Выносливость правит всем — маши без ума, и солнце для тебя сядет рано.",
-        p2: "Что работает на верстаке сегодня: цепочки направленных атак, расход выносливости на лёгкие и тяжёлые действия и пассивный направленный блок. Дуэль уже ощущается тем, что мы обещали — разговором на стали.",
-        p3: "Дальше на наковальне: полировка анимаций и граница между блоком и парированием. Позвоним в колокол снова, когда будет что показать.",
-        back: "← Все вести",
+        nav_game: "Игра",
+        nav_news: "Вести",
+        nav_about: "О нас",
+        share: "Скопировать ссылку",
+        shared: "Ссылка скопирована ✓",
+        prev: "Предыдущая",
+        next: "Следующая",
+        list: "✠ Все вести ✠",
         footer_copyright: "© MMXXVI · Mortmain Studio · Все права защищены",
-        legal_privacy: "Приватность", legal_terms: "Условия"
+        legal_privacy: "Приватность",
+        legal_terms: "Условия",
+        title: "Из кузницы: направленный бой",
+        tag: "Патч",
+        ver: "Верстак: UE 5.7.4 · ядро боя v0.1",
+        p1: "Первый столп стоит. Направленные удары работают: выбираешь, откуда придёт удар, а противник должен прочитать его раньше, чем он дойдёт. Выносливость правит всем — маши без ума, и солнце для тебя сядет рано.",
+        h_bench: "На верстаке сегодня",
+        li1: "Цепочки направленных атак.",
+        li2: "Расход выносливости на лёгкие и тяжёлые действия.",
+        li3: "Пассивный направленный блок.",
+        p2b: "Дуэль уже ощущается тем, что мы обещали — разговором на стали.",
+        p3: "Дальше на наковальне: полировка анимаций и граница между блоком и парированием. Позвоним в колокол снова, когда будет что показать."
     },
     uk: {
-        nav_game: "Гра", nav_news: "Вісті", nav_about: "Про нас",
-        title: "З кузні: напрямний бій", tag: "Патч",
-        p1: "Перший стовп стоїть. Напрямні удари працюють: обираєш, звідки прийде удар, а супротивник мусить прочитати його раніше, ніж він дійде. Витривалість править усім — маши без тями, і сонце для тебе сяде рано.",
-        p2: "Що працює на верстаку сьогодні: ланцюжки напрямних атак, витрати витривалості на легкі й важкі дії та пасивний напрямний блок. Двобій уже відчувається тим, що ми обіцяли — розмовою на сталі.",
-        p3: "Далі на ковадлі: полірування анімацій і межа між блоком та паруванням. Подзвонимо у дзвін знову, коли буде що показати.",
-        back: "← Усі вісті",
+        nav_game: "Гра",
+        nav_news: "Вісті",
+        nav_about: "Про нас",
+        share: "Скопіювати посилання",
+        shared: "Посилання скопійовано ✓",
+        prev: "Попередня",
+        next: "Наступна",
+        list: "✠ Усі вісті ✠",
         footer_copyright: "© MMXXVI · Mortmain Studio · Усі права захищені",
-        legal_privacy: "Приватність", legal_terms: "Умови"
+        legal_privacy: "Приватність",
+        legal_terms: "Умови",
+        title: "З кузні: напрямний бій",
+        tag: "Патч",
+        ver: "Верстак: UE 5.7.4 · ядро бою v0.1",
+        p1: "Перший стовп стоїть. Напрямні удари працюють: обираєш, звідки прийде удар, а супротивник мусить прочитати його раніше, ніж він дійде. Витривалість править усім — маши без тями, і сонце для тебе сяде рано.",
+        h_bench: "На верстаку сьогодні",
+        li1: "Ланцюжки напрямних атак.",
+        li2: "Витрати витривалості на легкі й важкі дії.",
+        li3: "Пасивний напрямний блок.",
+        p2b: "Двобій уже відчувається тим, що ми обіцяли — розмовою на сталі.",
+        p3: "Далі на ковадлі: полірування анімацій і межа між блоком та паруванням. Подзвонимо у дзвін знову, коли буде що показати."
     }
 };
+
+(function() {
+    var ID = "2026-06-03-forge-report-1";
+    var ITEMS = null, IDX = -1;
+
+    function lang() {
+        var l = window.LANG;
+        if (!l) { try { l = localStorage.getItem('mortmain_lang'); } catch (e) {} }
+        return (l === 'ru' || l === 'uk') ? l : 'en';
+    }
+
+    // --- Копирование ссылки ---
+    var sb = document.getElementById('artShare');
+    if (sb && navigator.clipboard) {
+        sb.addEventListener('click', function() {
+            navigator.clipboard.writeText(location.href).then(function() {
+                var t = window.pageTranslations[lang()] || window.pageTranslations.en;
+                sb.textContent = t.shared;
+                sb.classList.add('done');
+                setTimeout(function() {
+                    var t2 = window.pageTranslations[lang()] || window.pageTranslations.en;
+                    sb.textContent = t2.share;
+                    sb.classList.remove('done');
+                }, 2000);
+            });
+        });
+    }
+
+    // --- Соседние вести ---
+    function applyNav() {
+        if (!ITEMS || IDX < 0) return;
+        var L = lang();
+        function set(el, item) {
+            if (!el) return;
+            if (!item) { el.style.visibility = 'hidden'; return; }
+            el.style.visibility = '';
+            el.href = '../' + item.url;
+            var ttl = (item.title && (item.title[L] || item.title.en)) || '';
+            var tEl = el.querySelector('.art-nav-title');
+            if (tEl) tEl.textContent = ttl;
+        }
+        set(document.getElementById('artPrev'), ITEMS[IDX + 1]); // старее
+        set(document.getElementById('artNext'), ITEMS[IDX - 1]); // свежее
+    }
+
+    fetch('../news.json')
+        .then(function(r) { if (!r.ok) throw 0; return r.json(); })
+        .then(function(j) {
+            ITEMS = j.sort(function(x, y) { return y.date.localeCompare(x.date); });
+            IDX = ITEMS.findIndex(function(n) { return n.id === ID; });
+            applyNav();
+        })
+        .catch(function() {});
+
+    document.addEventListener('click', function(e) {
+        if (e.target.closest && e.target.closest('.lang-option')) {
+            setTimeout(applyNav, 60);
+        }
+    });
+})();
 </script>
 <script src="../shared.js"></script>
 

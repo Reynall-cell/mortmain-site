@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The first bell — Squalor / Mortmain Studio</title>
     <meta name="description" content="The bell rings for the first time: the site is live and the Vigil is gathering.">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="The first bell — Squalor">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Squalor — The first bell">
     <meta property="og:description" content="The bell rings for the first time: the site is live and the Vigil is gathering.">
-    <meta property="og:image" content="https://mortmainstudio.com/og-image.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image" content="https://mortmainstudio.com/roadmap-gates.jpg">
+    <meta property="og:image:width" content="1600">
+    <meta property="og:image:height" content="900">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="/favicon.ico" sizes="32x32">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -19,18 +19,12 @@
     <link rel="canonical" href="https://mortmainstudio.com/news/2026-06-10-gates-open.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&family=Tenor+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../shared.css">
-    <style>
-        .art-meta { display:flex; justify-content:center; align-items:center; gap:16px; margin-bottom:32px; }
-        .art-tag { font-family:'Cinzel','Tenor Sans',serif; font-size:9px; letter-spacing:0.22em; text-transform:uppercase; color:var(--accent-hover); border:1px solid var(--border-medium); padding:3px 10px; }
-        .art-date { font-family:'Inter',sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--text-tertiary); }
-        .back-link { display:inline-block; margin-top:48px; font-family:'Cinzel','Tenor Sans',serif; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-tertiary); text-decoration:none; transition:color 0.3s ease; }
-        .back-link:hover { color: var(--text-primary); }
-    </style>
 </head>
-<body>
+<body class="art-page">
 
+<div class="art-hero" style="background-image:url('../roadmap-gates.jpg')" aria-hidden="true"></div>
 <div class="page-frame"><div class="corner-bl"></div><div class="corner-br"></div></div>
 
 <nav id="nav">
@@ -68,18 +62,31 @@
         <div class="art-meta">
             <span class="art-tag" data-i18n="tag">News</span>
             <span class="art-date">10 · VI · MMXXVI</span>
+            <button class="art-share" id="artShare" type="button" data-i18n="share">Copy link</button>
         </div>
 
         <div class="page-divider"><div class="page-divider-symbol">✠</div></div>
 
         <div class="page-section">
-            <p data-i18n="p1">Mortmain Studio steps out of the dark. This site is now live, and with it — the Vigil: our list of those who want to know first when the dark begins.</p>
-            <p data-i18n="p2">Squalor is a multiplayer extraction game set in a medieval kingdom devoured by plague. Directional melee combat that takes skill, not luck. Loot you can lose. A world that bites back. No magic, no mercy.</p>
-            <p data-i18n="p3">We are a small workshop, and we will speak rarely — only when the bell has something to ring for. Combat is being forged right now; reports from the workbench will appear here as the work allows.</p>
-            <p data-i18n="p4">Leave your name with the watch. You will be the first to know.</p>
+            <p data-i18n="p1">P1</p>
+            <p data-i18n="p2">P2</p>
+            <p data-i18n="p3">P3</p>
+            <p data-i18n="p4">P4</p>
         </div>
 
-        <a href="../news.html" class="back-link" data-i18n="back">← All tidings</a>
+        <div class="art-nav frame-ornate">
+            <a class="art-nav-cell art-nav-prev" id="artPrev" href="../news.html">
+                <span class="art-nav-label" data-i18n="prev">Previous</span>
+                <span class="art-nav-title"></span>
+            </a>
+            <a class="art-nav-cell art-nav-list" href="../news.html">
+                <span class="art-nav-label" data-i18n="list">✠ All tidings ✠</span>
+            </a>
+            <a class="art-nav-cell art-nav-next" id="artNext" href="../news.html">
+                <span class="art-nav-label" data-i18n="next">Next</span>
+                <span class="art-nav-title"></span>
+            </a>
+        </div>
     </div>
 </main>
 
@@ -97,39 +104,123 @@
 <script>
 window.pageTranslations = {
     en: {
-        nav_game: "The Game", nav_news: "News", nav_about: "About",
-        title: "The first bell", tag: "News",
+        nav_game: "The Game",
+        nav_news: "News",
+        nav_about: "About",
+        share: "Copy link",
+        shared: "Link copied ✓",
+        prev: "Previous",
+        next: "Next",
+        list: "✠ All tidings ✠",
+        footer_copyright: "© MMXXVI · Mortmain Studio · All rights reserved",
+        legal_privacy: "Privacy",
+        legal_terms: "Terms",
+        title: "The first bell",
+        tag: "News",
         p1: "Mortmain Studio steps out of the dark. This site is now live, and with it — the Vigil: our list of those who want to know first when the dark begins.",
         p2: "Squalor is a multiplayer extraction game set in a medieval kingdom devoured by plague. Directional melee combat that takes skill, not luck. Loot you can lose. A world that bites back. No magic, no mercy.",
         p3: "We are a small workshop, and we will speak rarely — only when the bell has something to ring for. Combat is being forged right now; reports from the workbench will appear here as the work allows.",
-        p4: "Leave your name with the watch. You will be the first to know.",
-        back: "← All tidings",
-        footer_copyright: "© MMXXVI · Mortmain Studio · All rights reserved",
-        legal_privacy: "Privacy", legal_terms: "Terms"
+        p4: "Leave your name with the watch. You will be the first to know."
     },
     ru: {
-        nav_game: "Игра", nav_news: "Вести", nav_about: "О нас",
-        title: "Первый колокол", tag: "Новость",
+        nav_game: "Игра",
+        nav_news: "Вести",
+        nav_about: "О нас",
+        share: "Скопировать ссылку",
+        shared: "Ссылка скопирована ✓",
+        prev: "Предыдущая",
+        next: "Следующая",
+        list: "✠ Все вести ✠",
+        footer_copyright: "© MMXXVI · Mortmain Studio · Все права защищены",
+        legal_privacy: "Приватность",
+        legal_terms: "Условия",
+        title: "Первый колокол",
+        tag: "Новость",
         p1: "Mortmain Studio выходит из темноты. Этот сайт открыт, а вместе с ним — Дозор: список тех, кто хочет узнать первым, когда начнётся темнота.",
         p2: "Squalor — мультиплеерная extraction-игра в средневековом королевстве, пожранном чумой. Направленный ближний бой, требующий мастерства, а не везения. Лут, который можно потерять. Мир, который кусается в ответ. Без магии, без пощады.",
         p3: "Мы маленькая мастерская и говорить будем редко — только когда колоколу есть ради чего звонить. Бой куётся прямо сейчас; отчёты с верстака будут появляться здесь по мере работы.",
-        p4: "Оставь своё имя страже. Ты узнаешь первым.",
-        back: "← Все вести",
-        footer_copyright: "© MMXXVI · Mortmain Studio · Все права защищены",
-        legal_privacy: "Приватность", legal_terms: "Условия"
+        p4: "Оставь своё имя страже. Ты узнаешь первым."
     },
     uk: {
-        nav_game: "Гра", nav_news: "Вісті", nav_about: "Про нас",
-        title: "Перший дзвін", tag: "Новина",
+        nav_game: "Гра",
+        nav_news: "Вісті",
+        nav_about: "Про нас",
+        share: "Скопіювати посилання",
+        shared: "Посилання скопійовано ✓",
+        prev: "Попередня",
+        next: "Наступна",
+        list: "✠ Усі вісті ✠",
+        footer_copyright: "© MMXXVI · Mortmain Studio · Усі права захищені",
+        legal_privacy: "Приватність",
+        legal_terms: "Умови",
+        title: "Перший дзвін",
+        tag: "Новина",
         p1: "Mortmain Studio виходить із темряви. Цей сайт відкрито, а разом із ним — Варта: список тих, хто хоче дізнатися першим, коли почнеться темрява.",
         p2: "Squalor — багатокористувацька extraction-гра в середньовічному королівстві, пожертому чумою. Напрямний ближній бій, що вимагає майстерності, а не вдачі. Здобич, яку можна втратити. Світ, що огризається. Без магії, без милосердя.",
         p3: "Ми маленька майстерня й говоритимемо рідко — лише коли дзвону є заради чого бити. Бій кується просто зараз; звіти з верстака з'являтимуться тут у міру роботи.",
-        p4: "Лиши своє ім'я вартовим. Ти дізнаєшся першим.",
-        back: "← Усі вісті",
-        footer_copyright: "© MMXXVI · Mortmain Studio · Усі права захищені",
-        legal_privacy: "Приватність", legal_terms: "Умови"
+        p4: "Лиши своє ім'я вартовим. Ти дізнаєшся першим."
     }
 };
+
+(function() {
+    var ID = "2026-06-10-gates-open";
+    var ITEMS = null, IDX = -1;
+
+    function lang() {
+        var l = window.LANG;
+        if (!l) { try { l = localStorage.getItem('mortmain_lang'); } catch (e) {} }
+        return (l === 'ru' || l === 'uk') ? l : 'en';
+    }
+
+    // --- Копирование ссылки ---
+    var sb = document.getElementById('artShare');
+    if (sb && navigator.clipboard) {
+        sb.addEventListener('click', function() {
+            navigator.clipboard.writeText(location.href).then(function() {
+                var t = window.pageTranslations[lang()] || window.pageTranslations.en;
+                sb.textContent = t.shared;
+                sb.classList.add('done');
+                setTimeout(function() {
+                    var t2 = window.pageTranslations[lang()] || window.pageTranslations.en;
+                    sb.textContent = t2.share;
+                    sb.classList.remove('done');
+                }, 2000);
+            });
+        });
+    }
+
+    // --- Соседние вести ---
+    function applyNav() {
+        if (!ITEMS || IDX < 0) return;
+        var L = lang();
+        function set(el, item) {
+            if (!el) return;
+            if (!item) { el.style.visibility = 'hidden'; return; }
+            el.style.visibility = '';
+            el.href = '../' + item.url;
+            var ttl = (item.title && (item.title[L] || item.title.en)) || '';
+            var tEl = el.querySelector('.art-nav-title');
+            if (tEl) tEl.textContent = ttl;
+        }
+        set(document.getElementById('artPrev'), ITEMS[IDX + 1]); // старее
+        set(document.getElementById('artNext'), ITEMS[IDX - 1]); // свежее
+    }
+
+    fetch('../news.json')
+        .then(function(r) { if (!r.ok) throw 0; return r.json(); })
+        .then(function(j) {
+            ITEMS = j.sort(function(x, y) { return y.date.localeCompare(x.date); });
+            IDX = ITEMS.findIndex(function(n) { return n.id === ID; });
+            applyNav();
+        })
+        .catch(function() {});
+
+    document.addEventListener('click', function(e) {
+        if (e.target.closest && e.target.closest('.lang-option')) {
+            setTimeout(applyNav, 60);
+        }
+    });
+})();
 </script>
 <script src="../shared.js"></script>
 
