@@ -56,6 +56,7 @@
             position: absolute;
             left: -46px;
             top: 2px;
+            z-index: 3;
             width: 31px;
             height: 34px;
             display: flex;
@@ -115,7 +116,7 @@
             top: 0;
             width: 10px;
             height: 10px;
-            z-index: 2;
+            z-index: 1;
             border-radius: 50%;
             background: radial-gradient(circle, #ffe9b8 0%, #e0a64e 55%, rgba(180, 90, 30, 0.3) 85%, transparent 100%);
             box-shadow: 0 0 12px 4px rgba(228, 168, 80, 0.4), 0 0 30px 10px rgba(201, 169, 97, 0.12);
@@ -126,6 +127,10 @@
             0%, 100% { transform: scale(1); opacity: 0.95; }
             35% { transform: scale(1.12); opacity: 1; }
             65% { transform: scale(0.9); opacity: 0.85; }
+        }
+        .st-marker svg { transition: filter 1s ease; }
+        .station.flame-lit .st-marker svg {
+            filter: drop-shadow(0 0 7px rgba(201, 169, 97, 0.45));
         }
         .road-vow {
             max-width: 560px;
@@ -198,56 +203,56 @@
         <div class="road">
             <div class="pilgrim-flame" id="pilgrimFlame" aria-hidden="true"></div>
             <div class="station passed">
-                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">I</text></svg></div>
+                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" fill="#080706"/><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">I</text></svg></div>
                 <div class="st-status" data-i18n="status_passed">Passed</div>
                 <div class="st-name" data-i18n="st1_name">The Word</div>
                 <p class="st-body" data-i18n="st1_body">The world before the game: the kingdom, its plague, its faith, its dead. The codex is written, the names are spoken. What the player will walk through has been imagined to the last bell.</p>
             </div>
 
             <div class="station current">
-                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1.2"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">II</text></svg></div>
+                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" fill="#080706"/><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1.2"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">II</text></svg></div>
                 <div class="st-status" data-i18n="status_current">We are here</div>
                 <div class="st-name" data-i18n="st2_name">Steel</div>
                 <p class="st-body" data-i18n="st2_body">The combat core is on the anvil now: directional strikes, stamina that governs every swing, block and parry. The duel must feel like a conversation in steel before anything else is built on top of it. We will not move on until it does.</p>
             </div>
 
             <div class="station ahead">
-                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">III</text></svg></div>
+                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" fill="#080706"/><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">III</text></svg></div>
                 <div class="st-status" data-i18n="status_ahead">Ahead</div>
                 <div class="st-name" data-i18n="st3_name">The March</div>
                 <p class="st-body" data-i18n="st3_body">The first land: Dornmarch, its roads, its ruins, its weather. A place worth dying in. The world the steel was forged for.</p>
             </div>
 
             <div class="station ahead">
-                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">IV</text></svg></div>
+                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" fill="#080706"/><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">IV</text></svg></div>
                 <div class="st-status" data-i18n="status_ahead2">Ahead</div>
                 <div class="st-name" data-i18n="st4_name">What Walks the Roads</div>
                 <p class="st-body" data-i18n="st4_body">Bandits at the treeline. The dead that did not stay buried. Beasts from the old folklore. Every enemy speaks the same language of war as you — they must fight as well as they read.</p>
             </div>
 
             <div class="station ahead">
-                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">V</text></svg></div>
+                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" fill="#080706"/><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">V</text></svg></div>
                 <div class="st-status" data-i18n="status_ahead3">Ahead</div>
                 <div class="st-name" data-i18n="st5_name">The Burden</div>
                 <p class="st-body" data-i18n="st5_body">The extraction loop: what you carry, what you risk, what you keep. The stash, the insurance, the long walk home under a heavy pack. The part of the game that makes your hands sweat.</p>
             </div>
 
             <div class="station ahead">
-                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">VI</text></svg></div>
+                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" fill="#080706"/><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">VI</text></svg></div>
                 <div class="st-status" data-i18n="status_ahead4">Ahead</div>
                 <div class="st-name" data-i18n="st6_name">Fellow Travellers</div>
                 <p class="st-body" data-i18n="st6_body">Other pilgrims on the same road — squads, proximity voice, friendly fire, and everything multiplayer demands of a world this unforgiving.</p>
             </div>
 
             <div class="station ahead">
-                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">VII</text></svg></div>
+                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" fill="#080706"/><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">VII</text></svg></div>
                 <div class="st-status" data-i18n="status_ahead5">Ahead</div>
                 <div class="st-name" data-i18n="st7_name">The First Vigil</div>
                 <p class="st-body" data-i18n="st7_body">Closed testing. The first names from the Vigil are called through the gates to break what we built — and tell us the truth about it.</p>
             </div>
 
             <div class="station ahead">
-                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">VIII</text></svg></div>
+                <div class="st-marker"><svg viewBox="0 0 31 34"><polygon points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" fill="#080706"/><polygon class="st-hex" points="15.5,1 30,9 30,25 15.5,33 1,25 1,9" stroke-width="1"/><text class="st-num" x="15.5" y="17" text-anchor="middle" dominant-baseline="central">VIII</text></svg></div>
                 <div class="st-status" data-i18n="status_ahead6">Ahead</div>
                 <div class="st-name" data-i18n="st8_name">The Gates</div>
                 <p class="st-body" data-i18n="st8_body">Early Access. The gates open, the bells ring, and the road becomes yours. No earlier than 2027 — and not a day before it deserves to.</p>
@@ -369,21 +374,65 @@ window.pageTranslations = {
 <script src="shared.js"></script>
 
 <script>
-// Pilgrim flame: walks the road as you scroll
+// Pilgrim flame: walks the road on its own — from the first station to where we stand now
 (function() {
     var flame = document.getElementById('pilgrimFlame');
     var road = document.querySelector('.road');
     if (!flame || !road) return;
-    function update() {
-        var rect = road.getBoundingClientRect();
-        var anchor = window.innerHeight * 0.45;
-        var pr = (anchor - rect.top) / rect.height;
-        pr = Math.max(0, Math.min(1, pr));
-        flame.style.top = (pr * (road.offsetHeight - 14)) + 'px';
+
+    var stations = Array.prototype.slice.call(road.querySelectorAll('.station'));
+    if (!stations.length) return;
+    var currentSt = road.querySelector('.station.current') || stations[0];
+
+    function markerCenter(st) {
+        var m = st.querySelector('.st-marker');
+        return st.offsetTop + m.offsetTop + m.offsetHeight / 2 - 5;
     }
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
-    update();
+
+    var startY = markerCenter(stations[0]);
+    var endY = markerCenter(currentSt);
+    flame.style.top = startY + 'px';
+
+    var reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var played = false;
+
+    function play() {
+        if (played) return;
+        played = true;
+        if (reduced || endY <= startY) {
+            flame.style.top = endY + 'px';
+            stations.forEach(function(st) {
+                if (markerCenter(st) <= endY + 1) st.classList.add('flame-lit');
+            });
+            return;
+        }
+        var waypoints = stations
+            .map(function(st) { return { y: markerCenter(st), st: st, done: false }; })
+            .filter(function(w) { return w.y <= endY + 1; });
+        var T0 = null, DUR = 7000;
+        function step(ts) {
+            if (!T0) T0 = ts;
+            var p = Math.min((ts - T0) / DUR, 1);
+            var e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+            var y = startY + (endY - startY) * e;
+            flame.style.top = y + 'px';
+            waypoints.forEach(function(w) {
+                if (!w.done && y >= w.y - 2) { w.done = true; w.st.classList.add('flame-lit'); }
+            });
+            if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+    }
+
+    if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function(entries, obs) {
+            entries.forEach(function(en) {
+                if (en.isIntersecting) { play(); obs.disconnect(); }
+            });
+        }, { threshold: 0.12 }).observe(road);
+    } else {
+        play();
+    }
 })();
 </script>
 
