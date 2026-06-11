@@ -647,3 +647,21 @@ body.leaving .page-veil { opacity: 1; pointer-events: all; }
 @media (max-width: 768px) {
     .nav-burger { display: flex; }
 }
+
+
+/* === Focus visible, selection, scrollbar (brand) === */
+a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
+    outline: 1px solid rgba(201, 169, 97, 0.75);
+    outline-offset: 3px;
+}
+::selection { background: rgba(201, 169, 97, 0.3); color: #ece3cc; }
+html { scrollbar-width: thin; scrollbar-color: #5e5030 #0a0908; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #0a0908; }
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #6b5a34, #4a3f24);
+    border: 2px solid #0a0908;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover { background: #8a7444; }
+section[id], div[id].page-section { scroll-margin-top: 92px; }

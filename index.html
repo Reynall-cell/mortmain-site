@@ -28,7 +28,11 @@
 
     <meta name="theme-color" content="#080706">
 
-    <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="%2307060a"/><polygon points="16,3 27,9.5 27,22.5 16,29 5,22.5 5,9.5" fill="none" stroke="%23c9a961" stroke-width="1.5"/><text x="16" y="16" font-family="serif" font-size="14" font-weight="700" text-anchor="middle" dominant-baseline="central" fill="%23d9cdb3">M</text></svg>'>
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="canonical" href="https://mortmainstudio.com/">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1389,6 +1393,57 @@
             .rm-dots { display: none; }
         }
 
+        /* === NAV CTA === */
+        .nav-cta {
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            font-size: 0.62rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent);
+            text-decoration: none;
+            border: 1px solid var(--border-medium);
+            padding: 9px 18px;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+        .nav-cta:hover { background: var(--accent); color: var(--bg-deepest); }
+        .mm-cta {
+            margin-top: 22px;
+            font-family: 'Jost', sans-serif !important;
+            font-weight: 300 !important;
+            font-size: 0.8rem !important;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--accent) !important;
+            border: 1px solid var(--border-medium);
+            padding: 14px 32px !important;
+        }
+        @media (max-width: 900px) { .nav-cta { display: none; } }
+
+        /* === FOCUS VISIBLE (keyboard navigation) === */
+        a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
+            outline: 1px solid rgba(201, 169, 97, 0.75);
+            outline-offset: 3px;
+        }
+
+        /* === BRANDED SELECTION === */
+        ::selection { background: rgba(201, 169, 97, 0.3); color: #ece3cc; }
+
+        /* === BRANDED SCROLLBAR === */
+        html { scrollbar-width: thin; scrollbar-color: #5e5030 #0a0908; }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #0a0908; }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #6b5a34, #4a3f24);
+            border: 2px solid #0a0908;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: #8a7444; }
+
+        /* === ANCHOR OFFSET under fixed nav === */
+        section[id] { scroll-margin-top: 92px; }
+
         /* === PROMISES (home block) === */
         .prom-grid {
             display: grid;
@@ -1563,6 +1618,10 @@
             font-weight: 300;
             line-height: 1.65;
             color: var(--text-secondary);
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
         .news-more {
             text-align: center;
@@ -2514,6 +2573,34 @@
             }
         }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "Mortmain Studio",
+          "url": "https://mortmainstudio.com/",
+          "logo": "https://mortmainstudio.com/favicon-192.png",
+          "email": "contact@mortmain.studio"
+        },
+        {
+          "@type": "VideoGame",
+          "name": "Squalor",
+          "url": "https://mortmainstudio.com/",
+          "image": "https://mortmainstudio.com/og-image.jpg",
+          "description": "A multiplayer extraction game set in a medieval kingdom devoured by plague. Directional first-person melee combat. Even the bells have learned to mourn.",
+          "genre": ["Extraction", "Action role-playing", "Dark fantasy"],
+          "gamePlatform": "PC (Microsoft Windows)",
+          "operatingSystem": "Windows",
+          "applicationCategory": "Game",
+          "author": { "@type": "Organization", "name": "Mortmain Studio" },
+          "publisher": { "@type": "Organization", "name": "Mortmain Studio" },
+          "inLanguage": ["en", "ru", "uk"]
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
 <div class="vignette-overlay" aria-hidden="true"></div>
@@ -2567,6 +2654,7 @@
             <li><a href="roadmap.html" data-i18n="nav_roadmap">Roadmap</a></li>
             <li><a href="login.html" data-i18n="nav_login">Sign in</a></li>
         </ul>
+        <a class="nav-cta" href="#newsletter" data-i18n="nav_cta">Join the Vigil</a>
         <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
         <div class="audio-control" id="audioControl">
             <div class="volume-popout">
@@ -3454,6 +3542,8 @@ he comes not on his own.</p>
             prom4_t: "One purchase. The full game.",
             prom4_b: "Updates and patches come with it.",
             prom_more: "Read the promises in full",
+            nav_cta: "Join the Vigil",
+            doc_title: "Squalor — A Mortmain Studio Production",
             vigil_incentive: "The First Vigil — our closed test — will be called from these names.",
             footer_news: "News",
             news_label: "— Tidings —",
@@ -3630,6 +3720,8 @@ he comes not on his own.</p>
             prom4_t: "Одна покупка. Вся игра.",
             prom4_b: "Обновления и патчи — вместе с ней.",
             prom_more: "Прочесть клятвы целиком",
+            nav_cta: "Встать в дозор",
+            doc_title: "Squalor — игра Mortmain Studio",
             vigil_incentive: "Первый Дозор — закрытый тест — будет призван из этих имён.",
             footer_news: "Вести",
             news_label: "— Вести —",
@@ -3675,6 +3767,8 @@ he comes not on his own.</p>
                     "prom4_t": "Одна покупка. Уся гра.",
                     "prom4_b": "Оновлення й патчі — разом із нею.",
                     "prom_more": "Прочитати клятви цілком",
+                    "nav_cta": "Стати на варту",
+                    "doc_title": "Squalor — гра Mortmain Studio",
                     "vigil_incentive": "Першу Варту — закрите випробування — буде покликано з цих імен.",
                     "footer_news": "Вісті",
                     "news_label": "— Вісті —",
@@ -3851,6 +3945,8 @@ he comes not on his own.</p>
                     "prom4_t": "Ein Kauf. Das ganze Spiel.",
                     "prom4_b": "Updates und Patches inklusive.",
                     "prom_more": "Die Schwüre im Ganzen lesen",
+                    "nav_cta": "Der Wacht beitreten",
+                    "doc_title": "Squalor — Ein Spiel von Mortmain Studio",
                     "vigil_incentive": "Die Erste Wacht — unser geschlossener Test — wird aus diesen Namen berufen.",
                     "footer_news": "Neuigkeiten",
                     "news_label": "— Neuigkeiten —",
@@ -3947,6 +4043,8 @@ he comes not on his own.</p>
                     "prom4_t": "Una compra. El juego completo.",
                     "prom4_b": "Actualizaciones y parches incluidos.",
                     "prom_more": "Leer las promesas completas",
+                    "nav_cta": "Únete a la Vigilia",
+                    "doc_title": "Squalor — Un juego de Mortmain Studio",
                     "vigil_incentive": "La Primera Vigilia — nuestra prueba cerrada — será llamada de entre estos nombres.",
                     "footer_news": "Noticias",
                     "news_label": "— Noticias —",
@@ -4043,6 +4141,8 @@ he comes not on his own.</p>
                     "prom4_t": "Uma compra. O jogo completo.",
                     "prom4_b": "Atualizações e patches incluídos.",
                     "prom_more": "Ler as promessas na íntegra",
+                    "nav_cta": "Junta-te à Vigília",
+                    "doc_title": "Squalor — Um jogo da Mortmain Studio",
                     "vigil_incentive": "A Primeira Vigília — o nosso teste fechado — será chamada de entre estes nomes.",
                     "footer_news": "Notícias",
                     "news_label": "— Notícias —",
@@ -4139,6 +4239,8 @@ he comes not on his own.</p>
                     "prom4_t": "Un achat. Le jeu entier.",
                     "prom4_b": "Mises à jour et correctifs inclus.",
                     "prom_more": "Lire les serments en entier",
+                    "nav_cta": "Rejoindre la Veille",
+                    "doc_title": "Squalor — Un jeu de Mortmain Studio",
                     "vigil_incentive": "La Première Veille — notre test fermé — sera appelée parmi ces noms.",
                     "footer_news": "Nouvelles",
                     "news_label": "— Nouvelles —",
@@ -4235,6 +4337,8 @@ he comes not on his own.</p>
                     "prom4_t": "Un acquisto. Il gioco completo.",
                     "prom4_b": "Aggiornamenti e patch inclusi.",
                     "prom_more": "Leggi le promesse per intero",
+                    "nav_cta": "Unisciti alla Veglia",
+                    "doc_title": "Squalor — Un gioco di Mortmain Studio",
                     "vigil_incentive": "La Prima Veglia — il nostro test chiuso — sarà chiamata tra questi nomi.",
                     "footer_news": "Notizie",
                     "news_label": "— Notizie —",
@@ -4331,6 +4435,8 @@ he comes not on his own.</p>
                     "prom4_t": "一次购买，完整游戏",
                     "prom4_b": "更新与补丁全部包含。",
                     "prom_more": "阅读完整誓言",
+                    "nav_cta": "加入守夜",
+                    "doc_title": "Squalor — Mortmain Studio 作品",
                     "vigil_incentive": "首次守夜——我们的封闭测试——将从这些名字中召集。",
                     "footer_news": "消息",
                     "news_label": "— 消息 —",
@@ -4427,6 +4533,8 @@ he comes not on his own.</p>
                     "prom4_t": "一度の購入で、すべてを",
                     "prom4_b": "アップデートとパッチも含まれる。",
                     "prom_more": "誓いの全文を読む",
+                    "nav_cta": "夜警に加わる",
+                    "doc_title": "Squalor — Mortmain Studio 作品",
                     "vigil_incentive": "最初の夜警——クローズドテスト——は、この名簿から召集される。",
                     "footer_news": "ニュース",
                     "news_label": "— 便り —",
@@ -4500,6 +4608,7 @@ he comes not on his own.</p>
         // Localized "— soon" badge for pending footer items (CSS-injected, so set via custom property)
         var SOON = { en:"— soon", ru:"— скоро", uk:"— незабаром", de:"— bald", es:"— pronto", pt:"— em breve", fr:"— bientôt", it:"— presto", zh:"— 即将", ja:"— 近日" };
         document.documentElement.style.setProperty('--soon-label', '"' + (SOON[lang] || SOON.en) + '"');
+        if (dict.doc_title || en.doc_title) document.title = dict.doc_title || en.doc_title;
         document.querySelectorAll('[data-i18n]').forEach(function(el) {
             var key = el.dataset.i18n;
             // Fall back to English for any key the chosen language doesn't define (deep lore in UI-only languages)
@@ -5137,6 +5246,13 @@ he comes not on his own.</p>
             menu.appendChild(c);
             c.addEventListener('click', function() { menu.classList.remove('open'); });
         });
+        var cta = document.createElement('a');
+        cta.href = '#newsletter';
+        cta.className = 'mm-cta';
+        cta.setAttribute('data-i18n', 'nav_cta');
+        cta.textContent = (translations[window.LANG] && translations[window.LANG].nav_cta) || translations.en.nav_cta;
+        cta.addEventListener('click', function() { menu.classList.remove('open'); });
+        menu.appendChild(cta);
         burger.addEventListener('click', function() { menu.classList.add('open'); });
         document.getElementById('mmClose').addEventListener('click', function() { menu.classList.remove('open'); });
         document.addEventListener('keydown', function(e) { if (e.key === 'Escape') menu.classList.remove('open'); });
