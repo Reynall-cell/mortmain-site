@@ -32,13 +32,13 @@
         .gates-bg {
             position: absolute;
             left: 0; right: 0; bottom: 0;
-            height: clamp(420px, 88vh, 880px);
+            height: clamp(360px, 58vh, 640px);
             background: url('roadmap-gates.jpg') center bottom / cover no-repeat;
-            opacity: 0.55;
+            opacity: 0.5;
             pointer-events: none;
             z-index: 0;
-            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 45%);
-            mask-image: linear-gradient(to bottom, transparent 0%, #000 45%);
+            -webkit-mask-image: radial-gradient(ellipse 85% 105% at 50% 100%, #000 32%, rgba(0, 0, 0, 0.55) 58%, transparent 82%);
+            mask-image: radial-gradient(ellipse 85% 105% at 50% 100%, #000 32%, rgba(0, 0, 0, 0.55) 58%, transparent 82%);
         }
         .gates-bg::after {
             content: '';

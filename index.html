@@ -1421,17 +1421,27 @@
         }
 
         /* === SEVENTH DOT (sigil secret) === */
-        .hero-sigil svg * { pointer-events: none; }
         .seventh-dot {
-            pointer-events: all !important;
+            position: absolute;
+            left: 75.7%;
+            top: 19.3%;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #c9a961;
+            pointer-events: all;
             cursor: pointer;
-            transform-box: fill-box;
-            transform-origin: center;
+            z-index: 3;
             animation: seventhPulse 2.6s ease-in-out infinite;
         }
+        .seventh-dot::after {
+            content: '';
+            position: absolute;
+            inset: -10px;
+        }
         @keyframes seventhPulse {
-            0%, 100% { opacity: 0.35; transform: scale(1); filter: drop-shadow(0 0 0 rgba(201, 169, 97, 0)); }
-            50% { opacity: 1; transform: scale(1.45); filter: drop-shadow(0 0 6px rgba(201, 169, 97, 0.8)); }
+            0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 rgba(201, 169, 97, 0); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.5); box-shadow: 0 0 12px 3px rgba(201, 169, 97, 0.55); }
         }
         .whisper-overlay {
             position: fixed;
@@ -2869,8 +2879,8 @@
                 <circle cx="100" cy="100" r="80"/>
             </g>
             <circle cx="100" cy="100" r="6" fill="#c9a961"/>
-            <circle id="seventhDot" class="seventh-dot" cx="151.4" cy="38.6" r="3.2" fill="#c9a961"/>
         </svg>
+        <div id="seventhDot" class="seventh-dot" aria-hidden="true"></div>
     </div>
     <div class="hero-inner">
         <div class="hero-prefix" data-i18n="hero_presents">Mortmain Studio Presents</div>
