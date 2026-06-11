@@ -1393,6 +1393,33 @@
             .rm-dots { display: none; }
         }
 
+        /* === PROMISES BACKGROUND (the scribe) === */
+        .promises-home {
+            position: relative;
+        }
+        .promises-home::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('promises-scribe.jpg') center 30% / cover no-repeat;
+            opacity: 0.4;
+            pointer-events: none;
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 22%, #000 78%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, #000 22%, #000 78%, transparent 100%);
+        }
+        .promises-home .container {
+            position: relative;
+            z-index: 1;
+        }
+        .promises-home .prom-item {
+            background: rgba(12, 10, 8, 0.66);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+        }
+        @media (max-width: 768px) {
+            .promises-home::before { opacity: 0.28; }
+        }
+
         /* === SEVENTH DOT (sigil secret) === */
         .hero-sigil svg * { pointer-events: none; }
         .seventh-dot {

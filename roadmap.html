@@ -27,6 +27,34 @@
     <link rel="stylesheet" href="shared.css">
 
     <style>
+        .page-wrapper { position: relative; overflow: hidden; }
+        .page-container { position: relative; z-index: 1; }
+        .gates-bg {
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            height: clamp(420px, 88vh, 880px);
+            background: url('roadmap-gates.jpg') center bottom / cover no-repeat;
+            opacity: 0.55;
+            pointer-events: none;
+            z-index: 0;
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 45%);
+            mask-image: linear-gradient(to bottom, transparent 0%, #000 45%);
+        }
+        .gates-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 75% 40% at 50% 100%, rgba(8, 7, 6, 0.55), transparent 70%);
+        }
+        .road-vow, .last-updated {
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 1px 10px rgba(0, 0, 0, 0.85);
+        }
+        @media (max-width: 768px) {
+            .gates-bg { opacity: 0.42; }
+        }
+
         .road {
             position: relative;
             max-width: 640px;
@@ -193,6 +221,7 @@
 </nav>
 
 <main class="page-wrapper">
+    <div class="gates-bg" aria-hidden="true"></div>
     <div class="page-container">
         <div class="page-prefix" data-i18n="page_prefix">— The Pilgrim's Road —</div>
         <h1 class="page-title" data-i18n="page_title">Roadmap</h1>
