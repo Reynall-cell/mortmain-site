@@ -1749,7 +1749,107 @@
             max-width: 1080px;
             margin: 0 auto;
         }
-        .news-card {
+        .nh-feat {
+            display: grid;
+            grid-template-columns: minmax(300px, 1fr) minmax(0, 1.25fr);
+            gap: 52px;
+            align-items: center;
+            max-width: 1180px;
+            margin: 0 auto 60px;
+        }
+        .nh-feat:empty { display: none; }
+        .nh-feat-date {
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            font-size: 0.64rem;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            margin-bottom: 16px;
+        }
+        .nh-feat-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: clamp(26px, 3.4vw, 42px);
+            line-height: 1.12;
+            color: var(--text-primary);
+            margin-bottom: 18px;
+        }
+        .nh-feat-title a { color: inherit; text-decoration: none; transition: color 0.3s ease; }
+        .nh-feat-title a:hover { color: var(--accent); }
+        .nh-feat-rule {
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent), rgba(201, 169, 97, 0.25), transparent);
+            margin-bottom: 22px;
+        }
+        .nh-feat-ex {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.03rem;
+            font-weight: 300;
+            line-height: 1.85;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+        .nh-btn {
+            display: inline-block;
+            position: relative;
+            border: 1px solid rgba(201, 169, 97, 0.45);
+            padding: 13px 38px;
+            font-family: 'Jost', sans-serif;
+            font-weight: 400;
+            font-size: 0.68rem;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            color: var(--accent);
+            text-decoration: none;
+            transition: background 0.35s ease, border-color 0.35s ease;
+        }
+        .nh-btn::before, .nh-btn::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            bottom: 3px;
+            width: 5px;
+            border: 1px solid rgba(201, 169, 97, 0.35);
+            transition: border-color 0.35s ease;
+        }
+        .nh-btn::before { left: 3px; border-right: none; }
+        .nh-btn::after { right: 3px; border-left: none; }
+        .nh-btn:hover { background: rgba(201, 169, 97, 0.07); border-color: rgba(201, 169, 97, 0.7); }
+        .nh-feat-img {
+            display: block;
+            overflow: hidden;
+        }
+        .nh-feat-img img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            -webkit-mask-image: radial-gradient(120% 105% at 50% 50%, #000 58%, transparent 99%);
+            mask-image: radial-gradient(120% 105% at 50% 50%, #000 58%, transparent 99%);
+            transition: transform 0.6s ease;
+        }
+        .nh-feat-img:hover img { transform: scale(1.02); }
+        .news-card-img {
+            margin: -26px -26px 18px;
+            height: 152px;
+            overflow: hidden;
+        }
+        .news-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            -webkit-mask-image: linear-gradient(180deg, #000 62%, transparent 100%);
+            mask-image: linear-gradient(180deg, #000 62%, transparent 100%);
+            transition: transform 0.55s ease;
+            display: block;
+        }
+        .news-card:hover .news-card-img img { transform: scale(1.045); }
+        @media (max-width: 860px) {
+            .nh-feat { grid-template-columns: 1fr; gap: 26px; }
+            .nh-feat-img { order: -1; }
+        }
+                .news-card {
             display: block;
             text-decoration: none;
             border: 1px solid var(--border-subtle);
@@ -2754,6 +2854,7 @@
             }
         }
 
+        .roadbook { padding: 120px 0 100px; }
         .ob-head { text-align: center; max-width: 720px; margin: 0 auto 26px; }
         .ob-prefix {
             font-family: 'Jost', sans-serif;
@@ -2793,150 +2894,277 @@
             border-bottom: 1px solid var(--border-subtle);
         }
 
-        .ob-layout {
+        .ob-stage {
             display: grid;
-            grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr);
-            gap: 44px;
-            align-items: start;
+            grid-template-columns: minmax(300px, 1.05fr) minmax(0, 1.25fr) 104px;
+            gap: 46px;
+            align-items: center;
+            margin-bottom: 36px;
+            min-height: 480px;
         }
-        .ob-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
+        .ob-lead-group {
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            font-size: 0.62rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            opacity: 0.85;
+            margin-bottom: 12px;
         }
-        .ob-cell {
-            aspect-ratio: 1 / 1;
+        .ob-lead-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: clamp(34px, 3.8vw, 54px);
+            line-height: 1.05;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+        .ob-lead-rule {
+            width: 64px;
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            margin-bottom: 22px;
+        }
+        .ob-lead-fate {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.05rem;
+            font-weight: 300;
+            line-height: 1.9;
+            color: var(--text-secondary);
+        }
+
+        .ob-art {
+            position: relative;
+            min-height: 440px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ob-art::before {
+            content: '';
+            position: absolute;
+            inset: -10%;
+            background: radial-gradient(ellipse at center, rgba(201, 169, 97, 0.07), transparent 62%);
+            pointer-events: none;
+        }
+        .ob-art svg { width: min(290px, 72%); height: auto; opacity: 0.92; }
+        .ob-art .ob-hex { stroke: var(--accent); fill: none; opacity: 0.8; }
+        .ob-art .ob-letter { font-family: 'Cormorant Garamond', serif; font-weight: 600; fill: var(--text-secondary); }
+        .ob-art img { max-width: 100%; max-height: 480px; display: block; }
+        .ob-art.fade { animation: obArtFade 0.6s ease; }
+        @keyframes obArtFade {
+            from { opacity: 0; transform: scale(0.965); }
+            to { opacity: 1; transform: none; }
+        }
+
+        .ob-rail {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 560px;
+            overflow-y: auto;
+            padding: 4px 6px 4px 4px;
+            scrollbar-width: thin;
+            mask-image: linear-gradient(180deg, transparent, #000 26px, #000 calc(100% - 26px), transparent);
+            -webkit-mask-image: linear-gradient(180deg, transparent, #000 26px, #000 calc(100% - 26px), transparent);
+        }
+        .ob-rcell {
             border: 1px solid var(--border-subtle);
             background: rgba(14, 12, 10, 0.45);
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 9px;
+            gap: 6px;
+            padding: 11px 4px 9px;
             cursor: pointer;
-            padding: 8px 4px;
+            flex: 0 0 auto;
             transition: border-color 0.3s ease, background 0.3s ease;
         }
-        .ob-cell:hover { border-color: var(--border-medium); background: rgba(201, 169, 97, 0.04); }
-        .ob-cell.active {
+        .ob-rcell:hover { border-color: var(--border-medium); background: rgba(201, 169, 97, 0.04); }
+        .ob-rcell.active {
             border-color: rgba(201, 169, 97, 0.55);
             background: rgba(201, 169, 97, 0.07);
         }
-        .ob-cell svg { width: 46px; height: 50px; display: block; }
-        .ob-cell .ob-hex { stroke: var(--border-medium); fill: none; transition: stroke 0.3s ease; }
-        .ob-cell.active .ob-hex, .ob-cell:hover .ob-hex { stroke: var(--accent); }
-        .ob-cell .ob-letter {
+        .ob-rcell svg { width: 34px; height: 37px; display: block; }
+        .ob-rcell .ob-hex { stroke: var(--border-medium); fill: none; transition: stroke 0.3s ease; }
+        .ob-rcell.active .ob-hex, .ob-rcell:hover .ob-hex { stroke: var(--accent); }
+        .ob-rcell .ob-letter {
             font-family: 'Cormorant Garamond', serif;
             font-weight: 600;
             fill: var(--text-secondary);
             transition: fill 0.3s ease;
         }
-        .ob-cell.active .ob-letter { fill: var(--accent); }
-        .ob-cell-name {
+        .ob-rcell.active .ob-letter { fill: var(--accent); }
+        .ob-rcell-name {
             font-family: 'Jost', sans-serif;
             font-weight: 300;
-            font-size: 0.56rem;
-            letter-spacing: 0.14em;
+            font-size: 0.48rem;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
             color: var(--text-tertiary);
             text-align: center;
             line-height: 1.25;
             transition: color 0.3s ease;
         }
-        .ob-cell.active .ob-cell-name, .ob-cell:hover .ob-cell-name { color: var(--text-primary); }
+        .ob-rcell.active .ob-rcell-name, .ob-rcell:hover .ob-rcell-name { color: var(--text-primary); }
+        .ob-rcell.stamp { animation: cellStamp 0.5s ease; }
+        @keyframes cellStamp {
+            0% { box-shadow: 0 0 0 0 rgba(201, 169, 97, 0.45); }
+            100% { box-shadow: 0 0 0 12px rgba(201, 169, 97, 0); }
+        }
 
-        .ob-dossier {
-            position: sticky;
-            top: 96px;
+        .ob-plaque {
+            position: relative;
             border: 1px solid var(--border-subtle);
             background: rgba(12, 10, 8, 0.55);
-            padding: 36px 38px 40px;
+            padding: 32px 36px 30px;
         }
-        .ob-dossier.flash { animation: obFade 0.45s ease; }
-        @keyframes obFade {
-            from { opacity: 0.25; }
-            to { opacity: 1; }
-        }
-        .ob-group {
-            font-family: 'Jost', sans-serif;
-            font-weight: 300;
-            font-size: 0.6rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--accent);
-            opacity: 0.8;
-            margin-bottom: 10px;
-        }
-        .ob-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 700;
-            font-size: clamp(26px, 3vw, 34px);
-            color: var(--text-primary);
-            line-height: 1.1;
-            margin-bottom: 6px;
-        }
-        .ob-trade {
-            font-family: 'EB Garamond', Georgia, serif;
-            font-style: italic;
-            font-size: 0.96rem;
-            color: var(--text-tertiary);
-            margin-bottom: 20px;
-        }
-        .ob-fate {
-            font-family: 'EB Garamond', Georgia, serif;
-            font-size: 1.02rem;
-            font-weight: 300;
-            line-height: 1.85;
-            color: var(--text-secondary);
-        }
-        .ob-divider {
-            display: flex;
-            align-items: center;
-            margin: 26px 0;
-        }
-        .ob-divider::before, .ob-divider::after {
+        .ob-plaque::before {
             content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(201, 169, 97, 0.28), transparent);
+            position: absolute;
+            inset: 7px;
+            border: 1px solid rgba(201, 169, 97, 0.12);
+            pointer-events: none;
         }
-        .ob-divider span {
-            margin: 0 14px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.85rem;
-            color: var(--accent);
-            opacity: 0.55;
+        .ob-plq-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
         }
-        .ob-block { margin-bottom: 18px; }
-        .ob-block:last-child { margin-bottom: 0; }
-        .ob-block-label {
+        .ob-plq-label {
             font-family: 'Jost', sans-serif;
             font-weight: 400;
-            font-size: 0.62rem;
+            font-size: 0.6rem;
             letter-spacing: 0.28em;
             text-transform: uppercase;
             color: var(--accent);
-            margin-bottom: 8px;
+            margin-bottom: 9px;
         }
-        .ob-block-text {
+        .ob-plq-text {
             font-family: 'EB Garamond', Georgia, serif;
-            font-size: 0.99rem;
+            font-size: 0.98rem;
             font-weight: 300;
-            line-height: 1.75;
+            line-height: 1.7;
             color: var(--text-secondary);
         }
+        .ob-plq-div {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201, 169, 97, 0.25), transparent);
+            margin: 24px 0 22px;
+        }
+        .ob-plq-pathshead {
+            text-align: center;
+            font-family: 'Jost', sans-serif;
+            font-weight: 400;
+            font-size: 0.6rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+        .ob-plq-paths {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 34px;
+        }
+        .ob-plq-path-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: 1.24rem;
+            color: var(--accent);
+            margin-bottom: 9px;
+        }
+        .ob-path-row {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+        .ob-path-row:last-child { margin-bottom: 0; }
+        .ob-path-row span {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.56rem;
+            font-weight: 400;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-right: 8px;
+        }
 
+        .dr { opacity: 0; }
+        .play .dr { animation: drIn 0.55s ease both; }
+        .play .dr-name { animation: drInk 0.7s ease both; }
+        .play .dr-l { animation: drInL 0.6s ease both; }
+        .play .dr-r { animation: drInR 0.6s ease both; }
+        @keyframes drIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: none; }
+        }
+        @keyframes drInk {
+            from { opacity: 0; filter: blur(7px); transform: translateY(6px); }
+            to { opacity: 1; filter: blur(0); transform: none; }
+        }
+        @keyframes drInL {
+            from { opacity: 0; transform: translateX(-16px); }
+            to { opacity: 1; transform: none; }
+        }
+        @keyframes drInR {
+            from { opacity: 0; transform: translateX(16px); }
+            to { opacity: 1; transform: none; }
+        }
+
+        @media (max-width: 1100px) {
+            .ob-stage { grid-template-columns: minmax(260px, 1fr) minmax(0, 1fr) 92px; gap: 32px; }
+        }
         @media (max-width: 960px) {
-            .ob-layout { grid-template-columns: 1fr; gap: 34px; }
-            .ob-dossier { position: static; }
+            .ob-stage {
+                grid-template-columns: 1fr;
+                gap: 28px;
+                min-height: 0;
+            }
+            .ob-rail {
+                order: -1;
+                flex-direction: row;
+                max-height: none;
+                overflow-y: hidden;
+                overflow-x: auto;
+                padding: 4px;
+                mask-image: linear-gradient(90deg, transparent, #000 26px, #000 calc(100% - 26px), transparent);
+                -webkit-mask-image: linear-gradient(90deg, transparent, #000 26px, #000 calc(100% - 26px), transparent);
+            }
+            .ob-rcell { min-width: 74px; }
+            .ob-art { display: none; }
+            .ob-plq-row { grid-template-columns: 1fr; gap: 18px; }
+            .ob-plq-paths { grid-template-columns: 1fr; gap: 22px; }
+            .ob-plaque { padding: 24px 22px 22px; }
         }
-        @media (max-width: 560px) {
-            .ob-grid { grid-template-columns: repeat(3, 1fr); gap: 9px; }
-            .ob-cell svg { width: 38px; height: 42px; }
-            .ob-dossier { padding: 26px 22px 30px; }
+        @media (prefers-reduced-motion: reduce) {
+            .dr { opacity: 1; }
+            .play .dr, .play .dr-name, .play .dr-l, .play .dr-r { animation: none; }
+            .ob-rcell.stamp { animation: none; }
+            .ob-art.fade { animation: none; }
         }
-
-        .roadbook { padding: 120px 0 100px; }
+        .ob-path-row {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 0.93rem;
+            font-weight: 300;
+            line-height: 1.65;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+        .ob-path-row:last-child { margin-bottom: 0; }
+        .ob-path-row span {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.56rem;
+            font-weight: 400;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-right: 8px;
+        }
 
     </style>
     <script type="application/ld+json">
@@ -3254,10 +3482,12 @@ The third crow takes the light.</p>
             <p class="ob-sub" data-i18n="rb_sub">Twenty lives before the plague. Choose who you were — it decides how you survive, what you owe, and what you hear in the dark. No gift makes you stronger against another man: strength lives in iron and hands.</p>
         </header>
         <div class="ob-disclaimer" data-i18n="rb_disclaimer">An early design. Gifts and burdens are named in words, not numbers — the numbers will come with the game, and will change more than once.</div>
-        <div class="ob-layout">
-            <div class="ob-grid" id="obGrid"></div>
-            <aside class="ob-dossier" id="obDossier" aria-live="polite"></aside>
+        <div class="ob-stage reveal">
+            <div class="ob-lead" id="obLead"></div>
+            <div class="ob-art" id="obArt" aria-hidden="true"></div>
+            <div class="ob-rail" id="obRail"></div>
         </div>
+        <div class="ob-plaque reveal" id="obPlaque"></div>
     </div>
 </section>
 
@@ -3406,6 +3636,7 @@ he comes not on his own.</p>
             <div class="section-label" data-i18n="news_label">— Tidings —</div>
             <h2 class="section-title" data-i18n="news_title">Latest from the workshop</h2>
         </div>
+        <div class="nh-feat reveal" id="newsFeat"></div>
         <div class="news-grid reveal-stagger" id="newsHomeGrid"></div>
         <div class="news-more"><a href="news.html" data-i18n="news_all">All tidings</a></div>
     </div>
@@ -5640,16 +5871,34 @@ he comes not on his own.</p>
             catch (e) { return iso; }
         }
         window.renderHomeNews = function() {
-            if (!DATA) return;
+            if (!DATA || !DATA.length) return;
             var lang = window.LANG || 'en';
-            document.getElementById('newsHomeGrid').innerHTML = DATA.slice(0, 3).map(function(n) {
-                var title = (n.title && (n.title[lang] || n.title.en)) || '';
-                var ex = (n.excerpt && (n.excerpt[lang] || n.excerpt.en)) || '';
-                return '<a class="news-card" href="' + n.url + '">' +
+            var READ = { en: 'Read more', ru: 'Читать', uk: 'Читати', de: 'Mehr lesen', es: 'Leer más', pt: 'Ler mais', fr: 'Lire la suite', it: 'Leggi tutto', zh: '阅读更多', ja: '続きを読む' };
+            function T(n) { return (n.title && (n.title[lang] || n.title.en)) || ''; }
+            function X(n) { return (n.excerpt && (n.excerpt[lang] || n.excerpt.en)) || ''; }
+
+            var f = DATA[0];
+            var featEl = document.getElementById('newsFeat');
+            if (featEl) {
+                featEl.innerHTML =
+                    '<div class="nh-feat-info">'
+                    + '<div class="nh-feat-date">' + tagLabel(f.tag, lang) + ' \u00B7 ' + fmtDate(f.date, lang) + '</div>'
+                    + '<h3 class="nh-feat-title"><a href="' + f.url + '">' + T(f) + '</a></h3>'
+                    + '<div class="nh-feat-rule"></div>'
+                    + '<p class="nh-feat-ex">' + X(f) + '</p>'
+                    + '<a class="nh-btn" href="' + f.url + '">' + (READ[lang] || READ.en) + '</a>'
+                    + '</div>'
+                    + '<a class="nh-feat-img" href="' + f.url + '" aria-hidden="true" tabindex="-1">'
+                    + '<img src="' + (f.image || 'og-image.jpg') + '" alt="" loading="lazy"></a>';
+            }
+
+            document.getElementById('newsHomeGrid').innerHTML = DATA.slice(1, 4).map(function(n) {
+                var im = n.image ? '<div class="news-card-img"><img src="' + n.image + '" alt="" loading="lazy"></div>' : '';
+                return '<a class="news-card" href="' + n.url + '">' + im +
                     '<div class="news-meta"><span class="news-tag">' + tagLabel(n.tag, lang) + '</span>' +
                     '<span class="news-date">' + fmtDate(n.date, lang) + '</span></div>' +
-                    '<div class="news-card-title">' + title + '</div>' +
-                    '<div class="news-card-excerpt">' + ex + '</div></a>';
+                    '<div class="news-card-title">' + T(n) + '</div>' +
+                    '<div class="news-card-excerpt">' + X(n) + '</div></a>';
             }).join('');
         };
         fetch('news.json')
@@ -5961,13 +6210,737 @@ var ORIGINS = [
     }}
 ];
 
+var PATHS = {
+ "blacksmith": [
+  {
+   "en": {
+    "name": "Guild Master",
+    "gift": "Tempering: a thing he has mended is stronger than it was new.",
+    "burden": "A master takes his time: the repair itself takes twice as long."
+   },
+   "ru": {
+    "name": "Мастер цеха",
+    "gift": "Закалка: после его ремонта вещь крепче, чем была новой.",
+    "burden": "Мастер не торопится: сам ремонт вдвое дольше."
+   },
+   "uk": {
+    "name": "Майстер цеху",
+    "gift": "Гарт: після його ремонту річ міцніша, ніж була новою.",
+    "burden": "Майстер не квапиться: сам ремонт удвічі довший."
+   }
+  },
+  {
+   "en": {
+    "name": "Journeyman",
+    "gift": "Spends half the material on any repair.",
+    "burden": "An unsteady hand: now and then a repair fails and ruins the part."
+   },
+   "ru": {
+    "name": "Подмастерье",
+    "gift": "На починку тратит вдвое меньше материала.",
+    "burden": "Рука не тверда: редкая починка срывается и портит деталь."
+   },
+   "uk": {
+    "name": "Підмайстер",
+    "gift": "На лагодження витрачає вдвічі менше матеріалу.",
+    "burden": "Рука ще не тверда: зрідка ремонт зривається і псує деталь."
+   }
+  }
+ ],
+ "deserter": [
+  {
+   "en": {
+    "name": "Left with the Iron",
+    "gift": "Starts richer in armor and polearms.",
+    "burden": "The crown's brand: traders take army goods at half price."
+   },
+   "ru": {
+    "name": "Ушёл с железом",
+    "gift": "Старт богаче бронёй и древковым.",
+    "burden": "Казённое клеймо: армейское добро торговцы берут за полцены."
+   },
+   "uk": {
+    "name": "Пішов із залізом",
+    "gift": "Початок багатший на броню та древкове.",
+    "burden": "Казенне тавро: армійське добро торговці беруть за півціни."
+   }
+  },
+  {
+   "en": {
+    "name": "Lookout",
+    "gift": "A lookout's eye: makes out distant figures long before other men.",
+    "burden": "Peering into the distance, he stops hearing what is near."
+   },
+   "ru": {
+    "name": "Дозорный",
+    "gift": "Глаз дозорного: дальние фигуры различает много раньше прочих.",
+    "burden": "Всматриваясь вдаль, перестаёт слышать ближнее."
+   },
+   "uk": {
+    "name": "Дозорний",
+    "gift": "Око дозорного: далекі постаті розрізняє багато раніше за інших.",
+    "burden": "Вдивляючись удалину, перестає чути близьке."
+   }
+  }
+ ],
+ "sellsword": [
+  {
+   "en": {
+    "name": "Brotherhood Veteran",
+    "gift": "The brotherhood's chest repays part of the gear lost in a raid.",
+    "burden": "The tithe weighs twice as heavy."
+   },
+   "ru": {
+    "name": "Ветеран братства",
+    "gift": "Братская касса возмещает часть цены потерянного в рейде снаряжения.",
+    "burden": "Десятина вдвое тяжелее."
+   },
+   "uk": {
+    "name": "Ветеран братства",
+    "gift": "Братська каса відшкодовує частину ціни втраченого в рейді спорядження.",
+    "burden": "Десятина вдвічі важча."
+   }
+  },
+  {
+   "en": {
+    "name": "Free Blade",
+    "gift": "Spoils by right: a creature slain by his hand yields more.",
+    "burden": "No brotherhood cellar: his own stash is smaller than other men's."
+   },
+   "ru": {
+    "name": "Вольный клинок",
+    "gift": "Трофей по праву: тварь, убитая его рукой, отдаёт больше.",
+    "burden": "Без братского подвала: личное хранилище меньше прочих."
+   },
+   "uk": {
+    "name": "Вільний клинок",
+    "gift": "Трофей по праву: потвора, вбита його рукою, віддає більше.",
+    "burden": "Без братського підвалу: власне сховище менше, ніж в інших."
+   }
+  }
+ ],
+ "headsman": [
+  {
+   "en": {
+    "name": "Swordsman",
+    "gift": "Headsman to the highborn: rich chambers and noble dead yield him more.",
+    "burden": "White hands: he is twice as slow searching rotten and plagued bodies."
+   },
+   "ru": {
+    "name": "Мечник",
+    "gift": "Палач знати: богатые покои и знатные мертвецы отдают ему больше.",
+    "burden": "Белые руки: в гнилых и чумных телах копается вдвое дольше."
+   },
+   "uk": {
+    "name": "Мечник",
+    "gift": "Кат знаті: багаті покої та знатні мерці віддають йому більше.",
+    "burden": "Білі руки: у гнилих і чумних тілах порпається вдвічі довше."
+   }
+  },
+  {
+   "en": {
+    "name": "Hangman",
+    "gift": "Knots: his rope never breaks, climbs and descents are safe.",
+    "burden": "Common folk don't forgive their own: simple traders give him worse prices."
+   },
+   "ru": {
+    "name": "Верёвочник",
+    "gift": "Узлы: его верёвка не рвётся, спуски и подъёмы безопасны.",
+    "burden": "Чернь своих не прощает: у простых торговцев цены для него хуже."
+   },
+   "uk": {
+    "name": "Мотузник",
+    "gift": "Вузли: його мотузка не рветься, спуски й підйоми безпечні.",
+    "burden": "Простолюд своїх не прощає: у простих торговців ціни для нього гірші."
+   }
+  }
+ ],
+ "butcher": [
+  {
+   "en": {
+    "name": "Slaughterman",
+    "gift": "Breaks down the largest carcass whole, nothing left behind.",
+    "burden": "No hand for fine work: small game spoils in his grip."
+   },
+   "ru": {
+    "name": "Скотобоец",
+    "gift": "Крупную тушу разделывает целиком.",
+    "burden": "Тонкой работы не разумеет: мелкая дичь в его руках портится."
+   },
+   "uk": {
+    "name": "Скотобоєць",
+    "gift": "Велику тушу розбирає цілком.",
+    "burden": "Тонкої роботи не тямить: дрібна дичина в його руках псується."
+   }
+  },
+  {
+   "en": {
+    "name": "Sausage-maker",
+    "gift": "Meat keeps twice as long in his hands.",
+    "burden": "The smokehouse smell: creatures scent him farther still."
+   },
+   "ru": {
+    "name": "Колбасник",
+    "gift": "Мясо в его руках не гниёт вдвое дольше.",
+    "burden": "Запах коптильни: твари чуют ещё дальше."
+   },
+   "uk": {
+    "name": "Ковбасник",
+    "gift": "М'ясо в його руках не гниє вдвічі довше.",
+    "burden": "Запах коптильні: потвори чують ще далі."
+   }
+  }
+ ],
+ "poacher": [
+  {
+   "en": {
+    "name": "Mantrapper",
+    "gift": "Re-taught his snares: his traps bind two-legged game — a tangled man is slow and loud.",
+    "burden": "Man-iron is heavy: the traps eat a fair share of his pack."
+   },
+   "ru": {
+    "name": "Людолов",
+    "gift": "Переучил силки: его ловушки вяжут двуногую дичь — спутанный медлен и шумен.",
+    "burden": "Людское железо тяжко: капканы съедают изрядный вес мешка."
+   },
+   "uk": {
+    "name": "Людолов",
+    "gift": "Перевчив сильця: його пастки в'яжуть двоногу дичину — сплутаний повільний і гучний.",
+    "burden": "Людське залізо важке: капкани з'їдають чималу вагу мішка."
+   }
+  },
+  {
+   "en": {
+    "name": "Dead-stalker",
+    "gift": "Learned the creatures' ways: hears them far beyond other men.",
+    "burden": "His hand has left the living beast: game yields him half as much."
+   },
+   "ru": {
+    "name": "Мертволов",
+    "gift": "Выучил повадки тварей: слышит их много дальше прочих.",
+    "burden": "На живого зверя рука уже не та: с дичи добычи вдвое меньше."
+   },
+   "uk": {
+    "name": "Мертволов",
+    "gift": "Вивчив звички потвор: чує їх багато далі за інших.",
+    "burden": "На живого звіра рука вже не та: з дичини здобичі вдвічі менше."
+   }
+  }
+ ],
+ "ratcatcher": [
+  {
+   "en": {
+    "name": "Street-born",
+    "gift": "Knows Carrenhold's drains by heart: the city's underways are marked on his map.",
+    "burden": "Daylight cuts his eyes: above ground by day he sees worse."
+   },
+   "ru": {
+    "name": "Городской",
+    "gift": "Стоки Карренхольда наизусть: подземные ходы города отмечены на его карте.",
+    "burden": "Дневной свет режет глаза: днём на поверхности видит хуже."
+   },
+   "uk": {
+    "name": "Міський",
+    "gift": "Стоки Карренхольда напам'ять: підземні ходи міста позначені на його мапі.",
+    "burden": "Денне світло ріже очі: вдень на поверхні бачить гірше."
+   }
+  },
+  {
+   "en": {
+    "name": "Plague-born",
+    "gift": "Outlived every pestilence: sickness does not take to him at all.",
+    "burden": "Survived, but burned out: food and remedies heal him less."
+   },
+   "ru": {
+    "name": "Чумной",
+    "gift": "Пережил все поветрия: болезни не липнут вовсе.",
+    "burden": "Выжил, но выгорел: лечение еды и снадобий на нём слабее."
+   },
+   "uk": {
+    "name": "Чумний",
+    "gift": "Пережив усі пошесті: хвороби не липнуть зовсім.",
+    "burden": "Вижив, та вигорів: їжа й зілля лікують його слабше."
+   }
+  }
+ ],
+ "smuggler": [
+  {
+   "en": {
+    "name": "The False Lining",
+    "gift": "One small thing is sewn where no killer will find it: it survives his death and returns with him.",
+    "burden": "A lining is no mail: he wears no heavy armor at all."
+   },
+   "ru": {
+    "name": "Тайник в подкладке",
+    "gift": "Одна малая вещь зашита так, что убийца её не найдёт: переживает смерть и возвращается с ним.",
+    "burden": "Подкладка не кольчуга: тяжёлой брони не носит вовсе."
+   },
+   "uk": {
+    "name": "Тайник у підкладці",
+    "gift": "Одна мала річ зашита так, що вбивця її не знайде: переживає смерть і повертається з ним.",
+    "burden": "Підкладка не кольчуга: важкої броні не носить зовсім."
+   }
+  },
+  {
+   "en": {
+    "name": "Packer",
+    "gift": "Knows how to pack: bulky goods take less room in his bag.",
+    "burden": "A thin purse: he carries only so much coin into a raid."
+   },
+   "ru": {
+    "name": "Укладчик",
+    "gift": "Умеет паковать: громоздкое в его мешке занимает меньше места.",
+    "burden": "Кошель тощ: монет в рейд берёт ограниченно."
+   },
+   "uk": {
+    "name": "Укладач",
+    "gift": "Уміє пакувати: громіздке в його мішку займає менше місця.",
+    "burden": "Гаманець худий: монет у рейд бере обмежено."
+   }
+  }
+ ],
+ "charburner": [
+  {
+   "en": {
+    "name": "Tar-burner",
+    "gift": "Boils tar: fire burns longer, sticky pitch underfoot snares those who walk it.",
+    "burden": "Burn-scarred hands: lockwork and fine tasks come harder."
+   },
+   "ru": {
+    "name": "Смолокур",
+    "gift": "Варит смолу: огонь горит дольше, липкая смола под ноги вяжет идущих.",
+    "burden": "Руки в ожогах: взлом и тонкая работа хуже."
+   },
+   "uk": {
+    "name": "Смолокур",
+    "gift": "Варить смолу: вогонь горить довше, липка смола під ноги в'яже перехожих.",
+    "burden": "Руки в опіках: злам і тонка робота гірші."
+   }
+  },
+  {
+   "en": {
+    "name": "Kilnsman",
+    "gift": "Reads smoke: from afar he'll tell how many sit at a fire.",
+    "burden": "Smoke in the lungs: he can't creep for long — crouching drains him."
+   },
+   "ru": {
+    "name": "Жигарь",
+    "gift": "Читает дым: по дыму издали скажет, сколько народу у костра.",
+    "burden": "Дым в лёгких: долго красться не может, в приседе выносливость тает."
+   },
+   "uk": {
+    "name": "Жигар",
+    "gift": "Читає дим: здалеку скаже, скільки людей біля багаття.",
+    "burden": "Дим у легенях: довго скрадатися не може, навприсядки витривалість тане."
+   }
+  }
+ ],
+ "barber": [
+  {
+   "en": {
+    "name": "Bloodletter",
+    "gift": "Leeches and lancet: draws out poison and contagion, his own and his fellows'.",
+    "burden": "Believes in bad blood and lets his own: his health runs a little lower."
+   },
+   "ru": {
+    "name": "Кровопускатель",
+    "gift": "Пиявки и ланцет: вытягивает яд и заразу, себе и товарищам.",
+    "burden": "Верит в дурную кровь и спускает её себе: предел здоровья чуть ниже."
+   },
+   "uk": {
+    "name": "Кровопускач",
+    "gift": "П'явки й ланцет: витягає отруту й заразу, собі й товаришам.",
+    "burden": "Вірить у погану кров і спускає її собі: межа здоров'я трохи нижча."
+   }
+  },
+  {
+   "en": {
+    "name": "Tooth-puller",
+    "gift": "A ready tongue: better bargains, rumors stick to him.",
+    "burden": "A charlatan's fame: the courts' healing costs him dearer."
+   },
+   "ru": {
+    "name": "Ярмарочный зубодёр",
+    "gift": "Язык подвешен: торг лучше, слухи липнут.",
+    "burden": "Шарлатанская слава: лекарские услуги дворов для него дороже."
+   },
+   "uk": {
+    "name": "Ярмарковий зубодер",
+    "gift": "Язик підвішений: торг кращий, чутки липнуть.",
+    "burden": "Слава шарлатана: лікарські послуги дворів для нього дорожчі."
+   }
+  }
+ ],
+ "herbwife": [
+  {
+   "en": {
+    "name": "Brewster",
+    "gift": "What her hand has brewed never sours and works longer.",
+    "burden": "She drinks no stranger's potion in a raid — only her own."
+   },
+   "ru": {
+    "name": "Зелейница",
+    "gift": "Сваренное её рукой не скисает и действует дольше.",
+    "burden": "Чужих зелий в рейде не пьёт — только своё."
+   },
+   "uk": {
+    "name": "Зільниця",
+    "gift": "Зварене її рукою не скисає і діє довше.",
+    "burden": "Чужих зіль у рейді не п'є — тільки своє."
+   }
+  },
+  {
+   "en": {
+    "name": "Poisoner",
+    "gift": "Her poisons are twice as strong.",
+    "burden": "A blacker name: worse prices everywhere."
+   },
+   "ru": {
+    "name": "Отравщица",
+    "gift": "Яды вдвое крепче.",
+    "burden": "Слава чернее: цены хуже всюду."
+   },
+   "uk": {
+    "name": "Отруйниця",
+    "gift": "Отрути вдвічі міцніші.",
+    "burden": "Слава чорніша: ціни гірші всюди."
+   }
+  }
+ ],
+ "cook": [
+  {
+   "en": {
+    "name": "Garrison",
+    "gift": "Cooks for a company: feeds the whole band from the same stores.",
+    "burden": "No pot, no cooking: the kettle rides in his pack, and it isn't light."
+   },
+   "ru": {
+    "name": "Гарнизонный",
+    "gift": "Варит на роту: из тех же припасов кормит всю группу.",
+    "burden": "Без котла не готовит: котёл всегда в мешке, и он не лёгок."
+   },
+   "uk": {
+    "name": "Гарнізонний",
+    "gift": "Варить на роту: з тих самих припасів годує весь гурт.",
+    "burden": "Без казана не готує: казан завжди в мішку, і він не легкий."
+   }
+  },
+  {
+   "en": {
+    "name": "Tavern",
+    "gift": "One bowl of his feeds a man all day: fullness lasts twice as long.",
+    "burden": "Spoiled by the kitchen: he eats nothing raw or rotten, and hunger is stricter with him."
+   },
+   "ru": {
+    "name": "Корчемный",
+    "gift": "Одна его миска кормит на весь день: сытость держится вдвое дольше.",
+    "burden": "Изнежен кухней: сырого и гнилого не ест вовсе, голод к нему строже."
+   },
+   "uk": {
+    "name": "Корчемний",
+    "gift": "Одна його миска годує на весь день: ситість тримається вдвічі довше.",
+    "burden": "Розпещений кухнею: сирого й гнилого не їсть зовсім, голод до нього суворіший."
+   }
+  }
+ ],
+ "moneylender": [
+  {
+   "en": {
+    "name": "Usurer",
+    "gift": "Coin begets coin: the savings in his vault quietly grow on their own.",
+    "burden": "Trembles over every penny: he picks up coins slowly, counting."
+   },
+   "ru": {
+    "name": "Процентщик",
+    "gift": "Монета родит монету: сбережения в хранилище тихо прирастают сами.",
+    "burden": "Над каждым грошом трясётся: монеты подбирает медленно, пересчитывая."
+   },
+   "uk": {
+    "name": "Процентник",
+    "gift": "Монета родить монету: заощадження у сховищі тихо приростають самі.",
+    "burden": "Над кожним грошем труситься: монети підбирає повільно, перераховуючи."
+   }
+  },
+  {
+   "en": {
+    "name": "Treasurer",
+    "gift": "A strongbelt: his coin survives his death — the killer takes everything but the treasury.",
+    "burden": "The treasury rings: the more coin he carries, the louder his step."
+   },
+   "ru": {
+    "name": "Казначей",
+    "gift": "Сейфовый пояс: монеты при нём переживают смерть — убийце достаётся всё, кроме казны.",
+    "burden": "Казна звенит: чем больше монет несёт, тем громче его шаг."
+   },
+   "uk": {
+    "name": "Скарбник",
+    "gift": "Сейфовий пояс: монети при ньому переживають смерть — убивці дістається все, крім скарбниці.",
+    "burden": "Скарбниця дзвенить: що більше монет несе, то гучніший його крок."
+   }
+  }
+ ],
+ "innkeeper": [
+  {
+   "en": {
+    "name": "City Inn",
+    "gift": "A deep cellar: he starts with a stock of food and drink.",
+    "burden": "Uneasy without a roof: rest in the open field restores him less."
+   },
+   "ru": {
+    "name": "Городской",
+    "gift": "Погреб глубок: старт с запасом еды и питья.",
+    "burden": "Без крыши тревожен: в чистом поле отдых восстанавливает хуже."
+   },
+   "uk": {
+    "name": "Міський",
+    "gift": "Погріб глибокий: початок із запасом їжі та питва.",
+    "burden": "Без даху тривожний: у чистім полі відпочинок відновлює гірше."
+   }
+  },
+  {
+   "en": {
+    "name": "Tapster",
+    "gift": "Knows his drink: wine and ale in his hands warm and heal twice over.",
+    "burden": "A taster: every bottle he finds reaches his bag half gone."
+   },
+   "ru": {
+    "name": "Кабатчик",
+    "gift": "Хмель знает: вино и эль в его руках греют и лечат вдвое.",
+    "burden": "Дегустатор: всякая найденная бутыль доходит до мешка ополовиненной."
+   },
+   "uk": {
+    "name": "Шинкар",
+    "gift": "Хміль знає: вино та ель у його руках гріють і лікують удвічі.",
+    "burden": "Дегустатор: усяка знайдена пляшка доходить до мішка наполовину спорожнілою."
+   }
+  }
+ ],
+ "gravedigger": [
+  {
+   "en": {
+    "name": "Corpse-washer",
+    "gift": "Prepared the dead for burial: searches bodies twice as fast.",
+    "burden": "Works bare-handed only: wears no gloves nor gauntlets."
+   },
+   "ru": {
+    "name": "Обмывальщик",
+    "gift": "Готовил тела к погребению: обыскивает мёртвых вдвое быстрее.",
+    "burden": "Работает только голыми руками: перчаток и латных рукавиц не носит."
+   },
+   "uk": {
+    "name": "Обмивальник",
+    "gift": "Готував тіла до поховання: обшукує мертвих удвічі швидше.",
+    "burden": "Працює тільки голими руками: рукавичок і латних рукавиць не носить."
+   }
+  },
+  {
+   "en": {
+    "name": "Stonecutter",
+    "gift": "Carved the crypts and knows where things are hidden: tombs yield him more.",
+    "burden": "Cares nothing for worldly goods: dwellings yield him less."
+   },
+   "ru": {
+    "name": "Каменотёс",
+    "gift": "Резал склепы и знает, где прячут: гробницы и склепы отдают ему больше.",
+    "burden": "Мирской скарб не ценит: из жилых домов добычи меньше."
+   },
+   "uk": {
+    "name": "Каменотес",
+    "gift": "Різьбив склепи і знає, де ховають: гробниці та склепи віддають йому більше.",
+    "burden": "Мирського скарбу не цінує: з житлових домів здобичі менше."
+   }
+  }
+ ],
+ "ferryman": [
+  {
+   "en": {
+    "name": "Carrier of the Living",
+    "gift": "Carries men out: bears a wounded fellow with no loss of speed.",
+    "burden": "Carrying a man, he is wholly taken: no weapon, no bag."
+   },
+   "ru": {
+    "name": "Перевозчик живых",
+    "gift": "Выносит людей: раненого товарища несёт без штрафа скорости.",
+    "burden": "Неся человека, занят весь: ни оружия, ни мешка."
+   },
+   "uk": {
+    "name": "Перевізник живих",
+    "gift": "Виносить людей: пораненого товариша несе без штрафу швидкості.",
+    "burden": "Несучи людину, зайнятий весь: ні зброї, ні мішка."
+   }
+  },
+  {
+   "en": {
+    "name": "Carrier of the Dead",
+    "gift": "Feels where a life was cut short: places of recent death are marked to him.",
+    "burden": "The dead whisper: near corpses the sounds of the living world grow dim for him."
+   },
+   "ru": {
+    "name": "Перевозчик мёртвых",
+    "gift": "Чует, где оборвалась жизнь: места недавних смертей отмечены ему.",
+    "burden": "Мёртвые шепчут: рядом с трупами звуки живого мира для него глуше."
+   },
+   "uk": {
+    "name": "Перевізник мертвих",
+    "gift": "Чує, де урвалося життя: місця недавніх смертей позначені йому.",
+    "burden": "Мертві шепочуть: біля трупів звуки живого світу для нього глухіші."
+   }
+  }
+ ],
+ "miner": [
+  {
+   "en": {
+    "name": "Hewer",
+    "gift": "Hears the rock: by knocking he finds hollows, hidden ways, caches in the wall.",
+    "burden": "Underground without a lamp he is afraid: full darkness means panic."
+   },
+   "ru": {
+    "name": "Забойщик",
+    "gift": "Слышит породу: по стуку найдёт пустоту, скрытый проход, тайник в стене.",
+    "burden": "Без лампы под землёй ему страшно: в полной тьме паника."
+   },
+   "uk": {
+    "name": "Вибійник",
+    "gift": "Чує породу: по стуку знайде порожнину, прихований хід, схованку в стіні.",
+    "burden": "Без лампи під землею йому страшно: у повній темряві паніка."
+   }
+  },
+  {
+   "en": {
+    "name": "Timberman",
+    "gift": "The prop: he can wedge a door shut behind him or break a wedged one open.",
+    "burden": "Timber on his back: the props are heavy."
+   },
+   "ru": {
+    "name": "Крепильщик",
+    "gift": "Распорка: заклинит дверь за собой или выломает заклиненную.",
+    "burden": "Брус на горбу: распорки тяжелы."
+   },
+   "uk": {
+    "name": "Кріпильник",
+    "gift": "Розпірка: заклинить двері за собою або виламає заклинені.",
+    "burden": "Брус на горбі: розпірки важкі."
+   }
+  }
+ ],
+ "unfrocked": [
+  {
+   "en": {
+    "name": "Reader",
+    "gift": "The cloister's voice: his song at the fire deepens the band's rest.",
+    "burden": "He sings, he doesn't keep silent: his camp is heard farther."
+   },
+   "ru": {
+    "name": "Чтец",
+    "gift": "Голос обители: песня у костра делает отдых группы глубже.",
+    "burden": "Поёт, не молчит: его лагерь слышен дальше."
+   },
+   "uk": {
+    "name": "Читець",
+    "gift": "Голос обителі: пісня біля багаття робить відпочинок гурту глибшим.",
+    "burden": "Співає, не мовчить: його табір чутно далі."
+   }
+  },
+  {
+   "en": {
+    "name": "Cellarer",
+    "gift": "Lenten wisdom: bread, water and roots fill him like good meat.",
+    "burden": "The fast has set in: meat and fat serve him at half strength."
+   },
+   "ru": {
+    "name": "Келарь",
+    "gift": "Постная мудрость: хлеб, вода и коренья насыщают его как доброе мясо.",
+    "burden": "Пост въелся: мясное и жирное ему вполсилы."
+   },
+   "uk": {
+    "name": "Келар",
+    "gift": "Пісна мудрість: хліб, вода й коріння насичують його як добре м'ясо.",
+    "burden": "Піст в'ївся: м'ясне й жирне йому впівсили."
+   }
+  }
+ ],
+ "scrivener": [
+  {
+   "en": {
+    "name": "Of the Court",
+    "gift": "Knows the hand of the courts' seals: he can forge a pass through closed gates.",
+    "burden": "Ink-stained fingers: all he opens and searches bears his mark — those who follow see his work."
+   },
+   "ru": {
+    "name": "Судебный",
+    "gift": "Руку дворовых печатей знает: подделает пропуск за закрытые ворота.",
+    "burden": "Чернильные пальцы: всё, что он вскрыл и обшарил, помечено пятном — идущие следом видят его работу."
+   },
+   "uk": {
+    "name": "Судовий",
+    "gift": "Руку дворових печаток знає: підробить перепустку за зачинені ворота.",
+    "burden": "Чорнильні пальці: усе, що він відкрив і обшукав, позначене плямою — ті, хто йде слідом, бачать його роботу."
+   }
+  },
+  {
+   "en": {
+    "name": "Of the Ledger",
+    "gift": "Keeps the band's ledger: all see the common tally of finds.",
+    "burden": "Without quill and ink he marks nothing: the gift of the map needs supplies."
+   },
+   "ru": {
+    "name": "Счётный",
+    "gift": "Ведёт книгу группы: все видят общий учёт находок.",
+    "burden": "Без пера и чернил не отметит ничего: дар карты требует расходника."
+   },
+   "uk": {
+    "name": "Рахунковий",
+    "gift": "Веде книгу гурту: усі бачать спільний облік знахідок.",
+    "burden": "Без пера й чорнила не позначить нічого: дар мапи потребує припасу."
+   }
+  }
+ ],
+ "bellringer": [
+  {
+   "en": {
+    "name": "The Tocsin",
+    "gift": "The voice of bronze: striking any bell or board, he raises the alarm — creatures flee the ringing.",
+    "burden": "After the tocsin he is deaf a while, and the whole country heard him."
+   },
+   "ru": {
+    "name": "Набатчик",
+    "gift": "Голос меди: ударив в любой колокол или било, поднимает набат — твари бегут от звона.",
+    "burden": "Сам после набата глух на минуту, и слышала его вся округа."
+   },
+   "uk": {
+    "name": "Набатник",
+    "gift": "Голос міді: вдаривши в будь-який дзвін чи било, здіймає сполох — потвори тікають від дзвону.",
+    "burden": "Сам після сполоху глухий на хвилину, і чула його вся околиця."
+   }
+  },
+  {
+   "en": {
+    "name": "The Silent",
+    "gift": "Hears the world fall silent: when birds and crickets stop, a stranger is near.",
+    "burden": "After any thunder the ringing in his ears lasts longer than other men's."
+   },
+   "ru": {
+    "name": "Молчальник",
+    "gift": "Слышит, как мир замолкает: смолкли птицы и сверчки — значит, рядом чужой.",
+    "burden": "После всякого грохота звон в ушах стоит дольше, чем у прочих."
+   },
+   "uk": {
+    "name": "Мовчальник",
+    "gift": "Чує, як світ замовкає: змовкли птахи й цвіркуни — отже, поруч чужий.",
+    "burden": "Після всякого гуркоту дзвін у вухах стоїть довше, ніж в інших."
+   }
+  }
+ ]
+};
+
 (function() {
     var LBL = {
-        en: { trade: "Trade before the plague", gift: "Gift",  burden: "Burden" },
-        ru: { trade: "Ремесло прежде чумы",     gift: "Дар",   burden: "Бремя" },
-        uk: { trade: "Ремесло до чуми",         gift: "Дар",   burden: "Тягар" }
+        en: { trade: "Trade before the plague", gift: "Gift",  burden: "Burden", paths: "Two Paths" },
+        ru: { trade: "Ремесло прежде чумы",     gift: "Дар",   burden: "Бремя",  paths: "Две стези" },
+        uk: { trade: "Ремесло до чуми",         gift: "Дар",   burden: "Тягар",  paths: "Дві стезі" }
     };
-    var grid, dossier, selected = 0;
+    var ART = {}; // id -> URL гравюры; пока пусто — рисуется гекс-инициал
+    var rail, lead, art, plaque, selected = 0;
 
     function lang() {
         var l = window.LANG;
@@ -5982,60 +6955,110 @@ var ORIGINS = [
             + '</svg>';
     }
 
-    function buildGrid() {
+    function pathRows(t, lbl) {
+        return '<div class="ob-path-row"><span>' + lbl.gift + '</span>' + t.gift + '</div>'
+            + '<div class="ob-path-row"><span>' + lbl.burden + '</span>' + t.burden + '</div>';
+    }
+
+    function buildRail() {
         var L = lang();
-        grid.innerHTML = '';
+        rail.innerHTML = '';
         ORIGINS.forEach(function(o, i) {
             var cell = document.createElement('button');
             cell.type = 'button';
-            cell.className = 'ob-cell' + (i === selected ? ' active' : '');
+            cell.className = 'ob-rcell' + (i === selected ? ' active' : '');
             var t = o.t[L] || o.t.en;
-            cell.innerHTML = cellSvg(t.name.charAt(0)) + '<span class="ob-cell-name">' + t.name + '</span>';
+            cell.innerHTML = cellSvg(t.name.charAt(0)) + '<span class="ob-rcell-name">' + t.name + '</span>';
             cell.addEventListener('click', function() {
+                if (selected === i) return;
                 selected = i;
-                grid.querySelectorAll('.ob-cell').forEach(function(c, j) {
+                rail.querySelectorAll('.ob-rcell').forEach(function(c, j) {
                     c.classList.toggle('active', j === i);
+                    c.classList.remove('stamp');
                 });
-                renderDossier(true);
+                void cell.offsetWidth;
+                cell.classList.add('stamp');
+                renderStage(true);
+                centerRail(cell);
                 if (window.innerWidth < 960) {
-                    dossier.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    lead.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
-            grid.appendChild(cell);
+            rail.appendChild(cell);
         });
     }
 
-    function renderDossier(flash) {
+    function centerRail(cell) {
+        if (window.innerWidth < 960) {
+            rail.scrollTo({ left: cell.offsetLeft - rail.clientWidth / 2 + cell.clientWidth / 2, behavior: 'smooth' });
+        } else {
+            rail.scrollTo({ top: cell.offsetTop - rail.clientHeight / 2 + cell.clientHeight / 2, behavior: 'smooth' });
+        }
+    }
+
+    function renderStage(animate) {
         var L = lang();
         var lbl = LBL[L] || LBL.en;
         var o = ORIGINS[selected];
         var t = o.t[L] || o.t.en;
         var g = GROUPS[o.group][L] || GROUPS[o.group].en;
-        dossier.innerHTML =
-            '<div class="ob-group">' + g + '</div>'
-            + '<h3 class="ob-name">' + t.name + '</h3>'
-            + '<div class="ob-trade">' + lbl.trade + ': ' + t.trade + '</div>'
-            + '<p class="ob-fate">' + t.fate + '</p>'
-            + '<div class="ob-divider" aria-hidden="true"><span>\u2720</span></div>'
-            + '<div class="ob-block"><div class="ob-block-label">' + lbl.gift + '</div><div class="ob-block-text">' + t.gift + '</div></div>'
-            + '<div class="ob-block"><div class="ob-block-label">' + lbl.burden + '</div><div class="ob-block-text">' + t.burden + '</div></div>';
-        if (flash) {
-            dossier.classList.remove('flash');
-            void dossier.offsetWidth;
-            dossier.classList.add('flash');
+        var ps = PATHS[o.id];
+        var d = 0;
+        function w(html, anim) {
+            var out = '<div class="' + (anim ? 'dr ' + anim : 'dr') + '" style="animation-delay:' + d.toFixed(2) + 's">' + html + '</div>';
+            d += 0.09;
+            return out;
         }
+
+        lead.innerHTML =
+            w('<div class="ob-lead-group">' + g + '</div>')
+            + w('<h3 class="ob-lead-name">' + t.name + '</h3>', 'dr-name')
+            + w('<div class="ob-lead-rule"></div>')
+            + w('<p class="ob-lead-fate">' + t.fate + '</p>');
+
+        art.innerHTML = ART[o.id]
+            ? '<img src="' + ART[o.id] + '" alt="">'
+            : cellSvg(t.name.charAt(0));
+
+        var ph = w('<div class="ob-plq-row">'
+            + '<div><div class="ob-plq-label">' + lbl.trade + '</div><div class="ob-plq-text">' + t.trade + '</div></div>'
+            + '<div><div class="ob-plq-label">' + lbl.gift + '</div><div class="ob-plq-text">' + t.gift + '</div></div>'
+            + '<div><div class="ob-plq-label">' + lbl.burden + '</div><div class="ob-plq-text">' + t.burden + '</div></div>'
+            + '</div>');
+        if (ps && ps.length >= 2) {
+            var t0 = ps[0][L] || ps[0].en;
+            var t1 = ps[1][L] || ps[1].en;
+            ph += w('<div class="ob-plq-div"></div>')
+                + w('<div class="ob-plq-pathshead">\u2720 ' + lbl.paths + ' \u2720</div>')
+                + '<div class="ob-plq-paths">'
+                + '<div class="dr dr-l" style="animation-delay:' + d.toFixed(2) + 's"><div class="ob-plq-path-name">' + t0.name + '</div>' + pathRows(t0, lbl) + '</div>'
+                + '<div class="dr dr-r" style="animation-delay:' + d.toFixed(2) + 's"><div class="ob-plq-path-name">' + t1.name + '</div>' + pathRows(t1, lbl) + '</div>'
+                + '</div>';
+        }
+        plaque.innerHTML = ph;
+
+        [lead, plaque].forEach(function(el) {
+            el.classList.remove('play');
+            void el.offsetWidth;
+            el.classList.add('play');
+        });
+        art.classList.remove('fade');
+        void art.offsetWidth;
+        art.classList.add('fade');
     }
 
     window.renderRoadBook = function() {
-        if (!grid) return;
-        buildGrid();
-        renderDossier(false);
+        if (!rail) return;
+        buildRail();
+        renderStage(false);
     };
 
     function init() {
-        grid = document.getElementById('obGrid');
-        dossier = document.getElementById('obDossier');
-        if (!grid || !dossier) return;
+        rail = document.getElementById('obRail');
+        lead = document.getElementById('obLead');
+        art = document.getElementById('obArt');
+        plaque = document.getElementById('obPlaque');
+        if (!rail || !lead || !plaque) return;
         window.renderRoadBook();
     }
 
