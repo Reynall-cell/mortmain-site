@@ -1393,6 +1393,123 @@
             .rm-dots { display: none; }
         }
 
+        /* === SEVENTH DOT (sigil secret) === */
+        .hero-sigil svg * { pointer-events: none; }
+        .seventh-dot {
+            pointer-events: all !important;
+            cursor: pointer;
+            animation: seventhBlink 5s ease-in-out infinite;
+        }
+        @keyframes seventhBlink {
+            0%, 90%, 100% { opacity: 0.22; }
+            94% { opacity: 1; }
+        }
+        .whisper-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(4, 3, 2, 0);
+            z-index: 500;
+            pointer-events: none;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 18vh;
+            transition: background 1.4s ease;
+        }
+        .whisper-overlay.active { background: rgba(4, 3, 2, 0.93); }
+        .whisper-text {
+            font-family: 'EB Garamond', serif;
+            font-style: italic;
+            font-size: clamp(1rem, 2.4vw, 1.4rem);
+            color: rgba(201, 169, 97, 0.85);
+            text-align: center;
+            max-width: 640px;
+            padding: 0 24px;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 1.6s ease 0.6s, transform 1.6s ease 0.6s;
+        }
+        .whisper-overlay.active .whisper-text { opacity: 1; transform: translateY(0); }
+
+        /* === CANDLE LIGHT (cursor) === */
+        .candle-light {
+            position: fixed;
+            top: -300px;
+            left: -300px;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                rgba(238, 205, 140, 0.085) 0%,
+                rgba(201, 169, 97, 0.04) 38%,
+                transparent 70%);
+            mix-blend-mode: screen;
+            pointer-events: none;
+            z-index: 348;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            will-change: transform;
+        }
+
+        /* === SCROLL CANDLE (melting with reading progress) === */
+        .scroll-candle {
+            position: fixed;
+            left: 26px;
+            bottom: 24px;
+            width: 20px;
+            z-index: 90;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
+        }
+        .scroll-candle.lit { opacity: 0.85; }
+        .sc-flame {
+            position: absolute;
+            left: 50%;
+            width: 9px;
+            height: 15px;
+            transform: translateX(-50%);
+            background: radial-gradient(ellipse at 50% 78%, #ffe9b8 0%, #eaa94f 55%, rgba(180, 90, 30, 0.4) 80%, transparent 100%);
+            border-radius: 50% 50% 42% 42% / 64% 64% 36% 36%;
+            box-shadow: 0 0 14px 3px rgba(228, 168, 80, 0.35);
+            animation: scFlicker 1.7s ease-in-out infinite;
+        }
+        @keyframes scFlicker {
+            0%, 100% { transform: translateX(-50%) scale(1) skewX(0deg); opacity: 0.95; }
+            30% { transform: translateX(-52%) scale(1.06, 0.94) skewX(-2.5deg); opacity: 1; }
+            55% { transform: translateX(-48%) scale(0.95, 1.07) skewX(2deg); opacity: 0.88; }
+            78% { transform: translateX(-50%) scale(1.02) skewX(-1deg); opacity: 0.97; }
+        }
+        .sc-wax {
+            position: absolute;
+            left: 50%;
+            bottom: 4px;
+            width: 8px;
+            transform: translateX(-50%);
+            background: linear-gradient(to bottom, #cfc3a4, #9e9072 70%, #877a5e);
+            border-radius: 2px 2px 1px 1px;
+            box-shadow: inset -1px 0 1px rgba(0,0,0,0.35);
+        }
+        .sc-pool {
+            position: absolute;
+            left: 50%;
+            bottom: 1px;
+            width: 16px;
+            height: 4px;
+            transform: translateX(-50%);
+            background: radial-gradient(ellipse, #a89a78 0%, rgba(135, 122, 94, 0.5) 70%, transparent 100%);
+            border-radius: 50%;
+        }
+        @media (max-width: 1100px) { .scroll-candle { display: none; } }
+
+        /* === INK-SOAK SECTION TITLES === */
+        .reveal .section-title { opacity: 0; }
+        .reveal.visible .section-title { animation: inkSoak 1.15s cubic-bezier(0.25, 0.8, 0.35, 1) 0.12s both; }
+        @keyframes inkSoak {
+            from { opacity: 0; filter: blur(8px); }
+            to { opacity: 1; filter: blur(0); }
+        }
+
         /* === HOVER CORNER TICKS (cards echo the page frame) === */
         .news-card, .prom-item { position: relative; }
         .news-card::before, .prom-item::before,
@@ -2743,6 +2860,7 @@
                 <circle cx="100" cy="100" r="80"/>
             </g>
             <circle cx="100" cy="100" r="6" fill="#c9a961"/>
+            <circle id="seventhDot" class="seventh-dot" cx="151.4" cy="38.6" r="3.2" fill="#c9a961"/>
         </svg>
     </div>
     <div class="hero-inner">
@@ -5310,6 +5428,93 @@ he comes not on his own.</p>
     } else {
         initMobileMenu();
     }
+
+    // === CANDLE LIGHT: warm glow follows the cursor (desktop only) ===
+    (function() {
+        if (!window.matchMedia || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var light = document.createElement('div');
+        light.className = 'candle-light';
+        document.body.appendChild(light);
+        var tx = -600, ty = -600, x = tx, y = ty, t = 0, on = false;
+        document.addEventListener('mousemove', function(e) {
+            tx = e.clientX; ty = e.clientY;
+            if (!on) { on = true; light.style.opacity = '1'; }
+        });
+        document.addEventListener('mouseleave', function() { on = false; light.style.opacity = '0'; });
+        (function loop() {
+            x += (tx - x) * 0.085;
+            y += (ty - y) * 0.085;
+            t += 0.05;
+            var f = 1 + Math.sin(t * 2.7) * 0.012 + Math.sin(t * 7.3) * 0.008;
+            light.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0) scale(' + f + ')';
+            requestAnimationFrame(loop);
+        })();
+    })();
+
+    // === SCROLL CANDLE: burns down as the page is read ===
+    (function() {
+        var sc = document.createElement('div');
+        sc.className = 'scroll-candle';
+        sc.setAttribute('aria-hidden', 'true');
+        sc.innerHTML = '<div class="sc-flame"></div><div class="sc-wax"></div><div class="sc-pool"></div>';
+        document.body.appendChild(sc);
+        var flame = sc.querySelector('.sc-flame');
+        var wax = sc.querySelector('.sc-wax');
+        var MAXH = 58, MINH = 10;
+        function update() {
+            var doc = document.documentElement;
+            var max = doc.scrollHeight - window.innerHeight;
+            var pr = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+            var hgt = MAXH - (MAXH - MINH) * pr;
+            wax.style.height = hgt + 'px';
+            flame.style.bottom = (hgt + 3) + 'px';
+            sc.classList.toggle('lit', window.scrollY > 350);
+        }
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+        update();
+    })();
+
+    // === THE SEVENTH: sigil secret ===
+    (function() {
+        var WHISPERS = {
+            en: "Seven bells were cast. Six still mourn. I am the silence of the seventh.",
+            ru: "Семь колоколов отлили. Шесть всё ещё скорбят. Я — молчание седьмого.",
+            uk: "Сім дзвонів відлили. Шість досі тужать. Я — мовчання сьомого."
+        };
+        function init() {
+            var dot = document.getElementById('seventhDot');
+            if (!dot) return;
+            var overlay = document.createElement('div');
+            overlay.className = 'whisper-overlay';
+            var text = document.createElement('div');
+            text.className = 'whisper-text';
+            overlay.appendChild(text);
+            document.body.appendChild(overlay);
+            var clicks = 0, timer = null, busy = false;
+            dot.addEventListener('click', function() {
+                if (busy) return;
+                clicks++;
+                clearTimeout(timer);
+                timer = setTimeout(function() { clicks = 0; }, 6000);
+                if (clicks < 7) return;
+                clicks = 0;
+                busy = true;
+                var lang = window.LANG || 'en';
+                text.textContent = WHISPERS[lang] || WHISPERS.en;
+                overlay.classList.add('active');
+                try { console.log('%c\u2720 ' + (WHISPERS[lang] || WHISPERS.en), 'color:#c9a961;font-style:italic;'); } catch (e) {}
+                setTimeout(function() {
+                    overlay.classList.remove('active');
+                    setTimeout(function() { busy = false; }, 1600);
+                }, 5200);
+            });
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else { init(); }
+    })();
 
     // === PAGE VEIL: smooth transition when leaving to sub-pages ===
     (function() {
