@@ -1431,26 +1431,6 @@
         }
         .whisper-overlay.active .whisper-text { opacity: 1; transform: translateY(0); }
 
-        /* === CANDLE LIGHT (cursor) === */
-        .candle-light {
-            position: fixed;
-            top: -300px;
-            left: -300px;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            background: radial-gradient(circle,
-                rgba(238, 205, 140, 0.085) 0%,
-                rgba(201, 169, 97, 0.04) 38%,
-                transparent 70%);
-            mix-blend-mode: screen;
-            pointer-events: none;
-            z-index: 348;
-            opacity: 0;
-            transition: opacity 0.6s ease;
-            will-change: transform;
-        }
-
         /* === SCROLL CANDLE (melting with reading progress) === */
         .scroll-candle {
             position: fixed;
@@ -5428,29 +5408,6 @@ he comes not on his own.</p>
     } else {
         initMobileMenu();
     }
-
-    // === CANDLE LIGHT: warm glow follows the cursor (desktop only) ===
-    (function() {
-        if (!window.matchMedia || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        var light = document.createElement('div');
-        light.className = 'candle-light';
-        document.body.appendChild(light);
-        var tx = -600, ty = -600, x = tx, y = ty, t = 0, on = false;
-        document.addEventListener('mousemove', function(e) {
-            tx = e.clientX; ty = e.clientY;
-            if (!on) { on = true; light.style.opacity = '1'; }
-        });
-        document.addEventListener('mouseleave', function() { on = false; light.style.opacity = '0'; });
-        (function loop() {
-            x += (tx - x) * 0.085;
-            y += (ty - y) * 0.085;
-            t += 0.05;
-            var f = 1 + Math.sin(t * 2.7) * 0.012 + Math.sin(t * 7.3) * 0.008;
-            light.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0) scale(' + f + ')';
-            requestAnimationFrame(loop);
-        })();
-    })();
 
     // === SCROLL CANDLE: burns down as the page is read ===
     (function() {

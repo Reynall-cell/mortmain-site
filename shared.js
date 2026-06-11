@@ -109,29 +109,6 @@
         document.addEventListener('keydown', function(e) { if (e.key === 'Escape') menu.classList.remove('open'); });
     }
 
-    // Candle light: warm glow follows the cursor (desktop only)
-    function initCandle() {
-        if (!window.matchMedia || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        var light = document.createElement('div');
-        light.className = 'candle-light';
-        document.body.appendChild(light);
-        var tx = -600, ty = -600, x = tx, y = ty, t = 0, on = false;
-        document.addEventListener('mousemove', function(e) {
-            tx = e.clientX; ty = e.clientY;
-            if (!on) { on = true; light.style.opacity = '1'; }
-        });
-        document.addEventListener('mouseleave', function() { on = false; light.style.opacity = '0'; });
-        (function loop() {
-            x += (tx - x) * 0.085;
-            y += (ty - y) * 0.085;
-            t += 0.05;
-            var f = 1 + Math.sin(t * 2.7) * 0.012 + Math.sin(t * 7.3) * 0.008;
-            light.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0) scale(' + f + ')';
-            requestAnimationFrame(loop);
-        })();
-    }
-
     // Page transition: veil fades in on internal navigation, page reveals on load
     function initTransitions() {
         ['tl', 'br'].forEach(function(pos) {
@@ -175,11 +152,11 @@
     }
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() { window.MortmainI18n.init(); initTransitions(); initBurger(); initCandle(); });
+        document.addEventListener('DOMContentLoaded', function() { window.MortmainI18n.init(); initTransitions(); initBurger(); });
     } else {
         window.MortmainI18n.init();
         initTransitions();
         initBurger();
-        initCandle();
+       
     }
 })();

@@ -683,22 +683,3 @@ section[id], div[id].page-section { scroll-margin-top: 92px; }
 }
 
 
-/* === Candle light cursor glow (injected by shared.js) === */
-.candle-light {
-    position: fixed;
-    top: -300px;
-    left: -300px;
-    width: 600px;
-    height: 600px;
-    border-radius: 50%;
-    background: radial-gradient(circle,
-        rgba(238, 205, 140, 0.085) 0%,
-        rgba(201, 169, 97, 0.04) 38%,
-        transparent 70%);
-    mix-blend-mode: screen;
-    pointer-events: none;
-    z-index: 348;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    will-change: transform;
-}
