@@ -1425,11 +1425,13 @@
         .seventh-dot {
             pointer-events: all !important;
             cursor: pointer;
-            animation: seventhBlink 5s ease-in-out infinite;
+            transform-box: fill-box;
+            transform-origin: center;
+            animation: seventhPulse 2.6s ease-in-out infinite;
         }
-        @keyframes seventhBlink {
-            0%, 90%, 100% { opacity: 0.22; }
-            94% { opacity: 1; }
+        @keyframes seventhPulse {
+            0%, 100% { opacity: 0.35; transform: scale(1); filter: drop-shadow(0 0 0 rgba(201, 169, 97, 0)); }
+            50% { opacity: 1; transform: scale(1.45); filter: drop-shadow(0 0 6px rgba(201, 169, 97, 0.8)); }
         }
         .whisper-overlay {
             position: fixed;
@@ -5476,14 +5478,9 @@ he comes not on his own.</p>
             text.className = 'whisper-text';
             overlay.appendChild(text);
             document.body.appendChild(overlay);
-            var clicks = 0, timer = null, busy = false;
+            var busy = false;
             dot.addEventListener('click', function() {
                 if (busy) return;
-                clicks++;
-                clearTimeout(timer);
-                timer = setTimeout(function() { clicks = 0; }, 6000);
-                if (clicks < 7) return;
-                clicks = 0;
                 busy = true;
                 var lang = window.LANG || 'en';
                 text.textContent = WHISPERS[lang] || WHISPERS.en;
