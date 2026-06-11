@@ -111,6 +111,15 @@
 
     // Page transition: veil fades in on internal navigation, page reveals on load
     function initTransitions() {
+        ['tl', 'br'].forEach(function(pos) {
+            var vine = document.createElement('img');
+            vine.src = '/ornament-vine-corner.png';
+            vine.className = 'page-vine ' + pos;
+            vine.alt = '';
+            vine.setAttribute('aria-hidden', 'true');
+            vine.onerror = function() { vine.style.display = 'none'; };
+            document.body.appendChild(vine);
+        });
         var vig = document.createElement('div');
         vig.className = 'vignette-overlay';
         vig.setAttribute('aria-hidden', 'true');

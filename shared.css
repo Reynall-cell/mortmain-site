@@ -665,3 +665,19 @@ html { scrollbar-width: thin; scrollbar-color: #5e5030 #0a0908; }
 }
 ::-webkit-scrollbar-thumb:hover { background: #8a7444; }
 section[id], div[id].page-section { scroll-margin-top: 92px; }
+
+
+/* === Vine corner ornaments (injected by shared.js) === */
+.page-vine {
+    position: fixed;
+    width: clamp(120px, 16vw, 220px);
+    opacity: 0.16;
+    pointer-events: none;
+    z-index: 51;
+    filter: sepia(0.4) brightness(0.9);
+}
+.page-vine.tl { top: 10px; left: 10px; }
+.page-vine.br { bottom: 10px; right: 10px; transform: rotate(180deg); }
+@media (max-width: 768px) {
+    .page-vine { width: 90px; opacity: 0.12; }
+}
