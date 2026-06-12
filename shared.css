@@ -111,7 +111,7 @@ nav.scrolled {
     align-items: center;
     gap: 12px;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 14px;
+    font-size: 17px;
     font-weight: 500;
     letter-spacing: 0.25em;
     color: var(--text-secondary);
@@ -121,15 +121,15 @@ nav.scrolled {
 }
 
 .nav-brand-mark {
-    width: 28px;
-    height: 30px;
+    width: 34px;
+    height: 36px;
     flex-shrink: 0;
     transition: width 0.4s ease, height 0.4s ease;
 }
 
 .nav-brand:hover { color: var(--text-primary); }
-nav.scrolled .nav-brand { font-size: 12px; }
-nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
+nav.scrolled .nav-brand { font-size: 14.5px; }
+nav.scrolled .nav-brand-mark { width: 29px; height: 31px; }
 
 .nav-right { display: flex; align-items: center; gap: 28px; }
 
@@ -376,9 +376,9 @@ nav.scrolled .nav-brand-mark { width: 24px; height: 26px; }
     padding: 20px 24px;
     border: 1px solid var(--border-subtle);
     font-family: 'EB Garamond', Georgia, serif;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.7;
-    color: var(--text-tertiary);
+    color: var(--text-secondary);
     font-style: italic;
 }
 
@@ -450,7 +450,7 @@ footer {
 .footer-column .pending::after {
     content: var(--soon-label, '— soon');
     margin-left: 6px;
-    font-size: 10px;
+    font-size: 11.5px;
     font-style: italic;
     color: var(--text-tertiary);
     letter-spacing: 0.1em;
@@ -503,7 +503,7 @@ footer {
 
 .footer-legal a {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 400;
     color: var(--text-tertiary);
     text-decoration: none;
@@ -516,7 +516,7 @@ footer {
 
 .footer-contact {
     font-family: 'EB Garamond', Georgia, serif;
-    font-size: 12px;
+    font-size: 14px;
     color: var(--text-secondary);
 }
 
