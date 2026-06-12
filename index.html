@@ -1698,7 +1698,7 @@
         ::-webkit-scrollbar-thumb:hover { background: #8a7444; }
 
         /* === ANCHOR OFFSET under fixed nav === */
-        section[id] { scroll-margin-top: 92px; }
+        section[id], .divider[id] { scroll-margin-top: 92px; }
 
         /* === PROMISES (home block) === */
         .prom-grid {
@@ -3478,10 +3478,10 @@
 
 <div class="chapter-indicator" id="chapterIndicator">
     <a href="#top" class="chapter-dot active" data-section="top"><span class="chapter-label" data-i18n="ch_prologus">Prologus</span></a>
-    <a href="#game" class="chapter-dot" data-section="game"><span class="chapter-label" data-i18n="ch_1">Capitulum I</span></a>
-    <a href="#features" class="chapter-dot" data-section="features"><span class="chapter-label" data-i18n="ch_2">Capitulum II</span></a>
-    <a href="#codex" class="chapter-dot" data-section="codex"><span class="chapter-label" data-i18n="ch_3">Capitulum III</span></a>
-    <a href="#newsletter" class="chapter-dot" data-section="newsletter"><span class="chapter-label" data-i18n="ch_4">Capitulum IV</span></a>
+    <a href="#cap1" class="chapter-dot" data-section="game"><span class="chapter-label" data-i18n="ch_1">Capitulum I</span></a>
+    <a href="#cap2" class="chapter-dot" data-section="features"><span class="chapter-label" data-i18n="ch_2">Capitulum II</span></a>
+    <a href="#cap3" class="chapter-dot" data-section="codex"><span class="chapter-label" data-i18n="ch_3">Capitulum III</span></a>
+    <a href="#cap4" class="chapter-dot" data-section="newsletter"><span class="chapter-label" data-i18n="ch_4">Capitulum IV</span></a>
     <a href="#studio" class="chapter-dot" data-section="studio"><span class="chapter-label" data-i18n="ch_colophon">Colophon</span></a>
 </div>
 
@@ -3606,7 +3606,7 @@
 <!-- Dark fog between hero and content — stone texture fades in gradually -->
 <div class="hero-fog"></div>
 
-<div class="divider reveal">
+<div class="divider reveal" id="cap1">
     <div class="divider-line">
         <div class="divider-symbol-group">
             <div class="divider-dot"></div>
@@ -3639,7 +3639,7 @@ The third crow takes the light.</p>
     <div class="marginalia-attribution" data-i18n="marg_1_attr">— from the Sermons of the Last Bishop</div>
 </div>
 
-<div class="divider reveal">
+<div class="divider reveal" id="cap2">
     <div class="divider-line">
         <div class="divider-symbol-group">
             <div class="divider-dot"></div>
@@ -3723,7 +3723,7 @@ The third crow takes the light.</p>
     <div class="marginalia-attribution" data-i18n="marg_2_attr">— old saying of the road</div>
 </div>
 
-<div class="divider reveal">
+<div class="divider reveal" id="cap3">
     <div class="divider-line">
         <div class="divider-symbol-group">
             <div class="divider-dot"></div>
@@ -3851,7 +3851,7 @@ he comes not on his own.</p>
     <div class="marginalia-attribution" data-i18n="marg_3_attr">— public decree, year of the second mourning</div>
 </div>
 
-<div class="divider reveal">
+<div class="divider reveal" id="cap4">
     <div class="divider-line">
         <div class="divider-symbol-group">
             <div class="divider-dot"></div>
