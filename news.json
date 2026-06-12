@@ -1,9 +1,9 @@
 [
   {
-    "id": "2026-06-12-two-paths",
+    "id": "two-paths",
     "date": "2026-06-12",
     "tag": "news",
-    "url": "news/2026-06-12-two-paths.html",
+    "url": "news/two-paths",
     "image": "promises-scribe.jpg",
     "title": {
       "en": "The Road Book: Two Paths",
@@ -17,10 +17,10 @@
     }
   },
   {
-    "id": "2026-06-10-gates-open",
+    "id": "first-bell",
     "date": "2026-06-10",
     "tag": "news",
-    "url": "news/2026-06-10-gates-open.html",
+    "url": "news/first-bell",
     "title": {
       "en": "The first bell",
       "ru": "Первый колокол",
@@ -34,10 +34,10 @@
     "image": "roadmap-gates.jpg"
   },
   {
-    "id": "2026-06-03-forge-report-1",
+    "id": "forge-report-1",
     "date": "2026-06-03",
     "tag": "patch",
-    "url": "news/2026-06-03-forge-report-1.html",
+    "url": "news/forge-report-1",
     "title": {
       "en": "From the forge: directional combat",
       "ru": "Из кузницы: направленный бой",
