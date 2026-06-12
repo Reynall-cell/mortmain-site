@@ -144,8 +144,6 @@ nav.scrolled {
 }
 
 .nav-brand:hover { color: var(--text-primary); }
-nav.scrolled .nav-brand { font-size: 14.5px; }
-nav.scrolled .nav-brand-mark { width: 29px; height: 31px; }
 
 .nav-right { display: flex; align-items: center; gap: 28px; }
 
