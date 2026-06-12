@@ -98,6 +98,22 @@ nav {
     border-bottom: 1px solid transparent;
 }
 
+nav::before {
+    content: '';
+    position: absolute;
+    top: -17px;
+    left: -17px;
+    right: -17px;
+    height: 18px;
+    background: linear-gradient(180deg, #080706 35%, rgba(8, 7, 6, 0.82) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+nav.scrolled::before { opacity: 1; }
+
 nav.scrolled {
     padding: 14px 48px;
     background: rgba(8, 7, 6, 0.85);
