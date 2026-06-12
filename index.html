@@ -3019,19 +3019,36 @@
             mask-image: linear-gradient(180deg, transparent, #000 26px, #000 calc(100% - 26px), transparent);
             -webkit-mask-image: linear-gradient(180deg, transparent, #000 26px, #000 calc(100% - 26px), transparent);
         }
-        .ob-rail::-webkit-scrollbar { width: 5px; height: 5px; }
-        .ob-rail::-webkit-scrollbar-track { background: rgba(201, 169, 97, 0.1); }
-        .ob-rail::-webkit-scrollbar-thumb {
-            background: #C9A961;
-            opacity: 0.8;
-            border-radius: 3px;
+        .ob-railwrap { position: relative; }
+        .ob-rail { scrollbar-width: none; }
+        .ob-rail::-webkit-scrollbar { display: none; }
+        .ob-scrollbar {
+            position: absolute;
+            top: 8px;
+            bottom: 8px;
+            right: -16px;
+            width: 8px;
+            border-radius: 4px;
+            background: rgba(201, 169, 97, 0.1);
+            cursor: pointer;
         }
-        .ob-rail::-webkit-scrollbar-thumb:hover { background: #E0C685; }
-        @supports (-moz-appearance: none) {
-            .ob-rail {
-                scrollbar-width: thin;
-                scrollbar-color: #C9A961 rgba(201, 169, 97, 0.1);
-            }
+        .ob-scrollthumb {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 40px;
+            border-radius: 4px;
+            background: #C9A961;
+            cursor: grab;
+            transition: background 0.45s ease, box-shadow 0.45s ease;
+        }
+        .ob-scrollthumb:active { cursor: grabbing; }
+        .ob-scrollthumb.glow {
+            background: #EAD193;
+            box-shadow:
+                0 0 14px 3px rgba(218, 186, 116, 0.8),
+                0 0 4px 1px rgba(234, 209, 147, 0.9);
         }
         .gloss {
             position: relative;
@@ -3227,8 +3244,9 @@
                 gap: 28px;
                 min-height: 0;
             }
+            .ob-railwrap { order: -1; }
+            .ob-scrollbar { display: none; }
             .ob-rail {
-                order: -1;
                 flex-direction: row;
                 max-height: none;
                 overflow-y: hidden;
@@ -3587,7 +3605,10 @@ The third crow takes the light.</p>
         <div class="ob-stage reveal">
             <div class="ob-lead" id="obLead"></div>
             <div class="ob-art" id="obArt" aria-hidden="true"></div>
-            <div class="ob-rail" id="obRail"></div>
+            <div class="ob-railwrap">
+                <div class="ob-rail" id="obRail"></div>
+                <div class="ob-scrollbar" id="obScrollbar"><div class="ob-scrollthumb" id="obThumb"></div></div>
+            </div>
         </div>
         <div class="ob-plaque frame-ornate reveal" id="obPlaque"></div>
     </div>
@@ -7258,6 +7279,7 @@ var PATHS = {
         if (!rail) return;
         buildRail();
         renderStage(false);
+        if (window.obUpdateThumb) window.obUpdateThumb();
     };
 
     function init() {
@@ -7266,7 +7288,55 @@ var PATHS = {
         art = document.getElementById('obArt');
         plaque = document.getElementById('obPlaque');
         if (!rail || !lead || !plaque) return;
+        var sbar = document.getElementById('obScrollbar');
+        var thumb = document.getElementById('obThumb');
+        var glowT;
+
+        function updateThumb() {
+            if (!sbar || !thumb) return;
+            var sh = rail.scrollHeight, ch = rail.clientHeight;
+            if (sh <= ch + 2 || window.innerWidth < 960) { sbar.style.display = 'none'; return; }
+            sbar.style.display = '';
+            var th = sbar.clientHeight;
+            var hh = Math.max(30, th * ch / sh);
+            thumb.style.height = hh + 'px';
+            thumb.style.top = ((th - hh) * rail.scrollTop / (sh - ch)) + 'px';
+        }
+        window.obUpdateThumb = updateThumb;
+
+        rail.addEventListener('scroll', function() {
+            updateThumb();
+            thumb.classList.add('glow');
+            clearTimeout(glowT);
+            glowT = setTimeout(function() { thumb.classList.remove('glow'); }, 450);
+        }, { passive: true });
+        window.addEventListener('resize', updateThumb);
+
+        // перетаскивание бегунка и клик по дорожке
+        var dragY = null, dragTop = 0;
+        thumb.addEventListener('pointerdown', function(e) {
+            dragY = e.clientY;
+            dragTop = parseFloat(thumb.style.top) || 0;
+            thumb.setPointerCapture(e.pointerId);
+            e.preventDefault();
+        });
+        thumb.addEventListener('pointermove', function(e) {
+            if (dragY === null) return;
+            var th = sbar.clientHeight, hh = thumb.offsetHeight;
+            var top = Math.min(Math.max(dragTop + e.clientY - dragY, 0), th - hh);
+            rail.scrollTop = (rail.scrollHeight - rail.clientHeight) * top / (th - hh);
+        });
+        thumb.addEventListener('pointerup', function() { dragY = null; });
+        sbar.addEventListener('pointerdown', function(e) {
+            if (e.target === thumb) return;
+            var rect = sbar.getBoundingClientRect();
+            var th = sbar.clientHeight, hh = thumb.offsetHeight;
+            var top = Math.min(Math.max(e.clientY - rect.top - hh / 2, 0), th - hh);
+            rail.scrollTop = (rail.scrollHeight - rail.clientHeight) * top / (th - hh);
+        });
+
         window.renderRoadBook();
+        updateThumb();
     }
 
     if (document.readyState === 'loading') {
