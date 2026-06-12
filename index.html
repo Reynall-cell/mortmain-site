@@ -1569,6 +1569,21 @@
         .prom-item:hover::before,
         .prom-item:hover::after { opacity: 0.85; }
 
+        .nav-links a.nav-pending {
+            opacity: 0.4;
+            cursor: default;
+            pointer-events: none;
+        }
+        .nav-links a.nav-pending::after {
+            content: var(--soon-label, '\2014 soon');
+            font-size: 9px;
+            font-style: italic;
+            letter-spacing: 0.08em;
+            text-transform: none;
+            margin-left: 6px;
+            opacity: 0.85;
+        }
+
         /* === ОРНАМЕНТНАЯ РАМКА (программная: плетёные углы поверх контента) === */
         .frame-ornate {
             position: relative;
@@ -3111,6 +3126,118 @@
             visibility: visible;
             transform: translateX(-50%) translateY(0);
         }
+        .ob-dice-row { text-align: center; margin: -28px 0 52px; }
+        .ob-dice-btn { background: rgba(12, 10, 8, 0.4); }
+
+        .dice-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(8, 7, 6, 0.5);
+            backdrop-filter: blur(9px);
+            -webkit-backdrop-filter: blur(9px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.45s ease;
+        }
+        .dice-overlay.open { opacity: 1; pointer-events: auto; }
+        .dice-tray {
+            display: flex;
+            gap: 38px;
+            perspective: 1000px;
+            filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.6));
+            transition: opacity 0.3s ease;
+        }
+        .die {
+            width: 68px;
+            height: 68px;
+            position: relative;
+        }
+        .die.drop { animation: dieDrop 0.85s cubic-bezier(0.32, 0.7, 0.35, 1) both; }
+        .die:nth-child(2).drop { animation-duration: 0.95s; }
+        @keyframes dieDrop {
+            0% { transform: translateY(-170px) scale(0.75); opacity: 0; }
+            18% { opacity: 1; }
+            62% { transform: translateY(14px) scale(1); }
+            82% { transform: translateY(-9px); }
+            100% { transform: translateY(0); }
+        }
+        .die-inner {
+            position: absolute;
+            inset: 0;
+            transform-style: preserve-3d;
+        }
+        .die-inner.spin { animation: dieSpin 0.85s cubic-bezier(0.25, 0.6, 0.45, 1) both; }
+        .die:nth-child(2) .die-inner.spin { animation-duration: 0.95s; animation-name: dieSpinB; }
+        @keyframes dieSpin {
+            from { transform: rotateX(0deg) rotateY(0deg); }
+            to { transform: rotateX(900deg) rotateY(1260deg); }
+        }
+        @keyframes dieSpinB {
+            from { transform: rotateX(0deg) rotateY(0deg); }
+            to { transform: rotateX(-1080deg) rotateY(900deg); }
+        }
+        .die-face {
+            position: absolute;
+            inset: 0;
+            background: rgba(15, 12, 9, 0.97);
+            border: 1px solid rgba(201, 169, 97, 0.7);
+            border-radius: 9px;
+            box-shadow: inset 0 0 14px rgba(201, 169, 97, 0.12);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            padding: 9px;
+        }
+        .die-face .pip {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 5px rgba(201, 169, 97, 0.6);
+            align-self: center;
+            justify-self: center;
+        }
+        .df1 { transform: rotateY(0deg) translateZ(34px); }
+        .df2 { transform: rotateY(90deg) translateZ(34px); }
+        .df3 { transform: rotateY(180deg) translateZ(34px); }
+        .df4 { transform: rotateY(-90deg) translateZ(34px); }
+        .df5 { transform: rotateX(90deg) translateZ(34px); }
+        .df6 { transform: rotateX(-90deg) translateZ(34px); }
+        .dice-card {
+            position: relative;
+            width: min(88vw, 540px);
+            padding: 44px 48px 38px;
+            background-color: rgba(12, 10, 8, 0.94);
+            display: none;
+        }
+        .dice-card .ob-lead-name { font-size: clamp(30px, 4vw, 44px); }
+        .dice-close {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            line-height: 1;
+            color: var(--text-tertiary);
+            cursor: pointer;
+            padding: 6px;
+            z-index: 5;
+            transition: color 0.3s ease, transform 0.4s ease;
+        }
+        .dice-close:hover { color: var(--accent); transform: rotate(90deg); }
+        @media (max-width: 600px) {
+            .dice-card { padding: 34px 26px 28px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .die.drop, .die-inner.spin { animation: none; }
+        }
+
         .ob-rcell {
             border: 1px solid var(--border-subtle);
             background: rgba(14, 12, 10, 0.45);
@@ -3382,7 +3509,7 @@
             <li><a href="#studio" data-i18n="nav_studio">Studio</a></li>
             <li><a href="news.html" data-i18n="nav_news">News</a></li>
             <li><a href="roadmap.html" data-i18n="nav_roadmap">Roadmap</a></li>
-            <li><a href="login.html" data-i18n="nav_login">Sign in</a></li>
+            <li><a class="nav-pending" data-i18n="nav_login">Sign in</a></li>
         </ul>
         <a class="nav-cta" href="#newsletter" data-i18n="nav_cta">Join the Vigil</a>
         <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -3618,6 +3745,9 @@ The third crow takes the light.</p>
             <p class="ob-sub" data-i18n="rb_sub">Twenty lives before the plague. Choose who you were — it decides how you survive, what you owe, and what you hear in the dark. No gift makes you stronger against another man.</p>
         </header>
         <div class="ob-disclaimer" data-i18n="rb_disclaimer">An early design. Gifts and burdens are named in words, not numbers — the numbers will come with the game, and will change more than once.</div>
+        <div class="ob-dice-row">
+            <button type="button" class="nh-btn ob-dice-btn" id="obDice">⚄ Tempt fate</button>
+        </div>
         <div class="ob-stage reveal">
             <div class="ob-lead" id="obLead"></div>
             <div class="ob-art" id="obArt" aria-hidden="true"></div>
@@ -7216,18 +7346,7 @@ var PATHS = {
             cell.innerHTML = cellSvg(t.name.charAt(0)) + '<span class="ob-rcell-name">' + t.name + '</span>';
             cell.addEventListener('click', function() {
                 if (selected === i) return;
-                selected = i;
-                rail.querySelectorAll('.ob-rcell').forEach(function(c, j) {
-                    c.classList.toggle('active', j === i);
-                    c.classList.remove('stamp');
-                });
-                void cell.offsetWidth;
-                cell.classList.add('stamp');
-                renderStage(true);
-                centerRail(cell);
-                if (window.innerWidth < 960) {
-                    lead.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                selectOrigin(i, true);
             });
             rail.appendChild(cell);
         });
@@ -7291,11 +7410,209 @@ var PATHS = {
         art.classList.add('fade');
     }
 
+    function updateHash(id) {
+        try { history.replaceState(null, '', '#rb=' + id); } catch (e) {}
+    }
+
+    function selectOrigin(i, fromUser) {
+        selected = i;
+        var cells = rail.querySelectorAll('.ob-rcell');
+        var target = null;
+        cells.forEach(function(c, j) {
+            c.classList.toggle('active', j === i);
+            c.classList.remove('stamp');
+            if (j === i) target = c;
+        });
+        if (target) {
+            void target.offsetWidth;
+            target.classList.add('stamp');
+            centerRail(target);
+        }
+        renderStage(true);
+        updateHash(ORIGINS[i].id);
+        if (fromUser && window.innerWidth < 960) {
+            lead.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    /* ===== Кость судьбы ===== */
+    var DICE_LBL = {
+        en: '\u2684 Tempt fate',
+        ru: '\u2684 Испытай судьбу',
+        uk: '\u2684 Випробуй долю'
+    };
+    var diceOverlay, diceDie, diceCard, diceInner, dicePick = -1, dicePathPick = 0;
+
+    function buildDiceOverlay() {
+        var el = document.createElement('div');
+        el.className = 'dice-overlay';
+        el.id = 'obDiceOverlay';
+        el.setAttribute('aria-hidden', 'true');
+        function pipFace(n, cls) {
+            var POS = {
+                1: ['2/2'],
+                2: ['1/1', '3/3'],
+                3: ['1/1', '2/2', '3/3'],
+                4: ['1/1', '1/3', '3/1', '3/3'],
+                5: ['1/1', '1/3', '2/2', '3/1', '3/3'],
+                6: ['1/1', '1/3', '2/1', '2/3', '3/1', '3/3']
+            };
+            return '<div class="die-face ' + cls + '">' + POS[n].map(function(p) {
+                var rc = p.split('/');
+                return '<span class="pip" style="grid-row:' + rc[0] + ';grid-column:' + rc[1] + '"></span>';
+            }).join('') + '</div>';
+        }
+        function dieHtml() {
+            var h = '<div class="die"><div class="die-inner">';
+            for (var n = 1; n <= 6; n++) h += pipFace(n, 'df' + n);
+            return h + '</div></div>';
+        }
+        el.innerHTML = '<div class="dice-tray" id="obDiceTray">' + dieHtml() + dieHtml() + '</div>'
+            + '<div class="dice-card frame-ornate" id="obDiceCard">'
+            + '<button type="button" class="dice-close" id="obDiceClose" aria-label="Close">\u2715</button>'
+            + '<div id="obDiceInner"></div>'
+            + '</div>';
+        document.body.appendChild(el);
+        diceOverlay = el;
+        diceDie = document.getElementById('obDiceTray');
+        diceCard = document.getElementById('obDiceCard');
+        diceInner = document.getElementById('obDiceInner');
+        document.getElementById('obDiceClose').addEventListener('click', closeDice);
+        el.addEventListener('click', function(e) { if (e.target === el) closeDice(); });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && el.classList.contains('open')) closeDice();
+        });
+    }
+
+    var diceCtx = null, diceNoise = null;
+    function diceSound() {
+        try {
+            if (!diceCtx) {
+                diceCtx = new (window.AudioContext || window.webkitAudioContext)();
+                var len = diceCtx.sampleRate * 0.05;
+                diceNoise = diceCtx.createBuffer(1, len, diceCtx.sampleRate);
+                var ch = diceNoise.getChannelData(0);
+                for (var i = 0; i < len; i++) ch[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2);
+            }
+            if (diceCtx.state === 'suspended') diceCtx.resume();
+            var t0 = diceCtx.currentTime;
+            var taps = [0, 0.09, 0.17, 0.26, 0.36, 0.5, 0.68, 0.86, 0.96];
+            taps.forEach(function(dt, k) {
+                var s = diceCtx.createBufferSource();
+                s.buffer = diceNoise;
+                s.playbackRate.value = 0.7 + Math.random() * 0.9;
+                var bp = diceCtx.createBiquadFilter();
+                bp.type = 'bandpass';
+                bp.frequency.value = 1400 + Math.random() * 1200;
+                bp.Q.value = 1.2;
+                var g = diceCtx.createGain();
+                var last = k >= taps.length - 2;
+                g.gain.value = (last ? 0.5 : 0.22 + Math.random() * 0.12);
+                s.connect(bp); bp.connect(g); g.connect(diceCtx.destination);
+                s.start(t0 + dt);
+            });
+        } catch (e) {}
+    }
+
+    var FACE_END = {
+        1: [0, 0], 2: [0, -90], 3: [0, 180], 4: [0, 90], 5: [-90, 0], 6: [90, 0]
+    };
+
+    function rollDice() {
+        if (!diceOverlay) buildDiceOverlay();
+        diceCard.style.display = 'none';
+        diceDie.style.display = 'flex';
+        diceDie.style.opacity = '1';
+        diceOverlay.classList.add('open');
+        diceOverlay.setAttribute('aria-hidden', 'false');
+        var dies = diceDie.querySelectorAll('.die');
+        var inners = diceDie.querySelectorAll('.die-inner');
+        dies.forEach(function(d) { d.classList.remove('drop'); });
+        inners.forEach(function(n) {
+            n.classList.remove('spin');
+            n.style.transition = 'none';
+            n.style.transform = '';
+        });
+        void diceDie.offsetWidth;
+        dies.forEach(function(d) { d.classList.add('drop'); });
+        inners.forEach(function(n) { n.classList.add('spin'); });
+        diceSound();
+        dicePick = Math.floor(Math.random() * ORIGINS.length);
+        dicePathPick = Math.random() < 0.5 ? 0 : 1;
+        setTimeout(function() {
+            inners.forEach(function(n, k) {
+                var face = 1 + Math.floor(Math.random() * 6);
+                var fe = FACE_END[face];
+                var bx = k === 0 ? 900 : -1080;
+                var by = k === 0 ? 1260 : 900;
+                n.classList.remove('spin');
+                n.style.transform = 'rotateX(' + bx + 'deg) rotateY(' + by + 'deg)';
+                void n.offsetWidth;
+                n.style.transition = 'transform 0.45s cubic-bezier(0.2, 0.7, 0.3, 1.15)';
+                n.style.transform = 'rotateX(' + (bx + fe[0]) + 'deg) rotateY(' + (by + fe[1]) + 'deg)';
+            });
+            setTimeout(function() {
+                diceDie.style.opacity = '0';
+                setTimeout(showDiceResult, 280);
+            }, 620);
+        }, 960);
+    }
+
+    function showDiceResult() {
+        if (!diceOverlay.classList.contains('open')) return;
+        var L = lang();
+        var lbl = LBL[L] || LBL.en;
+        var o = ORIGINS[dicePick];
+        var t = o.t[L] || o.t.en;
+        var g = GROUPS[o.group][L] || GROUPS[o.group].en;
+        var d = 0;
+        function w(html, anim) {
+            var out = '<div class="' + (anim ? 'dr ' + anim : 'dr') + '" style="animation-delay:' + d.toFixed(2) + 's">' + html + '</div>';
+            d += 0.1;
+            return out;
+        }
+        diceInner.innerHTML =
+            w('<div class="ob-lead-group">' + g + '</div>')
+            + w('<h3 class="ob-lead-name">' + t.name + '</h3>', 'dr-name')
+            + w('<div class="ob-lead-rule"></div>')
+            + w('<p class="ob-lead-fate">' + glossify(t.fate) + '</p>')
+            + w('<div class="ob-divider" aria-hidden="true"><span>\u2720</span></div>')
+            + w('<div class="ob-path-row"><span>' + lbl.gift + '</span>' + glossify(t.gift) + '</div>')
+            + w('<div class="ob-path-row"><span>' + lbl.burden + '</span>' + glossify(t.burden) + '</div>');
+        var ps = PATHS[o.id];
+        if (ps && ps[dicePathPick]) {
+            var pt = ps[dicePathPick][L] || ps[dicePathPick].en;
+            var PATH_ONE = { en: 'Path', ru: 'Стезя', uk: 'Стезя' };
+            var h2 = w('<div class="ob-divider" aria-hidden="true"><span>\u2720</span></div>')
+                + w('<div class="ob-paths-label">' + (PATH_ONE[L] || PATH_ONE.en) + ' \u2014 ' + pt.name + '</div>')
+                + w('<div class="ob-path-row"><span>' + lbl.gift + '</span>' + glossify(pt.gift) + '</div>', 'dr-l')
+                + w('<div class="ob-path-row"><span>' + lbl.burden + '</span>' + glossify(pt.burden) + '</div>', 'dr-r');
+            diceInner.innerHTML += h2;
+        }
+        diceDie.style.display = 'none';
+        diceCard.style.display = 'block';
+        diceCard.classList.remove('play');
+        void diceCard.offsetWidth;
+        diceCard.classList.add('play');
+    }
+
+    function closeDice() {
+        diceOverlay.classList.remove('open');
+        diceOverlay.setAttribute('aria-hidden', 'true');
+        if (dicePick >= 0) {
+            var pick = dicePick;
+            dicePick = -1;
+            setTimeout(function() { selectOrigin(pick, false); }, 460);
+        }
+    }
+
     window.renderRoadBook = function() {
         if (!rail) return;
         buildRail();
         renderStage(false);
         if (window.obUpdateThumb) window.obUpdateThumb();
+        var db = document.getElementById('obDice');
+        if (db) db.textContent = DICE_LBL[lang()] || DICE_LBL.en;
     };
 
     function init() {
@@ -7351,8 +7668,22 @@ var PATHS = {
             rail.scrollTop = (rail.scrollHeight - rail.clientHeight) * top / (th - hh);
         });
 
+        var hm = (location.hash || '').match(/^#rb=([a-z]+)$/);
+        if (hm) {
+            ORIGINS.forEach(function(o, j) { if (o.id === hm[1]) selected = j; });
+        }
+        var diceBtn = document.getElementById('obDice');
+        if (diceBtn) diceBtn.addEventListener('click', rollDice);
         window.renderRoadBook();
         updateThumb();
+        if (hm && selected >= 0) {
+            var cells0 = rail.querySelectorAll('.ob-rcell');
+            if (cells0[selected]) centerRail(cells0[selected]);
+            setTimeout(function() {
+                var sec = document.getElementById('roadbook');
+                if (sec) sec.scrollIntoView({ behavior: 'auto', block: 'start' });
+            }, 120);
+        }
     }
 
     if (document.readyState === 'loading') {
