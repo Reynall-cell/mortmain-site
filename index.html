@@ -3017,8 +3017,61 @@
             overflow-y: auto;
             padding: 4px 6px 4px 4px;
             scrollbar-width: thin;
+            scrollbar-color: rgba(201, 169, 97, 0.3) transparent;
             mask-image: linear-gradient(180deg, transparent, #000 26px, #000 calc(100% - 26px), transparent);
             -webkit-mask-image: linear-gradient(180deg, transparent, #000 26px, #000 calc(100% - 26px), transparent);
+        }
+        .ob-rail::-webkit-scrollbar { width: 4px; height: 4px; }
+        .ob-rail::-webkit-scrollbar-track { background: rgba(201, 169, 97, 0.06); }
+        .ob-rail::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, rgba(201, 169, 97, 0.18), rgba(201, 169, 97, 0.45), rgba(201, 169, 97, 0.18));
+            border-radius: 2px;
+        }
+        .ob-rail::-webkit-scrollbar-thumb:hover { background: rgba(201, 169, 97, 0.6); }
+        .gloss {
+            position: relative;
+            border-bottom: 1px dotted rgba(201, 169, 97, 0.45);
+            cursor: help;
+        }
+        .gloss::after {
+            content: '\2726';
+            font-size: 0.55em;
+            vertical-align: super;
+            color: var(--accent);
+            margin-left: 1px;
+            opacity: 0.8;
+        }
+        .gloss::before {
+            content: attr(data-g);
+            position: absolute;
+            bottom: calc(100% + 9px);
+            left: 50%;
+            transform: translateX(-50%) translateY(4px);
+            width: max-content;
+            max-width: min(250px, 72vw);
+            background: rgba(13, 11, 9, 0.97);
+            border: 1px solid rgba(201, 169, 97, 0.45);
+            padding: 9px 13px;
+            font-family: 'EB Garamond', Georgia, serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 0.86rem;
+            line-height: 1.55;
+            letter-spacing: normal;
+            text-transform: none;
+            color: var(--text-secondary);
+            text-align: left;
+            white-space: normal;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            z-index: 60;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+        .gloss:hover::before, .gloss:focus::before {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
         }
         .ob-rcell {
             border: 1px solid var(--border-subtle);
@@ -3523,7 +3576,7 @@ The third crow takes the light.</p>
         <header class="ob-head">
             <div class="ob-prefix" data-i18n="rb_prefix">— The Road Book —</div>
             <h2 class="ob-title" data-i18n="rb_title">Who walks the road</h2>
-            <p class="ob-sub" data-i18n="rb_sub">Twenty lives before the plague. Choose who you were — it decides how you survive, what you owe, and what you hear in the dark. No gift makes you stronger against another man: strength lives in iron and hands.</p>
+            <p class="ob-sub" data-i18n="rb_sub">Twenty lives before the plague. Choose who you were — it decides how you survive, what you owe, and what you hear in the dark. No gift makes you stronger against another man.</p>
         </header>
         <div class="ob-disclaimer" data-i18n="rb_disclaimer">An early design. Gifts and burdens are named in words, not numbers — the numbers will come with the game, and will change more than once.</div>
         <div class="ob-stage reveal">
@@ -4205,7 +4258,7 @@ he comes not on his own.</p>
             nav_cta: "Join the Vigil",
             rb_prefix: "— The Road Book —",
             rb_title: "Who walks the road",
-            rb_sub: "Twenty lives before the plague. Choose who you were — it decides how you survive, what you owe, and what you hear in the dark. No gift makes you stronger against another man: strength lives in iron and hands.",
+            rb_sub: "Twenty lives before the plague. Choose who you were — it decides how you survive, what you owe, and what you hear in the dark. No gift makes you stronger against another man.",
             rb_disclaimer: "An early design. Gifts and burdens are named in words, not numbers — the numbers will come with the game, and will change more than once.",
             doc_title: "Squalor — A Mortmain Studio Production",
             vigil_incentive: "The First Vigil — our closed test — will be called from these names.",
@@ -4387,7 +4440,7 @@ he comes not on his own.</p>
             nav_cta: "Встать в дозор",
             rb_prefix: "— Дорожная книга —",
             rb_title: "Кто выходит на дорогу",
-            rb_sub: "Двадцать судеб до чумы. Выбери, кем ты был — это решает, как ты выживаешь, чем платишь и что слышишь в темноте. Ни один дар не делает тебя сильнее против другого человека: сила живёт в железе и в руках.",
+            rb_sub: "Двадцать судеб до чумы. Выбери, кем ты был — это решает, как ты выживаешь, чем платишь и что слышишь в темноте. Ни один дар не делает тебя сильнее против другого человека.",
             rb_disclaimer: "Ранний замысел. Дары и бремена названы словами, а не числами — числа придут вместе с игрой и изменятся не раз.",
             doc_title: "Squalor — игра Mortmain Studio",
             vigil_incentive: "Первый Дозор — закрытый тест — будет призван из этих имён.",
@@ -4438,7 +4491,7 @@ he comes not on his own.</p>
                     "nav_cta": "Стати на варту",
                     "rb_prefix": "— Дорожня книга —",
                     "rb_title": "Хто виходить на дорогу",
-                    "rb_sub": "Двадцять доль до чуми. Обери, ким ти був — це вирішує, як ти виживаєш, чим платиш і що чуєш у темряві. Жоден дар не робить тебе сильнішим проти іншої людини: сила живе в залізі та в руках.",
+                    "rb_sub": "Двадцять доль до чуми. Обери, ким ти був — це вирішує, як ти виживаєш, чим платиш і що чуєш у темряві. Жоден дар не робить тебе сильнішим проти іншої людини.",
                     "rb_disclaimer": "Ранній задум. Дари й тягарі названі словами, а не числами — числа прийдуть разом із грою і зміняться не раз.",
                     "doc_title": "Squalor — гра Mortmain Studio",
                     "vigil_incentive": "Першу Варту — закрите випробування — буде покликано з цих імен.",
@@ -4620,7 +4673,7 @@ he comes not on his own.</p>
                     "nav_cta": "Der Wacht beitreten",
                     "rb_prefix": "— Das Wegbuch —",
                     "rb_title": "Wer die Straße geht",
-                    "rb_sub": "Zwanzig Leben vor der Seuche. Wähle, wer du warst — es entscheidet, wie du überlebst, was du schuldest und was du im Dunkeln hörst. Keine Gabe macht dich stärker gegen einen anderen Menschen: Stärke liegt in Eisen und Händen.",
+                    "rb_sub": "Zwanzig Leben vor der Seuche. Wähle, wer du warst — es entscheidet, wie du überlebst, was du schuldest und was du im Dunkeln hörst. Keine Gabe macht dich stärker gegen einen anderen Menschen.",
                     "rb_disclaimer": "Ein früher Entwurf. Gaben und Bürden sind in Worten benannt, nicht in Zahlen — die Zahlen kommen mit dem Spiel und werden sich mehr als einmal ändern.",
                     "doc_title": "Squalor — Ein Spiel von Mortmain Studio",
                     "vigil_incentive": "Die Erste Wacht — unser geschlossener Test — wird aus diesen Namen berufen.",
@@ -4722,7 +4775,7 @@ he comes not on his own.</p>
                     "nav_cta": "Únete a la Vigilia",
                     "rb_prefix": "— El libro del camino —",
                     "rb_title": "Quién sale al camino",
-                    "rb_sub": "Veinte vidas antes de la plaga. Elige quién fuiste: decide cómo sobrevives, qué debes y qué oyes en la oscuridad. Ningún don te hace más fuerte contra otro hombre: la fuerza vive en el hierro y en las manos.",
+                    "rb_sub": "Veinte vidas antes de la plaga. Elige quién fuiste: decide cómo sobrevives, qué debes y qué oyes en la oscuridad. Ningún don te hace más fuerte contra otro hombre.",
                     "rb_disclaimer": "Un diseño temprano. Dones y cargas se nombran con palabras, no con números: los números llegarán con el juego y cambiarán más de una vez.",
                     "doc_title": "Squalor — Un juego de Mortmain Studio",
                     "vigil_incentive": "La Primera Vigilia — nuestra prueba cerrada — será llamada de entre estos nombres.",
@@ -4824,7 +4877,7 @@ he comes not on his own.</p>
                     "nav_cta": "Junta-te à Vigília",
                     "rb_prefix": "— O livro da estrada —",
                     "rb_title": "Quem percorre a estrada",
-                    "rb_sub": "Vinte vidas antes da peste. Escolhe quem foste — decide como sobrevives, o que deves e o que ouves no escuro. Nenhum dom te torna mais forte contra outro homem: a força vive no ferro e nas mãos.",
+                    "rb_sub": "Vinte vidas antes da peste. Escolhe quem foste — decide como sobrevives, o que deves e o que ouves no escuro. Nenhum dom te torna mais forte contra outro homem.",
                     "rb_disclaimer": "Um esboço inicial. Dons e fardos têm nome em palavras, não em números — os números chegarão com o jogo e mudarão mais de uma vez.",
                     "doc_title": "Squalor — Um jogo da Mortmain Studio",
                     "vigil_incentive": "A Primeira Vigília — o nosso teste fechado — será chamada de entre estes nomes.",
@@ -4926,7 +4979,7 @@ he comes not on his own.</p>
                     "nav_cta": "Rejoindre la Veille",
                     "rb_prefix": "— Le livre de la route —",
                     "rb_title": "Qui prend la route",
-                    "rb_sub": "Vingt vies avant la peste. Choisis qui tu étais — cela décide comment tu survis, ce que tu dois et ce que tu entends dans le noir. Aucun don ne te rend plus fort contre un autre homme : la force vit dans le fer et dans les mains.",
+                    "rb_sub": "Vingt vies avant la peste. Choisis qui tu étais — cela décide comment tu survis, ce que tu dois et ce que tu entends dans le noir. Aucun don ne te rend plus fort contre un autre homme.",
                     "rb_disclaimer": "Une ébauche. Dons et fardeaux sont nommés en mots, non en chiffres — les chiffres viendront avec le jeu et changeront plus d'une fois.",
                     "doc_title": "Squalor — Un jeu de Mortmain Studio",
                     "vigil_incentive": "La Première Veille — notre test fermé — sera appelée parmi ces noms.",
@@ -5028,7 +5081,7 @@ he comes not on his own.</p>
                     "nav_cta": "Unisciti alla Veglia",
                     "rb_prefix": "— Il libro della strada —",
                     "rb_title": "Chi percorre la strada",
-                    "rb_sub": "Venti vite prima della peste. Scegli chi eri — decide come sopravvivi, cosa devi e cosa senti nel buio. Nessun dono ti rende più forte contro un altro uomo: la forza vive nel ferro e nelle mani.",
+                    "rb_sub": "Venti vite prima della peste. Scegli chi eri — decide come sopravvivi, cosa devi e cosa senti nel buio. Nessun dono ti rende più forte contro un altro uomo.",
                     "rb_disclaimer": "Un progetto iniziale. Doni e fardelli hanno nomi in parole, non in numeri — i numeri arriveranno con il gioco e cambieranno più di una volta.",
                     "doc_title": "Squalor — Un gioco di Mortmain Studio",
                     "vigil_incentive": "La Prima Veglia — il nostro test chiuso — sarà chiamata tra questi nomi.",
@@ -5130,7 +5183,7 @@ he comes not on his own.</p>
                     "nav_cta": "加入守夜",
                     "rb_prefix": "— 路书 —",
                     "rb_title": "谁踏上这条路",
-                    "rb_sub": "瘟疫之前的二十种人生。选择你曾是谁——这决定你如何生存、欠下什么、在黑暗中听见什么。没有任何天赋能让你在对抗他人时更强：力量只存在于铁与双手之中。",
+                    "rb_sub": "瘟疫之前的二十种人生。选择你曾是谁——这决定你如何生存、欠下什么、在黑暗中听见什么。没有任何天赋能让你在对抗他人时更强。",
                     "rb_disclaimer": "早期构想。天赋与负担以文字而非数字命名——数字将随游戏而来，并会多次改动。",
                     "doc_title": "Squalor — Mortmain Studio 作品",
                     "vigil_incentive": "首次守夜——我们的封闭测试——将从这些名字中召集。",
@@ -5232,7 +5285,7 @@ he comes not on his own.</p>
                     "nav_cta": "夜警に加わる",
                     "rb_prefix": "— 道の書 —",
                     "rb_title": "誰が道を行くのか",
-                    "rb_sub": "疫病以前の二十の人生。かつての自分を選べ——それが生き延び方、負うもの、闇の中で聞こえるものを決める。いかなる才も他者との戦いで汝を強くはしない。力は鉄と腕に宿る。",
+                    "rb_sub": "疫病以前の二十の人生。かつての自分を選べ——それが生き延び方、負うもの、闇の中で聞こえるものを決める。いかなる才も他者との戦いで汝を強くはしない。",
                     "rb_disclaimer": "初期構想。才と重荷は数字ではなく言葉で記される——数字はゲームと共に訪れ、幾度も変わるだろう。",
                     "doc_title": "Squalor — Mortmain Studio 作品",
                     "vigil_incentive": "最初の夜警——クローズドテスト——は、この名簿から召集される。",
@@ -6999,9 +7052,115 @@ var PATHS = {
             + '</svg>';
     }
 
+    var GLOSS = {
+ "ru": [
+  [
+   "хоругв[а-яё]*",
+   "Войсковое знамя и отряд, собранный под ним, — рота старого строя."
+  ],
+  [
+   "пикинёр[а-яё]*",
+   "Пеший воин с пикой — длинным копьём против конницы."
+  ],
+  [
+   "гамбезон[а-яё]*",
+   "Стёганая куртка-поддоспешник: держит скользящий удар."
+  ],
+  [
+   "древков[а-яё]+",
+   "Оружие на длинном древке: копья, алебарды, рогатины."
+  ],
+  [
+   "поветри[а-яё]+",
+   "Повальная болезнь, мор."
+  ],
+  [
+   "било\\b",
+   "Доска или брус, в которые бьют вместо колокола."
+  ],
+  [
+   "десятин[а-яё]*",
+   "Десятая доля добычи, отдаваемая по уговору."
+  ],
+  [
+   "келар[а-яё]*",
+   "Монастырский эконом: ведает припасами и погребами."
+  ]
+ ],
+ "uk": [
+  [
+   "хоругв[а-яіїєґё]*",
+   "Військове знамено і загін, зібраний під ним, — рота старого ладу."
+  ],
+  [
+   "пікінер[а-яіїєґ]*",
+   "Піший воїн із пікою — довгим списом проти кінноти."
+  ],
+  [
+   "гамбезон[а-яіїєґ]*",
+   "Стьобана куртка-піддоспішник: тримає ковзний удар."
+  ],
+  [
+   "древков[а-яіїєґ]+",
+   "Зброя на довгому держаку: списи, алебарди, рогатини."
+  ],
+  [
+   "пошест[а-яіїєґ]+",
+   "Повальна хвороба, мор."
+  ],
+  [
+   "било\\b",
+   "Дошка чи брус, у які бʼють замість дзвона."
+  ],
+  [
+   "десятин[а-яіїєґ]*",
+   "Десята частка здобичі, віддана за умовою."
+  ],
+  [
+   "келар[а-яіїєґ]*",
+   "Монастирський еконо́м: відає припасами й погребами."
+  ]
+ ],
+ "en": [
+  [
+   "gambeson\\w*",
+   "A padded, quilted jacket worn under armour."
+  ],
+  [
+   "polearm\\w*",
+   "A weapon on a long shaft: spears, halberds, billhooks."
+  ],
+  [
+   "pikem[ae]n",
+   "A foot soldier with a pike — a long anti-cavalry spear."
+  ],
+  [
+   "tocsin\\w*",
+   "An alarm rung out on a bell."
+  ],
+  [
+   "tithe\\w*",
+   "A tenth share of the take, owed by old agreement."
+  ]
+ ]
+};
+
+    function glossify(s) {
+        var L = lang();
+        var dict = GLOSS[L];
+        if (!dict || !s) return s;
+        dict.forEach(function(pair) {
+            var re = new RegExp(pair[0], 'gi');
+            s = s.replace(re, function(m) {
+                return '<span class="gloss" tabindex="0" data-g="' + pair[1] + '">' + m + '</span>';
+            });
+        });
+        return s;
+    }
+
     function pathRows(t, lbl) {
-        return '<div class="ob-path-row"><span>' + lbl.gift + '</span>' + t.gift + '</div>'
-            + '<div class="ob-path-row"><span>' + lbl.burden + '</span>' + t.burden + '</div>';
+        return '<div class="ob-path-row"><span>' + lbl.gift + '</span>' + glossify(t.gift) + '</div>'
+            + '<div class="ob-path-row"><span>' + lbl.burden + '</span>' + glossify(t.burden) + '</div>';
     }
 
     function buildRail() {
@@ -7058,17 +7217,16 @@ var PATHS = {
             w('<div class="ob-lead-group">' + g + '</div>')
             + w('<h3 class="ob-lead-name">' + t.name + '</h3>', 'dr-name')
             + w('<div class="ob-lead-rule"></div>')
-            + w('<p class="ob-lead-fate">' + t.fate + '</p>');
+            + w('<p class="ob-lead-fate">' + glossify(t.fate) + '</p>');
 
         art.innerHTML = ART[o.id]
             ? '<img src="' + ART[o.id] + '" alt="">'
             : cellSvg(t.name.charAt(0));
 
         var ph = w('<div class="ob-plq-row">'
-            + '<div><div class="ob-plq-label">' + lbl.trade + '</div><div class="ob-plq-text">' + t.trade + '</div></div>'
-            + '<div><div class="ob-plq-label">' + lbl.gift + '</div><div class="ob-plq-text">' + t.gift + '</div></div>'
-            + '<div><div class="ob-plq-label">' + lbl.burden + '</div><div class="ob-plq-text">' + t.burden + '</div></div>'
-            + '</div>');
+            + '<div><div class="ob-plq-label">' + lbl.trade + '</div><div class="ob-plq-text">' + glossify(t.trade) + '</div></div>'
+            + '<div><div class="ob-plq-label">' + lbl.gift + '</div><div class="ob-plq-text">' + glossify(t.gift) + '</div></div>'
+            + '<div><div class="ob-plq-label">' + lbl.burden + '</div><div class="ob-plq-text">' + glossify(t.burden) + '</div></div>'             + '</div>');
         if (ps && ps.length >= 2) {
             var t0 = ps[0][L] || ps[0].en;
             var t1 = ps[1][L] || ps[1].en;
