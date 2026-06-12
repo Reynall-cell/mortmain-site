@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://mortmainstudio.com/</loc><lastmod>2026-06-11</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://mortmainstudio.com/news.html</loc><lastmod>2026-06-11</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mortmainstudio.com/</loc><lastmod>2026-06-12</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://mortmainstudio.com/news.html</loc><lastmod>2026-06-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://mortmainstudio.com/roadmap.html</loc><lastmod>2026-06-11</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://mortmainstudio.com/faq.html</loc><lastmod>2026-06-11</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://mortmainstudio.com/about.html</loc><lastmod>2026-06-11</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://mortmainstudio.com/press.html</loc><lastmod>2026-06-11</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://mortmainstudio.com/news/2026-06-10-gates-open.html</loc><lastmod>2026-06-10</lastmod><priority>0.6</priority></url>
-  <url><loc>https://mortmainstudio.com/news/2026-06-03-forge-report-1.html</loc><lastmod>2026-06-03</lastmod><priority>0.6</priority></url>
+  <url><loc>https://mortmainstudio.com/news/2026-06-12-two-paths.html</loc><lastmod>2026-06-12</lastmod><priority>0.7</priority></url>
+  <url><loc>https://mortmainstudio.com/news/2026-06-10-gates-open.html</loc><lastmod>2026-06-12</lastmod><priority>0.6</priority></url>
+  <url><loc>https://mortmainstudio.com/news/2026-06-03-forge-report-1.html</loc><lastmod>2026-06-12</lastmod><priority>0.6</priority></url>
   <url><loc>https://mortmainstudio.com/privacy.html</loc><lastmod>2026-06-11</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://mortmainstudio.com/terms.html</loc><lastmod>2026-06-11</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://mortmainstudio.com/login.html</loc><lastmod>2026-06-11</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
 </urlset>

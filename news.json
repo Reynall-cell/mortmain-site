@@ -1,5 +1,22 @@
 [
   {
+    "id": "2026-06-12-two-paths",
+    "date": "2026-06-12",
+    "tag": "news",
+    "url": "news/2026-06-12-two-paths.html",
+    "image": "promises-scribe.jpg",
+    "title": {
+      "en": "The Road Book: Two Paths",
+      "ru": "Дорожная книга: две стези",
+      "uk": "Дорожня книга: дві стезі"
+    },
+    "excerpt": {
+      "en": "Every fate now carries two paths — and a pair of dice to choose for you. The Road Book has grown.",
+      "ru": "У каждой судьбы теперь две стези — и кости, которые решат за тебя. Дорожная книга выросла.",
+      "uk": "Кожна доля тепер має дві стезі — і кості, що вирішать за тебе. Дорожня книга виросла."
+    }
+  },
+  {
     "id": "2026-06-10-gates-open",
     "date": "2026-06-10",
     "tag": "news",

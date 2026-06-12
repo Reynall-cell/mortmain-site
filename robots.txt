@@ -2,5 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /vigil-confirmed.html
 Disallow: /404.html
+Disallow: /login.html
+Disallow: /profile.html
 
 Sitemap: https://mortmainstudio.com/sitemap.xml
